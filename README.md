@@ -3,7 +3,7 @@
 Original daily commentary: 오늘의 오지랖 (Korean) and A Not-So-Polite Korean (English, one Korean's perspective). Four different topics and categories per batch, two videos per channel.
 
 ## Current state
-The first four videos are public (see state/ledger.json). Cloud production is disabled until OAuth credentials and Actions secrets pass preflight. A repository or workflow alone is not an active connection.
+The first four videos are public (see state/ledger.json). Both channel OAuth credentials and all four Actions secrets passed a real cloud preflight on November 5, 2026 KST. Production is separately controlled by the repository variable PUBLIC_UPLOADS_ENABLED; check that variable and the latest Actions run for live state.
 
 ## Setup
 1. Enable YouTube Data API in the dedicated Google Cloud project. Configure an external OAuth application and a Desktop client. Use personal-use production mode where allowed; Testing refresh tokens can expire after seven days.
@@ -15,10 +15,10 @@ The first four videos are public (see state/ledger.json). Cloud production is di
 The UTC schedule 23:00 corresponds to 08:00 Asia/Seoul. GitHub may delay scheduled runs. One concurrent producer; maximum four videos and 6000 ElevenLabs narration characters per daily batch. OpenAI uses at most three bounded requests for research, scripts and independent factual review. Insufficient included voice credits stop production.
 
 ## Editorial and media
-Google Trends KR/US RSS and web research discover topics. Claims require current cross-checked original reporting. English scripts explain Korean context; opinions and satire are labeled. Only assets in assets/media-library.json may be used. Pexels illustration is labeled; TikTok/Reels discovery is not permission to republish footage. The model cannot choose arbitrary download URLs. Additional footage requires an editorially reviewed library entry.
+Google Trends KR/US RSS and web research discover topics. Claims require current cross-checked original reporting. EDITORIAL.md defines conversational individual commentary, English-first international packaging and one synchronized caption layer. ElevenLabs v4 uses connected prose rather than separate sentence chunks. Commons searches retrieve actual named subjects with explicit permitted licenses; an independent vision and source review must approve at least two relevant images per story. Missing relevant material holds the batch. Generic stock is forbidden. Photos are labeled archival and attributed with source, author, license and resizing/captioning notice. Automatic media discovery currently covers photos; TikTok/Reels discovery is not permission to republish video.
 
 ## Recovery and measurement
 state/ledger.json records submissions before paid generation and uploads. Ambiguous or interrupted submissions stop for reconciliation; do not clear their markers and rerun blindly. Completed days and published job IDs never upload twice. GitHub Actions artifacts retain produced media for seven days. Public view, like and comment snapshots record video age and category; compare within the same channel at similar ages. Retention, engaged views and revenue need a separate YouTube Analytics connection.
 
 ## Validation
-Run `python -m unittest discover -s tests -v`. Tests cover topic diversity, duplicate prevention, missing credentials, channel identity and interrupted requests. Real cloud preflight and a first scheduled run remain required after credential setup.
+Run `python -m unittest discover -s tests -v`. Tests cover topic diversity, duplicate prevention, missing credentials, channel identity, interrupted requests, media ownership/relevance gates and caption continuity. A cloud preflight has passed; a successful preflight does not prove a future scheduled production batch will pass editorial review or upload successfully.

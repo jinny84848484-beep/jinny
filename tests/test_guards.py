@@ -11,6 +11,10 @@ def batch():
     return jobs
 
 class Guards(unittest.TestCase):
+    def test_direct_web_page_read_counts_as_source_evidence(self):
+        result={'output':[{'type':'web_search_call','action':{'type':'open_page','url':'https://example.org/report'}},{'type':'message','content':[{'type':'output_text','annotations':[{'type':'url_citation','url':'https://example.org/report','title':'Report'}]}]}]}
+        self.assertEqual([s['url'] for s in c.research_sources(result)],['https://example.org/report'])
+
     def test_batch_accepts_four_different_topics(self):
         c.validate_batch(batch(),'2026-11-05',set())
 

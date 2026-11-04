@@ -44,33 +44,20 @@ def overlay(scene,ch,i,total,media,path):
     draw.rectangle((0,0,W,18),fill=accent)
     brand=ch['name'] if ko else 'A NOT-SO-POLITE KOREAN'
     text(draw,brand,(64,100,900,60),fg,32)
-    label={'hook':'오늘의 이슈' if ko else 'A KOREAN TAKE',
-      'fact':'팩트 체크' if ko else 'THE FACTS',
-      'opinion':'내 생각' if ko else 'MY TAKE',
-      'closing':'굳이 한마디' if ko else 'ONE MORE THING'}[scene['kind']]
-    draw.rounded_rectangle((64,207,550,270),radius=16,fill=accent)
-    text(draw,label,(88,210,440,54),'#171717' if ko else 'white',30)
-    text(draw,scene['headline'],(64,315,885,385),fg,94)
-    if media:
-        # Transparent video window: landscape archive is cropped modestly to 1.8:1.
-        draw.rectangle((0,735,W,1334),fill=(0,0,0,0))
-        draw.rectangle((0,1260,W,1334),fill=(0,0,0,190))
-        text(draw,media['notice'],(42,1280,965,45),'#FFFFFF',23,False)
-    else:
-        draw.rounded_rectangle((64,760,962,1230),radius=30,fill='#242424' if ko else '#E5D9C2')
-        text(draw,scene.get('body',''),(104,828,808,320),fg,62,center=True)
-        draw.rectangle((64,1255,962,1260),fill=accent)
-    if media and scene.get('body'):
-        text(draw,scene['body'],(65,1364,875,90),fg,32)
+    if not media:raise ValueError('Directly relevant visual material required')
+    # The picture is dominant. Only synchronized captions carry editorial text.
+    # No duplicated headline, summary paragraph or fact/opinion badges.
+    draw.rectangle((0,185,W,1564),fill=(0,0,0,0))
+    draw.rectangle((0,1490,W,1564),fill=(0,0,0,170))
+    text(draw,media['notice'],(42,1510,965,45),'#FFFFFF',23,False)
     text(draw,'@'+ch['handle'],(64,1750,860,65),muted,27,False)
-    text(draw,f'{i+1:02}/{total:02}',(862,212,95,50),muted,27)
     im.save(path)
 
 def captions(text_value,alignment,ko):
     chars=alignment['characters'];starts=alignment['character_start_times_seconds'];ends=alignment['character_end_times_seconds']
     if ''.join(chars)!=text_value or len(chars)!=len(starts) or len(chars)!=len(ends):raise ValueError('Alignment mismatch')
     # Split only at whole-word boundaries, punctuation or paragraph breaks.
-    tokens=list(re.finditer(r'\S+',text_value)); cues=[];group=[];limit=15 if ko else 34
+    tokens=list(re.finditer(r'\S+',text_value)); cues=[];group=[];limit=12 if ko else 34
     def flush():
         if not group:return
         a,b=group[0].start(),group[-1].end()-1
@@ -80,7 +67,9 @@ def captions(text_value,alignment,ko):
         if group and (token.end()-group[0].start()>limit or '\n' in text_value[group[-1].end():token.start()]):flush()
         group.append(token)
         if re.search(r'[.!?。]$',token.group()):flush()
-    flush();return cues
+    flush()
+    if cues:cues[0]=(0,cues[0][1],cues[0][2])
+    return cues
 
 def run_ff(args,cwd):
     result=subprocess.run([p.ffmpeg(),'-hide_banner','-loglevel','error','-y',*args],cwd=cwd,capture_output=True,text=True,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
@@ -108,19 +97,21 @@ def render(job_path):
             path=(p.ROOT/media['path']).resolve()
             if not path.is_relative_to(p.ROOT.resolve()) or not path.is_file():raise ValueError('Missing or unsafe media path')
             credits[scene['media']]=media
-            args+=['-stream_loop','-1','-i',str(path),'-filter_complex',
-              '[1:v]scale=1080:600:force_original_aspect_ratio=increase,crop=1080:600,setsar=1,fps=30[v];[v]pad=1080:1920:0:735:black[b];[b][0:v]overlay=0:0:format=auto,format=yuv420p[out]', '-map','[out]']
+            if media.get('media_type')=='image':args+=['-loop','1','-framerate','30','-i',str(path)]
+            else:args+=['-stream_loop','-1','-i',str(path)]
+            args+=['-filter_complex',
+              '[1:v]scale=1080:1380:force_original_aspect_ratio=decrease,pad=1080:1380:(ow-iw)/2:(oh-ih)/2:black,setsar=1,fps=30[v];[v]pad=1080:1920:0:185:black[b];[b][0:v]overlay=0:0:format=auto,format=yuv420p[out]', '-map','[out]']
         else:args+=['-vf','format=yuv420p']
         args+=['-t',str(seconds),'-an','-r','30','-c:v','libx264','-preset','veryfast','-crf','21','-threads','4',part.name]
         run_ff(args,folder);manifest_parts.append("file '"+part.name+"'")
         print(d['id'],f'scene {i+1}/{len(d["scenes"])}',flush=True)
     (folder/'parts.txt').write_text('\n'.join(manifest_parts),encoding='utf-8')
     family='Malgun Gothic' if os.name=='nt' else 'Noto Sans CJK KR'
-    style=f'FontName={family},FontSize=14,PrimaryColour=&HFFFFFF,OutlineColour=&H111111,BorderStyle=3,Outline=1,Shadow=0,Alignment=2,MarginV=38,MarginL=24,MarginR=40'
+    style=f'FontName={family},FontSize=17,Bold=-1,PrimaryColour=&HFFFFFF,OutlineColour=&H111111,BorderStyle=3,Outline=1,Shadow=0,Alignment=2,MarginV=42,MarginL=18,MarginR=32'
     final=folder/'short.mp4'
     run_ff(['-f','concat','-safe','0','-i','parts.txt','-i','narration.mp3','-vf',f"subtitles=captions.srt:force_style='{style}'",'-af','loudnorm=I=-16:TP=-1.5:LRA=11','-t',str(duration),'-c:v','libx264','-preset','veryfast','-crf','21','-threads','4','-pix_fmt','yuv420p','-c:a','aac','-b:a','160k','-movflags','+faststart',final.name],folder)
     desc=d.get('description','')+'\n\nSources:\n'+'\n'.join(s['url'] for s in d['sources'])
-    desc+='\n\nFootage credits:\n'+'\n'.join(m['credit']+' — '+m['source']+'\n'+m.get('disclaimer','') for m in credits.values())
+    desc+='\n\nVisual credits (resized and captioned):\n'+'\n'.join(m['credit']+' — '+m['source']+'\n'+m.get('license','')+' '+m.get('license_url','')+'\n'+m.get('disclaimer','') for m in credits.values())
     desc+='\n\n#Shorts'
     p.write(folder/'script.json',d)
     p.write(folder/'upload-metadata.json',{'channel_id':d['channel_id'],'title':d['title'],'description':desc,'privacyStatus':'public','language':ch['language'],'category':d['category'],'uploaded':False})

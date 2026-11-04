@@ -14,7 +14,12 @@
       "voice_id": "jTcRjpnkGYhSlhg5EcUZ",
       "accent": "#FFCF33",
       "background": "#151515",
-      "voice_name": "오늘의 오지랖 | 굳이 한마디 v1"
+      "voice_name": "오늘의 오지랖 | 굳이 한마디 v1",
+      "model_id": "eleven_v4",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75
+      }
     },
     "korean": {
       "name": "A Not-So-Polite Korean",
@@ -24,7 +29,12 @@
       "voice_id": "H4U0Sx4yLfEcVChJWEir",
       "accent": "#C9362B",
       "background": "#F3E8D3",
-      "voice_name": "Not-So-Polite Korean | Dry Wit v1"
+      "voice_name": "Not-So-Polite Korean | Dry Wit v1",
+      "model_id": "eleven_v4",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.75
+      }
     }
   }
 }

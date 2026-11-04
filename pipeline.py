@@ -135,7 +135,7 @@ def validate(d):
         if scene["kind"]=="fact" and not scene.get("source_indices"): raise ValueError("Fact scene needs citations")
         for i in scene.get("source_indices",[]):
             if not isinstance(i,int) or not 0<=i<len(sources): raise ValueError("Bad citation index")
-    text="\n".join(s["narration"].strip() for s in scenes)
+    text=" ".join(s["narration"].strip() for s in scenes)
     if len(text)>1800 or len(text)<80: raise ValueError("Narration must be 80-1800 characters")
     if not d.get("title") or len(d["title"])>100: raise ValueError("Title must be 1-100 characters")
     return text
@@ -152,7 +152,9 @@ def process_lock(name):
 def synthesize(d,folder):
     text=validate(d); c=cfg(); voice=c["channels"][d["channel"]]["voice_id"]
     if not voice: raise RuntimeError("Choose the saved ElevenLabs voice on the local setup page")
-    signature=hashlib.sha256(json.dumps([text,voice,c["model_id"]],ensure_ascii=False).encode()).hexdigest()
+    model=c['channels'][d['channel']].get('model_id',c['model_id'])
+    settings=c['channels'][d['channel']].get('voice_settings',{'stability':0.5,'similarity_boost':0.75,'style':0,'use_speaker_boost':False})
+    signature=hashlib.sha256(json.dumps([text,voice,model,settings],ensure_ascii=False,sort_keys=True).encode()).hexdigest()
     cache=read(folder/"narration.json")
     if cache:
         if cache.get("signature")!=signature: raise RuntimeError("Existing audio belongs to a different script/voice; use a new job id")
@@ -169,7 +171,7 @@ def synthesize(d,folder):
         entry={"id":d["id"],"signature":signature,"characters":len(text),"state":"submitted","at":now().isoformat()}
         entries.append(entry); write(STATE/"usage.json",ledger)
         data=api("/v1/text-to-speech/"+urllib.parse.quote(voice,safe="")+"/with-timestamps?output_format=mp3_44100_128",
-            {"text":text,"model_id":c["model_id"],"voice_settings":{"stability":0.48,"similarity_boost":0.75,"style":0.2,"use_speaker_boost":True}})
+            {"text":text,"model_id":model,"voice_settings":settings,"language_code":c['channels'][d['channel']]['language']})
         audio=base64.b64decode(data["audio_base64"],validate=True)
         (folder/"narration.mp3").write_bytes(audio)
         cache={"signature":signature,"alignment":data.get("alignment"),"characters":len(text),"created_at":now().isoformat()}
