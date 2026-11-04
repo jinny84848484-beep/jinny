@@ -1,0 +1,30 @@
+{
+  "timezone": "Asia/Seoul",
+  "daily_time": "08:00",
+  "videos_per_channel": 2,
+  "daily_character_cap": 6000,
+  "model_id": "eleven_multilingual_v2",
+  "publishing": "cloud_pending",
+  "channels": {
+    "ojirap": {
+      "name": "오늘의 오지랖",
+      "handle": "todays_ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "language": "ko",
+      "voice_id": "jTcRjpnkGYhSlhg5EcUZ",
+      "accent": "#FFCF33",
+      "background": "#151515",
+      "voice_name": "오늘의 오지랖 | 굳이 한마디 v1"
+    },
+    "korean": {
+      "name": "A Not-So-Polite Korean",
+      "handle": "ANotSoPoliteKorean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "language": "en",
+      "voice_id": "H4U0Sx4yLfEcVChJWEir",
+      "accent": "#C9362B",
+      "background": "#F3E8D3",
+      "voice_name": "Not-So-Polite Korean | Dry Wit v1"
+    }
+  }
+}

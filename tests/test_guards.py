@@ -1,0 +1,49 @@
+import copy
+import unittest
+from unittest.mock import patch
+import cloud_runner as c
+
+def batch():
+    jobs=[]
+    for i,(channel,category) in enumerate(zip(['korean','korean','ojirap','ojirap'],['politics','sports','technology','entertainment'])):
+        narration=('One Korean perspective explains this current event with verified facts and original personal commentary. ' * 2) if channel=='korean' else ('오늘의 소식을 확인하고 제 생각을 덧붙입니다. ' * 3)
+        jobs.append({'id':f'2026-11-05-test-{i}','channel':channel,'category':category,'topic_key':f'unique-event-{i}','title':'Test title','sources':[{'title':'A','url':'https://example.com/news/a'},{'title':'B','url':'https://example.org/news/b'}],'scenes':[{'kind':'fact','headline':'Test','body':'Text','narration':narration,'source_indices':[0,1]} for _ in range(4)]})
+    return jobs
+
+class Guards(unittest.TestCase):
+    def test_batch_accepts_four_different_topics(self):
+        c.validate_batch(batch(),'2026-11-05',set())
+
+    def test_duplicate_topic_stops(self):
+        jobs=batch();jobs[3]['topic_key']=jobs[0]['topic_key']
+        with self.assertRaisesRegex(ValueError,'Duplicate topic'):c.validate_batch(jobs,'2026-11-05',set())
+
+    def test_recent_topic_stops(self):
+        with self.assertRaisesRegex(ValueError,'Duplicate topic'):c.validate_batch(batch(),'2026-11-05',{'unique-event-0'})
+
+    def test_wrong_channel_distribution_stops(self):
+        jobs=batch();jobs[0]['channel']='ojirap'
+        with self.assertRaisesRegex(ValueError,'Two videos'):c.validate_batch(jobs,'2026-11-05',set())
+
+    def test_no_secrets_no_network(self):
+        with patch.dict(c.os.environ,{},clear=True),patch.object(c,'http') as network:
+            with self.assertRaisesRegex(RuntimeError,'Missing configuration'):c.preflight()
+            network.assert_not_called()
+
+    def test_completed_batch_never_generates_again(self):
+        day=c.p.now().date().isoformat()
+        with patch.object(c,'preflight'),patch.dict(c.os.environ,{'PUBLIC_UPLOADS_ENABLED':'true'}),patch.object(c,'journal_get',return_value=({'days':{day:{'status':'complete'}},'publications':[]},'sha')),patch.object(c,'openai') as gen:
+            c.produce();gen.assert_not_called()
+
+    def test_ambiguous_submission_never_repeats(self):
+        day=c.p.now().date().isoformat()
+        for status in ['research_submitted','tts_submitted','rendered','upload_submitted']:
+            with self.subTest(status=status),patch.object(c,'preflight'),patch.dict(c.os.environ,{'PUBLIC_UPLOADS_ENABLED':'true'}),patch.object(c,'journal_get',return_value=({'days':{day:{'status':status}},'publications':[]},'sha')),patch.object(c,'openai') as gen,patch.object(c.media_renderer,'render') as render:
+                with self.assertRaisesRegex(RuntimeError,'reconcile'):c.produce()
+                gen.assert_not_called();render.assert_not_called()
+
+    def test_wrong_oauth_identity_stops(self):
+        with patch.object(c,'http',return_value={'items':[{'id':'wrong-channel'}]}):
+            with self.assertRaisesRegex(RuntimeError,'configured target'):c.verify_channel('ojirap','dummy')
+
+if __name__=='__main__':unittest.main()

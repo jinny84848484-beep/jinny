@@ -1,0 +1,83 @@
+{
+  "days": {
+    "2026-11-04": {
+      "status": "complete",
+      "completed_at": "2026-11-05T03:02:50.127885+09:00",
+      "method": "YouTube Studio bootstrap"
+    }
+  },
+  "publications": [
+    {
+      "job_id": "2026-11-04-midterms-korean",
+      "topic_key": "midterms-korean",
+      "category": "politics",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "Trump, Even the Midterms? A Korean Gets Déjà Vu",
+      "video_id": "6ldCELJXEJU",
+      "url": "https://www.youtube.com/shorts/6ldCELJXEJU",
+      "confirmed_at": "2026-11-05T03:02:50.127885+09:00",
+      "publication_method": "YouTube Studio",
+      "experiment": {
+        "batch": "launch-01",
+        "topic_category": "politics",
+        "hook_type": "dry-satire",
+        "compare_within_channel": true
+      }
+    },
+    {
+      "job_id": "2026-11-04-baseball-korean",
+      "topic_key": "baseball-korean",
+      "category": "sports",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "An 8–0 Lead Became 8–7. Welcome to Korean Baseball.",
+      "video_id": "qVsBUw0Ge_Q",
+      "url": "https://www.youtube.com/shorts/qVsBUw0Ge_Q",
+      "confirmed_at": "2026-11-05T03:02:50.127885+09:00",
+      "publication_method": "YouTube Studio",
+      "experiment": {
+        "batch": "launch-01",
+        "topic_category": "sports",
+        "hook_type": "dry-satire",
+        "compare_within_channel": true
+      }
+    },
+    {
+      "job_id": "2026-11-04-buds-ojirap",
+      "topic_key": "buds-ojirap",
+      "category": "technology",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "이어폰이 내 귀까지 챙긴다고? 버즈의 새 부업",
+      "video_id": "Omm0-7HOLek",
+      "url": "https://www.youtube.com/shorts/Omm0-7HOLek",
+      "confirmed_at": "2026-11-05T03:02:50.127885+09:00",
+      "publication_method": "YouTube Studio",
+      "experiment": {
+        "batch": "launch-01",
+        "topic_category": "technology",
+        "hook_type": "dry-satire",
+        "compare_within_channel": true
+      }
+    },
+    {
+      "job_id": "2026-11-04-double-glenn-ojirap",
+      "topic_key": "double-glenn-ojirap",
+      "category": "entertainment",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "레드카펫에 본인이 두 명? 이 정도면 분장도 출근 대행",
+      "video_id": "uiY3ipFoCO4",
+      "url": "https://www.youtube.com/shorts/uiY3ipFoCO4",
+      "confirmed_at": "2026-11-05T03:02:50.127885+09:00",
+      "publication_method": "YouTube Studio",
+      "experiment": {
+        "batch": "launch-01",
+        "topic_category": "entertainment",
+        "hook_type": "dry-satire",
+        "compare_within_channel": true
+      }
+    }
+  ]
+}

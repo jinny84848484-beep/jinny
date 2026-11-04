@@ -1,0 +1,11 @@
+.env*
+work/
+runs/
+proof/
+voices/
+__pycache__/
+*.dpapi
+*client_secret*.json
+*.mp4
+*.mp3
+*.log

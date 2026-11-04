@@ -1,0 +1,52 @@
+{
+  "earbuds": {
+    "url": "https://videos.pexels.com/video-files/9130466/9130466-hd_720_1280_30fps.mp4",
+    "source": "https://www.pexels.com/video/close-up-of-a-person-wearing-wireless-earphones-9130466/",
+    "credit": "Dario Fernandez Ruz / Pexels",
+    "notice": "자료화면 · 해당 제품 아님",
+    "path": "assets/earbuds.mp4",
+    "license_url": "https://www.pexels.com/license/",
+    "license": "Pexels; editing and social use allowed; credit retained",
+    "checked_at": "2026-11-04T23:36:46.457972+09:00"
+  },
+  "makeup": {
+    "url": "https://videos.pexels.com/video-files/8479189/8479189-hd_720_1280_24fps.mp4",
+    "source": "https://www.pexels.com/video/a-person-holding-a-makeup-brush-8479189/",
+    "credit": "Los Muertos Crew / Pexels",
+    "notice": "자료화면 · 행사 장면 아님",
+    "path": "assets/makeup.mp4",
+    "license_url": "https://www.pexels.com/license/",
+    "license": "Pexels; editing and social use allowed; credit retained",
+    "checked_at": "2026-11-04T23:36:46.457972+09:00"
+  },
+  "baseball": {
+    "url": "https://videos.pexels.com/video-files/14369143/14369143-hd_1280_720_30fps.mp4",
+    "source": "https://www.pexels.com/video/top-view-of-an-empty-baseball-stadium-14369143/",
+    "credit": "Grind 4K videos / Pexels",
+    "notice": "ILLUSTRATION · NOT GAME FOOTAGE",
+    "path": "assets/baseball.mp4",
+    "license_url": "https://www.pexels.com/license/",
+    "license": "Pexels; editing and social use allowed; credit retained",
+    "checked_at": "2026-11-04T23:36:46.457972+09:00"
+  },
+  "trump": {
+    "path": "assets/trump.mp4",
+    "source": "https://www.dvidshub.net/video/1014830/trump-hegseth-speak-defense-innovation-summit",
+    "credit": "U.S. government archive / DVIDS",
+    "notice": "ARCHIVE: JUL 2026 · NOT ELECTION-NIGHT FOOTAGE",
+    "license_url": "https://www.dvidshub.net/about/copyright",
+    "license": "Public domain U.S. government footage; news commentary use",
+    "disclaimer": "The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.",
+    "checked_at": "2026-11-04T23:49:41.043314+09:00"
+  },
+  "yoon": {
+    "path": "assets/yoon.mp4",
+    "source": "https://www.dvidshub.net/video/894352/president-biden-greets-and-welcomes-president-yoon-suk-yeol-and-prime-minister-kishida-fumio",
+    "credit": "U.S. government archive / DVIDS",
+    "notice": "ARCHIVE: AUG 2023 · NOT ELECTION-NIGHT FOOTAGE",
+    "license_url": "https://www.dvidshub.net/about/copyright",
+    "license": "Public domain U.S. government footage; news commentary use",
+    "disclaimer": "The appearance of U.S. Department of War (DoW) visual information does not imply or constitute DoW endorsement.",
+    "checked_at": "2026-11-04T23:49:41.043314+09:00"
+  }
+}
