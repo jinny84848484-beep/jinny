@@ -207,6 +207,49 @@ def validate_batch(jobs,day,recent):
         characters+=len(p.validate(job))
     if characters>p.cfg()['daily_character_cap']:raise ValueError('Daily narration cap exceeded')
 
+
+def draft_validation_diagnostics(jobs, error):
+    # Never persist generated titles, text, URLs, IDs or exception messages.
+    reasons={
+        'Korean narration length outside Shorts limits':'korean_narration_length',
+        'English narration length outside Shorts limits':'english_narration_length',
+        'Daily narration cap exceeded':'daily_narration_cap',
+        'Exactly four videos required':'batch_size',
+        'Two videos per channel required':'channel_distribution',
+        'Four distinct categories required':'category_diversity',
+        'Duplicate topic':'duplicate_topic',
+    }
+    rows=[]
+    for index,job in enumerate(jobs[:4] if isinstance(jobs,list) else []):
+        if not isinstance(job,dict):continue
+        channel=job.get('channel')
+        scenes=job.get('scenes')
+        if not isinstance(scenes,list):continue
+        narrations=[scene.get('narration') for scene in scenes if isinstance(scene,dict)]
+        if len(narrations)!=len(scenes) or not all(isinstance(t,str) for t in narrations):continue
+        narration=' '.join(narrations)
+        rows.append({'job_index':index,'channel':channel if channel in ('ojirap','korean') else 'unknown',
+                     'characters':len(narration),'words':len(narration.split()),'scene_count':len(scenes)})
+    return {'reason':reasons.get(str(error),'draft_schema_or_validation'),
+            'job_count':len(jobs) if isinstance(jobs,list) else 0,'narration_counts':rows}
+
+
+def guarded_draft_validation(ledger,sha,day,draft,recent):
+    """Record known draft rejection, without a paid retry or public raw draft."""
+    jobs=None
+    try:
+        jobs=json.loads(draft)['jobs']
+        validate_batch(jobs,day,recent)
+        return jobs
+    except (ValueError,KeyError,TypeError,IndexError) as exc:
+        diagnostic=draft_validation_diagnostics(jobs,exc)
+        record=ledger['days'][day]
+        record.update(status='draft_validation_failed',retry_hold=True)
+        record.setdefault('draft_failures',[]).append({**diagnostic,'at':p.now().isoformat()})
+        # The earlier submitted marker remains fail-closed if saving fails.
+        journal_put(ledger,sha)
+        raise RuntimeError('Draft validation failed: '+diagnostic['reason']+'; reconcile before retrying') from None
+
 def download_media(jobs):
     lib=p.read(p.ROOT/'assets/media-library.json')
     for name in {s.get('media') for j in jobs for s in j['scenes']} - {None}:
@@ -269,7 +312,7 @@ def produce():
         recent={x.get('topic_key','').lower() for x in ledger.get('publications',[])[-40:]}
         research,evidence=guarded_research(ledger,sha,day,'research','Today is '+p.now().isoformat()+'. Research four unrelated recent issues, using YouTube and Google Trends signals plus official/original reporting. Public TikTok/Reels may identify a trend but are not proof or permission to reuse video. Explain Korean context for the English channel. Verify facts against at least two independent sources per story. Exclude recent topics: '+json.dumps(list(recent))+'\nTrend candidates:\n'+json.dumps(trends,ensure_ascii=False),True,5000)
         draft,_=openai('Return JSON with jobs for '+day+'. Use this researched evidence. Provide visual_queries for the exact subjects; the pipeline will source licensed actual photos and visually verify them. Do not assign invented media IDs. Make the first spoken phrase a concise immediately understandable hook that also works as the single opening caption.\n'+research,False,7500)
-        jobs=json.loads(draft)['jobs'];validate_batch(jobs,day,recent)
+        jobs=guarded_draft_validation(ledger,sha,day,draft,recent)
         media=relevant_media.candidates(jobs)
         review,review_sources=guarded_research(ledger,sha,day,'editorial_review','Independently verify every factual claim and check four truly different topics, two per channel, conversational natural speech rather than anchor delivery, correct language, original opinion, no invented quotes or outcomes. Browse cited sources. VISUALLY inspect every supplied image and confirm it directly depicts the named person or exact product, not unrelated scenery or another person. Archival pictures are labeled as archival and must not imply current event footage. Each job needs at least two suitable images. If everything passes, FIRST LINE must be PASS, followed by a JSON object mapping each job id to an array of approved image IDs, one per scene. Otherwise return FAIL and explain. Do not repair scripts or invent images.\nJOBS:\n'+json.dumps(jobs,ensure_ascii=False)+'\nIMAGE METADATA:\n'+json.dumps(media,ensure_ascii=False),True,3500,media)
         if review.splitlines()[0].strip()!='PASS':raise RuntimeError('Editorial review did not pass; batch held')
