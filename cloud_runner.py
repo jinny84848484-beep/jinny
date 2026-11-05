@@ -11,7 +11,7 @@ import pipeline as p
 import media_renderer
 import relevant_media
 
-CATEGORIES={'technology':'28','entertainment':'24','sports':'17','politics':'25','science':'28','culture':'22','internet':'24','society':'25','business':'25'}
+CATEGORIES={'technology':'28','entertainment':'24','sports':'17','politics':'25','science':'28','culture':'22','internet':'24','society':'25','business':'25','film':'1','music':'10'}
 BATCH_SLOTS=(('korean','politics'),('korean','sports'),('ojirap','technology'),('ojirap','entertainment'))
 SLOT_INSTRUCTIONS='''Use these four distinct editorial slots exactly once each: korean/politics, korean/sports, ojirap/technology, ojirap/entertainment. These are channel/category pairs, not topic suggestions. Choose four genuinely unrelated current events. Never relabel one event to fill another slot or translate the same event. The channel key korean means ENGLISH narration; ojirap means KOREAN narration. If a slot has insufficient verified evidence, explicitly report that limitation instead of inventing a story. '''
 
@@ -132,9 +132,15 @@ class CompletedResearchUnusable(RuntimeError):
 
 
 def guarded_research(ledger,sha,day,stage,*args,**kwargs):
+    slots=kwargs.pop('editorial_slots',BATCH_SLOTS)
     instructions={'research':RESEARCH_PROMPT,'editorial_review':REVIEW_PROMPT}[stage]
+    if stage=='editorial_review' and slots!=BATCH_SLOTS:
+        # Only allowlisted channel/category labels enter these instructions.
+        if len(slots)!=4 or any(ch not in ('korean','ojirap') or cat not in CATEGORIES for ch,cat in slots):raise ValueError('Editorial category slots mismatch')
+        selected='Review these selected channel/category pairs: '+', '.join(ch+'/'+cat for ch,cat in slots)+'. Four unrelated events; never relabel or translate one event. korean means ENGLISH narration; ojirap means KOREAN narration. '
+        instructions=instructions.replace(SLOT_INSTRUCTIONS,selected)
     try:
-        return openai(*args,instructions=instructions,**kwargs)
+        return openai(*args,instructions=instructions,stage=stage,**kwargs)
     except CompletedResearchUnusable as exc:
         record=ledger['days'][day]
         record.update(status='research_completed_unusable',retry_hold=True)
@@ -146,7 +152,7 @@ def guarded_research(ledger,sha,day,stage,*args,**kwargs):
         raise
 
 
-def openai(prompt,search=False,max_tokens=6500,images=None,*,instructions=None):
+def openai(prompt,search=False,max_tokens=6500,images=None,*,instructions=None,stage=None):
     body={'model':os.environ.get('OPENAI_MODEL','gpt-5.4-mini'),'instructions':instructions if instructions is not None else (RESEARCH_PROMPT if search else PROMPT),'input':prompt,'max_output_tokens':max_tokens,'store':False}
     if search:
         body.update(tools=[{'type':'web_search'}],tool_choice='required',include=['web_search_call.action.sources'])
@@ -156,7 +162,8 @@ def openai(prompt,search=False,max_tokens=6500,images=None,*,instructions=None):
         for key,value in images.items():
             content.extend([{'type':'input_text','text':'Image ID: '+key},{'type':'input_image','image_url':value['url'],'detail':'low'}])
         body['input']=[{'role':'user','content':content}]
-    stage='narration_correction' if instructions==CORRECTION_PROMPT else 'editorial_review' if instructions==REVIEW_PROMPT else 'research' if search else 'draft'
+    if stage is None:stage='narration_correction' if instructions==CORRECTION_PROMPT else 'editorial_review' if instructions==REVIEW_PROMPT else 'research' if search else 'draft'
+    if stage not in {'research','draft','narration_correction','editorial_review'}:raise ValueError('Invalid provider stage')
     print('OpenAI stage started: '+stage,flush=True)
     data=http('https://api.openai.com/v1/responses',body,{'Authorization':'Bearer '+os.environ['OPENAI_API_KEY']})
     if data.get('status')!='completed':raise RuntimeError('Incomplete OpenAI response; do not publish')
@@ -216,11 +223,11 @@ def preflight():
     media_renderer.font(30);p.ffmpeg()
     print('Preflight passed: models, voices, fonts and both channel identities verified.',flush=True)
 
-def validate_batch(jobs,day,recent):
+def validate_batch(jobs,day,recent,*,slots=BATCH_SLOTS):
     if len(jobs)!=4:raise ValueError('Exactly four videos required')
     if sorted(j['channel'] for j in jobs)!=['korean','korean','ojirap','ojirap']:raise ValueError('Two videos per channel required')
     if len({j['category'] for j in jobs})!=4:raise ValueError('Four distinct categories required')
-    if sorted((j['channel'],j['category']) for j in jobs)!=sorted(BATCH_SLOTS):raise ValueError('Editorial category slots mismatch')
+    if sorted((j['channel'],j['category']) for j in jobs)!=sorted(slots):raise ValueError('Editorial category slots mismatch')
     keys=[j['topic_key'].strip().lower() for j in jobs]
     if len(set(keys))!=4 or any(k in recent for k in keys):raise ValueError('Duplicate topic')
     if len({j['id'] for j in jobs})!=4:raise ValueError('Duplicate job ID')
@@ -391,7 +398,7 @@ def produce():
     if record.get('retry_hold') or record.get('status')=='research_completed_unusable':
         raise RuntimeError('Research retry is on hold: reconcile and obtain approval before retrying')
     if record.get('status')=='complete':print('Daily batch already complete.');return
-    if record.get('status') in {'research_submitted','tts_submitted','rendered','upload_submitted'}:raise RuntimeError('Interrupted external request: reconcile journal before retrying')
+    if record.get('status') in {'research_submitted','tts_submitted','rendered','upload_submitted','staged_waiting','staged_review_submitted'}:raise RuntimeError('Interrupted external request: reconcile journal before retrying')
     preflight()
     collect_metrics(ledger)
     if not record.get('jobs'):
@@ -401,15 +408,27 @@ def produce():
         research,evidence=guarded_research(ledger,sha,day,'research','Today is '+p.now().isoformat()+'. Research four unrelated recent issues, using YouTube and Google Trends signals plus official/original reporting. Public TikTok/Reels may identify a trend but are not proof or permission to reuse video. Explain Korean context for the English channel. Verify facts against at least two independent sources per story. Exclude recent topics: '+json.dumps(list(recent))+'\nTrend candidates:\n'+json.dumps(trends,ensure_ascii=False),True,5000)
         draft,_=openai('Return JSON with jobs for '+day+'. Use this researched evidence. Provide visual_queries for the exact subjects; the pipeline will source licensed actual photos and visually verify them. Do not assign invented media IDs. Make the first spoken phrase a concise immediately understandable hook that also works as the single opening caption.\n'+research,False,7500)
         jobs=guarded_draft_validation(ledger,sha,day,draft,recent,allow_length_correction=True)
-        media=relevant_media.candidates(jobs)
-        review,review_sources=guarded_research(ledger,sha,day,'editorial_review','Independently verify every factual claim and check four truly different topics, two per channel, conversational natural speech rather than anchor delivery, correct language, original opinion, no invented quotes or outcomes. Browse cited sources. VISUALLY inspect every supplied image and confirm it directly depicts the named person or exact product, not unrelated scenery or another person. Archival pictures are labeled as archival and must not imply current event footage. Each job needs at least two suitable images. If everything passes, FIRST LINE must be PASS, followed by a JSON object mapping each job id to an array of approved image IDs, one per scene. Otherwise return FAIL and explain. Do not repair scripts or invent images.\nJOBS:\n'+json.dumps(jobs,ensure_ascii=False)+'\nIMAGE METADATA:\n'+json.dumps(media,ensure_ascii=False),True,3500,media)
-        if review.splitlines()[0].strip()!='PASS':raise RuntimeError('Editorial review did not pass; batch held')
-        selection=json.loads(review.split('\n',1)[1].strip());relevant_media.apply_review(jobs,media,selection)
-        record.update(status='reviewed',jobs=jobs,media=media,review=review,review_source_urls=[s.get('url') for s in review_sources],created_at=p.now().isoformat())
-        sha=journal_put(ledger,sha)
+        sha=review_jobs(ledger,sha,day,jobs)
+    publish_reviewed(ledger,sha,day)
+
+
+def review_jobs(ledger,sha,day,jobs,*,slots=BATCH_SLOTS):
+    record=ledger['days'][day]
+    media=relevant_media.candidates(jobs)
+    review,review_sources=guarded_research(ledger,sha,day,'editorial_review','Independently verify every factual claim and check four truly different topics, two per channel, conversational natural speech rather than anchor delivery, correct language, original opinion, no invented quotes or outcomes. Browse cited sources. VISUALLY inspect every supplied image and confirm it directly depicts the named person or exact product, not unrelated scenery or another person. Archival pictures are labeled as archival and must not imply current event footage. Each job needs at least two suitable images. If everything passes, FIRST LINE must be PASS, followed by a JSON object mapping each job id to an array of approved image IDs, one per scene. Otherwise return FAIL and explain. Do not repair scripts or invent images.\nJOBS:\n'+json.dumps(jobs,ensure_ascii=False)+'\nIMAGE METADATA:\n'+json.dumps(media,ensure_ascii=False),True,3500,media,editorial_slots=slots)
+    if review.splitlines()[0].strip()!='PASS':raise RuntimeError('Editorial review did not pass; batch held')
+    selection=json.loads(review.split('\n',1)[1].strip());relevant_media.apply_review(jobs,media,selection)
+    validate_batch(jobs,day,{x.get('topic_key','').lower() for x in ledger.get('publications',[])[-40:]},slots=slots)
+    record.update(status='reviewed',jobs=jobs,media=media,review=review,review_source_urls=[s.get('url') for s in review_sources],created_at=p.now().isoformat())
+    sha=journal_put(ledger,sha)
+    return sha
+
+
+def publish_reviewed(ledger,sha,day,*,slots=BATCH_SLOTS):
+    record=ledger['days'][day]
     jobs=record['jobs']
     library=p.read(p.ROOT/'assets/media-library.json',{});library.update(record.get('media',{}));p.write(p.ROOT/'assets/media-library.json',library)
-    validate_batch(jobs,day,set())
+    validate_batch(jobs,day,set(),slots=slots)
     for job in jobs:
         for scene in job['scenes']:
             media=library.get(scene.get('media'),{})
@@ -432,8 +451,13 @@ def produce():
     record['status']='complete';record['completed_at']=p.now().isoformat();journal_put(ledger,sha)
 
 if __name__=='__main__':
-    a=argparse.ArgumentParser();a.add_argument('mode',choices=['preflight','produce']);args=a.parse_args()
-    try:preflight() if args.mode=='preflight' else produce()
+    a=argparse.ArgumentParser();a.add_argument('mode',choices=['preflight','produce','stage_produce']);args=a.parse_args()
+    try:
+        if args.mode=='preflight':preflight()
+        elif args.mode=='produce':produce()
+        else:
+            from staged_runner import run_staged
+            run_staged()
     except Exception as exc:
         # Provider response bodies and credentials never go into Actions logs.
         print('Automation stopped: '+str(exc)[:250],file=sys.stderr);sys.exit(1)

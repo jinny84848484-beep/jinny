@@ -1,2 +1,5 @@
 Pillow==13.0.0
 imageio-ffmpeg==0.8.1
+
+
+cryptography==50.0.0

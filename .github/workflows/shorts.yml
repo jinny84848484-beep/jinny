@@ -5,8 +5,12 @@ on:
       mode:
         description: 'Preflight checks connections; produce publishes four videos'
         type: choice
-        options: [preflight, produce]
+        options: [preflight, produce, stage_produce]
         default: preflight
+      staged_sender_public_key:
+        description: One-run Ed25519 public key for stage_produce only
+        type: string
+        required: false
   schedule:
     - cron: '0 23 * * *'
 permissions:
@@ -44,6 +48,7 @@ jobs:
           OPENAI_MODEL: gpt-5.4-mini
           SHORTS_STATE_DIR: ${{ runner.temp }}/shorts-state
           IMAGEIO_FFMPEG_EXE: /usr/bin/ffmpeg
+          STAGED_SENDER_PUBLIC_KEY: ${{ inputs.staged_sender_public_key }}
           RUN_MODE: ${{ inputs.mode || 'produce' }}
         run: python cloud_runner.py "$RUN_MODE"
       - name: Save produced media
@@ -54,3 +59,4 @@ jobs:
           path: runs/
           if-no-files-found: ignore
           retention-days: 7
+
