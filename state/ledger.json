@@ -706,7 +706,7 @@
         }
       ],
       "method": "Reviewed local production with remote before-upload journal",
-      "active_job": "2026-11-05-swift-telescope-final-shift"
+      "active_job": "2026-11-05-nintendo-switch2-sales-profit"
     }
   },
   "publications": [
@@ -795,6 +795,21 @@
       "experiment": {
         "hook_type": "understated-personal-reaction",
         "topic_category": "sports"
+      }
+    },
+    {
+      "job_id": "2026-11-05-swift-telescope-final-shift",
+      "topic_key": "swift-telescope-final-shift",
+      "category": "science",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "NASA’s Observatory Worked 20 Years Overtime",
+      "video_id": "l1X1iJBHDnE",
+      "url": "https://www.youtube.com/shorts/l1X1iJBHDnE",
+      "at": "2026-11-05T23:27:09.026312+09:00",
+      "experiment": {
+        "hook_type": "understated-personal-reaction",
+        "topic_category": "science"
       }
     }
   ]
