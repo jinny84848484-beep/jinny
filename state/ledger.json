@@ -6,7 +6,7 @@
       "method": "YouTube Studio bootstrap"
     },
     "2026-11-05": {
-      "status": "staged_review_submitted",
+      "status": "draft_validation_failed",
       "retry_hold": true,
       "research_failures": [
         {
@@ -112,13 +112,24 @@
           "at": "2026-11-05T15:06:50.909773+09:00"
         }
       ],
-      "staging": {
-        "run_id": "41978173617",
-        "run_attempt": "1",
-        "day": "2026-11-05",
-        "session_id": "V0d3twYL6tVZWa33/yTNi0OHEU74fJcP7UilK13+JwY="
-      },
-      "staging_envelope_blob": "0cc615c17d4f47a95649b72121712e187356faf7"
+      "staging_failures": [
+        {
+          "run_id": "41978173617",
+          "run_attempt": "1",
+          "status": "completed_failure",
+          "boundary": "media_candidate_discovery",
+          "reason": "insufficient_eligible_search_results",
+          "model_review_started": false,
+          "staging": {
+            "run_id": "41978173617",
+            "run_attempt": "1",
+            "day": "2026-11-05",
+            "session_id": "V0d3twYL6tVZWa33/yTNi0OHEU74fJcP7UilK13+JwY="
+          },
+          "envelope_blob": "0cc615c17d4f47a95649b72121712e187356faf7",
+          "reconciled_at": "2026-11-05T15:16:04+09:00"
+        }
+      ]
     }
   },
   "publications": [
