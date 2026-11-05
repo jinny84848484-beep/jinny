@@ -729,7 +729,7 @@
           "completed_at": "2026-11-06T07:29:05.792771+09:00"
         }
       },
-      "status": "research_validation_failed",
+      "status": "staged_waiting",
       "active_stage": "research_repair",
       "retry_hold": true,
       "research_failures": [
@@ -739,7 +739,23 @@
           "repair_attempted": true,
           "at": "2026-11-06T07:29:06.961083+09:00"
         }
-      ]
+      ],
+      "staging_history": [
+        {
+          "previous_status": "research_validation_failed",
+          "run_id": "42130980896",
+          "run_attempt": "1",
+          "day": "2026-11-06",
+          "session_id": "LV/hgospMIwiIoCa2mVC2LtO8Mo+NSNPgtx+PgyVTL4=",
+          "at": "2026-11-06T08:39:26.019601+09:00"
+        }
+      ],
+      "staging": {
+        "run_id": "42130980896",
+        "run_attempt": "1",
+        "day": "2026-11-06",
+        "session_id": "LV/hgospMIwiIoCa2mVC2LtO8Mo+NSNPgtx+PgyVTL4="
+      }
     }
   },
   "publications": [
