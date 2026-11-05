@@ -225,3 +225,36 @@ class StagedRunner(unittest.TestCase):
             self.assertEqual(len(ledger['publications']),5)
             self.assertTrue(ledger['days'][DAY]['retry_hold'])
             self.assertTrue(all(j['editorial_status']=='verified' for j in ledger['days'][DAY]['jobs']))
+
+
+class StagedFailureLabel(unittest.TestCase):
+    def test_label_prints_stage_and_fixed_message(self):
+        label=r.staged_failure_label('editorial_review',RuntimeError('Editorial review did not pass; batch held'))
+        self.assertEqual(label,'Staged failure detail: stage=editorial_review type=RuntimeError message=Editorial review did not pass; batch held')
+
+    def test_label_hides_runtime_data_and_unknown_stage(self):
+        secret='sk-live-should-not-appear https://example.com/private?token=abc'
+        label=r.staged_failure_label('somewhere',ValueError(secret))
+        self.assertNotIn('sk-live',label);self.assertNotIn('token',label)
+        self.assertIn('stage=unknown_stage',label);self.assertIn('message=unlisted_message',label)
+
+    def test_review_failure_logs_stage_without_releasing_hold(self):
+        with ExitStack() as stack:
+            out=io.StringIO()
+            ledger,receiver,put,fetch,preflight,review,publish,get=StagedRunner.setup_run(self_stub(self),stack)
+            stack.enter_context(redirect_stdout(out))
+            review.side_effect=RuntimeError('Editorial review did not pass; batch held')
+            with self.assertRaisesRegex(RuntimeError,'Staged attempt stopped; hold remains'):r.run_staged()
+            self.assertIn('stage=editorial_review type=RuntimeError message=Editorial review did not pass; batch held',out.getvalue())
+            self.assertEqual(ledger['days'][DAY]['status'],'staged_review_submitted')
+            self.assertTrue(ledger['days'][DAY]['retry_hold'])
+            publish.assert_not_called()
+
+
+def self_stub(case):
+    import datetime as dt
+    stub=StagedRunner('test_success_orders_validation_marker_review_publish_preserves_history')
+    stub.signer=s.Ed25519PrivateKey.generate()
+    clock=patch.object(c.p,'now',return_value=dt.datetime(2026,11,5,12,tzinfo=dt.timezone(dt.timedelta(hours=9))))
+    clock.start();case.addCleanup(clock.stop)
+    return stub
