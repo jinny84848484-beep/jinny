@@ -6,7 +6,7 @@
       "method": "YouTube Studio bootstrap"
     },
     "2026-11-05": {
-      "status": "upload_submitted",
+      "status": "complete",
       "repair_attempt": 6,
       "reason": "Review calibration now rejects only material unsupported assertions. Source bundle reduced to Reuters original statement reproduction plus independent AP reporting, both natively inspected. Fresh full review after instruction change.",
       "checkpoints": {},
@@ -706,7 +706,7 @@
         }
       ],
       "method": "Reviewed local production with remote before-upload journal",
-      "active_job": "2026-11-05-scarlett-batman-mystery-interview"
+      "completed_at": "2026-11-05T23:27:26.476478+09:00"
     }
   },
   "publications": [
@@ -825,6 +825,21 @@
       "experiment": {
         "hook_type": "understated-personal-reaction",
         "topic_category": "technology"
+      }
+    },
+    {
+      "job_id": "2026-11-05-scarlett-batman-mystery-interview",
+      "topic_key": "scarlett-batman-mystery-interview",
+      "category": "entertainment",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "요한슨이 배트맨 얘기를 했는데, 더 모르겠음",
+      "video_id": "yVSWUlEBL8o",
+      "url": "https://www.youtube.com/shorts/yVSWUlEBL8o",
+      "at": "2026-11-05T23:27:26.476478+09:00",
+      "experiment": {
+        "hook_type": "understated-personal-reaction",
+        "topic_category": "entertainment"
       }
     }
   ]
