@@ -20,7 +20,11 @@ def valid_jobs():
     return jobs
 
 class StagedRunner(unittest.TestCase):
-    def setUp(self):self.signer=s.Ed25519PrivateKey.generate()
+    def setUp(self):
+        import datetime as dt
+        self.signer=s.Ed25519PrivateKey.generate()
+        clock=patch.object(c.p,'now',return_value=dt.datetime(2026,11,5,12,tzinfo=dt.timezone(dt.timedelta(hours=9))))
+        clock.start();self.addCleanup(clock.stop)
     def setup_run(self, stack, jobs=None):
         ledger={'days':{DAY:{'status':'draft_validation_failed','retry_hold':True,'draft_failures':[{'reason':'old'}]}},'publications':[{'job_id':'old','topic_key':'old'}]}
         receiver=s.create_receiver(r.REPOSITORY,'123','1',DAY,s.public(self.signer))
