@@ -6,8 +6,8 @@
       "method": "YouTube Studio bootstrap"
     },
     "2026-11-05": {
-      "status": "research_submitted",
-      "retry_hold": false,
+      "status": "draft_validation_failed",
+      "retry_hold": true,
       "research_failures": [
         {
           "previous_status": "research_submitted",
@@ -28,6 +28,43 @@
           "recognized_source_count": 0,
           "stage": "research",
           "at": "2026-11-05T12:04:47.208828+09:00"
+        }
+      ],
+      "draft_failures": [
+        {
+          "reason": "category_diversity",
+          "job_count": 4,
+          "narration_counts": [
+            {
+              "job_index": 0,
+              "channel": "korean",
+              "characters": 153,
+              "words": 37,
+              "scene_count": 5
+            },
+            {
+              "job_index": 1,
+              "channel": "ojirap",
+              "characters": 164,
+              "words": 43,
+              "scene_count": 5
+            },
+            {
+              "job_index": 2,
+              "channel": "korean",
+              "characters": 171,
+              "words": 47,
+              "scene_count": 5
+            },
+            {
+              "job_index": 3,
+              "channel": "ojirap",
+              "characters": 149,
+              "words": 38,
+              "scene_count": 5
+            }
+          ],
+          "at": "2026-11-05T13:33:55.168207+09:00"
         }
       ]
     }
