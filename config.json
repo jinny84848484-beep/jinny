@@ -4,7 +4,7 @@
   "videos_per_channel": 2,
   "daily_character_cap": 6000,
   "model_id": "eleven_multilingual_v2",
-  "publishing": "cloud_pending",
+  "publishing": "github_actions",
   "channels": {
     "ojirap": {
       "name": "오늘의 오지랖",
@@ -19,7 +19,8 @@
       "voice_settings": {
         "stability": 0.5,
         "similarity_boost": 0.75
-      }
+      },
+      "delivery": "Relaxed conversational tone, matter-of-fact, understated dry amusement, talking to a friend"
     },
     "korean": {
       "name": "A Not-So-Polite Korean",
@@ -34,7 +35,8 @@
       "voice_settings": {
         "stability": 0.5,
         "similarity_boost": 0.75
-      }
+      },
+      "delivery": "Casual conversational voice, calm and personal, understated dry wit, talking to a friend"
     }
   }
 }

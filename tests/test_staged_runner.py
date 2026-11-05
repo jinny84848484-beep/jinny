@@ -212,7 +212,8 @@ class StagedRunner(unittest.TestCase):
                 self.assertNotIn('"editorial_status"',prompt)
                 self.assertNotIn('"checked_at"',prompt)
                 self.assertEqual(kwargs['stage'],'editorial_review')
-                return 'PASS\n'+json.dumps(selection),[{'url':'https://example.org/report'}]
+                job=json.loads(prompt.split('\nJOB:\n',1)[1].split('\nIMAGE METADATA:\n',1)[0])
+                return 'PASS\n'+json.dumps({job['id']:selection[job['id']]}),[{'url':'https://example.org/report'}]
             stack.enter_context(patch.object(c,'openai',side_effect=provider))
             stack.enter_context(patch.object(c,'download_media'))
             render=stack.enter_context(patch.object(c.media_renderer,'render'))
@@ -223,7 +224,7 @@ class StagedRunner(unittest.TestCase):
             self.assertEqual(render.call_count,4);self.assertEqual(upload.call_count,4);self.assertEqual(verify.call_count,4)
             self.assertEqual(ledger['days'][DAY]['status'],'complete')
             self.assertEqual(len(ledger['publications']),5)
-            self.assertTrue(ledger['days'][DAY]['retry_hold'])
+            self.assertFalse(ledger['days'][DAY]['retry_hold'])
             self.assertTrue(all(j['editorial_status']=='verified' for j in ledger['days'][DAY]['jobs']))
 
 
@@ -258,3 +259,4 @@ def self_stub(case):
     clock=patch.object(c.p,'now',return_value=dt.datetime(2026,11,5,12,tzinfo=dt.timezone(dt.timedelta(hours=9))))
     clock.start();case.addCleanup(clock.stop)
     return stub
+

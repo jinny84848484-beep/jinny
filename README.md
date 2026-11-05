@@ -3,7 +3,7 @@
 Original daily commentary: 오늘의 오지랖 (Korean) and A Not-So-Polite Korean (English, one Korean's perspective). Four different topics and categories per batch, two videos per channel.
 
 ## Current state
-The first four videos are public (see state/ledger.json). Both channel OAuth credentials and all four Actions secrets passed a real cloud preflight on November 5, 2026 KST. Production is separately controlled by the repository variable PUBLIC_UPLOADS_ENABLED; check that variable and the latest Actions run for live state.
+The first eight videos, including the four November 5 stories, are public (see state/ledger.json). Both channels were verified by the YouTube API during today's uploads. Production is separately controlled by the repository variable PUBLIC_UPLOADS_ENABLED; check that variable and the latest Actions run for live state.
 
 ## Setup
 1. Enable YouTube Data API in the dedicated Google Cloud project. Configure an external OAuth application and a Desktop client. Use personal-use production mode where allowed; Testing refresh tokens can expire after seven days.
@@ -12,7 +12,7 @@ The first four videos are public (see state/ledger.json). Both channel OAuth cre
 4. Manually run Daily Shorts in preflight mode. This checks connections without paid generation or upload. Only after it passes set repository variable PUBLIC_UPLOADS_ENABLED=true. Disable the previous local render-only automation at cutover.
 
 ## Schedule and limits
-The UTC schedule 23:00 corresponds to 08:00 Asia/Seoul. GitHub may delay scheduled runs. One concurrent producer; maximum four videos and 6000 ElevenLabs narration characters per daily batch. OpenAI uses at most three bounded requests for research, scripts and independent factual review. Insufficient included voice credits stop production.
+The UTC schedule 23:00 corresponds to 08:00 Asia/Seoul. GitHub may delay scheduled runs. One concurrent producer; maximum four videos and 6000 ElevenLabs narration characters per daily batch. OpenAI uses two bounded research/script requests, one review per video and at most one narration-length correction (seven requests maximum). Research, drafting and reviews use gpt-5.4; reviews receive decoded, size-bounded actual photographs. Included voice credits are checked before production. A structured per-story source manifest is validated before drafting; the draft inherits its exact bibliography and citation indices are remapped without inventing sources.
 
 ## Editorial and media
 Google Trends KR/US RSS and web research discover topics. Claims require current cross-checked original reporting. EDITORIAL.md defines conversational individual commentary, English-first international packaging and one synchronized caption layer. ElevenLabs v4 uses connected prose rather than separate sentence chunks. Commons searches retrieve actual named subjects with explicit permitted licenses; an independent vision and source review must approve at least two relevant images per story. Missing relevant material holds the batch. Generic stock is forbidden. Photos are labeled archival and attributed with source, author, license and resizing/captioning notice. Automatic media discovery currently covers photos; TikTok/Reels discovery is not permission to republish video.
@@ -22,3 +22,4 @@ state/ledger.json records submissions before paid generation and uploads. Ambigu
 
 ## Validation
 Run `python -m unittest discover -s tests -v`. Tests cover topic diversity, duplicate prevention, missing credentials, channel identity, interrupted requests, media ownership/relevance gates and caption continuity. A cloud preflight has passed; a successful preflight does not prove a future scheduled production batch will pass editorial review or upload successfully.
+

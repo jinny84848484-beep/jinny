@@ -45,7 +45,8 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           PUBLIC_UPLOADS_ENABLED: ${{ vars.PUBLIC_UPLOADS_ENABLED }}
-          OPENAI_MODEL: gpt-5.4-mini
+          OPENAI_MODEL: gpt-5.4
+          OPENAI_REVIEW_MODEL: gpt-5.4
           SHORTS_STATE_DIR: ${{ runner.temp }}/shorts-state
           IMAGEIO_FFMPEG_EXE: /usr/bin/ffmpeg
           STAGED_SENDER_PUBLIC_KEY: ${{ inputs.staged_sender_public_key }}
@@ -59,4 +60,5 @@ jobs:
           path: runs/
           if-no-files-found: ignore
           retention-days: 7
+
 

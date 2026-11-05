@@ -48,8 +48,8 @@ def overlay(scene,ch,i,total,media,path):
     # The picture is dominant. Only synchronized captions carry editorial text.
     # No duplicated headline, summary paragraph or fact/opinion badges.
     draw.rectangle((0,185,W,1564),fill=(0,0,0,0))
-    draw.rectangle((0,1490,W,1564),fill=(0,0,0,170))
-    text(draw,media['notice'],(42,1510,965,45),'#FFFFFF',23,False)
+    draw.rectangle((0,185,W,257),fill=(0,0,0,170))
+    text(draw,media['notice'],(42,205,965,45),'#FFFFFF',23,False)
     text(draw,'@'+ch['handle'],(64,1750,860,65),muted,27,False)
     im.save(path)
 
@@ -68,6 +68,11 @@ def captions(text_value,alignment,ko):
         group.append(token)
         if re.search(r'[.!?。]$',token.group()):flush()
     flush()
+    first=re.search(r'[.!?。](?:\s|$)',text_value)
+    if first and first.start()+1<=(34 if ko else 64):
+        boundary=ends[first.start()]
+        consumed=next((i+1 for i,cue in enumerate(cues) if cue[1]>=boundary),0)
+        if consumed:cues=[(0,boundary,text_value[:first.start()+1])]+cues[consumed:]
     if cues:cues[0]=(0,cues[0][1],cues[0][2])
     return cues
 
@@ -100,7 +105,7 @@ def render(job_path):
             if media.get('media_type')=='image':args+=['-loop','1','-framerate','30','-i',str(path)]
             else:args+=['-stream_loop','-1','-i',str(path)]
             args+=['-filter_complex',
-              '[1:v]scale=1080:1380:force_original_aspect_ratio=decrease,pad=1080:1380:(ow-iw)/2:(oh-ih)/2:black,setsar=1,fps=30[v];[v]pad=1080:1920:0:185:black[b];[b][0:v]overlay=0:0:format=auto,format=yuv420p[out]', '-map','[out]']
+              '[1:v]split=2[bg][fg];[bg]scale=1080:1380:force_original_aspect_ratio=increase,crop=1080:1380,gblur=sigma=35,eq=brightness=-0.25[back];[fg]scale=1080:1380:force_original_aspect_ratio=decrease[front];[back][front]overlay=(W-w)/2:(H-h)/2,setsar=1,fps=30[v];[v]pad=1080:1920:0:185:black[b];[b][0:v]overlay=0:0:format=auto,format=yuv420p[out]', '-map','[out]']
         else:args+=['-vf','format=yuv420p']
         args+=['-t',str(seconds),'-an','-r','30','-c:v','libx264','-preset','veryfast','-crf','21','-threads','4',part.name]
         run_ff(args,folder);manifest_parts.append("file '"+part.name+"'")
@@ -124,3 +129,4 @@ def render(job_path):
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('jobs',nargs='+');args=parser.parse_args()
     for job in args.jobs:render(Path(job))
+

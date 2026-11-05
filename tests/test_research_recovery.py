@@ -3,6 +3,8 @@ import json
 import unittest
 from unittest.mock import patch
 import cloud_runner as c
+from test_guards import batch
+from test_source_manifest import manifest_for,evidence_for
 
 
 def response(evidence=False,text='Researched text',status='completed'):
@@ -87,13 +89,16 @@ class ResearchRecovery(unittest.TestCase):
                 def save(value,sha):
                     saved.append(copy.deepcopy(value))
                     return 'new-sha'
-                responses=[response()] if failure_stage=='research' else [response(True),response(text='{"jobs": []}'),response()]
+                researched=response(True,json.dumps(manifest_for(batch())))
+                researched['output'][-1]['action']['sources']=evidence_for(manifest_for(batch()))
+                responses=[response()] if failure_stage=='research' else [researched,response(text=json.dumps({'jobs':batch()})),response()]
                 with patch.dict(c.os.environ,{'PUBLIC_UPLOADS_ENABLED':'true','OPENAI_API_KEY':'test'}),patch.object(c,'journal_get',return_value=(ledger,'sha')),patch.object(c,'journal_put',side_effect=save),patch.object(c,'preflight'),patch.object(c,'collect_metrics'),patch.object(c.p,'collect',return_value={'path':'unused'}),patch.object(c.p,'read',return_value={}),patch.object(c,'validate_batch'),patch.object(c.relevant_media,'candidates',return_value={}),patch.object(c,'http',side_effect=responses) as network,patch.object(c.media_renderer,'render') as render,patch.object(c,'upload') as upload:
                     with self.assertRaises(c.CompletedResearchUnusable):c.produce()
                     self.assertEqual(network.call_count,len(responses))
                     render.assert_not_called();upload.assert_not_called()
                 self.assertEqual(saved[0]['days'][day]['status'],'research_submitted')
                 self.assertEqual(saved[-1]['days'][day]['status'],'research_completed_unusable')
-                self.assertEqual(saved[-1]['days'][day]['research_failures'][0]['stage'],failure_stage)
+                self.assertEqual(saved[-1]['days'][day]['research_failures'][0]['stage'],'editorial_review_0' if failure_stage=='editorial_review' else failure_stage)
                 self.assertTrue(saved[-1]['days'][day]['retry_hold'])
                 self.assertEqual(saved[-1]['publications'],[{'job_id':'old','video_id':'existing'}])
+

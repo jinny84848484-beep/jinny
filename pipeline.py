@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse, base64, ctypes, datetime as dt, hashlib, json, os, re, secrets
 import subprocess, sys, threading, urllib.error, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
+from email.utils import parsedate_to_datetime
 from contextlib import contextmanager
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -87,7 +88,34 @@ def status():
         "subscription":read(STATE/"subscription.json",{}),
         "last_collection":read(STATE/"collection-status.json",{}),
         "scheduler":read(STATE/"scheduler.json",{"status":"not_registered"}),
-        "publishing":"render_only"}
+        "publishing":c.get('publishing','github_actions')}
+
+def news_candidates():
+    leads=[];errors=[]
+    feeds=[('NASA','https://www.nasa.gov/feed/','primary'),('BBC','https://feeds.bbci.co.uk/news/rss.xml','original_reporting'),('The Verge','https://www.theverge.com/rss/index.xml','original_reporting')]
+    for publisher,url,role in feeds:
+        try:
+            req=urllib.request.Request(url,headers={'User-Agent':'JinnyShortsResearch/1.0'})
+            with urllib.request.urlopen(req,timeout=20) as response:root=ET.fromstring(response.read(4_000_000))
+            entries=root.findall('./channel/item') or root.findall('{http://www.w3.org/2005/Atom}entry')
+            count=0
+            for entry in entries:
+                fields={child.tag.split('}')[-1]:child for child in entry}
+                title=fields.get('title');link=fields.get('link');date=fields.get('pubDate')
+                if date is None:date=fields.get('published')
+                if date is None:date=fields.get('updated')
+                if title is None or link is None or date is None:continue
+                target=(link.text or '').strip() or link.get('href','')
+                raw_date=(date.text or '').strip()
+                try:published=parsedate_to_datetime(raw_date)
+                except (ValueError,TypeError):published=dt.datetime.fromisoformat(raw_date.replace('Z','+00:00'))
+                if published.tzinfo is None or not -300<=(now()-published).total_seconds()<=72*3600:continue
+                if not target.startswith('https://'):continue
+                leads.append({'title':title.text or '', 'url':target,'published_at':published.isoformat(),'publisher':publisher,'role_hint':role,'verified':False})
+                count+=1
+                if count>=8:break
+        except Exception as exc:errors.append({'publisher':publisher,'error':type(exc).__name__})
+    return leads,errors
 
 def collect():
     results=[]; errors=[]
@@ -108,10 +136,11 @@ def collect():
                 results.append({"region":geo,"query":item.findtext("title"),"trend_started_at":item.findtext("pubDate"),
                     "approx_traffic":get_local(item,"approx_traffic"),"news_candidates":news,"feed":url})
         except Exception as exc: errors.append({"region":geo,"error":type(exc).__name__})
-    data={"collected_at":now().isoformat(),"topics":results,"errors":errors,"notice":"Discovery signals only; each news claim must be verified against original sources before scripting."}
+    leads,feed_errors=news_candidates();errors.extend(feed_errors)
+    data={"collected_at":now().isoformat(),"topics":results,"news_article_candidates":leads,"errors":errors,"notice":"Discovery signals and RSS headlines only; each news claim must be verified against original sources before scripting. Article candidates are not verified evidence."}
     out=ROOT/"runs"/now().date().isoformat()/"research"/"google-trends.json"
     write(out,data); write(STATE/"collection-status.json",{"at":data["collected_at"],"count":len(results),"errors":errors,"path":str(out)})
-    if not results: raise RuntimeError("No trends fetched; do not fabricate replacement news.")
+    if not results and not leads: raise RuntimeError("No trends or news leads fetched; do not fabricate replacement news.")
     return {"path":str(out),"topic_count":len(results),"errors":errors}
 
 def validate(d):
@@ -154,7 +183,9 @@ def synthesize(d,folder):
     if not voice: raise RuntimeError("Choose the saved ElevenLabs voice on the local setup page")
     model=c['channels'][d['channel']].get('model_id',c['model_id'])
     settings=c['channels'][d['channel']].get('voice_settings',{'stability':0.5,'similarity_boost':0.75,'style':0,'use_speaker_boost':False})
-    signature=hashlib.sha256(json.dumps([text,voice,model,settings],ensure_ascii=False,sort_keys=True).encode()).hexdigest()
+    delivery=c['channels'][d['channel']].get('delivery','')
+    speech_text=('['+delivery+'] ' if delivery else '')+text
+    signature=hashlib.sha256(json.dumps([text,voice,model,settings,delivery],ensure_ascii=False,sort_keys=True).encode()).hexdigest()
     cache=read(folder/"narration.json")
     if cache:
         if cache.get("signature")!=signature: raise RuntimeError("Existing audio belongs to a different script/voice; use a new job id")
@@ -171,13 +202,24 @@ def synthesize(d,folder):
         entry={"id":d["id"],"signature":signature,"characters":len(text),"state":"submitted","at":now().isoformat()}
         entries.append(entry); write(STATE/"usage.json",ledger)
         data=api("/v1/text-to-speech/"+urllib.parse.quote(voice,safe="")+"/with-timestamps?output_format=mp3_44100_128",
-            {"text":text,"model_id":model,"voice_settings":settings,"language_code":c['channels'][d['channel']]['language']})
+            {"text":speech_text,"model_id":model,"voice_settings":settings,"language_code":c['channels'][d['channel']]['language']})
         audio=base64.b64decode(data["audio_base64"],validate=True)
         (folder/"narration.mp3").write_bytes(audio)
-        cache={"signature":signature,"alignment":data.get("alignment"),"characters":len(text),"created_at":now().isoformat()}
+        alignment=narration_alignment(text,data)
+        cache={"signature":signature,"alignment":alignment,"characters":len(text),"delivery":delivery,"created_at":now().isoformat()}
         write(folder/"narration.json",cache)
         entry["state"]="completed"; write(STATE/"usage.json",ledger)
         return cache
+
+def narration_alignment(text,data):
+    # Expressive delivery tags guide the voice, never the visible captions.
+    for key in ('alignment','normalized_alignment'):
+        value=data.get(key) or {};chars=value.get('characters',[])
+        rendered=''.join(chars);start=rendered.find(text)
+        if start>=0 and rendered[start:]==text:
+            result={name:value[name][start:] for name in ('characters','character_start_times_seconds','character_end_times_seconds')}
+            if all(len(v)==len(text) for v in result.values()):return result
+    raise ValueError('Narration alignment mismatch; saved audio requires review before retrying')
 
 def ffmpeg():
     import imageio_ffmpeg
@@ -339,3 +381,4 @@ def main():
     except Exception as exc: emit({"error":str(exc)}); sys.exit(1)
 
 if __name__=="__main__": main()
+

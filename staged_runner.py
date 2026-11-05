@@ -16,7 +16,7 @@ import cloud_runner as c
 from staged_transfer import MAX_BYTES, canonical, create_receiver
 
 REPOSITORY = 'jinny84848484-beep/jinny'
-START_STATES = {'draft_validation_failed', 'research_completed_unusable'}
+START_STATES = {'draft_validation_failed', 'research_completed_unusable', 'editorial_review_failed'}
 
 
 STAGES = ('journal_start', 'await_envelope', 'decrypt_envelope', 'offline_validation', 'preflight',
@@ -217,3 +217,4 @@ def run_staged():
         raise RuntimeError('Staged attempt stopped; hold remains, reconcile journal') from None
     finally:
         receiver.close()
+

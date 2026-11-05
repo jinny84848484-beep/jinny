@@ -11,7 +11,11 @@ class CategorySlots(unittest.TestCase):
 
     def test_wrong_assignment_rejected_even_with_distinct_categories(self):
         jobs=batch();jobs[0]['category'],jobs[2]['category']=jobs[2]['category'],jobs[0]['category']
-        with self.assertRaisesRegex(ValueError,'slots mismatch'):c.validate_batch(jobs,'2026-11-05',set())
+        with self.assertRaisesRegex(ValueError,'slots mismatch'):c.validate_batch(jobs,'2026-11-05',set(),slots=c.BATCH_SLOTS)
+
+    def test_default_categories_can_change_daily(self):
+        jobs=batch();jobs[0]['category']='film';jobs[1]['category']='music'
+        c.validate_batch(jobs,'2026-11-05',set())
 
     def test_order_does_not_change_slot_validity(self):
         c.validate_batch(list(reversed(batch())),'2026-11-05',set())
@@ -32,9 +36,10 @@ class CategorySlots(unittest.TestCase):
 
     def test_slot_failure_does_not_invoke_length_correction(self):
         import json
-        jobs=batch();jobs[0]['category']='society'
+        jobs=batch();jobs[0]['category']='unknown'
         ledger={'days':{'2026-11-05':{'status':'research_submitted'}}}
         with patch.object(c,'correct_narration_lengths_once') as correction,patch.object(c,'journal_put'):
-            with self.assertRaisesRegex(RuntimeError,'category_slots'):c.guarded_draft_validation(ledger,'sha','2026-11-05',json.dumps({'jobs':jobs}),set(),allow_length_correction=True)
+            with self.assertRaisesRegex(RuntimeError,'unknown_category'):c.guarded_draft_validation(ledger,'sha','2026-11-05',json.dumps({'jobs':jobs}),set(),allow_length_correction=True)
             correction.assert_not_called()
         self.assertTrue(ledger['days']['2026-11-05']['retry_hold'])
+
