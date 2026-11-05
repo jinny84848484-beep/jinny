@@ -6,7 +6,20 @@
       "method": "YouTube Studio bootstrap"
     },
     "2026-11-05": {
-      "status": "research_submitted"
+      "status": "research_completed_unusable",
+      "retry_hold": true,
+      "research_failures": [
+        {
+          "previous_status": "research_submitted",
+          "response_status": "completed",
+          "reason": "no_recognized_source_evidence",
+          "stage": "unknown_search_stage",
+          "recognized_source_count": 0,
+          "reconciled_at": "2026-11-05T00:25:56.712432+00:00",
+          "evidence_url": "https://github.com/jinny84848484-beep/jinny/actions/runs/41934741643",
+          "note": "Confirmed from terminal run log and code guard. Raw response unavailable; absent evidence versus unsupported response shape is unresolved. No retry authorized or submitted."
+        }
+      ]
     }
   },
   "publications": [

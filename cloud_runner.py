@@ -56,6 +56,35 @@ def journal_put(value,sha):
     result=http('https://api.github.com/repos/'+os.environ['GITHUB_REPOSITORY']+'/contents/state/ledger.json',body,gh_headers(),'PUT')
     return result['content']['sha']
 
+class CompletedResearchUnusable(RuntimeError):
+    """The provider finished, but its result is not approved for downstream work."""
+    def __init__(self, reason, data, evidence):
+        super().__init__('Completed research unusable: '+reason+'; reconcile before retrying')
+        items=data.get('output') or []
+        # Counts and fixed labels only: no provider text, URLs, IDs or credentials.
+        self.diagnostic={
+            'response_status':'completed', 'reason':reason,
+            'output_items':len(items),
+            'web_search_calls':sum(i.get('type')=='web_search_call' for i in items),
+            'output_text_blocks':sum(c.get('type')=='output_text' for i in items for c in (i.get('content') or [])),
+            'recognized_source_count':len(evidence),
+        }
+
+
+def guarded_research(ledger,sha,day,stage,*args,**kwargs):
+    try:
+        return openai(*args,**kwargs)
+    except CompletedResearchUnusable as exc:
+        record=ledger['days'][day]
+        record.update(status='research_completed_unusable',retry_hold=True)
+        record.setdefault('research_failures',[]).append({
+            **exc.diagnostic,'stage':stage,'at':p.now().isoformat(),
+        })
+        # If persistence fails, the earlier research_submitted marker still blocks retry.
+        journal_put(ledger,sha)
+        raise
+
+
 def openai(prompt,search=False,max_tokens=6500,images=None):
     body={'model':os.environ.get('OPENAI_MODEL','gpt-5.4-mini'),'instructions':PROMPT,'input':prompt,'max_output_tokens':max_tokens,'store':False}
     if search:
@@ -70,7 +99,8 @@ def openai(prompt,search=False,max_tokens=6500,images=None):
     if data.get('status')!='completed':raise RuntimeError('Incomplete OpenAI response; do not publish')
     output='\n'.join(c.get('text','') for item in data.get('output',[]) for c in item.get('content',[]) if c.get('type')=='output_text')
     evidence=research_sources(data)
-    if search and not evidence:raise RuntimeError('Research returned no source evidence')
+    if search and not evidence:raise CompletedResearchUnusable('no_recognized_source_evidence',data,evidence)
+    if search and not output.strip():raise CompletedResearchUnusable('empty_research_text',data,evidence)
     return output,evidence
 
 def research_sources(data):
@@ -192,21 +222,23 @@ def collect_metrics(ledger):
     p.write(p.ROOT/'runs'/observed.date().isoformat()/'metrics.json',{'rows':rows,'note':'Public counts only; retention, engaged views and revenue require YouTube Analytics. Compare within channel and similar video age.'})
 
 def produce():
-    preflight()
     if os.environ.get('PUBLIC_UPLOADS_ENABLED')!='true':raise RuntimeError('Public production is not enabled')
     day=p.now().date().isoformat();ledger,sha=journal_get();record=ledger['days'].setdefault(day,{})
+    if record.get('retry_hold') or record.get('status')=='research_completed_unusable':
+        raise RuntimeError('Research retry is on hold: reconcile and obtain approval before retrying')
     if record.get('status')=='complete':print('Daily batch already complete.');return
     if record.get('status') in {'research_submitted','tts_submitted','rendered','upload_submitted'}:raise RuntimeError('Interrupted external request: reconcile journal before retrying')
+    preflight()
     collect_metrics(ledger)
     if not record.get('jobs'):
         record['status']='research_submitted';sha=journal_put(ledger,sha)
         collection=p.collect();trends=p.read(collection['path'])
         recent={x.get('topic_key','').lower() for x in ledger.get('publications',[])[-40:]}
-        research,evidence=openai('Today is '+p.now().isoformat()+'. Research four unrelated recent issues, using YouTube and Google Trends signals plus official/original reporting. Public TikTok/Reels may identify a trend but are not proof or permission to reuse video. Explain Korean context for the English channel. Verify facts against at least two independent sources per story. Exclude recent topics: '+json.dumps(list(recent))+'\nTrend candidates:\n'+json.dumps(trends,ensure_ascii=False),True,5000)
+        research,evidence=guarded_research(ledger,sha,day,'research','Today is '+p.now().isoformat()+'. Research four unrelated recent issues, using YouTube and Google Trends signals plus official/original reporting. Public TikTok/Reels may identify a trend but are not proof or permission to reuse video. Explain Korean context for the English channel. Verify facts against at least two independent sources per story. Exclude recent topics: '+json.dumps(list(recent))+'\nTrend candidates:\n'+json.dumps(trends,ensure_ascii=False),True,5000)
         draft,_=openai('Return JSON with jobs for '+day+'. Use this researched evidence. Provide visual_queries for the exact subjects; the pipeline will source licensed actual photos and visually verify them. Do not assign invented media IDs. Make the first spoken phrase a concise immediately understandable hook that also works as the single opening caption.\n'+research,False,7500)
         jobs=json.loads(draft)['jobs'];validate_batch(jobs,day,recent)
         media=relevant_media.candidates(jobs)
-        review,review_sources=openai('Independently verify every factual claim and check four truly different topics, two per channel, conversational natural speech rather than anchor delivery, correct language, original opinion, no invented quotes or outcomes. Browse cited sources. VISUALLY inspect every supplied image and confirm it directly depicts the named person or exact product, not unrelated scenery or another person. Archival pictures are labeled as archival and must not imply current event footage. Each job needs at least two suitable images. If everything passes, FIRST LINE must be PASS, followed by a JSON object mapping each job id to an array of approved image IDs, one per scene. Otherwise return FAIL and explain. Do not repair scripts or invent images.\nJOBS:\n'+json.dumps(jobs,ensure_ascii=False)+'\nIMAGE METADATA:\n'+json.dumps(media,ensure_ascii=False),True,3500,media)
+        review,review_sources=guarded_research(ledger,sha,day,'editorial_review','Independently verify every factual claim and check four truly different topics, two per channel, conversational natural speech rather than anchor delivery, correct language, original opinion, no invented quotes or outcomes. Browse cited sources. VISUALLY inspect every supplied image and confirm it directly depicts the named person or exact product, not unrelated scenery or another person. Archival pictures are labeled as archival and must not imply current event footage. Each job needs at least two suitable images. If everything passes, FIRST LINE must be PASS, followed by a JSON object mapping each job id to an array of approved image IDs, one per scene. Otherwise return FAIL and explain. Do not repair scripts or invent images.\nJOBS:\n'+json.dumps(jobs,ensure_ascii=False)+'\nIMAGE METADATA:\n'+json.dumps(media,ensure_ascii=False),True,3500,media)
         if review.splitlines()[0].strip()!='PASS':raise RuntimeError('Editorial review did not pass; batch held')
         selection=json.loads(review.split('\n',1)[1].strip());relevant_media.apply_review(jobs,media,selection)
         record.update(status='reviewed',jobs=jobs,media=media,review=review,review_source_urls=[s.get('url') for s in review_sources],created_at=p.now().isoformat())
@@ -241,3 +273,4 @@ if __name__=='__main__':
     except Exception as exc:
         # Provider response bodies and credentials never go into Actions logs.
         print('Automation stopped: '+str(exc)[:250],file=sys.stderr);sys.exit(1)
+
