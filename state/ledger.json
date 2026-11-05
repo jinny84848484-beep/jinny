@@ -6,7 +6,7 @@
       "method": "YouTube Studio bootstrap"
     },
     "2026-11-05": {
-      "status": "draft_validation_failed",
+      "status": "staged_waiting",
       "retry_hold": true,
       "research_failures": [
         {
@@ -101,7 +101,23 @@
           ],
           "at": "2026-11-05T14:22:29.617119+09:00"
         }
-      ]
+      ],
+      "staging_history": [
+        {
+          "previous_status": "draft_validation_failed",
+          "run_id": "41978173617",
+          "run_attempt": "1",
+          "day": "2026-11-05",
+          "session_id": "V0d3twYL6tVZWa33/yTNi0OHEU74fJcP7UilK13+JwY=",
+          "at": "2026-11-05T15:06:50.909773+09:00"
+        }
+      ],
+      "staging": {
+        "run_id": "41978173617",
+        "run_attempt": "1",
+        "day": "2026-11-05",
+        "session_id": "V0d3twYL6tVZWa33/yTNi0OHEU74fJcP7UilK13+JwY="
+      }
     }
   },
   "publications": [
