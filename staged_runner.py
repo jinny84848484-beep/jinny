@@ -5,6 +5,7 @@ Public keys/ciphertext are public; reviewed publication-ready jobs follow the
 existing journal behavior. All review/render/upload guards remain shared.
 """
 import copy
+from start_guard import assert_staged_start
 import base64
 import hashlib
 import json
@@ -164,9 +165,7 @@ def run_staged():
     day = c.p.now().date().isoformat()
     ledger, sha = c.journal_get()
     record = ledger['days'].get(day, {})
-    if (record.get('status') not in START_STATES or record.get('retry_hold') is not True
-            or record.get('jobs') or record.get('staging')):
-        raise RuntimeError('Staged start requires reconciled failed batch; no replay')
+    assert_staged_start(record, day, c.p.now().date().isoformat())
     receiver = create_receiver(REPOSITORY, run, attempt, day, signing_key)
     identity = session_record(receiver.announcement)
     path = 'state/staging/' + run + '-' + attempt + '.json'
@@ -217,4 +216,5 @@ def run_staged():
         raise RuntimeError('Staged attempt stopped; hold remains, reconcile journal') from None
     finally:
         receiver.close()
+
 
