@@ -729,7 +729,7 @@
           "completed_at": "2026-11-06T07:29:05.792771+09:00"
         }
       },
-      "status": "staged_waiting",
+      "status": "staged_review_submitted",
       "active_stage": "research_repair",
       "retry_hold": true,
       "research_failures": [
@@ -755,7 +755,8 @@
         "run_attempt": "1",
         "day": "2026-11-06",
         "session_id": "LV/hgospMIwiIoCa2mVC2LtO8Mo+NSNPgtx+PgyVTL4="
-      }
+      },
+      "staging_envelope_blob": "ecf2b890aff1fae65eb10889bedae0cfde2e9b46"
     }
   },
   "publications": [
