@@ -6,145 +6,706 @@
       "method": "YouTube Studio bootstrap"
     },
     "2026-11-05": {
-      "status": "staged_review_submitted",
-      "retry_hold": true,
-      "research_failures": [
+      "status": "reviewed",
+      "repair_attempt": 6,
+      "reason": "Review calibration now rejects only material unsupported assertions. Source bundle reduced to Reuters original statement reproduction plus independent AP reporting, both natively inspected. Fresh full review after instruction change.",
+      "checkpoints": {},
+      "active_stage": "editorial_review_3",
+      "retry_hold": false,
+      "jobs": [
         {
-          "previous_status": "research_submitted",
-          "response_status": "completed",
-          "reason": "no_recognized_source_evidence",
-          "stage": "unknown_search_stage",
-          "recognized_source_count": 0,
-          "reconciled_at": "2026-11-05T00:25:56.712432+00:00",
-          "evidence_url": "https://github.com/jinny84848484-beep/jinny/actions/runs/41934741643",
-          "note": "Confirmed from terminal run log and code guard. Raw response unavailable; absent evidence versus unsupported response shape is unresolved. No retry authorized or submitted."
-        },
-        {
-          "response_status": "completed",
-          "reason": "no_recognized_source_evidence",
-          "output_items": 2,
-          "web_search_calls": 1,
-          "output_text_blocks": 1,
-          "recognized_source_count": 0,
-          "stage": "research",
-          "at": "2026-11-05T12:04:47.208828+09:00"
-        }
-      ],
-      "draft_failures": [
-        {
-          "reason": "category_diversity",
-          "job_count": 4,
-          "narration_counts": [
+          "id": "2026-11-05-ronaldo-portugal-farewell",
+          "channel": "korean",
+          "topic_key": "ronaldo-portugal-farewell",
+          "category": "sports",
+          "title": "Ronaldo’s Portugal Team Goodbye Feels Personal",
+          "opening_text": "Ronaldo has announced his retirement from international football.",
+          "description": "One Korean's personal perspective and dry commentary.",
+          "sources": [
             {
-              "job_index": 0,
-              "channel": "korean",
-              "characters": 153,
-              "words": 37,
-              "scene_count": 5
+              "title": "Reuters report carried by CNN Brasil",
+              "url": "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-portugues/cristiano-ronaldo-anuncia-aposentadoria-da-selecao-de-portugal/",
+              "checked_at": "2026-11-05T23:23:24.477916+09:00"
             },
             {
-              "job_index": 1,
-              "channel": "ojirap",
-              "characters": 164,
-              "words": 43,
-              "scene_count": 5
-            },
-            {
-              "job_index": 2,
-              "channel": "korean",
-              "characters": 171,
-              "words": 47,
-              "scene_count": 5
-            },
-            {
-              "job_index": 3,
-              "channel": "ojirap",
-              "characters": 149,
-              "words": 38,
-              "scene_count": 5
+              "title": "AP retirement photo gallery",
+              "url": "https://apnews.com/photo-gallery/cristiano-ronaldo-retires-portugal-s-national-team-photos-155900d1438b4b2ca2d3a2d0843fb7f0",
+              "checked_at": "2026-11-05T23:23:24.477916+09:00"
             }
           ],
-          "at": "2026-11-05T13:33:55.168207+09:00"
-        },
-        {
-          "reason": "draft_schema_or_validation",
-          "job_count": 4,
-          "narration_counts": [
-            {
-              "job_index": 0,
-              "channel": "korean",
-              "characters": 489,
-              "words": 82,
-              "scene_count": 5
-            },
-            {
-              "job_index": 1,
-              "channel": "korean",
-              "characters": 475,
-              "words": 85,
-              "scene_count": 5
-            },
-            {
-              "job_index": 2,
-              "channel": "ojirap",
-              "characters": 199,
-              "words": 52,
-              "scene_count": 5
-            },
-            {
-              "job_index": 3,
-              "channel": "ojirap",
-              "characters": 194,
-              "words": 52,
-              "scene_count": 5
-            }
+          "visual_queries": [
+            "ronaldo portugal farewell actual subject",
+            "ronaldo portugal farewell photograph"
           ],
-          "at": "2026-11-05T14:22:29.617119+09:00"
-        }
-      ],
-      "staging_history": [
-        {
-          "previous_status": "draft_validation_failed",
-          "run_id": "41978173617",
-          "run_attempt": "1",
-          "day": "2026-11-05",
-          "session_id": "V0d3twYL6tVZWa33/yTNi0OHEU74fJcP7UilK13+JwY=",
-          "at": "2026-11-05T15:06:50.909773+09:00"
-        },
-        {
-          "previous_status": "draft_validation_failed",
-          "run_id": "41988843459",
-          "run_attempt": "1",
-          "day": "2026-11-05",
-          "session_id": "5M5ibxfGW4SGollVzs4gzd/jUEPQVtVSBymkoWMiHNs=",
-          "at": "2026-11-05T16:40:57.995101+09:00"
-        }
-      ],
-      "staging_failures": [
-        {
-          "run_id": "41978173617",
-          "run_attempt": "1",
-          "status": "completed_failure",
-          "boundary": "media_candidate_discovery",
-          "reason": "insufficient_eligible_search_results",
-          "model_review_started": false,
-          "staging": {
-            "run_id": "41978173617",
-            "run_attempt": "1",
-            "day": "2026-11-05",
-            "session_id": "V0d3twYL6tVZWa33/yTNi0OHEU74fJcP7UilK13+JwY="
+          "visual_source_titles": [
+            "File:Cristiano Ronaldo WC2022 - 02.jpg",
+            "File:Portugal and Iran match at the FIFA World Cup 2018 2.jpg"
+          ],
+          "experiment": {
+            "hook_type": "understated-personal-reaction",
+            "topic_category": "sports"
           },
-          "envelope_blob": "0cc615c17d4f47a95649b72121712e187356faf7",
-          "reconciled_at": "2026-11-05T15:16:04+09:00"
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "RONALDO’S GOODBYE",
+              "body": "",
+              "narration": "Ronaldo has announced his retirement from international football. I’m Korean, but this is still one of those headlines that makes me check my own age.",
+              "source_indices": [],
+              "media": "commons-126238456-94e610f2"
+            },
+            {
+              "kind": "fact",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "The announcement came on November fifth, after more than two decades in the national team. That’s longer than most of my habits have lasted.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-70257465-94e610f2"
+            },
+            {
+              "kind": "fact",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "One hundred and forty-six international goals, Euro two thousand sixteen, and Nations League titles in twenty nineteen and twenty twenty-five. Quite a CV.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-126238456-94e610f2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "He’s retiring from international football. That’s the part I’m talking about, before this turns into an obituary for his entire career.",
+              "source_indices": [],
+              "media": "commons-70257465-94e610f2"
+            },
+            {
+              "kind": "closing",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "I’m not expecting him to disappear quietly. But it’s strange when somebody who always seemed permanent starts clearing out one locker.",
+              "source_indices": [],
+              "media": "commons-126238456-94e610f2"
+            }
+          ],
+          "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-05T23:23:24.477916+09:00"
+        },
+        {
+          "id": "2026-11-05-swift-telescope-final-shift",
+          "channel": "korean",
+          "topic_key": "swift-telescope-final-shift",
+          "category": "science",
+          "title": "NASA’s Observatory Worked 20 Years Overtime",
+          "opening_text": "NASA’s Swift observatory finally clocked out.",
+          "description": "One Korean's personal perspective and dry commentary.",
+          "sources": [
+            {
+              "title": "NASA’s Swift Observatory Re-Entered Atmosphere",
+              "url": "https://science.nasa.gov/blogs/swift/2026/11/02/nasas-swift-observatory-to-re-enter-atmosphere/",
+              "checked_at": "2026-11-05T23:23:24.478919+09:00"
+            },
+            {
+              "title": "Spaceflight Now: NASA’s Neil Gehrels Swift Observatory reenters over Western Indonesia",
+              "url": "https://spaceflightnow.com/2026/11/04/nasas-neil-gehrels-swift-observatory-reenters-over-western-indonesia/",
+              "checked_at": "2026-11-05T23:23:24.478919+09:00"
+            },
+            {
+              "title": "SpacePolicyOnline: Farewell Swift",
+              "url": "https://spacepolicyonline.com/news/farewell-swift/",
+              "checked_at": "2026-11-05T23:23:24.478919+09:00"
+            },
+            {
+              "title": "University of Leicester: Pioneering space mission's legacy as Swift returns to Earth",
+              "url": "https://le.ac.uk/news/2026/november/pioneering-space-mission-legacy-swift",
+              "checked_at": "2026-11-05T23:23:24.478919+09:00"
+            }
+          ],
+          "visual_queries": [
+            "swift telescope final shift actual subject",
+            "swift telescope final shift photograph"
+          ],
+          "visual_source_titles": [
+            "File:Swift pre-launch.jpg",
+            "File:Swift spacecraft in Hangar AE at Cape Canaveral (KSC-04PD-1618).jpg"
+          ],
+          "experiment": {
+            "hook_type": "understated-personal-reaction",
+            "topic_category": "science"
+          },
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "ONE LAST SHIFT",
+              "body": "",
+              "narration": "NASA’s Swift observatory finally clocked out. It reentered Earth’s atmosphere on November fourth, after almost twenty-two years in orbit. That’s a very long shift.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-225814-44ca0041"
+            },
+            {
+              "kind": "fact",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "It reentered over Indonesia’s North Sumatra region. NASA expected most of the spacecraft to burn up, though some components may have survived.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-34705278-44ca0041"
+            },
+            {
+              "kind": "fact",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "Swift was meant to work for two years, studying cosmic explosions. Instead it kept going for almost twenty two. I respect that.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-225814-44ca0041"
+            },
+            {
+              "kind": "opinion",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "An attempt to rescue it earlier this year failed. Space apparently has its own disappointing customer service. I wasn’t expecting that part.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-34705278-44ca0041"
+            },
+            {
+              "kind": "closing",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "The data work continues at the University of Leicester. Here in Korea, I recognise that arrangement: leaving the office doesn’t end the work.",
+              "source_indices": [
+                3
+              ],
+              "media": "commons-225814-44ca0041"
+            }
+          ],
+          "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-05T23:23:24.478919+09:00"
+        },
+        {
+          "id": "2026-11-05-nintendo-switch2-sales-profit",
+          "channel": "ojirap",
+          "topic_key": "nintendo-switch2-sales-profit",
+          "category": "technology",
+          "title": "덜 팔았는데 더 벌었다고? 닌텐도의 계산법",
+          "opening_text": "닌텐도, 덜 팔고 더 벌었다.",
+          "description": "한국인 한 사람의 시각으로 보는 개인 의견과 풍자입니다.",
+          "sources": [
+            {
+              "title": "Nintendo official half-year earnings, November 5 2026",
+              "url": "https://www.nintendo.co.jp/ir/pdf/2026/261105e.pdf",
+              "checked_at": "2026-11-05T23:23:24.479920+09:00"
+            },
+            {
+              "title": "'스위치2' 누적 2,635만 대 돌파... 4~9월 판매는 37.4% 감소",
+              "url": "https://www.inven.co.kr/webzine/news/?news=323038",
+              "checked_at": "2026-11-05T23:23:24.479920+09:00"
+            },
+            {
+              "title": "Nintendo financial results – November 2026 – Switch 2 at 26.35 million, Switch at 157.20 million, more",
+              "url": "https://nintendoeverything.com/nintendo-financial-results-november-2026-switch-2-at-26-35-million-switch-at-157-20-million-more/",
+              "checked_at": "2026-11-05T23:23:24.479920+09:00"
+            }
+          ],
+          "visual_queries": [
+            "nintendo switch2 sales profit actual subject",
+            "nintendo switch2 sales profit photograph"
+          ],
+          "visual_source_titles": [
+            "File:Nintendo Switch 2-Konsole IL 20250606.png",
+            "File:Nintendo Switch 2 20250605 HOF4954 RAW-Export.png"
+          ],
+          "experiment": {
+            "hook_type": "understated-personal-reaction",
+            "topic_category": "technology"
+          },
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "덜 팔고 더 벌었다",
+              "body": "",
+              "narration": "닌텐도, 덜 팔고 더 벌었다. 스위치 투 얘기예요. 처음엔 기사 두 개를 잘못 붙여 놓은 줄 알았어요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-167221037-5f32334d"
+            },
+            {
+              "kind": "fact",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "오늘 나온 반기 실적을 보면, 본체 판매는 작년 같은 기간보다 삼십칠 퍼센트쯤 줄었어요. 그런데 영업이익은 사십구 퍼센트나 늘었고요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-166904192-5f32334d"
+            },
+            {
+              "kind": "fact",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "게임이 차지하는 매출 비중이 커졌고, 미국에서 관세를 돌려받은 영향도 있었대요. 기계 몇 대 팔았는지만 봐선 놓치는 게 있는 거죠.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-167221037-5f32334d"
+            },
+            {
+              "kind": "opinion",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "스위치 투는 구월 말까지 누적으로 이천육백만 대 넘게 팔렸어요. 덜 팔렸다는 말은, 출시 때 폭발적으로 팔린 작년과 비교한 거고요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-166904192-5f32334d"
+            },
+            {
+              "kind": "closing",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "저도 판매가 줄었다길래 장사가 다 안 된 줄 알았어요. 아무튼 부럽네요. 저도 출근은 줄이고 월급은 늘리는 쪽으로 가고 싶거든요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-167221037-5f32334d"
+            }
+          ],
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-05T23:23:24.479920+09:00"
+        },
+        {
+          "id": "2026-11-05-scarlett-batman-mystery-interview",
+          "channel": "ojirap",
+          "topic_key": "scarlett-batman-mystery-interview",
+          "category": "entertainment",
+          "title": "요한슨이 배트맨 얘기를 했는데, 더 모르겠음",
+          "opening_text": "배역은 비밀인데, 배우는 고생했대요.",
+          "description": "한국인 한 사람의 시각으로 보는 개인 의견과 풍자입니다.",
+          "sources": [
+            {
+              "title": "Watch Scarlett Johansson Learn Adam Driver Is TERRIFIED of Daughter's American Girl Doll (Exclusive) — Entertainment Tonight",
+              "url": "https://www.youtube.com/watch?v=nWZDoTfZN9Q",
+              "checked_at": "2026-11-05T23:23:24.479920+09:00"
+            },
+            {
+              "title": "Scarlett Johansson Breaks Silence on Her Batman 2 Character: “It Was Hard to Crack”",
+              "url": "https://comicbook.com/movies/news/scarlett-johansson-breaks-silence-on-her-batman-2-character-it-was-hard-to-crack/",
+              "checked_at": "2026-11-05T23:23:24.479920+09:00"
+            },
+            {
+              "title": "Scarlett Johansson on THE BATMAN PART II Role: “It Gave Me A Lot of Existential Angst”",
+              "url": "https://batman-on-film.com/25879/scarlett-johanson-on-the-batman-part-ii-role/",
+              "checked_at": "2026-11-05T23:23:24.479920+09:00"
+            }
+          ],
+          "visual_queries": [
+            "scarlett batman mystery interview actual subject",
+            "scarlett batman mystery interview photograph"
+          ],
+          "visual_source_titles": [
+            "File:Ghost In The Shell World Premiere Red Carpet-Scarlett Johansson (37147912300).jpg",
+            "File:Scarlett Johansson - Captain America 2 press conference (retouched) 2.jpg"
+          ],
+          "experiment": {
+            "hook_type": "understated-personal-reaction",
+            "topic_category": "entertainment"
+          },
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "말했는데 더 궁금함",
+              "body": "",
+              "narration": "배역은 비밀인데, 배우는 고생했대요. 스칼렛 요한슨이 이번 배트맨 속편 얘기를 꺼냈거든요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-66552928-19920483"
+            },
+            {
+              "kind": "fact",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "인터뷰에서 엑소시스트와 배트맨 중 뭐가 더 낯선 도전이었냐고 물었대요. 요한슨은 배트맨을 골랐고, 역할을 이해하기 어려웠다네요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-31909367-19920483"
+            },
+            {
+              "kind": "fact",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "역할 때문인지 자기 삶의 시기 때문인지 모르겠지만, 불안도 컸대요. 잘 맞는 배역을 만났다는 익숙한 출연 소감과는 좀 다르죠.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-66552928-19920483"
+            },
+            {
+              "kind": "opinion",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "그런데 거기까지 말하고, 무슨 캐릭터인지는 공개하지 않았어요. 배우도 어려웠다는데, 우리는 캐릭터 이름부터 모르는 상황인 거예요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-31909367-19920483"
+            },
+            {
+              "kind": "closing",
+              "headline": "Commentary",
+              "body": "",
+              "narration": "저는 인터뷰를 보면 궁금증이 좀 풀릴 줄 알았거든요. 배우가 고생했다는 얘기만 듣고 더 궁금해졌네요. 홍보는 참 묘하게 잘돼요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-66552928-19920483"
+            }
+          ],
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-05T23:23:24.479920+09:00"
         }
       ],
-      "staging": {
-        "run_id": "41988843459",
-        "run_attempt": "1",
-        "day": "2026-11-05",
-        "session_id": "5M5ibxfGW4SGollVzs4gzd/jUEPQVtVSBymkoWMiHNs="
+      "media": {
+        "commons-126238456-94e610f2": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Cristiano_Ronaldo_WC2022_-_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:Cristiano_Ronaldo_WC2022_-_02.jpg",
+          "path": "assets/commons-126238456-94e610f2.jpg",
+          "media_type": "image",
+          "credit": "Hossein Zohrevand / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "ARCHIVE PHOTO · 2022",
+          "description": "Cristiano Ronaldo durante i Mondiali del 2022 in Qatat",
+          "capture_date": "2022-12-02 07:39:50",
+          "title": "File:Cristiano Ronaldo WC2022 - 02.jpg",
+          "topic_key": "ronaldo-portugal-farewell",
+          "relevance_verified": true,
+          "checked_at": "2026-11-05T22:49:32.998671+09:00",
+          "sha256": "d9df57745d50846af03cde95149fca254d60c72b2de46b0425e4c4df5297389e"
+        },
+        "commons-70257465-94e610f2": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/1/10/Portugal_and_Iran_match_at_the_FIFA_World_Cup_2018_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:Portugal_and_Iran_match_at_the_FIFA_World_Cup_2018_2.jpg",
+          "path": "assets/commons-70257465-94e610f2.jpg",
+          "media_type": "image",
+          "credit": "Mahdi Zare/Fars News Agency / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "ARCHIVE PHOTO · 2018",
+          "description": "نیمه دوم بازی تیم‌های فوتبال ایران و پرتغال در جام جهانی ۲۰۱۸",
+          "capture_date": "2018-06-25",
+          "title": "File:Portugal and Iran match at the FIFA World Cup 2018 2.jpg",
+          "topic_key": "ronaldo-portugal-farewell",
+          "relevance_verified": true,
+          "checked_at": "2026-11-05T22:49:32.998671+09:00",
+          "sha256": "13a8ca8d88cd98ec790ed99de9ec4bcccaab40f21ab51f45c2f60c8b1e2183d2"
+        },
+        "commons-225814-44ca0041": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Swift_pre-launch.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Swift_pre-launch.jpg",
+          "path": "assets/commons-225814-44ca0041.jpg",
+          "media_type": "image",
+          "credit": "NASA/KSC / Wikimedia Commons",
+          "license": "Public domain",
+          "license_url": "",
+          "notice": "ARCHIVE PHOTO · 2004",
+          "description": "At NASA’s Hangar AE on Cape Canaveral Air Force Station (CCAFS), Fla., technicians check the attachment of the base petals of a transportation canister around the bottom of the payload attach fitting on the Swift spacecraft.",
+          "capture_date": "2004-11-04",
+          "title": "File:Swift pre-launch.jpg",
+          "topic_key": "swift-telescope-final-shift",
+          "relevance_verified": true,
+          "checked_at": "2026-11-05T22:49:33.015551+09:00",
+          "sha256": "835515a09e1243a72a7174de1f947b6979e63704779f8f402095cddc49adbd9e"
+        },
+        "commons-34705278-44ca0041": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Swift_spacecraft_in_Hangar_AE_at_Cape_Canaveral_%28KSC-04PD-1618%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Swift_spacecraft_in_Hangar_AE_at_Cape_Canaveral_(KSC-04PD-1618).jpg",
+          "path": "assets/commons-34705278-44ca0041.jpg",
+          "media_type": "image",
+          "credit": "NASA/KSC / Wikimedia Commons",
+          "license": "Public domain",
+          "license_url": "",
+          "notice": "ARCHIVE PHOTO · 2004",
+          "description": "In Hangar AE at Cape Canaveral Air Force Station, the Swift spacecraft waits for final removal of the protective cover (at top). Swift is a first-of-its-kind, multi-wavelength observatory dedicated to the study of gamma-ray burst (GRB) science. Its three instruments will work together to observe GRBs and afterglows in the gamma-ray, X-ray and optical wavebands. Swift is part of NASA’s medium explorer (MIDEX) program being developed by an international collaboration. During its nominal 2-year mission, Swift is expected to observe more than 200 bursts, which will represent the most comprehensive study of GRB afterglow to date. It is scheduled for launch into a low-Earth orbit on a Delta 7320 rocket on Oct. 7.",
+          "capture_date": "2004-07-31",
+          "title": "File:Swift spacecraft in Hangar AE at Cape Canaveral (KSC-04PD-1618).jpg",
+          "topic_key": "swift-telescope-final-shift",
+          "relevance_verified": true,
+          "checked_at": "2026-11-05T22:49:33.015551+09:00",
+          "sha256": "8b450a4c06916b08f5fe79f2789b8331c80209247624b784598707ddf7fbf619"
+        },
+        "commons-167221037-5f32334d": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Nintendo_Switch_2-Konsole_IL_20250606.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Nintendo_Switch_2-Konsole_IL_20250606.png",
+          "path": "assets/commons-167221037-5f32334d.png",
+          "media_type": "image",
+          "credit": "PantheraLeo1359531 / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2025",
+          "description": "Focus-stacked photo of the Switch 2.",
+          "capture_date": "2025-06-06",
+          "title": "File:Nintendo Switch 2-Konsole IL 20250606.png",
+          "topic_key": "nintendo-switch2-sales-profit",
+          "relevance_verified": true,
+          "checked_at": "2026-11-05T22:49:33.015551+09:00",
+          "sha256": "d0f2a97a0da190ca79eed1539a57a98c5029f569fd61005e19208622e6a0443b"
+        },
+        "commons-166904192-5f32334d": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Nintendo_Switch_2_20250605_HOF4954_RAW-Export.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Nintendo_Switch_2_20250605_HOF4954_RAW-Export.png",
+          "path": "assets/commons-166904192-5f32334d.png",
+          "media_type": "image",
+          "credit": "PantheraLeo1359531 / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2025",
+          "description": "View of the Nintendo Switch 2. Equipment of the console. Photo corrections are planned for later.",
+          "capture_date": "2025-06-05",
+          "title": "File:Nintendo Switch 2 20250605 HOF4954 RAW-Export.png",
+          "topic_key": "nintendo-switch2-sales-profit",
+          "relevance_verified": true,
+          "checked_at": "2026-11-05T22:49:33.015551+09:00",
+          "sha256": "a10d1279cc87f963a9b3621d7933f6678e79b3b5723df48d9fc9240c80e7bb55"
+        },
+        "commons-66552928-19920483": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/5/5b/Ghost_In_The_Shell_World_Premiere_Red_Carpet-Scarlett_Johansson_%2837147912300%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:Ghost_In_The_Shell_World_Premiere_Red_Carpet-Scarlett_Johansson_(37147912300).jpg",
+          "path": "assets/commons-66552928-19920483.jpg",
+          "media_type": "image",
+          "credit": "Dick Thomas Johnson from Tokyo, Japan / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2017",
+          "description": "ゴースト・イン・ザ・シェル ワールドプレミアレッドカーペット ピルー・アスベック ビートたけし スカーレット・ヨハンソン ジュリエット・ビノシュ ルパート・サンダース 桃井かおり",
+          "capture_date": "2017-03-16 19:55",
+          "title": "File:Ghost In The Shell World Premiere Red Carpet-Scarlett Johansson (37147912300).jpg",
+          "topic_key": "scarlett-batman-mystery-interview",
+          "relevance_verified": true,
+          "checked_at": "2026-11-05T22:49:33.299394+09:00",
+          "sha256": "df3e5188c28514f918655655ab12ed09b2c1498fd46db5a98cac2728ab75f9c6"
+        },
+        "commons-31909367-19920483": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Scarlett_Johansson_-_Captain_America_2_press_conference_%28retouched%29_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:Scarlett_Johansson_-_Captain_America_2_press_conference_(retouched)_2.jpg",
+          "path": "assets/commons-31909367-19920483.jpg",
+          "media_type": "image",
+          "credit": "Elen Nivrae\n\nLight show at en.wikipedia / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2014",
+          "description": "Actress Scarlett Johansson at a press conference for Captain America 2 in March 2014",
+          "capture_date": "17 March 2014, 15:00:23\n\n30 March 2014 (original upload date)",
+          "title": "File:Scarlett Johansson - Captain America 2 press conference (retouched) 2.jpg",
+          "topic_key": "scarlett-batman-mystery-interview",
+          "relevance_verified": true,
+          "checked_at": "2026-11-05T22:49:33.299394+09:00",
+          "sha256": "b232e02112478e30074cf2aa4136c43035952fc84878c3b408195d96627a6649"
+        }
       },
-      "staging_envelope_blob": "50a4c2b46bc83b768805bc07f02e4cc5c66689e7"
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-05-ronaldo-portugal-farewell\": [\"commons-126238456-94e610f2\", \"commons-70257465-94e610f2\", \"commons-126238456-94e610f2\", \"commons-70257465-94e610f2\", \"commons-126238456-94e610f2\"], \"2026-11-05-swift-telescope-final-shift\": [\"commons-225814-44ca0041\", \"commons-34705278-44ca0041\", \"commons-225814-44ca0041\", \"commons-34705278-44ca0041\", \"commons-225814-44ca0041\"], \"2026-11-05-nintendo-switch2-sales-profit\": [\"commons-167221037-5f32334d\", \"commons-166904192-5f32334d\", \"commons-167221037-5f32334d\", \"commons-166904192-5f32334d\", \"commons-167221037-5f32334d\"], \"2026-11-05-scarlett-batman-mystery-interview\": [\"commons-66552928-19920483\", \"commons-31909367-19920483\", \"commons-66552928-19920483\", \"commons-31909367-19920483\", \"commons-66552928-19920483\"]}}",
+      "review_source_urls": [
+        "https://www.cnnbrasil.com.br/esportes/futebol/futebol-internacional/futebol-portugues/cristiano-ronaldo-anuncia-aposentadoria-da-selecao-de-portugal/",
+        "https://apnews.com/photo-gallery/cristiano-ronaldo-retires-portugal-s-national-team-photos-155900d1438b4b2ca2d3a2d0843fb7f0",
+        "https://science.nasa.gov/blogs/swift/2026/11/02/nasas-swift-observatory-to-re-enter-atmosphere/",
+        "https://www.nintendo.co.jp/ir/pdf/2026/261105e.pdf",
+        "https://comicbook.com/movies/news/scarlett-johansson-breaks-silence-on-her-batman-2-character-it-was-hard-to-crack/"
+      ],
+      "created_at": "2026-11-05T23:23:24.480919+09:00",
+      "reconciliation_history": [
+        {
+          "at": "2026-11-05T23:28:00+09:00",
+          "reason": "Terminal failed cloud run reconciled; no TTS/render/upload reached. Four replacement stories independently researched and source/photo-reviewed locally.",
+          "terminal_run": "https://github.com/jinny84848484-beep/jinny/actions/runs/41988843459",
+          "previous_record": {
+            "status": "staged_review_submitted",
+            "retry_hold": true,
+            "research_failures": [
+              {
+                "previous_status": "research_submitted",
+                "response_status": "completed",
+                "reason": "no_recognized_source_evidence",
+                "stage": "unknown_search_stage",
+                "recognized_source_count": 0,
+                "reconciled_at": "2026-11-05T00:25:56.712432+00:00",
+                "evidence_url": "https://github.com/jinny84848484-beep/jinny/actions/runs/41934741643",
+                "note": "Confirmed from terminal run log and code guard. Raw response unavailable; absent evidence versus unsupported response shape is unresolved. No retry authorized or submitted."
+              },
+              {
+                "response_status": "completed",
+                "reason": "no_recognized_source_evidence",
+                "output_items": 2,
+                "web_search_calls": 1,
+                "output_text_blocks": 1,
+                "recognized_source_count": 0,
+                "stage": "research",
+                "at": "2026-11-05T12:04:47.208828+09:00"
+              }
+            ],
+            "draft_failures": [
+              {
+                "reason": "category_diversity",
+                "job_count": 4,
+                "narration_counts": [
+                  {
+                    "job_index": 0,
+                    "channel": "korean",
+                    "characters": 153,
+                    "words": 37,
+                    "scene_count": 5
+                  },
+                  {
+                    "job_index": 1,
+                    "channel": "ojirap",
+                    "characters": 164,
+                    "words": 43,
+                    "scene_count": 5
+                  },
+                  {
+                    "job_index": 2,
+                    "channel": "korean",
+                    "characters": 171,
+                    "words": 47,
+                    "scene_count": 5
+                  },
+                  {
+                    "job_index": 3,
+                    "channel": "ojirap",
+                    "characters": 149,
+                    "words": 38,
+                    "scene_count": 5
+                  }
+                ],
+                "at": "2026-11-05T13:33:55.168207+09:00"
+              },
+              {
+                "reason": "draft_schema_or_validation",
+                "job_count": 4,
+                "narration_counts": [
+                  {
+                    "job_index": 0,
+                    "channel": "korean",
+                    "characters": 489,
+                    "words": 82,
+                    "scene_count": 5
+                  },
+                  {
+                    "job_index": 1,
+                    "channel": "korean",
+                    "characters": 475,
+                    "words": 85,
+                    "scene_count": 5
+                  },
+                  {
+                    "job_index": 2,
+                    "channel": "ojirap",
+                    "characters": 199,
+                    "words": 52,
+                    "scene_count": 5
+                  },
+                  {
+                    "job_index": 3,
+                    "channel": "ojirap",
+                    "characters": 194,
+                    "words": 52,
+                    "scene_count": 5
+                  }
+                ],
+                "at": "2026-11-05T14:22:29.617119+09:00"
+              }
+            ],
+            "staging_history": [
+              {
+                "previous_status": "draft_validation_failed",
+                "run_id": "41978173617",
+                "run_attempt": "1",
+                "day": "2026-11-05",
+                "session_id": "V0d3twYL6tVZWa33/yTNi0OHEU74fJcP7UilK13+JwY=",
+                "at": "2026-11-05T15:06:50.909773+09:00"
+              },
+              {
+                "previous_status": "draft_validation_failed",
+                "run_id": "41988843459",
+                "run_attempt": "1",
+                "day": "2026-11-05",
+                "session_id": "5M5ibxfGW4SGollVzs4gzd/jUEPQVtVSBymkoWMiHNs=",
+                "at": "2026-11-05T16:40:57.995101+09:00"
+              }
+            ],
+            "staging_failures": [
+              {
+                "run_id": "41978173617",
+                "run_attempt": "1",
+                "status": "completed_failure",
+                "boundary": "media_candidate_discovery",
+                "reason": "insufficient_eligible_search_results",
+                "model_review_started": false,
+                "staging": {
+                  "run_id": "41978173617",
+                  "run_attempt": "1",
+                  "day": "2026-11-05",
+                  "session_id": "V0d3twYL6tVZWa33/yTNi0OHEU74fJcP7UilK13+JwY="
+                },
+                "envelope_blob": "0cc615c17d4f47a95649b72121712e187356faf7",
+                "reconciled_at": "2026-11-05T15:16:04+09:00"
+              }
+            ],
+            "staging": {
+              "run_id": "41988843459",
+              "run_attempt": "1",
+              "day": "2026-11-05",
+              "session_id": "5M5ibxfGW4SGollVzs4gzd/jUEPQVtVSBymkoWMiHNs="
+            },
+            "staging_envelope_blob": "50a4c2b46bc83b768805bc07f02e4cc5c66689e7"
+          }
+        }
+      ],
+      "method": "Reviewed local production with remote before-upload journal"
     }
   },
   "publications": [
