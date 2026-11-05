@@ -53,13 +53,14 @@ def assert_waiting(ledger, day, identity):
 
 
 def reject_unknown_fields(jobs):
-    job_fields={'id','channel','topic_key','category','title','description','sources','scenes','experiment','opening_text','visual_queries'}
+    job_fields={'id','channel','topic_key','category','title','description','sources','scenes','experiment','opening_text','visual_queries','visual_source_titles'}
     source_fields={'title','url'}
     scene_fields={'kind','headline','body','narration','source_indices'}
     for job in jobs:
         if not isinstance(job,dict) or set(job)-job_fields:raise ValueError('Unknown staged job field')
         for key in ('id','channel','topic_key','category','title','description'):
             if not isinstance(job.get(key),str):raise ValueError('Invalid staged text field')
+        if 'visual_source_titles' in job:c.relevant_media.validate_titles(job['visual_source_titles'])
         if 'opening_text' in job and not isinstance(job['opening_text'],str):raise ValueError('Invalid staged text field')
         if not isinstance(job.get('sources'),list) or not isinstance(job.get('scenes'),list):raise ValueError('Invalid staged schema')
         for source in job['sources']:
