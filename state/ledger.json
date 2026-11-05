@@ -706,7 +706,7 @@
         }
       ],
       "method": "Reviewed local production with remote before-upload journal",
-      "active_job": "2026-11-05-nintendo-switch2-sales-profit"
+      "active_job": "2026-11-05-scarlett-batman-mystery-interview"
     }
   },
   "publications": [
@@ -810,6 +810,21 @@
       "experiment": {
         "hook_type": "understated-personal-reaction",
         "topic_category": "science"
+      }
+    },
+    {
+      "job_id": "2026-11-05-nintendo-switch2-sales-profit",
+      "topic_key": "nintendo-switch2-sales-profit",
+      "category": "technology",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "덜 팔았는데 더 벌었다고? 닌텐도의 계산법",
+      "video_id": "wq6ijo4ghIg",
+      "url": "https://www.youtube.com/shorts/wq6ijo4ghIg",
+      "at": "2026-11-05T23:27:18.293252+09:00",
+      "experiment": {
+        "hook_type": "understated-personal-reaction",
+        "topic_category": "technology"
       }
     }
   ]
