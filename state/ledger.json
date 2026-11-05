@@ -745,10 +745,16 @@
           "usable": true,
           "sha256": "e0859b5e67b7e79e0ff50c25c6479eda4c5f36634039c2567e5bfa60041104c8",
           "completed_at": "2026-11-06T08:41:23.569800+09:00"
+        },
+        "editorial_review_2": {
+          "status": "submitted",
+          "request_hash": "5dc64f42b6c053c890ad9303e08f23ae7b8ba88eccd5e4630187f77d4de50cc4",
+          "attempts": 1,
+          "at": "2026-11-06T08:41:24.730234+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
-      "active_stage": "editorial_review_1",
+      "status": "editorial_review_2_submitted",
+      "active_stage": "editorial_review_2",
       "retry_hold": true,
       "research_failures": [
         {
