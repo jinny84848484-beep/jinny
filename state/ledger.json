@@ -711,13 +711,16 @@
     "2026-11-06": {
       "checkpoints": {
         "research": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "0502f764466cc2916f26fad21ceb8e242ad574fcfd2c9322b4c4c7a612b93a45",
           "attempts": 1,
-          "at": "2026-11-06T07:26:58.774679+09:00"
+          "at": "2026-11-06T07:26:58.774679+09:00",
+          "usable": true,
+          "sha256": "34064bda3f6a4dd8dcd65547d760d1005968455f92a5ce7f58509aa04bc282e4",
+          "completed_at": "2026-11-06T07:28:18.016613+09:00"
         }
       },
-      "status": "research_submitted",
+      "status": "research_completed",
       "active_stage": "research"
     }
   },
