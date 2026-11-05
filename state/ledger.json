@@ -706,7 +706,7 @@
         }
       ],
       "method": "Reviewed local production with remote before-upload journal",
-      "active_job": "2026-11-05-ronaldo-portugal-farewell"
+      "active_job": "2026-11-05-swift-telescope-final-shift"
     }
   },
   "publications": [
@@ -780,6 +780,21 @@
         "topic_category": "entertainment",
         "hook_type": "dry-satire",
         "compare_within_channel": true
+      }
+    },
+    {
+      "job_id": "2026-11-05-ronaldo-portugal-farewell",
+      "topic_key": "ronaldo-portugal-farewell",
+      "category": "sports",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "Ronaldo’s Portugal Team Goodbye Feels Personal",
+      "video_id": "LbHChj86pEg",
+      "url": "https://www.youtube.com/shorts/LbHChj86pEg",
+      "at": "2026-11-05T23:26:27.731930+09:00",
+      "experiment": {
+        "hook_type": "understated-personal-reaction",
+        "topic_category": "sports"
       }
     }
   ]
