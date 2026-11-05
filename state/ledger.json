@@ -6,7 +6,7 @@
       "method": "YouTube Studio bootstrap"
     },
     "2026-11-05": {
-      "status": "staged_waiting",
+      "status": "staged_review_submitted",
       "retry_hold": true,
       "research_failures": [
         {
@@ -117,7 +117,8 @@
         "run_attempt": "1",
         "day": "2026-11-05",
         "session_id": "V0d3twYL6tVZWa33/yTNi0OHEU74fJcP7UilK13+JwY="
-      }
+      },
+      "staging_envelope_blob": "0cc615c17d4f47a95649b72121712e187356faf7"
     }
   },
   "publications": [
