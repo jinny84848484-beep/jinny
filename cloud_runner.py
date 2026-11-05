@@ -75,6 +75,24 @@ def research_diagnostics(data, evidence):
         'web_search_details':details, 'web_search_details_truncated':len(calls)>20,
     }
 
+
+def safe_provider_error_fields(raw):
+    """No error message, request text, IDs, URLs or arbitrary strings are logged."""
+    try:
+        error=json.loads(raw).get('error',{})
+        if not isinstance(error,dict):return 'code=unknown parameter=unknown'
+        code=error.get('code')
+        allowed={'invalid_image','invalid_image_url','image_parse_error','image_too_large','invalid_value','invalid_request_error','unsupported_parameter','unsupported_value','context_length_exceeded','invalid_prompt','model_not_found','insufficient_quota','rate_limit_exceeded'}
+        if not isinstance(code,str) or code not in allowed:code='unknown'
+        param=error.get('param')
+        if isinstance(param,str):
+            if param in {'model','tools','tool_choice','include','text','max_output_tokens','instructions','reasoning','input'}:pass
+            elif re.fullmatch(r'input(?:\[\d+\]|\.\d+)?\.content(?:\[\d+\]|\.\d+)?\.image_url',param):param='input.image_url'
+            else:param='unknown'
+        else:param='unknown'
+        return 'code='+code+' parameter='+param
+    except (ValueError,TypeError,AttributeError):return 'code=unknown parameter=unknown'
+
 def http(url,body=None,headers=None,method=None):
     hdr={'User-Agent':'JinnyShortsAutomation/1.0',**(headers or {})}
     if body is not None and not isinstance(body,bytes):
@@ -84,7 +102,9 @@ def http(url,body=None,headers=None,method=None):
         with urllib.request.urlopen(request,timeout=180) as r:
             raw=r.read();return json.loads(raw) if raw else {}
     except urllib.error.HTTPError as exc:
-        raise RuntimeError(f'{urllib.parse.urlparse(url).hostname} HTTP {exc.code}') from None
+        host=urllib.parse.urlparse(url).hostname
+        detail=' '+safe_provider_error_fields(exc.read(65536)) if host=='api.openai.com' else ''
+        raise RuntimeError(f'{host} HTTP {exc.code}'+detail) from None
     except urllib.error.URLError:
         raise RuntimeError('Network request failed; submission state must be reconciled') from None
 
@@ -136,12 +156,15 @@ def openai(prompt,search=False,max_tokens=6500,images=None,*,instructions=None):
         for key,value in images.items():
             content.extend([{'type':'input_text','text':'Image ID: '+key},{'type':'input_image','image_url':value['url'],'detail':'low'}])
         body['input']=[{'role':'user','content':content}]
+    stage='narration_correction' if instructions==CORRECTION_PROMPT else 'editorial_review' if instructions==REVIEW_PROMPT else 'research' if search else 'draft'
+    print('OpenAI stage started: '+stage,flush=True)
     data=http('https://api.openai.com/v1/responses',body,{'Authorization':'Bearer '+os.environ['OPENAI_API_KEY']})
     if data.get('status')!='completed':raise RuntimeError('Incomplete OpenAI response; do not publish')
     output='\n'.join(c.get('text','') for item in data.get('output',[]) for c in item.get('content',[]) if c.get('type')=='output_text')
     evidence=research_sources(data)
     if search and not evidence:raise CompletedResearchUnusable('no_recognized_source_evidence',data,evidence)
     if search and not output.strip():raise CompletedResearchUnusable('empty_research_text',data,evidence)
+    print('OpenAI stage validated: '+stage,flush=True)
     return output,evidence
 
 def research_sources(data):
