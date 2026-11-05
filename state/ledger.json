@@ -6,7 +6,7 @@
       "method": "YouTube Studio bootstrap"
     },
     "2026-11-05": {
-      "status": "reviewed",
+      "status": "upload_submitted",
       "repair_attempt": 6,
       "reason": "Review calibration now rejects only material unsupported assertions. Source bundle reduced to Reuters original statement reproduction plus independent AP reporting, both natively inspected. Fresh full review after instruction change.",
       "checkpoints": {},
@@ -705,7 +705,8 @@
           }
         }
       ],
-      "method": "Reviewed local production with remote before-upload journal"
+      "method": "Reviewed local production with remote before-upload journal",
+      "active_job": "2026-11-05-ronaldo-portugal-farewell"
     }
   },
   "publications": [
