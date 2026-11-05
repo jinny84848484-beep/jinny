@@ -26,7 +26,7 @@ class DraftRecovery(unittest.TestCase):
         for draft in ['secret-invalid-json','{}','{"jobs":null}','{"jobs":[null]}']:
             ledger={'days':{'today':{'status':'research_submitted'}}}
             with patch.object(c,'journal_put'),patch.object(c,'validate_batch',side_effect=TypeError('private-error-detail')):
-                with self.assertRaisesRegex(RuntimeError,'draft_schema_or_validation') as caught:
+                with self.assertRaisesRegex(RuntimeError,'draft_json_syntax|missing_jobs|draft_schema_type') as caught:
                     c.guarded_draft_validation(ledger,'sha','today',draft,set())
             self.assertNotIn('private',str(caught.exception))
             self.assertNotIn('secret',json.dumps(ledger))
