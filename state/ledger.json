@@ -707,6 +707,18 @@
       ],
       "method": "Reviewed local production with remote before-upload journal",
       "completed_at": "2026-11-05T23:27:26.476478+09:00"
+    },
+    "2026-11-06": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "0502f764466cc2916f26fad21ceb8e242ad574fcfd2c9322b4c4c7a612b93a45",
+          "attempts": 1,
+          "at": "2026-11-06T07:26:58.774679+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
