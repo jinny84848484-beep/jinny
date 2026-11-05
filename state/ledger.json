@@ -6,8 +6,8 @@
       "method": "YouTube Studio bootstrap"
     },
     "2026-11-05": {
-      "status": "draft_validation_failed",
-      "retry_hold": true,
+      "status": "research_retry_approved",
+      "retry_hold": false,
       "research_failures": [
         {
           "previous_status": "research_submitted",
