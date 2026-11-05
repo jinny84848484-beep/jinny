@@ -251,7 +251,35 @@ def draft_validation_diagnostics(jobs, error):
         'Four distinct categories required':'category_diversity',
         'Editorial category slots mismatch':'category_slots',
         'Duplicate topic':'duplicate_topic',
+        'Duplicate job ID':'duplicate_job_id',
+        'Unknown category':'unknown_category',
+        'Wrong production date':'production_date',
+        'Unknown target channel':'unknown_channel',
+        'Channel identity mismatch':'channel_identity',
+        'Invalid job id':'job_id_format',
+        'Source verification required':'source_verification',
+        'Refresh source verification before rendering':'source_verification_age',
+        'Two independent source domains required':'source_domain_diversity',
+        'Incomplete source citation':'source_citation_fields',
+        'Use 4-10 scenes':'scene_count',
+        'Incomplete scene':'scene_fields',
+        'Unknown scene kind':'scene_kind',
+        'Fact scene needs citations':'fact_citations_missing',
+        'Bad citation index':'citation_index',
+        'Narration must be 80-1800 characters':'narration_character_limits',
+        'Title must be 1-100 characters':'title_length',
+        'Invalid narration correction schema':'correction_schema',
+        'Invalid narration correction shape':'correction_shape',
     }
+    reason=reasons.get(str(error),'draft_schema_or_validation')
+    # These names are schema constants, never user/provider-controlled labels.
+    if isinstance(error,json.JSONDecodeError):reason='draft_json_syntax'
+    elif isinstance(error,KeyError):
+        field=error.args[0] if len(error.args)==1 else None
+        allowed={'jobs','channel','category','topic_key','id','scenes','narration','sources','kind','verified_at'}
+        reason='missing_'+field if isinstance(field,str) and field in allowed else 'missing_schema_field'
+    elif isinstance(error,TypeError):reason='draft_schema_type'
+    elif isinstance(error,IndexError):reason='draft_schema_index'
     rows=[]
     for index,job in enumerate(jobs[:4] if isinstance(jobs,list) else []):
         if not isinstance(job,dict):continue
@@ -263,7 +291,7 @@ def draft_validation_diagnostics(jobs, error):
         narration=' '.join(narrations)
         rows.append({'job_index':index,'channel':channel if channel in ('ojirap','korean') else 'unknown',
                      'characters':len(narration),'words':len(narration.split()),'scene_count':len(scenes)})
-    return {'reason':reasons.get(str(error),'draft_schema_or_validation'),
+    return {'reason':reason,
             'job_count':len(jobs) if isinstance(jobs,list) else 0,'narration_counts':rows}
 
 
