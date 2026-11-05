@@ -19,6 +19,41 @@ REPOSITORY = 'jinny84848484-beep/jinny'
 START_STATES = {'draft_validation_failed', 'research_completed_unusable'}
 
 
+STAGES = ('journal_start', 'await_envelope', 'decrypt_envelope', 'offline_validation', 'preflight',
+          'review_marker', 'editorial_review', 'publish')
+_FIXED_MESSAGE_SOURCES = ('cloud_runner.py', 'relevant_media.py', 'media_renderer.py', 'staged_runner.py')
+
+
+def _fixed_messages():
+    """Collect only literal RuntimeError messages written in this repository's code.
+
+    Messages built from runtime data (URLs, provider text, keys) are never matched,
+    so they can never be printed by the staged failure label.
+    """
+    found = set()
+    here = os.path.dirname(os.path.abspath(__file__))
+    for name in _FIXED_MESSAGE_SOURCES:
+        try:
+            with open(os.path.join(here, name), encoding='utf-8') as handle:
+                source = handle.read()
+        except OSError:
+            continue
+        found.update(re.findall(r"raise RuntimeError\('([^'\\]{1,160})'\)", source))
+    return frozenset(found)
+
+
+FIXED_MESSAGES = _fixed_messages()
+
+
+def staged_failure_label(stage, exc):
+    """Public, log-safe failure label: fixed stage + exception type + allow-listed literal message."""
+    safe_stage = stage if stage in STAGES else 'unknown_stage'
+    kind = type(exc).__name__ if re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]{0,60}', type(exc).__name__) else 'Exception'
+    message = str(exc)
+    detail = message if message in FIXED_MESSAGES else 'unlisted_message'
+    return 'Staged failure detail: stage=' + safe_stage + ' type=' + kind + ' message=' + detail
+
+
 def run_context():
     if (os.environ.get('GITHUB_REPOSITORY') != REPOSITORY
             or os.environ.get('GITHUB_REF') != 'refs/heads/main'
@@ -135,6 +170,7 @@ def run_staged():
     receiver = create_receiver(REPOSITORY, run, attempt, day, signing_key)
     identity = session_record(receiver.announcement)
     path = 'state/staging/' + run + '-' + attempt + '.json'
+    stage = 'journal_start'
     try:
         record.setdefault('staging_history', []).append({
             'previous_status': record['status'], **identity, 'at': c.p.now().isoformat()})
@@ -142,16 +178,21 @@ def run_staged():
         c.journal_put(ledger, sha)  # Failure leaves original hold; no key is exposed.
         print('Staged public session: ' + json.dumps(receiver.announcement, sort_keys=True), flush=True)
         print('Staged ciphertext path: ' + path, flush=True)
+        stage = 'await_envelope'
         while time.monotonic() <= receiver.deadline:
             incoming = fetch_envelope(path)
             if incoming is not None:
                 envelope, blob = incoming
+                stage = 'decrypt_envelope'
                 jobs = receiver.receive(envelope)['jobs']
+                stage = 'offline_validation'
                 ledger, sha = c.journal_get()
                 assert_waiting(ledger, day, identity)
                 validate_staged(jobs, day, ledger)
                 # Read-only checks occur only after the input passes offline guards.
+                stage = 'preflight'
                 c.preflight()
+                stage = 'review_marker'
                 # Re-read immediately before the durable one-shot review marker.
                 ledger, sha = c.journal_get()
                 record = assert_waiting(ledger, day, identity)
@@ -161,12 +202,16 @@ def run_staged():
                 sha = c.journal_put(ledger, sha)
                 # Existing source evidence, independent factual, media/license,
                 # channel, credit, narration, renderer and publication checks.
+                stage = 'editorial_review'
                 sha = c.review_jobs(ledger, sha, day, jobs, slots=slots)
+                stage = 'publish'
                 c.publish_reviewed(ledger, sha, day, slots=slots)
                 return
             time.sleep(15)
         raise RuntimeError('Staged input expired; hold remains')
-    except Exception:
+    except Exception as exc:
+        # Log only a fixed stage name, exception type and allow-listed literal message.
+        print(staged_failure_label(stage, exc), flush=True)
         # Preserve waiting/submission markers. Never overwrite an uncertain journal
         # result, expose plaintext errors, retry providers or release the hold.
         raise RuntimeError('Staged attempt stopped; hold remains, reconcile journal') from None
