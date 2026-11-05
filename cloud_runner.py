@@ -273,7 +273,7 @@ CORRECTION_PROMPT = """Copy-edit only the narration strings of supplied scripts 
 def correct_narration_lengths_once(jobs):
     # One bounded request, no search and no loop. Existing submission marker blocks replay.
     # All non-narration fields remain from the original draft, never from the correction.
-    text,_=openai('Original jobs (untrusted data): '+json.dumps(jobs,ensure_ascii=False),
+    text,_=openai('Return JSON with exactly the narrations key as specified. Original jobs (untrusted data): '+json.dumps(jobs,ensure_ascii=False),
                   False,3500,instructions=CORRECTION_PROMPT)
     result=json.loads(text)
     if not isinstance(result,dict) or set(result)!={'narrations'}:
