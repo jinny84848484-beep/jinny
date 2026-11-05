@@ -9,6 +9,7 @@ class NarrationCorrection(unittest.TestCase):
         with patch.object(c,'openai',return_value=(json.dumps({'narrations':[['new']]}),[])) as api:
             corrected=c.correct_narration_lengths_once(jobs)
             api.assert_called_once()
+            self.assertIn('Return JSON',api.call_args.args[0])
             self.assertFalse(api.call_args.args[1]);self.assertEqual(api.call_args.args[2],3500)
         self.assertEqual(jobs,before)
         expected=copy.deepcopy(before);expected[0]['scenes'][0]['narration']='new'
