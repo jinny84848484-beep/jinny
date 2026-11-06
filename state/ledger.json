@@ -765,7 +765,7 @@
           "completed_at": "2026-11-06T08:41:38.320525+09:00"
         }
       },
-      "status": "tts_submitted",
+      "status": "rendered",
       "active_stage": "editorial_review_3",
       "retry_hold": true,
       "research_failures": [
