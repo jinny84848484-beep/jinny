@@ -765,7 +765,7 @@
           "completed_at": "2026-11-06T08:41:38.320525+09:00"
         }
       },
-      "status": "editorial_review_failed",
+      "status": "cached_review_recovery_submitted",
       "active_stage": "editorial_review_3",
       "retry_hold": true,
       "research_failures": [
@@ -806,6 +806,26 @@
         "source_count": 5,
         "candidate_count": 8,
         "input_hash": "7aebb669b5e674ceab3a788c7e7a3ae19f06a02a2df72f277dbdfb79c051a7f1"
+      },
+      "cached_recovery": {
+        "source_run": "42130980896",
+        "archive_sha256": "1bbcb78ac5acae87b6099cd3eb8ae496548b0dcfe12fff434263311d1224f421",
+        "run_id": "42136680107",
+        "run_attempt": "1",
+        "at": "2026-11-06T09:25:55.267001+09:00",
+        "previous_diagnostic": {
+          "status": "FAIL",
+          "issues": [
+            {
+              "code": "review_contract",
+              "job_index": 2,
+              "scene_index": -1
+            }
+          ],
+          "source_count": 5,
+          "candidate_count": 8,
+          "input_hash": "7aebb669b5e674ceab3a788c7e7a3ae19f06a02a2df72f277dbdfb79c051a7f1"
+        }
       }
     }
   },
