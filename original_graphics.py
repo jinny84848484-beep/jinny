@@ -176,7 +176,7 @@ def render_graphics_review_frames(job, manifest, output_dir, *, graphics_spec):
         frame = root / f'review-frame-{i+1:02d}.png'
         style = 'FontName=Noto Sans CJK KR,FontSize=17,Bold=-1,PrimaryColour=&HFFFFFF,OutlineColour=&H111111,BorderStyle=3,Outline=1,Shadow=0,Alignment=2,MarginV=42,MarginL=18,MarginR=32'
         filt = '[1:v]split=2[bg][fg];[bg]scale=1080:1380:force_original_aspect_ratio=increase,crop=1080:1380,gblur=sigma=35,eq=brightness=-0.25[back];[fg]scale=1080:1380:force_original_aspect_ratio=decrease[front];[back][front]overlay=(W-w)/2:(H-h)/2,setsar=1,fps=30[v];[v]pad=1080:1920:0:185:black[b];[b][0:v]overlay=0:0:format=auto,format=yuv420p[composed];[composed]subtitles='+subtitle.name+":force_style='"+style+"'[out]"
-        subprocess.run(['ffmpeg','-v','error','-y','-i',overlay.name,'-i',card['file'],'-filter_complex',filt,'-map','[out]','-frames:v','1',frame.name],cwd=root,check=True)
+        subprocess.run(['ffmpeg','-v','error','-y','-loop','1','-i',overlay.name,'-loop','1','-i',card['file'],'-filter_complex',filt,'-map','[out]','-frames:v','1',frame.name],cwd=root,check=True)
         frames.append({'scene_index': i, 'path': frame.name, 'sha256': hashlib.sha256(frame.read_bytes()).hexdigest(), 'subtitle': cue})
     sheet = Image.new('RGB', (1080, 768), '#080D13')
     for i, frame in enumerate(frames):
