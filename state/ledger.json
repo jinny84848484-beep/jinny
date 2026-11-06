@@ -765,7 +765,7 @@
           "completed_at": "2026-11-06T08:41:38.320525+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_3",
       "retry_hold": true,
       "research_failures": [
@@ -1472,6 +1472,21 @@
       "experiment": {
         "hook_type": "specific_question",
         "topic_category": "entertainment"
+      }
+    },
+    {
+      "job_id": "2026-11-06-post-election-ai-stock-reversal-nov5-2026",
+      "topic_key": "post-election-ai-stock-reversal-nov5-2026",
+      "category": "business",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "The Election Ended. The Uncertainty Didn't.",
+      "video_id": "gkA8Yv3cEcg",
+      "url": "https://www.youtube.com/shorts/gkA8Yv3cEcg",
+      "at": "2026-11-06T10:00:23.680664+09:00",
+      "experiment": {
+        "hook_type": "specific_question",
+        "topic_category": "business"
       }
     }
   ]
