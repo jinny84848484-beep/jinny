@@ -162,6 +162,13 @@ def download_archive():
 def run_recovery():
     try:
         recover_from_archive(download_archive())
+    except c.MediaDownloadError as exc:
+        # Only locally constructed HTTP status/network labels, never response bodies.
+        import re
+        label=str(exc)
+        if not re.fullmatch(r'Media download (HTTP [1-5][0-9]{2}|network failure)',label):
+            label='Media download stopped'
+        raise RuntimeError(label+'; hold remains, no automatic retry') from None
     except Exception:
         # No provider errors, source text, signed URLs or credentials in logs.
         raise RuntimeError('Cached recovery stopped; reconcile journal, no automatic retry') from None

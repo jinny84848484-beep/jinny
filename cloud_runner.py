@@ -549,6 +549,9 @@ def guarded_draft_validation(ledger,sha,day,draft,recent,*,allow_length_correcti
         journal_put(ledger,sha() if callable(sha) else sha)
         raise RuntimeError('Draft validation failed: '+diagnostic['reason']+'; reconcile before retrying') from None
 
+class MediaDownloadError(RuntimeError):
+    """Fixed, non-content download diagnostic."""
+
 def download_media(jobs):
     lib=p.read(p.ROOT/'assets/media-library.json')
     for name in {s.get('media') for j in jobs for s in j['scenes']} - {None}:
@@ -559,7 +562,13 @@ def download_media(jobs):
         url=media.get('url','')
         if urllib.parse.urlparse(url).hostname!='upload.wikimedia.org' or not media.get('relevance_verified'):raise RuntimeError('Reviewed directly relevant media required: '+name)
         target.parent.mkdir(parents=True,exist_ok=True)
-        with urllib.request.urlopen(url,timeout=60) as r:raw=r.read(80_000_001)
+        request=urllib.request.Request(url,headers={'User-Agent':'JinnyShorts/1.0 (https://github.com/jinny84848484-beep/jinny)'})
+        try:
+            with urllib.request.urlopen(request,timeout=60) as r:raw=r.read(80_000_001)
+        except urllib.error.HTTPError as exc:
+            raise MediaDownloadError('Media download HTTP '+str(exc.code)) from None
+        except (urllib.error.URLError,TimeoutError):
+            raise MediaDownloadError('Media download network failure') from None
         if len(raw)>80_000_000:raise RuntimeError('Media size limit')
         target.write_bytes(raw)
 
@@ -739,7 +748,10 @@ Return ONLY JSON with exactly status, issues, selection. status is PASS or FAIL.
     return sha
 
 
-def publish_reviewed(ledger,sha,day,*,slots=None):
+def publish_reviewed(ledger,sha,day,*,slots=None,stage_callback=None):
+    def stage(name):
+        if stage_callback is not None:stage_callback(name)
+    stage('publish_validation')
     record=ledger['days'][day]
     jobs=record['jobs']
     library=p.read(p.ROOT/'assets/media-library.json',{});library.update(record.get('media',{}));p.write(p.ROOT/'assets/media-library.json',library)
@@ -748,21 +760,31 @@ def publish_reviewed(ledger,sha,day,*,slots=None):
         for scene in job['scenes']:
             media=library.get(scene.get('media'),{})
             if not media.get('relevance_verified') or media.get('topic_key')!=job['topic_key']:raise RuntimeError('Direct media relevance is not verified')
+    stage('download')
     download_media(jobs)
     done={x['job_id'] for x in ledger['publications']}
     for job in jobs:
         if job['id'] in done:continue
+        stage('job_files')
         folder=p.ROOT/'runs'/day/job['channel']/job['id'];folder.mkdir(parents=True,exist_ok=True)
         path=p.ROOT/'runs'/day/'jobs'/(job['id']+'.json');p.write(path,job)
+        stage('tts_marker')
         record.update(status='tts_submitted',active_job=job['id']);sha=journal_put(ledger,sha)
+        stage('render')
         media_renderer.render(path)
+        stage('render_marker')
         record['status']='rendered';sha=journal_put(ledger,sha)
+        stage('channel_verification')
         token=youtube_token(job['channel']);verify_channel(job['channel'],token)
+        stage('upload_marker')
         record['status']='upload_submitted';sha=journal_put(ledger,sha)
+        stage('upload')
         video_id=upload(folder,job,token)
         ledger['publications'].append({'job_id':job['id'],'topic_key':job['topic_key'],'category':job['category'],'channel':job['channel'],'channel_id':job['channel_id'],'title':job['title'],'video_id':video_id,'url':'https://www.youtube.com/shorts/'+video_id,'at':p.now().isoformat(),'experiment':job.get('experiment',{})})
+        stage('publication_marker')
         record['status']='uploaded';sha=journal_put(ledger,sha)
         print('Published '+job['channel']+': https://www.youtube.com/shorts/'+video_id,flush=True)
+    stage('completion_marker')
     record['status']='complete';record['completed_at']=p.now().isoformat();journal_put(ledger,sha)
 
 if __name__=='__main__':

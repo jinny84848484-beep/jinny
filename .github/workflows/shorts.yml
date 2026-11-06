@@ -5,7 +5,7 @@ on:
       mode:
         description: 'Preflight checks connections; produce publishes four videos'
         type: choice
-        options: [preflight, produce, stage_produce, recover_saved_reviews]
+        options: [preflight, produce, stage_produce, recover_saved_reviews, resume_reviewed]
         default: preflight
       staged_sender_public_key:
         description: One-run Ed25519 public key for stage_produce only
@@ -55,6 +55,8 @@ jobs:
         run: |
           if [ "$RUN_MODE" = "recover_saved_reviews" ]; then
             python cached_review_recovery.py
+          elif [ "$RUN_MODE" = "resume_reviewed" ]; then
+            python reviewed_resume.py
           else
             python cloud_runner.py "$RUN_MODE"
           fi
