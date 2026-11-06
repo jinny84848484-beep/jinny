@@ -1593,5 +1593,22 @@
       "approval_hash": "4af35367a9575ae75bbae29b5fe975ad7c34df76fbe1e6765513014fc5117331",
       "completed_anchor_day": "2026-11-06"
     }
+  },
+  "additional_batches": {
+    "2026-11-07-extra-01": {
+      "production_date": "2026-11-07",
+      "completed_anchor_day": "2026-11-06",
+      "job_id": "2026-11-07-extra-01-eunpyeong-stalking-protection-gap",
+      "packet_hash": "8e5e09a86fba2f13f374c3ebeead41839576f749a6c70193f15e8bd713ef9900",
+      "approval_hash": "4af35367a9575ae75bbae29b5fe975ad7c34df76fbe1e6765513014fc5117331",
+      "event_keys": [
+        "eunpyeong-stalking-protection-gap"
+      ],
+      "tts_reservation": 368,
+      "status": "reserved",
+      "checkpoints": {},
+      "run_id": "42256600410",
+      "created_at": "2026-11-07T01:56:12.488484+09:00"
+    }
   }
 }
