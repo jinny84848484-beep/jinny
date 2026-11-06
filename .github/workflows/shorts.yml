@@ -5,7 +5,7 @@ on:
       mode:
         description: 'Preflight checks connections; produce publishes four videos'
         type: choice
-        options: [preflight, produce, stage_produce]
+        options: [preflight, produce, stage_produce, recover_saved_reviews]
         default: preflight
       staged_sender_public_key:
         description: One-run Ed25519 public key for stage_produce only
@@ -15,6 +15,7 @@ on:
     - cron: '0 23 * * *'
 permissions:
   contents: write
+  actions: read
 concurrency:
   group: shorts-production
   cancel-in-progress: false
@@ -51,7 +52,12 @@ jobs:
           IMAGEIO_FFMPEG_EXE: /usr/bin/ffmpeg
           STAGED_SENDER_PUBLIC_KEY: ${{ inputs.staged_sender_public_key }}
           RUN_MODE: ${{ inputs.mode || 'produce' }}
-        run: python cloud_runner.py "$RUN_MODE"
+        run: |
+          if [ "$RUN_MODE" = "recover_saved_reviews" ]; then
+            python cached_review_recovery.py
+          else
+            python cloud_runner.py "$RUN_MODE"
+          fi
       - name: Save produced media
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
@@ -60,5 +66,6 @@ jobs:
           path: runs/
           if-no-files-found: ignore
           retention-days: 7
+
 
 
