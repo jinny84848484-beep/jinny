@@ -178,7 +178,7 @@ def process_lock(name):
         os.write(handle,str(os.getpid()).encode()); os.close(handle); yield
     finally: path.unlink(missing_ok=True)
 
-def synthesize(d,folder):
+def synthesize(d,folder,*,billing_guard=None):
     text=validate(d); c=cfg(); voice=c["channels"][d["channel"]]["voice_id"]
     if not voice: raise RuntimeError("Choose the saved ElevenLabs voice on the local setup page")
     model=c['channels'][d['channel']].get('model_id',c['model_id'])
@@ -196,9 +196,15 @@ def synthesize(d,folder):
         day=now().date().isoformat(); entries=ledger.setdefault(day,[])
         if any(e["id"]==d["id"] for e in entries): raise RuntimeError("Prior TTS submission exists; reconcile it before retrying to avoid duplicate charges")
         if sum(e["characters"] for e in entries)+len(text)>c["daily_character_cap"]: raise RuntimeError("Local daily narration cap reached")
-        sub=subscription()
-        if sub.get("character_limit") is None or sub.get("character_count") is None: raise RuntimeError("Cannot verify included credit balance")
-        if sub["character_limit"]-sub["character_count"]<len(text): raise RuntimeError("Insufficient included credits; automatic overage is not allowed")
+        if billing_guard is None:
+            sub=subscription()
+            if sub.get("character_limit") is None or sub.get("character_count") is None: raise RuntimeError("Cannot verify included credit balance")
+            if sub["character_limit"]-sub["character_count"]<len(text): raise RuntimeError("Insufficient included credits; automatic overage is not allowed")
+        else:
+            # Explicit additional-batch authorization checks exact speech text,
+            # approved config, current pricing/credits and its reserved day limit.
+            # Ordinary daily and recovery callers retain the included-credit rule.
+            billing_guard(d,speech_text,c)
         entry={"id":d["id"],"signature":signature,"characters":len(text),"state":"submitted","at":now().isoformat()}
         entries.append(entry); write(STATE/"usage.json",ledger)
         data=api("/v1/text-to-speech/"+urllib.parse.quote(voice,safe="")+"/with-timestamps?output_format=mp3_44100_128",

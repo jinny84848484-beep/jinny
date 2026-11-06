@@ -1,0 +1,80 @@
+name: Additional Korean Short
+on:
+  workflow_dispatch:
+    inputs:
+      production_date:
+        description: Approved Korea production date (YYYY-MM-DD)
+        type: string
+        required: true
+      batch_id:
+        description: Approved immutable YYYY-MM-DD-extra-NN identity
+        type: string
+        required: true
+      approval_hash:
+        description: Independently approved exact authorization SHA256
+        type: string
+        required: true
+      expected_head:
+        description: Reviewed deployed main commit SHA
+        type: string
+        required: true
+      staged_sender_public_key:
+        description: One-run Ed25519 sender public key
+        type: string
+        required: true
+      recovery_public_key:
+        description: One-run X25519 encrypted-artifact recipient public key
+        type: string
+        required: true
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: shorts-production
+  cancel-in-progress: false
+jobs:
+  additional:
+    if: github.event_name == 'workflow_dispatch' && vars.PUBLIC_UPLOADS_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install existing renderer dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk ffmpeg
+          python -m pip install -r requirements.txt
+      - name: Test production guards offline
+        env:
+          SHORTS_STATE_DIR: ${{ runner.temp }}/shorts-test-state
+        run: python -m unittest discover -s tests -v
+      - name: Receive approved private input and produce one Short
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          YOUTUBE_OJIRAP_OAUTH: ${{ secrets.YOUTUBE_OJIRAP_OAUTH }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PUBLIC_UPLOADS_ENABLED: ${{ vars.PUBLIC_UPLOADS_ENABLED }}
+          SHORTS_STATE_DIR: ${{ runner.temp }}/shorts-state
+          IMAGEIO_FFMPEG_EXE: /usr/bin/ffmpeg
+          STAGED_SENDER_PUBLIC_KEY: ${{ inputs.staged_sender_public_key }}
+          ADDITIONAL_PRODUCTION_DATE: ${{ inputs.production_date }}
+          ADDITIONAL_BATCH_ID: ${{ inputs.batch_id }}
+          ADDITIONAL_APPROVAL_HASH: ${{ inputs.approval_hash }}
+          ADDITIONAL_APPROVED_HEAD: ${{ inputs.expected_head }}
+          ADDITIONAL_RECOVERY_PUBLIC_KEY: ${{ inputs.recovery_public_key }}
+          ADDITIONAL_CONCURRENCY_GROUP: shorts-production
+        run: python additional_driver.py
+      - name: Save only encrypted recovery artifact
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: additional-encrypted-${{ github.run_id }}
+          path: private-artifacts/*.enc.json
+          if-no-files-found: ignore
+          retention-days: 1

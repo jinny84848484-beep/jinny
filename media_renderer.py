@@ -80,11 +80,11 @@ def run_ff(args,cwd):
     result=subprocess.run([p.ffmpeg(),'-hide_banner','-loglevel','error','-y',*args],cwd=cwd,capture_output=True,text=True,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
     if result.returncode:raise RuntimeError(result.stderr[-2000:])
 
-def render(job_path):
+def render(job_path,*,billing_guard=None):
     d=p.read(job_path);spoken=p.validate(d);ch=p.cfg()['channels'][d['channel']]
     day=d['id'][:10];folder=p.ROOT/'runs'/day/d['channel']/d['id'];folder.mkdir(parents=True,exist_ok=True)
     library=p.read(p.ROOT/'assets/media-library.json',{})
-    alignment=p.synthesize(d,folder)['alignment'];duration=alignment['character_end_times_seconds'][-1]+0.35
+    alignment=p.synthesize(d,folder,**({'billing_guard':billing_guard} if billing_guard is not None else {}))['alignment'];duration=alignment['character_end_times_seconds'][-1]+0.35
     if not 15<=duration<=75:raise ValueError('Unexpected narration length')
     cues=captions(spoken,alignment,ch['language']=='ko')
     (folder/'captions.srt').write_text('\n\n'.join(f'{i+1}\n{p.srt_time(a)} --> {p.srt_time(b)}\n{t}' for i,(a,b,t) in enumerate(cues))+'\n',encoding='utf-8')
