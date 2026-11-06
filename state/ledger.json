@@ -1552,7 +1552,7 @@
       }
     },
     "42252624976": {
-      "status": "waiting",
+      "status": "resolved_no_effects",
       "identity": {
         "run_id": "42252624976",
         "run_attempt": "1",
@@ -1562,7 +1562,23 @@
       "production_date": "2026-11-07",
       "batch_id": "2026-11-07-extra-01",
       "approval_hash": "3de87f889c5ba1367f0a87335883aee7186bfb0d4ae8f37850ee775d1ce9e77a",
-      "completed_anchor_day": "2026-11-06"
+      "completed_anchor_day": "2026-11-06",
+      "resolution": {
+        "previous_session_hash": "13bbb65900c771fabe7d777927b0ff8a5208c2b3762327a6f078d88b2b0fb807",
+        "proof": {
+          "run_id": "42252624976",
+          "run_attempt": "1",
+          "head_sha": "9a99a3ea6f590bed5196be7a211517991e770e18",
+          "conclusion": "failure",
+          "stage": "materialize_assets",
+          "session_hash": "13bbb65900c771fabe7d777927b0ff8a5208c2b3762327a6f078d88b2b0fb807",
+          "recovery_zip_sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85",
+          "recovery_entries": [],
+          "ledger_sha": "49ba7e34aa99c5cc42d55b22f505c73c19954085",
+          "checked_at": "2026-11-06T16:52:19.725419+00:00"
+        },
+        "proof_hash": "a6e1233c1ac452b3f983851172208e42ac01b453f592271c36a4dc3cf1768820"
+      }
     }
   }
 }
