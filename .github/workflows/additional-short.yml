@@ -51,11 +51,38 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
-      - name: Install existing renderer dependencies
+      - name: Install pinned renderer and verified fonts
+        timeout-minutes: 8
         run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y fonts-noto-cjk ffmpeg
-          python -m pip install -r requirements.txt
+          set -euo pipefail
+          python -m pip install --only-binary=:all: -r requirements.txt
+          curl --fail --location --proto '=https' --connect-timeout 20 --max-time 180 \
+            'https://archive.ubuntu.com/ubuntu/pool/main/f/fonts-noto-cjk/fonts-noto-cjk_20230817+repack1-3_all.deb' \
+            -o "$RUNNER_TEMP/fonts-noto-cjk.deb"
+          echo "7d64b985f6fe128c99eae5610d5c047338e572bdcfb2bb09736be01b824a7f6c  $RUNNER_TEMP/fonts-noto-cjk.deb" | sha256sum -c -
+          dpkg-deb -x "$RUNNER_TEMP/fonts-noto-cjk.deb" "$RUNNER_TEMP/verified-fonts"
+          fontdir="$RUNNER_TEMP/verified-fonts/usr/share/fonts/opentype/noto"
+          echo "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a  $fontdir/NotoSansCJK-Regular.ttc" | sha256sum -c -
+          echo "faa5f3656a78b2e2d450d27fe8382c778bc2b6bb5ea29c986664a6a435056ceb  $fontdir/NotoSansCJK-Bold.ttc" | sha256sum -c -
+          sudo install -d /usr/share/fonts/opentype/noto
+          sudo install -m 644 "$fontdir/NotoSansCJK-Regular.ttc" "$fontdir/NotoSansCJK-Bold.ttc" /usr/share/fonts/opentype/noto/
+          echo "b76b0433203017ca80401b2ee0dd69350349871c4b19d504c34dbdd80541690a  /usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc" | sha256sum -c -
+          echo "faa5f3656a78b2e2d450d27fe8382c778bc2b6bb5ea29c986664a6a435056ceb  /usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc" | sha256sum -c -
+          ffmpeg_exe="$(python -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')"
+          test -x "$ffmpeg_exe"
+          mkdir -p "$RUNNER_TEMP/shorts-bin"
+          ln -s "$ffmpeg_exe" "$RUNNER_TEMP/shorts-bin/ffmpeg"
+          echo "$RUNNER_TEMP/shorts-bin" >> "$GITHUB_PATH"
+          echo "IMAGEIO_FFMPEG_EXE=$ffmpeg_exe" >> "$GITHUB_ENV"
+      - name: Verify renderer before private input or paid work
+        timeout-minutes: 3
+        env:
+          SHORTS_STATE_DIR: ${{ runner.temp }}/shorts-test-state
+        run: |
+          set -euo pipefail
+          python preview_diagnostic.py
+          ffmpeg -v error -y -f lavfi -i color=c=black:s=1080x1920:r=6:d=1 -f lavfi -i anullsrc=r=48000:cl=stereo -t 1 -c:v libx264 -preset ultrafast -pix_fmt yuv420p -af loudnorm -c:a aac "$RUNNER_TEMP/renderer-smoke.mp4"
+          test -s "$RUNNER_TEMP/renderer-smoke.mp4"
       - name: Test production guards offline
         env:
           SHORTS_STATE_DIR: ${{ runner.temp }}/shorts-test-state
@@ -69,7 +96,6 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           PUBLIC_UPLOADS_ENABLED: ${{ vars.PUBLIC_UPLOADS_ENABLED }}
           SHORTS_STATE_DIR: ${{ runner.temp }}/shorts-state
-          IMAGEIO_FFMPEG_EXE: /usr/bin/ffmpeg
           STAGED_SENDER_PUBLIC_KEY: ${{ inputs.staged_sender_public_key }}
           ADDITIONAL_PRODUCTION_DATE: ${{ inputs.production_date }}
           ADDITIONAL_ANCHOR_DAY: ${{ inputs.completed_anchor_day }}
