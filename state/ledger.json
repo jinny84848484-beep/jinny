@@ -1520,5 +1520,20 @@
         "topic_category": "film"
       }
     }
-  ]
+  ],
+  "additional_sessions": {
+    "42241148266": {
+      "status": "waiting",
+      "identity": {
+        "run_id": "42241148266",
+        "run_attempt": "1",
+        "day": "2026-11-07",
+        "session_id": "tv2yfYqTQrvWL4gWq49IxMYPcpBYdbVx2XEkNQpW8JA="
+      },
+      "production_date": "2026-11-07",
+      "batch_id": "2026-11-07-extra-01",
+      "approval_hash": "029fafdbb1c945bf7fecedda4d857c5e9e44fd2759effe8012877f634d65f6b2",
+      "completed_anchor_day": "2026-11-06"
+    }
+  }
 }
