@@ -1523,7 +1523,7 @@
   ],
   "additional_sessions": {
     "42241148266": {
-      "status": "waiting",
+      "status": "resolved_no_effects",
       "identity": {
         "run_id": "42241148266",
         "run_attempt": "1",
@@ -1533,7 +1533,23 @@
       "production_date": "2026-11-07",
       "batch_id": "2026-11-07-extra-01",
       "approval_hash": "029fafdbb1c945bf7fecedda4d857c5e9e44fd2759effe8012877f634d65f6b2",
-      "completed_anchor_day": "2026-11-06"
+      "completed_anchor_day": "2026-11-06",
+      "resolution": {
+        "previous_session_hash": "6a45a99e7631c3574e193ae39ae06448775488a2f44e7b1458673bc3d699429a",
+        "proof": {
+          "run_id": "42241148266",
+          "run_attempt": "1",
+          "head_sha": "cf0594536b3fa4d21794c49a8f00e9c8fac4ad7f",
+          "conclusion": "failure",
+          "stage": "materialize_assets",
+          "session_hash": "6a45a99e7631c3574e193ae39ae06448775488a2f44e7b1458673bc3d699429a",
+          "recovery_zip_sha256": "8739c76e681f900923b900c9df0ef75cf421d39cabb54650c4b9ad19b6a76d85",
+          "recovery_entries": [],
+          "ledger_sha": "6766174a73d4f0ea69887991f2a866b94f5e2341",
+          "checked_at": "2026-11-06T15:57:21.892368+00:00"
+        },
+        "proof_hash": "80ceb29698c850c67b6fdc3fd820632328349b537826224b2b81708406d1b1bb"
+      }
     }
   }
 }
