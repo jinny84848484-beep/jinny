@@ -765,7 +765,7 @@
           "completed_at": "2026-11-06T08:41:38.320525+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_3",
       "retry_hold": true,
       "research_failures": [
@@ -1456,6 +1456,21 @@
       "at": "2026-11-05T23:27:26.476478+09:00",
       "experiment": {
         "hook_type": "understated-personal-reaction",
+        "topic_category": "entertainment"
+      }
+    },
+    {
+      "job_id": "2026-11-06-cate-blanchett-ai-consent-amicus-2026",
+      "topic_key": "cate-blanchett-ai-consent-amicus-2026",
+      "category": "entertainment",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "스타들이 AI보다 먼저 묻는 질문",
+      "video_id": "lHeQj1BQQSs",
+      "url": "https://www.youtube.com/shorts/lHeQj1BQQSs",
+      "at": "2026-11-06T09:57:26.345532+09:00",
+      "experiment": {
+        "hook_type": "specific_question",
         "topic_category": "entertainment"
       }
     }
