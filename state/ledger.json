@@ -765,7 +765,7 @@
           "completed_at": "2026-11-06T08:41:38.320525+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_3",
       "retry_hold": true,
       "research_failures": [
@@ -893,12 +893,12 @@
             {
               "title": "October30 proposed amici brief",
               "url": "https://payauthors.com/court/68024915/gov.uscourts.nysd.610699.924.1.pdf",
-              "checked_at": "2026-11-06T09:25:56.504003+09:00"
+              "checked_at": "2026-11-06T09:56:12.499482+09:00"
             },
             {
               "title": "TheWrap original report",
               "url": "https://www.thewrap.com/industry-news/public-policy-legal/cate-blanchett-led-coalition-amicus-brief-new-york-times-openai-microsoft-battle/",
-              "checked_at": "2026-11-06T09:25:56.504003+09:00"
+              "checked_at": "2026-11-06T09:56:12.499482+09:00"
             }
           ],
           "title": "스타들이 AI보다 먼저 묻는 질문",
@@ -913,7 +913,7 @@
           ],
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-06T09:25:56.504003+09:00"
+          "verified_at": "2026-11-06T09:56:12.499482+09:00"
         },
         {
           "category": "business",
@@ -980,12 +980,12 @@
             {
               "title": "Reuters November4 close",
               "url": "https://za.investing.com/news/stock-market-news/us-stock-index-futures-steady-as-democrats-seize-congress-4548527",
-              "checked_at": "2026-11-06T09:25:56.504193+09:00"
+              "checked_at": "2026-11-06T09:56:12.499651+09:00"
             },
             {
               "title": "AP November5 close (body verification pending)",
               "url": "https://apnews.com/article/afe254c608c3d1fe2ea792812ba9765a",
-              "checked_at": "2026-11-06T09:25:56.504193+09:00"
+              "checked_at": "2026-11-06T09:56:12.499651+09:00"
             }
           ],
           "title": "The Election Ended. The Uncertainty Didn't.",
@@ -1000,7 +1000,7 @@
           ],
           "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
           "editorial_status": "verified",
-          "verified_at": "2026-11-06T09:25:56.504193+09:00"
+          "verified_at": "2026-11-06T09:56:12.499651+09:00"
         },
         {
           "category": "technology",
@@ -1067,12 +1067,12 @@
             {
               "title": "OpenAI Community Compact",
               "url": "https://cdn.openai.com/pdf/community-compact.pdf",
-              "checked_at": "2026-11-06T09:25:56.504340+09:00"
+              "checked_at": "2026-11-06T09:56:12.499767+09:00"
             },
             {
               "title": "Reuters November5 original report",
               "url": "https://www.aol.com/articles/openai-kicks-off-charm-offensive-100410000.html",
-              "checked_at": "2026-11-06T09:25:56.504340+09:00"
+              "checked_at": "2026-11-06T09:56:12.499767+09:00"
             }
           ],
           "title": "AI 전기요금, 회사가 낸다는 약속의 범위",
@@ -1087,7 +1087,7 @@
           ],
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-06T09:25:56.504340+09:00"
+          "verified_at": "2026-11-06T09:56:12.499767+09:00"
         },
         {
           "category": "film",
@@ -1154,12 +1154,12 @@
             {
               "title": "PEOPLE original producer and director statements",
               "url": "https://people.com/grimes-starring-in-ai-generated-movie-gods-don-t-give-gifts-12228154",
-              "checked_at": "2026-11-06T09:25:56.504482+09:00"
+              "checked_at": "2026-11-06T09:56:12.499883+09:00"
             },
             {
               "title": "The Verge casting report",
               "url": "https://www.theverge.com/entertainment/1026282/grimes-ai-movie",
-              "checked_at": "2026-11-06T09:25:56.504482+09:00"
+              "checked_at": "2026-11-06T09:56:12.499883+09:00"
             }
           ],
           "title": "An AI Face, A Human Choice",
@@ -1174,7 +1174,7 @@
           ],
           "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
           "editorial_status": "verified",
-          "verified_at": "2026-11-06T09:25:56.504482+09:00"
+          "verified_at": "2026-11-06T09:56:12.499883+09:00"
         }
       ],
       "media": {
@@ -1322,7 +1322,8 @@
         "run_id": "42140267072",
         "run_attempt": "1",
         "at": "2026-11-06T09:56:11.226396+09:00"
-      }
+      },
+      "active_job": "2026-11-06-cate-blanchett-ai-consent-amicus-2026"
     }
   },
   "publications": [
