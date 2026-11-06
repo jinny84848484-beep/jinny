@@ -765,7 +765,7 @@
           "completed_at": "2026-11-06T08:41:38.320525+09:00"
         }
       },
-      "status": "uploaded",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_3",
       "retry_hold": true,
       "research_failures": [
@@ -1323,7 +1323,7 @@
         "run_attempt": "1",
         "at": "2026-11-06T09:56:11.226396+09:00"
       },
-      "active_job": "2026-11-06-post-election-ai-stock-reversal-nov5-2026"
+      "active_job": "2026-11-06-openai-community-compact-2026"
     }
   },
   "publications": [
