@@ -765,7 +765,7 @@
           "completed_at": "2026-11-06T08:41:38.320525+09:00"
         }
       },
-      "status": "cached_review_recovery_submitted",
+      "status": "reviewed",
       "active_stage": "editorial_review_3",
       "retry_hold": true,
       "research_failures": [
@@ -826,7 +826,496 @@
           "candidate_count": 8,
           "input_hash": "7aebb669b5e674ceab3a788c7e7a3ae19f06a02a2df72f277dbdfb79c051a7f1"
         }
-      }
+      },
+      "jobs": [
+        {
+          "category": "entertainment",
+          "channel": "ojirap",
+          "description": "사실 보도와 제안 논평을 구분한 오리지널 해설. 인물·기관 사진은 과거 자료사진이며 현재 사건 현장이나 현재 시세 화면이 아닙니다.",
+          "experiment": {
+            "hook_type": "specific_question",
+            "topic_category": "entertainment"
+          },
+          "id": "2026-11-06-cate-blanchett-ai-consent-amicus-2026",
+          "opening_text": "허락은 받았나요?",
+          "scenes": [
+            {
+              "body": "",
+              "headline": "스타들이 AI보다 먼저 묻는 질문",
+              "kind": "hook",
+              "narration": "허락은 받았나요? 케이트 블란쳇과 창작자 단체들이 에이아이 저작권 소송에 의견서를 냈어요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-77945754-384c5f5f"
+            },
+            {
+              "body": "",
+              "headline": "스타들이 AI보다 먼저 묻는 질문",
+              "kind": "fact",
+              "narration": "십월 삼십일 제출한 제안 의견서에서, 대규모로 작품 이용 허락을 받는 방법이 이미 있다고 주장했죠.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-163433262-384c5f5f"
+            },
+            {
+              "body": "",
+              "headline": "스타들이 AI보다 먼저 묻는 질문",
+              "kind": "fact",
+              "narration": "블란쳇은 얼굴이나 목소리를 쓰려면 먼저 묻고 계약하는 게 업계 원칙이었다고 설명했어요. 법원의 판결이 아니라 제출한 쪽의 주장입니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-77945754-384c5f5f"
+            },
+            {
+              "body": "",
+              "headline": "스타들이 AI보다 먼저 묻는 질문",
+              "kind": "opinion",
+              "narration": "제 생각엔 기술을 쓰느냐 마느냐보다, 누구의 것을 어떤 조건으로 쓰느냐가 핵심 같아요. 허락받는 과정도 혁신에서 빼면 안 되겠죠.",
+              "source_indices": [],
+              "media": "commons-163433262-384c5f5f"
+            },
+            {
+              "body": "",
+              "headline": "스타들이 AI보다 먼저 묻는 질문",
+              "kind": "closing",
+              "narration": "에이아이는 질문에 답을 그렇게 잘한다면서, 정작 주인한테 질문하는 건 왜 이렇게 어려울까요?",
+              "source_indices": [],
+              "media": "commons-77945754-384c5f5f"
+            }
+          ],
+          "sources": [
+            {
+              "title": "October30 proposed amici brief",
+              "url": "https://payauthors.com/court/68024915/gov.uscourts.nysd.610699.924.1.pdf",
+              "checked_at": "2026-11-06T09:25:56.504003+09:00"
+            },
+            {
+              "title": "TheWrap original report",
+              "url": "https://www.thewrap.com/industry-news/public-policy-legal/cate-blanchett-led-coalition-amicus-brief-new-york-times-openai-microsoft-battle/",
+              "checked_at": "2026-11-06T09:25:56.504003+09:00"
+            }
+          ],
+          "title": "스타들이 AI보다 먼저 묻는 질문",
+          "topic_key": "cate-blanchett-ai-consent-amicus-2026",
+          "visual_queries": [
+            "Cate Blanchett portrait",
+            "Cate Blanchett film festival"
+          ],
+          "visual_source_titles": [
+            "File:Cate_Blanchett_Cannes_2018_2.jpg",
+            "File:Cate_Blanchett_in_2023.jpg"
+          ],
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-06T09:25:56.504003+09:00"
+        },
+        {
+          "category": "business",
+          "channel": "korean",
+          "description": "Original commentary distinguishing reported facts from opinion. Photographs are archival views of the named subjects, not current event footage or live market prices.",
+          "experiment": {
+            "hook_type": "specific_question",
+            "topic_category": "business"
+          },
+          "id": "2026-11-06-post-election-ai-stock-reversal-nov5-2026",
+          "opening_text": "One election, two market moods.",
+          "scenes": [
+            {
+              "body": "",
+              "headline": "The Election Ended. The Uncertainty Didn",
+              "kind": "hook",
+              "narration": "One election, two market moods. American stocks rallied on November fourth, then AI-linked shares helped lead a broad selloff the next day.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-150112302-53b63089"
+            },
+            {
+              "body": "",
+              "headline": "The Election Ended. The Uncertainty Didn",
+              "kind": "fact",
+              "narration": "Democrats were reported to have won both chambers of Congress. That result wasn't an instant new rulebook for every data center.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-110229084-53b63089"
+            },
+            {
+              "body": "",
+              "headline": "The Election Ended. The Uncertainty Didn",
+              "kind": "fact",
+              "narration": "Investors were weighing future oversight and expensive AI expansion. Those were expectations, not proof that every feared restriction had already become law.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-150112302-53b63089"
+            },
+            {
+              "body": "",
+              "headline": "The Election Ended. The Uncertainty Didn",
+              "kind": "opinion",
+              "narration": "My take is that an election headline isn't an investment thesis. Prices can move before policy does, and then change their minds.",
+              "source_indices": [],
+              "media": "commons-110229084-53b63089"
+            },
+            {
+              "body": "",
+              "headline": "The Election Ended. The Uncertainty Didn",
+              "kind": "closing",
+              "narration": "Apparently the market wanted certainty. It got an election result, then immediately ordered a fresh serving of uncertainty.",
+              "source_indices": [],
+              "media": "commons-150112302-53b63089"
+            }
+          ],
+          "sources": [
+            {
+              "title": "Reuters November4 close",
+              "url": "https://za.investing.com/news/stock-market-news/us-stock-index-futures-steady-as-democrats-seize-congress-4548527",
+              "checked_at": "2026-11-06T09:25:56.504193+09:00"
+            },
+            {
+              "title": "AP November5 close (body verification pending)",
+              "url": "https://apnews.com/article/afe254c608c3d1fe2ea792812ba9765a",
+              "checked_at": "2026-11-06T09:25:56.504193+09:00"
+            }
+          ],
+          "title": "The Election Ended. The Uncertainty Didn't.",
+          "topic_key": "post-election-ai-stock-reversal-nov5-2026",
+          "visual_queries": [
+            "New York Stock Exchange facade",
+            "Nasdaq MarketSite Times Square"
+          ],
+          "visual_source_titles": [
+            "File:NYSE_facade.jpg",
+            "File:Nasdaq_MarketSite_(51494550508).jpg"
+          ],
+          "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-06T09:25:56.504193+09:00"
+        },
+        {
+          "category": "technology",
+          "channel": "ojirap",
+          "description": "사실 보도와 제안 논평을 구분한 오리지널 해설. 인물·기관 사진은 과거 자료사진이며 현재 사건 현장이나 현재 시세 화면이 아닙니다.",
+          "experiment": {
+            "hook_type": "specific_question",
+            "topic_category": "technology"
+          },
+          "id": "2026-11-06-openai-community-compact-2026",
+          "opening_text": "전기요금은 누가 내죠?",
+          "scenes": [
+            {
+              "body": "",
+              "headline": "AI 전기요금, 회사가 낸다는 약속의 범위",
+              "kind": "hook",
+              "narration": "전기요금은 누가 내죠? 오픈에이아이가 새 데이터센터 운영 원칙을 공개했어요. 전력 사용료와 필요한 전력망 비용을 부담하겠다는 내용입니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-164150862-492d6823"
+            },
+            {
+              "body": "",
+              "headline": "AI 전기요금, 회사가 낸다는 약속의 범위",
+              "kind": "fact",
+              "narration": "다만 모든 데이터센터에 당장 적용되는 법은 아니에요. 앞으로 회사가 직접 소유하고 운영할 시설에 대한 약속인지, 범위부터 봐야 해요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-136301712-492d6823"
+            },
+            {
+              "body": "",
+              "headline": "AI 전기요금, 회사가 낸다는 약속의 범위",
+              "kind": "fact",
+              "narration": "전력 수요가 몰릴 때 사용량을 조절하고, 사업이 취소됐을 때 다른 고객에게 비용이 넘어가지 않게 하겠다는 내용도 들어 있어요. 화면은 샘 올트먼 대표의 자료사진이고, 새 시설을 찍은 건 아니에요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-164150862-492d6823"
+            },
+            {
+              "body": "",
+              "headline": "AI 전기요금, 회사가 낸다는 약속의 범위",
+              "kind": "opinion",
+              "narration": "제 생각엔 멋진 약속도 중요하지만, 실제 계약과 요금표에서 확인되는 게 더 중요해요. 이미 전기요금이 내려갔다는 소식은 아니거든요.",
+              "source_indices": [],
+              "media": "commons-136301712-492d6823"
+            },
+            {
+              "body": "",
+              "headline": "AI 전기요금, 회사가 낸다는 약속의 범위",
+              "kind": "closing",
+              "narration": "에이아이는 구름 위에 있다지만 전기요금은 땅으로 내려오죠. 그 고지서가 우리 집에 잘못 배달되지만 않으면 좋겠네요.",
+              "source_indices": [],
+              "media": "commons-164150862-492d6823"
+            }
+          ],
+          "sources": [
+            {
+              "title": "OpenAI Community Compact",
+              "url": "https://cdn.openai.com/pdf/community-compact.pdf",
+              "checked_at": "2026-11-06T09:25:56.504340+09:00"
+            },
+            {
+              "title": "Reuters November5 original report",
+              "url": "https://www.aol.com/articles/openai-kicks-off-charm-offensive-100410000.html",
+              "checked_at": "2026-11-06T09:25:56.504340+09:00"
+            }
+          ],
+          "title": "AI 전기요금, 회사가 낸다는 약속의 범위",
+          "topic_key": "openai-community-compact-2026",
+          "visual_queries": [
+            "OpenAI headquarters San Francisco",
+            "Sam Altman OpenAI"
+          ],
+          "visual_source_titles": [
+            "File:Sam_Altman_speaking_at_TED.jpg",
+            "File:Sam_Altman_November_2022.jpg"
+          ],
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-06T09:25:56.504340+09:00"
+        },
+        {
+          "category": "film",
+          "channel": "korean",
+          "description": "Original commentary distinguishing reported facts from opinion. Photographs are archival views of the named subjects, not current event footage or live market prices. The 2011 Commons portrait is an existing crop of an archival photograph, not a frame from the AI film.",
+          "experiment": {
+            "hook_type": "specific_question",
+            "topic_category": "film"
+          },
+          "id": "2026-11-06-grimes-ai-film-casting",
+          "opening_text": "Whose choice was it?",
+          "scenes": [
+            {
+              "body": "",
+              "headline": "An AI Face, A Human Choice",
+              "kind": "hook",
+              "narration": "Whose choice was it? Grimes is reported to be joining Gods Don't Give Gifts, an AI-made film using her likeness and recorded voice.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-18787356-f3e10da7"
+            },
+            {
+              "body": "",
+              "headline": "An AI Face, A Human Choice",
+              "kind": "fact",
+              "narration": "The important distinction isn't simply that software made the images. It's whether the performer chose the role and agreed to that use.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-65959732-f3e10da7"
+            },
+            {
+              "body": "",
+              "headline": "An AI Face, A Human Choice",
+              "kind": "fact",
+              "narration": "Reports describe her vocal performance driving the character. That doesn't tell us her contract terms, payment, or what other material trained the tools.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-65959732-f3e10da7"
+            },
+            {
+              "body": "",
+              "headline": "An AI Face, A Human Choice",
+              "kind": "opinion",
+              "narration": "My take is that agreeing to one project isn't signing away your identity everywhere. Permission should have boundaries, even when the picture doesn't.",
+              "source_indices": [],
+              "media": "commons-18787356-f3e10da7"
+            },
+            {
+              "body": "",
+              "headline": "An AI Face, A Human Choice",
+              "kind": "closing",
+              "narration": "Hollywood can generate a face now. Apparently it still needs the ancient technology of asking the person attached to it.",
+              "source_indices": [],
+              "media": "commons-65959732-f3e10da7"
+            }
+          ],
+          "sources": [
+            {
+              "title": "PEOPLE original producer and director statements",
+              "url": "https://people.com/grimes-starring-in-ai-generated-movie-gods-don-t-give-gifts-12228154",
+              "checked_at": "2026-11-06T09:25:56.504482+09:00"
+            },
+            {
+              "title": "The Verge casting report",
+              "url": "https://www.theverge.com/entertainment/1026282/grimes-ai-movie",
+              "checked_at": "2026-11-06T09:25:56.504482+09:00"
+            }
+          ],
+          "title": "An AI Face, A Human Choice",
+          "topic_key": "grimes-ai-film-casting",
+          "visual_queries": [
+            "Grimes singer portrait",
+            "Grimes singer performance"
+          ],
+          "visual_source_titles": [
+            "File:Grimes_Governors_Ball_2014_01.jpg",
+            "File:Grimes.jpg"
+          ],
+          "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-06T09:25:56.504482+09:00"
+        }
+      ],
+      "media": {
+        "commons-77945754-384c5f5f": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/d/d0/Cate_Blanchett_Cannes_2018_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:Cate_Blanchett_Cannes_2018_2.jpg",
+          "path": "assets/commons-77945754-384c5f5f.jpg",
+          "media_type": "image",
+          "credit": "Joan Hernandez Mir / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2018",
+          "description": "Cate Blanchett at Cannes in 2018.",
+          "capture_date": "2018-05-19 19:06:51",
+          "title": "File:Cate Blanchett Cannes 2018 2.jpg",
+          "topic_key": "cate-blanchett-ai-consent-amicus-2026",
+          "relevance_verified": true,
+          "checked_at": "2026-11-06T08:41:04.997056+09:00"
+        },
+        "commons-163433262-384c5f5f": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Cate_Blanchett_in_2023.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Cate_Blanchett_in_2023.jpg",
+          "path": "assets/commons-163433262-384c5f5f.jpg",
+          "media_type": "image",
+          "credit": "Duk3L1xon / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2023",
+          "description": "Cate Blanchett performing with Sparks at Glastonbury Festival in 2023",
+          "capture_date": "2023-06-23 21:22:29",
+          "title": "File:Cate Blanchett in 2023.jpg",
+          "topic_key": "cate-blanchett-ai-consent-amicus-2026",
+          "relevance_verified": true,
+          "checked_at": "2026-11-06T08:41:04.997120+09:00"
+        },
+        "commons-150112302-53b63089": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/e/e5/NYSE_facade.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:NYSE_facade.jpg",
+          "path": "assets/commons-150112302-53b63089.jpg",
+          "media_type": "image",
+          "credit": "Ryan Schwark / Wikimedia Commons",
+          "license": "CC0",
+          "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "notice": "ARCHIVE PHOTO · 2024",
+          "description": "NYSE facade",
+          "capture_date": "2024-06-14 14:46:39",
+          "title": "File:NYSE facade.jpg",
+          "topic_key": "post-election-ai-stock-reversal-nov5-2026",
+          "relevance_verified": true,
+          "checked_at": "2026-11-06T08:41:05.112424+09:00"
+        },
+        "commons-110229084-53b63089": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/c/cb/Nasdaq_MarketSite_%2851494550508%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Nasdaq_MarketSite_(51494550508).jpg",
+          "path": "assets/commons-110229084-53b63089.jpg",
+          "media_type": "image",
+          "credit": "ajay_suresh / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "ARCHIVE PHOTO · 2021",
+          "description": "Nasdaq MarketSite",
+          "capture_date": "2021-09-19 15:40",
+          "title": "File:Nasdaq MarketSite (51494550508).jpg",
+          "topic_key": "post-election-ai-stock-reversal-nov5-2026",
+          "relevance_verified": true,
+          "checked_at": "2026-11-06T08:41:05.112505+09:00"
+        },
+        "commons-136301712-492d6823": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Sam_Altman_November_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Sam_Altman_November_2022.jpg",
+          "path": "assets/commons-136301712-492d6823.jpg",
+          "media_type": "image",
+          "credit": "Village Global / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2022",
+          "description": "The Grove 2022",
+          "capture_date": "2022-11-17",
+          "title": "File:Sam Altman November 2022.jpg",
+          "topic_key": "openai-community-compact-2026",
+          "relevance_verified": true,
+          "checked_at": "2026-11-06T08:41:05.215794+09:00"
+        },
+        "commons-164150862-492d6823": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/0/06/Sam_Altman_speaking_at_TED.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Sam_Altman_speaking_at_TED.jpg",
+          "path": "assets/commons-164150862-492d6823.jpg",
+          "media_type": "image",
+          "credit": "Steve Jurvetson / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2025",
+          "description": "OpenAI’s user base doubled in just the past few weeks (an accidental disclosure on stage). “10% of the world now uses our systems a lot.”\nReflecting on the life ahead for his newborn: “My kids will never be smarter than AI.”\nReaction to DeepSeek:\n“We had a meeting last night on our open source policy. We are going to do a powerful open-source model near the frontier. We were late to act, but we are going to do really well now.”\nRegarding the accumulated knowledge OpenAI gains from its usage history: “The upload happens bit by bit. It is an extension of yourself, and a companion, and soon will proactively push things to you.”\nHave there been any scary moments? \n“No. There have been moments of awe. And questions of how far this will go. But we are not sitting on a conscious model capable of self-improvement.”\nHow do you define AGI?\n“If you ask 10 OpenAI engineers, you will get 14 different definitions. Whichever you choose, it is clear that we will go way past that. They are points along an unbelievable exponential curve.”\n“Agentic AI is the most interesting and consequential safety problem we have faced. It has much higher stakes. People want to use agents they can trust.”\nWhen aske",
+          "capture_date": "2025-04-11 09:53:19",
+          "title": "File:Sam Altman speaking at TED.jpg",
+          "topic_key": "openai-community-compact-2026",
+          "relevance_verified": true,
+          "checked_at": "2026-11-06T08:41:05.215854+09:00"
+        },
+        "commons-18787356-f3e10da7": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/5/5e/Grimes.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Grimes.jpg",
+          "path": "assets/commons-18787356-f3e10da7.jpg",
+          "media_type": "image",
+          "credit": "Phillip Nguyen / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "ARCHIVE PHOTO · 2011",
+          "description": "Grimes",
+          "capture_date": "2011-10-19 23:57",
+          "title": "File:Grimes.jpg",
+          "topic_key": "grimes-ai-film-casting",
+          "relevance_verified": true,
+          "checked_at": "2026-11-06T08:41:05.350659+09:00"
+        },
+        "commons-65959732-f3e10da7": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Grimes_Governors_Ball_2014_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Grimes_Governors_Ball_2014_01.jpg",
+          "path": "assets/commons-65959732-f3e10da7.jpg",
+          "media_type": "image",
+          "credit": "Jordan Uhl / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "ARCHIVE PHOTO · 2014",
+          "description": "Grimes performing at the Governors Ball Music Festival in New York City, June 2014.",
+          "capture_date": "2014-06-06",
+          "title": "File:Grimes Governors Ball 2014 01.jpg",
+          "topic_key": "grimes-ai-film-casting",
+          "relevance_verified": true,
+          "checked_at": "2026-11-06T08:41:05.350714+09:00"
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-06-cate-blanchett-ai-consent-amicus-2026\": [\"commons-77945754-384c5f5f\", \"commons-163433262-384c5f5f\", \"commons-77945754-384c5f5f\", \"commons-163433262-384c5f5f\", \"commons-77945754-384c5f5f\"], \"2026-11-06-post-election-ai-stock-reversal-nov5-2026\": [\"commons-150112302-53b63089\", \"commons-110229084-53b63089\", \"commons-150112302-53b63089\", \"commons-110229084-53b63089\", \"commons-150112302-53b63089\"], \"2026-11-06-openai-community-compact-2026\": [\"commons-164150862-492d6823\", \"commons-136301712-492d6823\", \"commons-164150862-492d6823\", \"commons-136301712-492d6823\", \"commons-164150862-492d6823\"], \"2026-11-06-grimes-ai-film-casting\": [\"commons-18787356-f3e10da7\", \"commons-65959732-f3e10da7\", \"commons-65959732-f3e10da7\", \"commons-18787356-f3e10da7\", \"commons-65959732-f3e10da7\"]}}",
+      "review_source_urls": [
+        "https://payauthors.com/court/68024915/gov.uscourts.nysd.610699.924.1.pdf",
+        "https://za.investing.com/news/stock-market-news/us-stock-index-futures-steady-as-democrats-seize-congress-4548527",
+        "https://apnews.com/article/afe254c608c3d1fe2ea792812ba9765a",
+        "https://cdn.openai.com/pdf/community-compact.pdf",
+        "https://people.com/grimes-starring-in-ai-generated-movie-gods-don-t-give-gifts-12228154"
+      ],
+      "created_at": "2026-11-06T09:25:56.504627+09:00"
     }
   },
   "publications": [
