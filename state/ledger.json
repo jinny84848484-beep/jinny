@@ -1592,6 +1592,19 @@
       "batch_id": "2026-11-07-extra-01",
       "approval_hash": "4af35367a9575ae75bbae29b5fe975ad7c34df76fbe1e6765513014fc5117331",
       "completed_anchor_day": "2026-11-06"
+    },
+    "42303122623": {
+      "status": "waiting",
+      "identity": {
+        "run_id": "42303122623",
+        "run_attempt": "1",
+        "day": "2026-11-07",
+        "session_id": "lv/YsSXVlf0r1YbxVRX9FDYJSG8FQVN927lQvikhKUk="
+      },
+      "production_date": "2026-11-07",
+      "batch_id": "2026-11-07-extra-01",
+      "approval_hash": "3a0af2f088bcd26e762f7def449ab1e51914a3b04046579317a971e5eca4db28",
+      "completed_anchor_day": "2026-11-06"
     }
   },
   "additional_batches": {
