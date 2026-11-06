@@ -765,7 +765,7 @@
           "completed_at": "2026-11-06T08:41:38.320525+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_3",
       "retry_hold": true,
       "research_failures": [
@@ -1487,6 +1487,21 @@
       "experiment": {
         "hook_type": "specific_question",
         "topic_category": "business"
+      }
+    },
+    {
+      "job_id": "2026-11-06-openai-community-compact-2026",
+      "topic_key": "openai-community-compact-2026",
+      "category": "technology",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "AI 전기요금, 회사가 낸다는 약속의 범위",
+      "video_id": "kIk0-_3sOHk",
+      "url": "https://www.youtube.com/shorts/kIk0-_3sOHk",
+      "at": "2026-11-06T10:04:23.965060+09:00",
+      "experiment": {
+        "hook_type": "specific_question",
+        "topic_category": "technology"
       }
     }
   ]
