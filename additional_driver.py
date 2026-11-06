@@ -17,9 +17,12 @@ def dispatch_context():
     run, attempt, signing_key = staged.run_context()
     a.require(attempt == '1', 'Additional transport cannot rerun an old attempt')
     values = {name: os.environ.get(name, '') for name in
-              ('ADDITIONAL_BATCH_ID', 'ADDITIONAL_PRODUCTION_DATE', 'ADDITIONAL_APPROVAL_HASH',
+              ('ADDITIONAL_BATCH_ID', 'ADDITIONAL_PRODUCTION_DATE', 'ADDITIONAL_ANCHOR_DAY', 'ADDITIONAL_APPROVAL_HASH',
                'ADDITIONAL_APPROVED_HEAD', 'ADDITIONAL_RECOVERY_PUBLIC_KEY')}
     day = values['ADDITIONAL_PRODUCTION_DATE']; batch = values['ADDITIONAL_BATCH_ID']
+    anchor = values['ADDITIONAL_ANCHOR_DAY'] or day
+    a.require(a.dt.date.fromisoformat(anchor).isoformat() == anchor and anchor <= day, 'Invalid dispatch anchor date')
+    values['ADDITIONAL_ANCHOR_DAY'] = anchor
     a.require(day == c.p.now().date().isoformat() and
               re.fullmatch(re.escape(day) + '-extra-[0-9]{2}', batch) is not None,
               'Additional dispatch day or identity invalid')
@@ -31,21 +34,24 @@ def dispatch_context():
     return run, attempt, signing_key, values
 
 
-def register_session(ledger, run, identity, day, batch, approval_hash):
+def register_session(ledger, run, identity, day, batch, approval_hash, *, completed_anchor_day=None):
     """Pure state transformation; caller must CAS before exposing session."""
-    a.require(ledger['days'].get(day, {}).get('status') == 'complete', 'Original day incomplete')
+    anchor = completed_anchor_day or day
+    a.require(a.dt.date.fromisoformat(anchor).isoformat() == anchor and anchor <= day and
+              ledger['days'].get(anchor, {}).get('status') == 'complete', 'Original anchor day incomplete')
     a.require(not any(r.get('status') != 'complete' for r in ledger.get('additional_batches', {}).values()),
               'Unresolved additional production exists')
     sessions = ledger.setdefault('additional_sessions', {})
     a.require(run not in sessions and all(s.get('status') == 'complete' for s in sessions.values()),
               'Unresolved or reused additional transport session')
     sessions[run] = {'status': 'waiting', 'identity': identity, 'production_date': day,
-                     'batch_id': batch, 'approval_hash': approval_hash}
+                     'batch_id': batch, 'approval_hash': approval_hash, 'completed_anchor_day': anchor}
 
 
-def assert_session(ledger, run, identity, day, batch, approval_hash):
+def assert_session(ledger, run, identity, day, batch, approval_hash, *, completed_anchor_day=None):
+    anchor = completed_anchor_day or day
     expected = {'status': 'waiting', 'identity': identity, 'production_date': day,
-                'batch_id': batch, 'approval_hash': approval_hash}
+                'batch_id': batch, 'approval_hash': approval_hash, 'completed_anchor_day': anchor}
     a.require(ledger.get('additional_sessions', {}).get(run) == expected and
               c.p.now().date().isoformat() == day, 'Additional transport session changed')
 
@@ -63,7 +69,7 @@ def execute():
         root = c.p.ROOT / 'runs' / day / 'additional' / batch
         stage = 'session_reservation'
         ledger, sha = c.journal_get()
-        register_session(ledger, run, identity, day, batch, approval_hash)
+        register_session(ledger, run, identity, day, batch, approval_hash, completed_anchor_day=values['ADDITIONAL_ANCHOR_DAY'])
         c.journal_put(ledger, sha)
         path = 'state/staging/additional-' + run + '-1.json'
         print('Additional public session: ' + json.dumps(receiver.announcement, sort_keys=True), flush=True)
@@ -77,12 +83,13 @@ def execute():
             stage = 'decrypt'
             payload = at.unwrap_payload(receiver.receive(incoming[0]))
             packet = payload['packet']; approval = payload['approval']
-            a.require(packet.get('production_date') == day and packet.get('batch_id') == batch,
+            a.require(packet.get('production_date') == day and packet.get('batch_id') == batch and
+                      packet.get('completed_anchor_day', day) == values['ADDITIONAL_ANCHOR_DAY'],
                       'Additional input identity mismatch')
             a.require(a.digest(approval) == approval_hash, 'Additional approval hash mismatch')
             stage = 'input_validation'
             ledger, sha = c.journal_get()
-            assert_session(ledger, run, identity, day, batch, approval_hash)
+            assert_session(ledger, run, identity, day, batch, approval_hash, completed_anchor_day=values['ADDITIONAL_ANCHOR_DAY'])
             a.validate(packet, approval, approval_hash, ledger, runtime.config(), day)
             runtime.verified_tts_terms = payload['verified_tts_terms']
             runtime.bind_authorization(approval, packet)

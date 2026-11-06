@@ -43,6 +43,17 @@ def date_of(value):
     return stamp.astimezone(dt.timezone(dt.timedelta(hours=9))).date().isoformat()
 
 
+def publication_may_need_day_accounting(publication, day):
+    if publication.get('at'):
+        return date_of(publication['at']) == day
+    # Bootstrap receipts record confirmation, not exact upload time. Confirmation
+    # before the actual day proves it was already published earlier. Otherwise
+    # conservatively require accounting; never invent a publication timestamp.
+    if publication.get('confirmed_at'):
+        return date_of(publication['confirmed_at']) >= day
+    return True
+
+
 def historical_identity(ledger):
     # The audit binds all legacy history; new batches have their own reservations.
     return digest({'days': ledger['days'], 'publications': [
@@ -64,9 +75,15 @@ def validate(packet, approval, trusted_approval_hash, ledger, config, today):
     require(job.get('id', '').startswith(batch + '-') and
             re.fullmatch('[a-z0-9][a-z0-9-]{2,90}', job['id']) is not None,
             'Invalid batch job identity')
-    require(ledger['days'].get(day, {}).get('status') == 'complete',
+    anchor = packet.get('completed_anchor_day', day)
+    require(dt.date.fromisoformat(anchor).isoformat() == anchor and anchor <= day,
+            'Completed anchor date invalid or in future')
+    require(ledger['days'].get(anchor, {}).get('status') == 'complete',
             'Original daily batch is not complete')
-    original_jobs = ledger['days'][day].get('jobs', [])
+    if anchor != day:
+        require(approval.get('completed_anchor') == {'day': anchor, 'record_hash': digest(ledger['days'][anchor])},
+                'Explicit immutable completed anchor approval required')
+    original_jobs = ledger['days'][anchor].get('jobs', [])
     require(len(original_jobs) == 4 and sorted(j.get('channel') for j in original_jobs) ==
             ['korean', 'korean', 'ojirap', 'ojirap'] and len({j['id'] for j in original_jobs}) == 4,
             'Original four-job daily batch not established')
@@ -132,7 +149,7 @@ def validate(packet, approval, trusted_approval_hash, ledger, config, today):
     ids = {p.get('job_id') for p in ledger['publications']}
     topics = {p.get('topic_key', '').lower() for p in ledger['publications'][-40:]}
     for pub in ledger['publications']:
-        if date_of(pub['at']) == day:
+        if publication_may_need_day_accounting(pub, day):
             topics.add(pub.get('topic_key', '').lower())
     for record in records:
         ids.update(j['id'] for j in record.get('jobs', []))
@@ -142,6 +159,8 @@ def validate(packet, approval, trusted_approval_hash, ledger, config, today):
             topics.update(j.get('topic_key', '').lower() for j in record.get('jobs', []))
     require(job['id'] not in ids and not set(aliases).intersection(topics), 'Duplicate job or event')
     audit = approval.get('prior_tts_audit', {})
+    if anchor != day:
+        require(audit.get('scope') == 'repository_pipeline', 'Actual-day repository usage audit scope required')
     require(audit.get('production_date') == day and
             audit.get('historical_identity') == historical_identity(ledger) and
             audit.get('includes_all_attempts_and_uncertain_submissions') is True,
@@ -156,7 +175,7 @@ def validate(packet, approval, trusted_approval_hash, ledger, config, today):
     require(len({e['attempt_id'] for e in entries}) == len(entries), 'Duplicate audited attempt')
     accounted = {e['job_id'] for e in entries}
     expected = {p['job_id'] for p in ledger['publications']
-                if date_of(p['at']) == day and not p.get('additional_batch_id')}
+                if publication_may_need_day_accounting(p, day) and not p.get('additional_batch_id')}
     # Include potentially billed legacy jobs even if upload never completed.
     for record_day, record in ledger['days'].items():
         if record_day == day:
@@ -200,7 +219,7 @@ def run(packet, approval, trusted_approval_hash, runtime):
     original_days = copy.deepcopy(ledger['days'])
     original_publications = copy.deepcopy(ledger['publications'])
     batch = packet['batch_id']; day = packet['production_date']; job = copy.deepcopy(packet['job'])
-    record = {'production_date': day, 'job_id': job['id'], 'packet_hash': digest(packet),
+    record = {'production_date': day, 'completed_anchor_day': packet.get('completed_anchor_day', day), 'job_id': job['id'], 'packet_hash': digest(packet),
               'approval_hash': trusted_approval_hash, 'event_keys': packet['event_keys'],
               'tts_reservation': plan['tts_characters'], 'status': 'reserved',
               'checkpoints': {}, 'run_id': runtime.run_id(), 'created_at': runtime.now()}

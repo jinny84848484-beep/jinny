@@ -6,6 +6,10 @@ on:
         description: Approved Korea production date (YYYY-MM-DD)
         type: string
         required: true
+      completed_anchor_day:
+        description: Completed original daily batch date (defaults to production date)
+        type: string
+        required: false
       batch_id:
         description: Approved immutable YYYY-MM-DD-extra-NN identity
         type: string
@@ -64,6 +68,7 @@ jobs:
           IMAGEIO_FFMPEG_EXE: /usr/bin/ffmpeg
           STAGED_SENDER_PUBLIC_KEY: ${{ inputs.staged_sender_public_key }}
           ADDITIONAL_PRODUCTION_DATE: ${{ inputs.production_date }}
+          ADDITIONAL_ANCHOR_DAY: ${{ inputs.completed_anchor_day }}
           ADDITIONAL_BATCH_ID: ${{ inputs.batch_id }}
           ADDITIONAL_APPROVAL_HASH: ${{ inputs.approval_hash }}
           ADDITIONAL_APPROVED_HEAD: ${{ inputs.expected_head }}

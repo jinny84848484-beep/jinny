@@ -613,6 +613,7 @@ def produce():
     if record.get('retry_hold') or record.get('status')=='research_completed_unusable':
         raise RuntimeError('Completed production check is on hold; inspect the saved diagnostic before resuming')
     if record.get('status') in {'research_submitted','draft_submitted','narration_correction_submitted','editorial_review_submitted','tts_submitted','rendered','upload_submitted','staged_waiting','staged_review_submitted'} or any(v.get('status')=='submitted' for v in record.get('checkpoints',{}).values()):raise RuntimeError('Interrupted external request: reconcile journal before retrying')
+    assert_no_unresolved_additional(ledger)
     preflight()
     collect_metrics(ledger)
     if not record.get('jobs'):
@@ -748,14 +749,45 @@ Return ONLY JSON with exactly status, issues, selection. status is PASS or FAIL.
     return sha
 
 
+def assert_no_unresolved_additional(ledger):
+    if any(record.get('status')!='complete' for record in ledger.get('additional_batches',{}).values()):
+        raise RuntimeError('Unresolved additional production requires reconciliation before scheduled production')
+
+
+def assert_additional_day_budget(ledger, day, jobs):
+    """Account for extra production before the normal scheduled four-job batch.
+
+    Sum each planned regular job once plus durable additional reservations. Do
+    not add the local per-run usage journal again or release failed reservations.
+    With no same-day additional record, the original path is unchanged.
+    """
+    extras=[r for r in ledger.get('additional_batches',{}).values() if r.get('production_date')==day]
+    if not extras:return
+    reserved=0
+    for record in extras:
+        value=record.get('tts_reservation')
+        if type(value) is not int or value<=0:raise RuntimeError('Additional daily narration reservation is unknown')
+        reserved+=value
+    config=p.cfg()
+    planned=0
+    for job in jobs:
+        delivery=config['channels'][job['channel']].get('delivery','')
+        text=' '.join(scene['narration'].strip() for scene in job['scenes'])
+        planned+=len(('['+delivery+'] ' if delivery else '')+text)
+    if reserved+planned>config['daily_character_cap']:
+        raise RuntimeError('Aggregate daily narration cap exceeded with additional production')
+
+
 def publish_reviewed(ledger,sha,day,*,slots=None,stage_callback=None):
     def stage(name):
         if stage_callback is not None:stage_callback(name)
     stage('publish_validation')
+    assert_no_unresolved_additional(ledger)
     record=ledger['days'][day]
     jobs=record['jobs']
     library=p.read(p.ROOT/'assets/media-library.json',{});library.update(record.get('media',{}));p.write(p.ROOT/'assets/media-library.json',library)
     validate_batch(jobs,day,set(),slots=slots)
+    assert_additional_day_budget(ledger,day,jobs)
     for job in jobs:
         for scene in job['scenes']:
             media=library.get(scene.get('media'),{})

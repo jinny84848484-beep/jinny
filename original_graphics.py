@@ -6,6 +6,7 @@ binds regenerated cards, while a pinned editorial hash rejects foreign stories.
 """
 from __future__ import annotations
 import argparse
+import datetime as dt
 import hashlib
 import io
 import json
@@ -27,7 +28,9 @@ def digest(value):
 
 
 def _check_job(job, approved_story_hash, production_date):
-    if production_date != DATE or not job.get('id', '').startswith(DATE):
+    if (dt.date.fromisoformat(production_date).isoformat() != production_date
+            or not DATE <= production_date <= (dt.date.fromisoformat(DATE) + dt.timedelta(days=1)).isoformat()
+            or not job.get('id', '').startswith(production_date + '-')):
         raise ValueError('Dated approved story required; obtain a new review for another date')
     if digest(job) != approved_story_hash:
         raise ValueError('Approved job content hash mismatch')
@@ -59,7 +62,7 @@ def _check_spec(graphics_spec):
                 raise ValueError('Invalid graphic text, length or control character')
 
 
-def _image(index, graphics_spec):
+def _image(index, graphics_spec, production_date):
     _check_spec(graphics_spec)
     cards = graphics_spec['cards']
     for font_path, expected in FONT_HASHES.items():
@@ -78,7 +81,7 @@ def _image(index, graphics_spec):
     category, headline, rows, footer = cards[index]
     draw.rectangle((80, 125, 88, 225), fill='#87C8CA')
     label(category, 112, 123, 32, '#87C8CA', True)
-    label('2026.11.06 저녁 보도 기준', 112, 178, 28, '#C3D0DC')
+    label('제작 ' + production_date.replace('-', '.') + ' · 출처 시점은 본문 참고', 112, 178, 26, '#C3D0DC')
     label(headline, 80, 290, 58, bold=True)
     draw.line((80, 400, 970, 400), fill='#466074', width=2)
     for n, row in enumerate(rows):
@@ -99,7 +102,7 @@ def build_original_graphics(job, output_dir, *, approved_story_hash, production_
     root.mkdir(parents=True, exist_ok=True)
     cards = []
     for i in range(5):
-        data, labels = _image(i, graphics_spec)
+        data, labels = _image(i, graphics_spec, production_date)
         name = f'original-graphic-{i+1:02d}.png'
         target = root / name
         if target.is_symlink():
@@ -132,7 +135,7 @@ def validate_original_graphics(job, manifest, output_dir, *, approved_story_hash
         raise ValueError('Invalid original graphics manifest')
     root = Path(output_dir).resolve()
     for i, card in enumerate(manifest['cards']):
-        expected, labels = _image(i, graphics_spec)
+        expected, labels = _image(i, graphics_spec, production_date)
         name = f'original-graphic-{i+1:02d}.png'
         path = root / name
         sha = hashlib.sha256(expected).hexdigest()

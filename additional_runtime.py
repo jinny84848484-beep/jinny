@@ -191,7 +191,7 @@ class Runtime:
     def review_request(self, packet, model, output_tokens, tool_calls):
         allowed = c.REVIEW_ISSUES - {'review_contract', 'english_hook'}
         instructions = '''Independently audit ONLY this ONE Korean personal-commentary Short, not a batch.
-Browse the actual cited source articles and inspect all attached image bytes. Check material factual claims,
+Browse the actual cited source articles and inspect all attached image bytes. Check current material developments as of the supplied production_date, including warrant status. A later production date does not turn older reporting into fresh evidence. Fail rather than rewrite or publish if later developments make the approved script or graphic labels misleading. Check material factual claims,
 source independence, natural Korean, distinctions between allegation/arrest/warrant/conviction, privacy,
 and exact pictured-subject relevance. Do not infer guilt or invent confirmation. Verify reusable image
 licenses and archive notices. Generic stock, unrelated buildings, symbolic images, or invented event footage
