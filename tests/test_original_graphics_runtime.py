@@ -29,6 +29,8 @@ class GraphicsRuntimeIntegration(unittest.TestCase):
                 packet = {'production_date': '2026-11-06', 'batch_id': batch, 'job': job,
                           'graphics_spec': spec, 'graphics_manifest': manifest, 'media_policy': 'original_graphics',
                           'media': ar.Runtime.graphics_media(job, batch, manifest)}
+                import base64
+                packet['graphics_files'] = {card['file']: base64.b64encode((root/'assets'/batch/card['file']).read_bytes()).decode() for card in manifest['cards']}
                 runtime = ar.Runtime('a' * 40)
                 runtime.bind_authorization({'config_hash': a.digest(runtime.config())}, packet)
                 # The compositor has separate real-render smoke coverage; no FFmpeg needed here.

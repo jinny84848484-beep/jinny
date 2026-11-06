@@ -120,12 +120,21 @@ class Runtime:
     def materialize_media(self, packet):
         if packet.get('media_policy') == 'original_graphics':
             import original_graphics as graphics
-            root = c.p.ROOT / 'assets' / packet['batch_id']
-            manifest = graphics.build_original_graphics(packet['job'], root,
-                approved_story_hash=a.digest(packet['job']), production_date=packet['production_date'],
-                graphics_spec=packet['graphics_spec'])
-            a.require(manifest == packet.get('graphics_manifest'), 'Regenerated graphic manifest changed')
-            self.graphics_review = graphics.render_graphics_review_frames(packet['job'], manifest, root, graphics_spec=packet['graphics_spec'])
+            root = (c.p.ROOT / 'assets' / packet['batch_id']).resolve()
+            a.require(root.is_relative_to(c.p.ROOT.resolve()), 'Unsafe original graphic path')
+            manifest = packet.get('graphics_manifest', {})
+            a.require(packet == self.approved_packet, 'Unapproved graphic materialization')
+            try:
+                graphics.validate_approved_graphics(packet['job'], manifest, root,
+                    approved_story_hash=a.digest(packet['job']), production_date=packet['production_date'],
+                    graphics_spec=packet['graphics_spec'], files=packet.get('graphics_files'))
+                a.require(isinstance(packet.get('graphics_files'), dict), 'Approved PNG transport required')
+            except Exception:
+                raise ValueError('graphics_bytes_invalid') from None
+            try:
+                self.graphics_review = graphics.render_graphics_review_frames(packet['job'], manifest, root, graphics_spec=packet['graphics_spec'])
+            except Exception:
+                raise ValueError('graphics_preview_failed') from None
             return
         self.validate_media(packet, require_local=False)
         import urllib.request
@@ -173,7 +182,7 @@ class Runtime:
         root = (c.p.ROOT / 'assets' / packet['batch_id']).resolve()
         a.require(root.is_relative_to(c.p.ROOT.resolve()), 'Unsafe original graphic path')
         if require_local:
-            graphics.validate_original_graphics(original, manifest, root,
+            graphics.validate_approved_graphics(original, manifest, root,
                 approved_story_hash=a.digest(original), production_date=packet['production_date'],
                 graphics_spec=self.approved_packet['graphics_spec'])
 

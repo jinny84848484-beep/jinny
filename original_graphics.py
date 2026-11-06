@@ -162,7 +162,7 @@ def render_graphics_review_frames(job, manifest, output_dir, *, graphics_spec):
     import subprocess
     import media_renderer as renderer
     root = Path(output_dir).resolve()
-    validate_original_graphics(job, manifest, root, approved_story_hash=digest(job), production_date=job['id'][:10], graphics_spec=graphics_spec)
+    validate_approved_graphics(job, manifest, root, approved_story_hash=digest(job), production_date=job['id'][:10], graphics_spec=graphics_spec)
     ch = renderer.p.cfg()['channels'][job['channel']]
     frames = []
     for i, card in enumerate(manifest['cards']):
@@ -200,3 +200,79 @@ if __name__ == '__main__':
     manifest = generate_original_graphics(job, args.output_dir, graphics_spec=graphics_spec)
     validate_original_graphics(job, manifest, args.output_dir, approved_story_hash=digest(job), production_date=job['id'][:10], graphics_spec=graphics_spec)
     print(json.dumps({'manifest': str(Path(args.output_dir)/'graphics-manifest.json'), 'cards': len(manifest['cards']), 'validated': True}))
+
+
+def validate_approved_graphics(job, manifest, output_dir, *, approved_story_hash,
+                               production_date, graphics_spec, files=None):
+    """Check exact approval-bound PNGs without platform-dependent regeneration.
+
+    Caller must independently bind this manifest/spec/job to dispatch approval.
+    With files supplied, validate every byte before creating any local artwork.
+    """
+    import base64
+    _check_job(job, approved_story_hash, production_date)
+    _check_spec(graphics_spec)
+    root = Path(output_dir).resolve()
+    if (manifest.get('policy') != 'original_graphics' or manifest.get('version') != 1
+            or manifest.get('job_content_hash') != approved_story_hash
+            or manifest.get('graphics_spec_hash') != digest(graphics_spec)
+            or manifest.get('production_date') != production_date
+            or manifest.get('editorial_hash') != EDITORIAL_HASH
+            or manifest.get('dimensions') != list(SIZE)
+            or manifest.get('safe_bounds') != list(SAFE)
+            or not isinstance(manifest.get('cards'), list) or len(manifest['cards']) != 5):
+        raise ValueError('Invalid approved graphics manifest')
+    names = [f'original-graphic-{i+1:02d}.png' for i in range(5)]
+    if files is not None and (not isinstance(files, dict) or set(files) != set(names)):
+        raise ValueError('Invalid approved graphics files')
+    pending = []
+    total = 0
+    for i, (name, card) in enumerate(zip(names, manifest['cards'])):
+        category, headline, rows, footer = graphics_spec['cards'][i]
+        expected_text = [category, '제작 ' + production_date.replace('-', '.') + ' · 출처 시점은 본문 참고',
+                         headline, *rows, footer, NOTICE, f'{i+1} / 5']
+        if (set(card) != {'scene_index','path','file','sha256','content_hash','notice','classification','labels'}
+                or card['scene_index'] != i or card['path'] != name or card['file'] != name
+                or card['content_hash'] != approved_story_hash or card['notice'] != NOTICE
+                or card['classification'] != category or not isinstance(card['labels'], list)
+                or [label.get('text') for label in card['labels']] != expected_text):
+            raise ValueError('Invalid approved graphic binding')
+        for label in card['labels']:
+            box = label.get('bbox')
+            if (set(label) != {'text','bbox','font_size'} or not isinstance(box,list) or len(box)!=4
+                    or any(type(n) is not int for n in box)
+                    or not SAFE[0] <= box[0] < box[2] <= SAFE[2]
+                    or not SAFE[1] <= box[1] < box[3] <= SAFE[3]
+                    or type(label['font_size']) is not int or not 26 <= label['font_size'] <= 58):
+                raise ValueError('Invalid approved graphic layout')
+        path = root / name
+        if path.is_symlink():
+            raise ValueError('Symlink graphic target rejected')
+        if files is not None:
+            encoded = files[name]
+            if not isinstance(encoded,str) or len(encoded) > 262144:
+                raise ValueError('Graphic transport size exceeded')
+            raw = base64.b64decode(encoded, validate=True)
+        else:
+            if not path.is_file() or path.stat().st_size > 196608:
+                raise ValueError('Missing or oversized approved graphic')
+            raw = path.read_bytes()
+        total += len(raw)
+        if not 0 < len(raw) <= 196608 or total > 600000 or hashlib.sha256(raw).hexdigest() != card['sha256']:
+            raise ValueError('Approved graphic bytes differ')
+        with Image.open(io.BytesIO(raw)) as im:
+            if im.format != 'PNG' or im.size != SIZE or im.mode != 'RGB' or getattr(im,'n_frames',1) != 1:
+                raise ValueError('Invalid approved PNG format')
+            im.verify()
+        pending.append((path, raw))
+    if files is not None:
+        root.mkdir(parents=True,exist_ok=True)
+        import os
+        for path, raw in pending:
+            if path.exists():
+                if path.read_bytes() != raw:
+                    raise ValueError('Existing approved graphic differs')
+            else:
+                fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
+                with os.fdopen(fd,'wb') as output: output.write(raw)
+    return True

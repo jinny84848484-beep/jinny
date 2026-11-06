@@ -28,8 +28,8 @@ def b64(raw):
     return base64.b64encode(raw).decode('ascii')
 
 
-def unb64(value, size=None):
-    if not isinstance(value, str) or len(value) > 2 * MAX_BYTES:
+def unb64(value, size=None, *, max_bytes=MAX_BYTES):
+    if not isinstance(value, str) or len(value) > 2 * max_bytes:
         raise ValueError('Invalid staged envelope')
     raw = base64.b64decode(value, validate=True)
     if size is not None and len(raw) != size:
@@ -53,6 +53,7 @@ class Receiver:
     deadline: float
     _private: object = field(repr=False)
     _consumed: bool = field(default=False, repr=False)
+    max_bytes: int = MAX_BYTES
 
     def close(self):
         # Releasing Python references is not a guarantee of secure memory erasure.
@@ -64,7 +65,7 @@ class Receiver:
         available = not self._consumed and time.monotonic() <= self.deadline
         self.close()  # Even invalid input consumes the session. No automatic retries.
         try:
-            if not available or not isinstance(envelope_bytes, bytes) or len(envelope_bytes) > 2 * MAX_BYTES:
+            if not available or not isinstance(envelope_bytes, bytes) or len(envelope_bytes) > 2 * self.max_bytes:
                 raise ValueError()
             envelope = json.loads(envelope_bytes)
             if not isinstance(envelope, dict) or set(envelope) != {'session', 'sender_key', 'nonce', 'ciphertext', 'signature'}:
@@ -75,8 +76,8 @@ class Receiver:
             Ed25519PublicKey.from_public_bytes(unb64(self.announcement['signing_key'], 32)).verify(signature, canonical(envelope))
             aad = canonical({'session': self.announcement, 'sender_key': envelope['sender_key']})
             key = derive(private, envelope['sender_key'], self.announcement)
-            plaintext = AESGCM(key).decrypt(unb64(envelope['nonce'], 12), unb64(envelope['ciphertext']), aad)
-            if len(plaintext) > MAX_BYTES:
+            plaintext = AESGCM(key).decrypt(unb64(envelope['nonce'], 12), unb64(envelope['ciphertext'], max_bytes=self.max_bytes), aad)
+            if len(plaintext) > self.max_bytes:
                 raise ValueError()
             batch = json.loads(plaintext)
             if not isinstance(batch, dict) or set(batch) != {'jobs'} or not isinstance(batch['jobs'], list):
@@ -87,26 +88,30 @@ class Receiver:
             raise ValueError('Staged input rejected; session closed') from None
 
 
-def create_receiver(repository, run_id, run_attempt, day, signing_key, ttl=600):
+def create_receiver(repository, run_id, run_attempt, day, signing_key, ttl=600, *, max_bytes=MAX_BYTES):
     if not all(isinstance(x, str) and x for x in (repository, run_id, run_attempt, day)):
         raise ValueError('Invalid staging context')
     if not 1 <= ttl <= 900:
         raise ValueError('Invalid staging lifetime')
+    if type(max_bytes) is not int or not MAX_BYTES <= max_bytes <= 1048576:
+        raise ValueError('Invalid transport limit')
     Ed25519PublicKey.from_public_bytes(unb64(signing_key, 32))
     key = X25519PrivateKey.generate()
     announcement = {'version': 1, 'repository': repository, 'run_id': run_id,
                     'run_attempt': run_attempt, 'day': day,
                     'session_id': b64(os.urandom(32)), 'receiver_key': public(key), 'signing_key': signing_key}
-    return Receiver(announcement, time.monotonic() + ttl, key)
+    return Receiver(announcement, time.monotonic() + ttl, key, max_bytes=max_bytes)
 
 
-def seal_batch(announcement, batch, signing_private):
+def seal_batch(announcement, batch, signing_private, *, max_bytes=MAX_BYTES):
+    if type(max_bytes) is not int or not MAX_BYTES <= max_bytes <= 1048576:
+        raise ValueError("Invalid transport limit")
     if not isinstance(batch, dict) or set(batch) != {'jobs'} or not isinstance(batch['jobs'], list):
         raise ValueError('Invalid staged batch')
     if public(signing_private) != announcement['signing_key']:
         raise ValueError('Wrong staged signing identity')
     plaintext = canonical(batch)
-    if len(plaintext) > MAX_BYTES:
+    if len(plaintext) > max_bytes:
         raise ValueError('Staged batch too large')
     sender = X25519PrivateKey.generate()
     sender_key = public(sender)

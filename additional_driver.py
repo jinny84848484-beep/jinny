@@ -34,6 +34,63 @@ def dispatch_context():
     return run, attempt, signing_key, values
 
 
+def verified_no_effects_session(record):
+    """Validate a preserved, independently reconciled pre-production terminal record."""
+    if not isinstance(record, dict) or record.get('status') != 'resolved_no_effects':
+        return False
+    prior = copy.deepcopy(record)
+    resolution = prior.pop('resolution', None)
+    prior['status'] = 'waiting'
+    if not isinstance(resolution, dict) or set(resolution) != {'previous_session_hash', 'proof', 'proof_hash'}:
+        return False
+    proof = resolution['proof']
+    if not isinstance(proof, dict) or set(proof) != {'run_id','run_attempt','head_sha','conclusion','stage',
+            'session_hash','recovery_zip_sha256','recovery_entries','ledger_sha','checked_at'}:
+        return False
+    try:
+        checked = a.dt.datetime.fromisoformat(proof['checked_at'].replace('Z', '+00:00'))
+        if checked.tzinfo is None or checked.utcoffset() is None:
+            return False
+    except (ValueError, TypeError, AttributeError):
+        return False
+    if not isinstance(proof['run_id'], str) or re.fullmatch('[0-9]+', proof['run_id']) is None:
+        return False
+    if not isinstance(prior.get('identity'), dict) or not {'run_id','run_attempt'} <= set(prior['identity']):
+        return False
+    return (resolution['previous_session_hash'] == a.digest(prior) == proof['session_hash']
+            and resolution['proof_hash'] == a.digest(proof)
+            and proof['run_id'] == prior['identity']['run_id']
+            and proof['run_attempt'] == prior['identity']['run_attempt'] == '1'
+            and proof['conclusion'] == 'failure' and proof['stage'] == 'materialize_assets'
+            and proof['recovery_entries'] == []
+            and all(isinstance(proof[k], str) and re.fullmatch('[0-9a-f]{40}', proof[k])
+                    for k in ('head_sha','ledger_sha'))
+            and isinstance(proof['recovery_zip_sha256'], str)
+            and re.fullmatch('[0-9a-f]{64}', proof['recovery_zip_sha256']) is not None
+            and isinstance(proof['checked_at'], str) and bool(proof['checked_at']))
+
+
+def reconcile_preproduction_session(ledger, run, proof, *, expected_session_hash, expected_proof_hash):
+    """Pure transformation after operator independently verifies GitHub/run/recovery evidence.
+
+    Does not fetch evidence, clear production holds, or certify anything itself.
+    Caller must CAS against proof.ledger_sha and inspect exact deployed code/head.
+    """
+    record = ledger.get('additional_sessions', {}).get(run)
+    a.require(isinstance(record, dict) and record.get('status') == 'waiting'
+              and a.digest(record) == expected_session_hash
+              and a.digest(proof) == expected_proof_hash, 'Reconciliation evidence mismatch')
+    a.require(not ledger.get('additional_batches'), 'Production records prohibit session-only reconciliation')
+    candidate = copy.deepcopy(record)
+    candidate['status'] = 'resolved_no_effects'
+    candidate['resolution'] = {'previous_session_hash': expected_session_hash,
+                               'proof': copy.deepcopy(proof), 'proof_hash': expected_proof_hash}
+    a.require(verified_no_effects_session(candidate), 'Unverified preproduction terminal evidence')
+    a.require(proof['run_id'] == run, 'Reconciliation run mismatch')
+    ledger['additional_sessions'][run] = candidate
+    return candidate
+
+
 def register_session(ledger, run, identity, day, batch, approval_hash, *, completed_anchor_day=None):
     """Pure state transformation; caller must CAS before exposing session."""
     anchor = completed_anchor_day or day
@@ -42,7 +99,7 @@ def register_session(ledger, run, identity, day, batch, approval_hash, *, comple
     a.require(not any(r.get('status') != 'complete' for r in ledger.get('additional_batches', {}).values()),
               'Unresolved additional production exists')
     sessions = ledger.setdefault('additional_sessions', {})
-    a.require(run not in sessions and all(s.get('status') == 'complete' for s in sessions.values()),
+    a.require(run not in sessions and all(s.get('status') == 'complete' or verified_no_effects_session(s) for s in sessions.values()),
               'Unresolved or reused additional transport session')
     sessions[run] = {'status': 'waiting', 'identity': identity, 'production_date': day,
                      'batch_id': batch, 'approval_hash': approval_hash, 'completed_anchor_day': anchor}
@@ -64,7 +121,7 @@ def execute():
         approval_hash = values['ADDITIONAL_APPROVAL_HASH']
         runtime = ar.Runtime(values['ADDITIONAL_APPROVED_HEAD'])
         runtime.assert_context()
-        receiver = t.create_receiver(ar.REPOSITORY, run, attempt, day, signing_key, ttl=600)
+        receiver = t.create_receiver(ar.REPOSITORY, run, attempt, day, signing_key, ttl=600, max_bytes=524288)
         identity = staged.session_record(receiver.announcement)
         root = c.p.ROOT / 'runs' / day / 'additional' / batch
         stage = 'session_reservation'
@@ -76,7 +133,7 @@ def execute():
         print('Additional ciphertext path: ' + path, flush=True)
         stage = 'await_envelope'
         while time.monotonic() <= receiver.deadline:
-            incoming = staged.fetch_envelope(path)
+            incoming = staged.fetch_envelope(path, max_bytes=524288)
             if incoming is None:
                 time.sleep(15)
                 continue
@@ -112,7 +169,9 @@ def execute():
             print('Published additional Short: ' + result['url'], flush=True)
             return result
         raise ValueError('Additional encrypted input expired')
-    except Exception:
+    except Exception as exc:
+        code = str(exc) if type(exc) is ValueError and str(exc) in {"graphics_bytes_invalid", "graphics_preview_failed"} else "unclassified"
+        print("Additional fixed failure code=" + code, flush=True)
         # Never echo parser/provider strings, scripts, credentials or account terms.
         print('Additional production stopped at stage=' + stage + '; reconcile saved state.', flush=True)
         raise RuntimeError('Additional production stopped; no automatic retry') from None

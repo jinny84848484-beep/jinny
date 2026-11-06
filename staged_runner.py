@@ -135,7 +135,9 @@ def validate_staged(jobs, day, ledger):
     return slots
 
 
-def fetch_envelope(path):
+def fetch_envelope(path, *, max_bytes=MAX_BYTES):
+    if type(max_bytes) is not int or not MAX_BYTES <= max_bytes <= 1048576:
+        raise ValueError("Invalid transport limit")
     # The repo and path are fixed by trusted run context, never supplied content.
     url = 'https://api.github.com/repos/' + REPOSITORY + '/contents/' + path + '?ref=main'
     try:
@@ -146,10 +148,10 @@ def fetch_envelope(path):
         raise RuntimeError('Staged envelope read failed') from None
     try:
         if (result.get('type') != 'file' or result.get('encoding') != 'base64'
-                or not isinstance(result.get('size'), int) or not 0 < result['size'] <= 2 * MAX_BYTES):
+                or not isinstance(result.get('size'), int) or not 0 < result['size'] <= 2 * max_bytes):
             raise ValueError()
         data = base64.b64decode(result['content'], validate=False)
-        if len(data) != result['size'] or len(data) > 2 * MAX_BYTES:
+        if len(data) != result['size'] or len(data) > 2 * max_bytes:
             raise ValueError()
         # Pin exact bytes to the immutable Git blob identity, not an arbitrary URL.
         blob = hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()

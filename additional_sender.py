@@ -46,7 +46,7 @@ def seal_one_run(announcement, payload, key_file, *, repository, run_id, product
               verified['approval'].get('packet_hash') == a.digest(verified['packet']) and
               verified['packet'].get('production_date') == production_date,
               'Sender input not bound to dispatch approval')
-    return t.seal_batch(announcement, payload, signing)
+    return t.seal_batch(announcement, payload, signing, max_bytes=524288)
 
 
 def prepare_graphics_packet(job, graphics_spec, batch_id, output_dir, config, *, completed_anchor_day=None):
@@ -65,6 +65,7 @@ def prepare_graphics_packet(job, graphics_spec, batch_id, output_dir, config, *,
     return {'production_date': day, 'completed_anchor_day': completed_anchor_day or day, 'batch_id': batch_id, 'job': candidate,
             'event_keys': [candidate['topic_key']], 'media_policy': 'original_graphics',
             'graphics_spec': copy.deepcopy(graphics_spec), 'graphics_manifest': manifest,
+            'graphics_files': {card['file']: t.b64((Path(output_dir) / card['file']).read_bytes()) for card in manifest['cards']},
             'media': Runtime.graphics_media(candidate, batch_id, manifest)}
 
 
