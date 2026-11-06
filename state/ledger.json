@@ -765,7 +765,7 @@
           "completed_at": "2026-11-06T08:41:38.320525+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_3",
       "retry_hold": true,
       "research_failures": [
@@ -1502,6 +1502,21 @@
       "experiment": {
         "hook_type": "specific_question",
         "topic_category": "technology"
+      }
+    },
+    {
+      "job_id": "2026-11-06-grimes-ai-film-casting",
+      "topic_key": "grimes-ai-film-casting",
+      "category": "film",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "An AI Face, A Human Choice",
+      "video_id": "cpl6FyGuNB8",
+      "url": "https://www.youtube.com/shorts/cpl6FyGuNB8",
+      "at": "2026-11-06T10:07:10.908793+09:00",
+      "experiment": {
+        "hook_type": "specific_question",
+        "topic_category": "film"
       }
     }
   ]
