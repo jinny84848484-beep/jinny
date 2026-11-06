@@ -26,6 +26,10 @@ on:
         description: One-run Ed25519 sender public key
         type: string
         required: true
+      continuation_record_hash:
+        description: Optional exact prior paid FAIL record hash for approved one-shot continuation
+        type: string
+        required: false
       recovery_public_key:
         description: One-run X25519 encrypted-artifact recipient public key
         type: string
@@ -73,6 +77,7 @@ jobs:
           ADDITIONAL_APPROVAL_HASH: ${{ inputs.approval_hash }}
           ADDITIONAL_APPROVED_HEAD: ${{ inputs.expected_head }}
           ADDITIONAL_RECOVERY_PUBLIC_KEY: ${{ inputs.recovery_public_key }}
+          ADDITIONAL_CONTINUATION_RECORD_HASH: ${{ inputs.continuation_record_hash }}
           ADDITIONAL_CONCURRENCY_GROUP: shorts-production
         run: python additional_driver.py
       - name: Save only encrypted recovery artifact

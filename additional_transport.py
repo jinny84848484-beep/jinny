@@ -25,21 +25,27 @@ def validate_recovery_key(recipient_public_key):
              {'purpose': 'additional-recovery-key-validation-v1'})
 
 
-def wrap_payload(packet, approval, verified_tts_terms=None):
-    return {'jobs': [{'additional_version': 1, 'packet': packet, 'approval': approval,
-                      'verified_tts_terms': verified_tts_terms}]}
+def wrap_payload(packet, approval, verified_tts_terms=None, *, continuation_evidence=None):
+    payload = {'additional_version': 1, 'packet': packet, 'approval': approval,
+               'verified_tts_terms': verified_tts_terms}
+    if continuation_evidence is not None:
+        payload['continuation_evidence'] = continuation_evidence
+    return {'jobs': [payload]}
 
 
 def unwrap_payload(value):
     a.require(isinstance(value, dict) and set(value) == {'jobs'} and isinstance(value['jobs'], list)
               and len(value['jobs']) == 1, 'Invalid additional transport wrapper')
     payload = value['jobs'][0]
-    a.require(isinstance(payload, dict) and set(payload) ==
-              {'additional_version', 'packet', 'approval', 'verified_tts_terms'} and
+    a.require(isinstance(payload, dict) and set(payload) in (
+              {'additional_version', 'packet', 'approval', 'verified_tts_terms'},
+              {'additional_version', 'packet', 'approval', 'verified_tts_terms', 'continuation_evidence'}) and
               type(payload['additional_version']) is int and payload['additional_version'] == 1
               and isinstance(payload['packet'], dict) and isinstance(payload['approval'], dict)
               and (payload['verified_tts_terms'] is None or isinstance(payload['verified_tts_terms'], dict)),
               'Invalid additional payload')
+    if 'continuation_evidence' in payload:
+        a.require(isinstance(payload['continuation_evidence'], dict), 'Invalid continuation evidence')
     return payload
 
 

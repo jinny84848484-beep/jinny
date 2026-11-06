@@ -43,6 +43,17 @@ class GraphicsRuntimeIntegration(unittest.TestCase):
                 self.assertIn('ORIGINAL GRAPHICS policy', request['instructions'])
                 self.assertNotIn('Fail if two usable directly relevant photos are absent', request['instructions'])
                 self.assertNotIn('exact pictured-subject relevance', request['instructions'])
+                text_part = request['input'][0]['content'][0]['text']
+                review_text_packet = json.loads(text_part)
+                self.assertNotIn('graphics_files', review_text_packet)
+                self.assertIn('graphics_files', packet)  # immutable authorized packet
+                self.assertEqual(review_text_packet['review_image_context']['height'], 1920)
+                self.assertEqual(len([v for v in request['input'][0]['content'] if v['type'] == 'input_image']), 5)
+                self.assertLess(len(text_part), 50000)
+                oversized = copy.deepcopy(packet)
+                oversized['unexpected_text'] = 'x' * 50001
+                with self.assertRaisesRegex(ValueError, 'safe input bound'):
+                    runtime.review_request(oversized, a.MODEL, 2600, 3)
                 keys = list(packet['media'])
                 decision = {'status': 'PASS', 'issues': [], 'selection': {job['id']: keys},
                             'source_checks': [{'url': s['url'], 'accessed': True,

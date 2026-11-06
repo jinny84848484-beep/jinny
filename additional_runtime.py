@@ -224,7 +224,19 @@ Allowed codes: ''' + ', '.join(sorted(allowed)) + '\n' + c.SEARCH_SAFETY + c.REV
                 'This is the separately approved ORIGINAL GRAPHICS policy: sober original typography and geometric timelines, not photographs. Inspect actual composed 1080x1920 review frames. Require the notice 자료를 바탕으로 구성한 그래픽, clear reported-fact versus channel-opinion labels, legible Korean, no invented event reconstruction, faces, news images or implication of actual footage. Every printed factual label must be supported by the cited reporting. Five scene-specific graphics are required; licensed photographs are NOT required under this policy.')
             instructions = instructions.replace('using at least two distinct images.',
                 'using exactly the matching scene_index graphic for each scene, in order.')
-        content = [{'type': 'input_text', 'text': json.dumps(packet, ensure_ascii=False)}]
+        # Transport bytes are verified during materialization and sent as image
+        # parts below. They must never be duplicated into model text tokens.
+        review_packet = copy.deepcopy(packet)
+        review_packet.pop('graphics_files', None)
+        if graphics_mode:
+            review_packet['review_image_context'] = {
+                'kind': 'composed_full_frame', 'width': 1080, 'height': 1920,
+                'note': 'Attached images are full composed review frames. The graphics_manifest describes only embedded artwork cards.',
+                'frames': self.graphics_review['frames'],
+            }
+        review_text = json.dumps(review_packet, ensure_ascii=False)
+        a.require(len(review_text) <= 50000, 'Review text exceeds safe input bound')
+        content = [{'type': 'input_text', 'text': review_text}]
         for key, media in packet['media'].items():
             if graphics_mode:
                 frame = self.graphics_review['frames'][media['scene_index']]

@@ -18,7 +18,7 @@ def dispatch_context():
     a.require(attempt == '1', 'Additional transport cannot rerun an old attempt')
     values = {name: os.environ.get(name, '') for name in
               ('ADDITIONAL_BATCH_ID', 'ADDITIONAL_PRODUCTION_DATE', 'ADDITIONAL_ANCHOR_DAY', 'ADDITIONAL_APPROVAL_HASH',
-               'ADDITIONAL_APPROVED_HEAD', 'ADDITIONAL_RECOVERY_PUBLIC_KEY')}
+               'ADDITIONAL_APPROVED_HEAD', 'ADDITIONAL_RECOVERY_PUBLIC_KEY', 'ADDITIONAL_CONTINUATION_RECORD_HASH')}
     day = values['ADDITIONAL_PRODUCTION_DATE']; batch = values['ADDITIONAL_BATCH_ID']
     anchor = values['ADDITIONAL_ANCHOR_DAY'] or day
     a.require(a.dt.date.fromisoformat(anchor).isoformat() == anchor and anchor <= day, 'Invalid dispatch anchor date')
@@ -30,6 +30,9 @@ def dispatch_context():
               re.fullmatch('[0-9a-f]{40}', values['ADDITIONAL_APPROVED_HEAD']) is not None and
               values['ADDITIONAL_APPROVED_HEAD'] == os.environ.get('GITHUB_SHA'),
               'Additional dispatch approval or head invalid')
+    if values['ADDITIONAL_CONTINUATION_RECORD_HASH']:
+        a.require(re.fullmatch('[0-9a-f]{64}', values['ADDITIONAL_CONTINUATION_RECORD_HASH']),
+                  'Invalid continuation dispatch hash')
     at.validate_recovery_key(values['ADDITIONAL_RECOVERY_PUBLIC_KEY'])
     return run, attempt, signing_key, values
 
@@ -91,15 +94,57 @@ def reconcile_preproduction_session(ledger, run, proof, *, expected_session_hash
     return candidate
 
 
-def register_session(ledger, run, identity, day, batch, approval_hash, *, completed_anchor_day=None):
+def verified_completed_review_continuation(ledger, source_run, source_session):
+    """Recognize completed replacement without rewriting the original waiting audit."""
+    record = ledger.get('additional_batches', {}).get(source_session.get('batch_id'), {})
+    history = record.get('review_continuation', {})
+    prior = history.get('previous_record', {})
+    auth = history.get('authorization', {})
+    current_session = ledger.get('additional_sessions', {}).get(record.get('run_id'), {})
+    receipts = [p for p in ledger.get('publications', [])
+                if p.get('additional_batch_id') == source_session.get('batch_id')]
+    return (source_session.get('status') == 'waiting' and record.get('status') == 'complete'
+            and prior.get('status') == 'review_completed' and prior.get('run_id') == source_run
+            and auth.get('previous_record_hash') == a.digest(prior)
+            and auth.get('previous_review_response_hash') == history.get('previous_review_response_hash')
+            == prior.get('checkpoints', {}).get('review', {}).get('response_hash')
+            and prior.get('approval_hash') == source_session.get('approval_hash')
+            and prior.get('production_date') == source_session.get('production_date')
+            and record.get('run_id') != source_run and current_session.get('status') == 'complete'
+            and current_session.get('approval_hash') == record.get('approval_hash')
+            and current_session.get('batch_id') == source_session.get('batch_id')
+            and len(receipts) == 1 and bool(record.get('video_id'))
+            and receipts[0].get('video_id') == record.get('video_id')
+            and receipts[0].get('job_id') == record.get('job_id'))
+
+
+def register_session(ledger, run, identity, day, batch, approval_hash, *, completed_anchor_day=None,
+                     continuation_record_hash=None):
     """Pure state transformation; caller must CAS before exposing session."""
     anchor = completed_anchor_day or day
     a.require(a.dt.date.fromisoformat(anchor).isoformat() == anchor and anchor <= day and
               ledger['days'].get(anchor, {}).get('status') == 'complete', 'Original anchor day incomplete')
-    a.require(not any(r.get('status') != 'complete' for r in ledger.get('additional_batches', {}).values()),
+    source_run = None
+    if continuation_record_hash:
+        prior = ledger.get('additional_batches', {}).get(batch, {})
+        a.require(a.digest(prior) == continuation_record_hash and
+                  prior.get('status') == 'review_completed' and 'review_continuation' not in prior and
+                  prior.get('production_date') == day and prior.get('completed_anchor_day') == anchor,
+                  'Continuation dispatch record mismatch')
+        source_run = prior.get('run_id')
+        previous_session = ledger.get('additional_sessions', {}).get(source_run, {})
+        a.require(source_run != run and previous_session.get('status') == 'waiting' and
+                  previous_session.get('batch_id') == batch and
+                  previous_session.get('production_date') == day and
+                  previous_session.get('approval_hash') == prior.get('approval_hash'),
+                  'Continuation source session mismatch')
+    a.require(not any(r.get('status') != 'complete' for key, r in
+                      ledger.get('additional_batches', {}).items()
+                      if not (continuation_record_hash and key == batch)),
               'Unresolved additional production exists')
     sessions = ledger.setdefault('additional_sessions', {})
-    a.require(run not in sessions and all(s.get('status') == 'complete' or verified_no_effects_session(s) for s in sessions.values()),
+    a.require(run not in sessions and all(s.get('status') == 'complete' or verified_no_effects_session(s)
+              or verified_completed_review_continuation(ledger, key, s) or key == source_run for key, s in sessions.items()),
               'Unresolved or reused additional transport session')
     sessions[run] = {'status': 'waiting', 'identity': identity, 'production_date': day,
                      'batch_id': batch, 'approval_hash': approval_hash, 'completed_anchor_day': anchor}
@@ -126,7 +171,9 @@ def execute():
         root = c.p.ROOT / 'runs' / day / 'additional' / batch
         stage = 'session_reservation'
         ledger, sha = c.journal_get()
-        register_session(ledger, run, identity, day, batch, approval_hash, completed_anchor_day=values['ADDITIONAL_ANCHOR_DAY'])
+        register_session(ledger, run, identity, day, batch, approval_hash,
+                         completed_anchor_day=values['ADDITIONAL_ANCHOR_DAY'],
+                         continuation_record_hash=values['ADDITIONAL_CONTINUATION_RECORD_HASH'])
         c.journal_put(ledger, sha)
         path = 'state/staging/additional-' + run + '-1.json'
         print('Additional public session: ' + json.dumps(receiver.announcement, sort_keys=True), flush=True)
@@ -147,7 +194,16 @@ def execute():
             stage = 'input_validation'
             ledger, sha = c.journal_get()
             assert_session(ledger, run, identity, day, batch, approval_hash, completed_anchor_day=values['ADDITIONAL_ANCHOR_DAY'])
-            a.validate(packet, approval, approval_hash, ledger, runtime.config(), day)
+            evidence = payload.get('continuation_evidence')
+            if values['ADDITIONAL_CONTINUATION_RECORD_HASH']:
+                import additional_review_continuation as continuation
+                a.require(approval.get('review_continuation', {}).get('previous_record_hash') ==
+                          values['ADDITIONAL_CONTINUATION_RECORD_HASH'], 'Continuation dispatch authorization mismatch')
+                continuation.validate(packet, approval, approval_hash, ledger, runtime.config(), day, evidence)
+            else:
+                a.require(evidence is None and 'review_continuation' not in approval,
+                          'Continuation requires explicit dispatch')
+                a.validate(packet, approval, approval_hash, ledger, runtime.config(), day)
             runtime.verified_tts_terms = payload['verified_tts_terms']
             runtime.bind_authorization(approval, packet)
             runtime.validate_job(packet['job'])
@@ -157,7 +213,7 @@ def execute():
             runtime.validate_media(packet)
             c.p.write(root / 'approved-input.json', payload)
             stage = 'production'
-            result = a.run(packet, approval, approval_hash, runtime)
+            result = a.run(packet, approval, approval_hash, runtime, continuation_evidence=evidence)
             stage = 'session_completion'
             ledger, sha = c.journal_get()
             # Completion receipts may be written after midnight for accepted uploads.

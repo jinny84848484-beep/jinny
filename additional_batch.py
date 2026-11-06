@@ -200,7 +200,7 @@ def validate(packet, approval, trusted_approval_hash, ledger, config, today):
             'day_total_reserved': previous + chars}
 
 
-def run(packet, approval, trusted_approval_hash, runtime):
+def run(packet, approval, trusted_approval_hash, runtime, *, continuation_evidence=None):
     """runtime is an explicit production adapter or an offline test double.
 
     No retries. All legacy data remains untouched. A failed CAS stops immediately.
@@ -208,7 +208,15 @@ def run(packet, approval, trusted_approval_hash, runtime):
     """
     ledger, sha = runtime.journal_get()
     config = runtime.config()
-    plan = validate(packet, approval, trusted_approval_hash, ledger, config, runtime.today())
+    previous_record = None
+    if continuation_evidence is not None:
+        import additional_review_continuation as continuation
+        plan, previous_record = continuation.validate(packet, approval, trusted_approval_hash,
+            ledger, config, runtime.today(), continuation_evidence)
+        require(runtime.run_id() != previous_record['run_id'], 'Continuation needs a fresh run')
+    else:
+        require('review_continuation' not in approval, 'Continuation evidence missing')
+        plan = validate(packet, approval, trusted_approval_hash, ledger, config, runtime.today())
     if plan['complete']:
         return plan['publication']
     runtime.bind_authorization(approval, packet)
@@ -223,6 +231,12 @@ def run(packet, approval, trusted_approval_hash, runtime):
               'approval_hash': trusted_approval_hash, 'event_keys': packet['event_keys'],
               'tts_reservation': plan['tts_characters'], 'status': 'reserved',
               'checkpoints': {}, 'run_id': runtime.run_id(), 'created_at': runtime.now()}
+    if previous_record is not None:
+        record['tts_reservation'] = previous_record['tts_reservation']
+        record['review_continuation'] = {'previous_record': previous_record,
+            'previous_review_response_hash': digest(continuation_evidence['previous_review_response']),
+            'authorization': copy.deepcopy(approval['review_continuation'])}
+    immutable_continuation = copy.deepcopy(record.get('review_continuation'))
     ledger.setdefault('additional_batches', {})[batch] = record
 
     def persist(status, check_date=True):
@@ -232,10 +246,15 @@ def run(packet, approval, trusted_approval_hash, runtime):
         require(ledger['days'] == original_days and
                 ledger['publications'][:len(original_publications)] == original_publications,
                 'Historical state mutation forbidden')
+        require(record.get('review_continuation') == immutable_continuation,
+                'Original failed review audit mutation forbidden')
         record['status'] = status
         sha = runtime.journal_put(ledger, sha)
 
     persist('reserved')
+    if previous_record is not None:
+        runtime.save_checkpoint(batch, 'previous_failed_review',
+                                continuation_evidence['previous_review_response'])
     # Actual provider factual/media review, not an input's claimed PASS.
     request = runtime.review_request(packet, MODEL, REVIEW_OUTPUT_TOKENS, REVIEW_TOOL_CALLS)
     record['checkpoints']['review'] = {'status': 'submitted', 'request_hash': digest(request), 'attempts': 1}
