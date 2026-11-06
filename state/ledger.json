@@ -1605,8 +1605,14 @@
         "eunpyeong-stalking-protection-gap"
       ],
       "tts_reservation": 368,
-      "status": "reserved",
-      "checkpoints": {},
+      "status": "review_submitted",
+      "checkpoints": {
+        "review": {
+          "status": "submitted",
+          "request_hash": "162240889219fbb1a2ed04a953c3fb39582940859a3de7da2c1525e1a9de8655",
+          "attempts": 1
+        }
+      },
       "run_id": "42256600410",
       "created_at": "2026-11-07T01:56:12.488484+09:00"
     }
