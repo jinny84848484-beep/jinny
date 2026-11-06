@@ -1550,6 +1550,19 @@
         },
         "proof_hash": "80ceb29698c850c67b6fdc3fd820632328349b537826224b2b81708406d1b1bb"
       }
+    },
+    "42252624976": {
+      "status": "waiting",
+      "identity": {
+        "run_id": "42252624976",
+        "run_attempt": "1",
+        "day": "2026-11-07",
+        "session_id": "yP0uw7IKRNF1CMLpeGBRJMgqjJGnOmTncJNa2VRXPZ8="
+      },
+      "production_date": "2026-11-07",
+      "batch_id": "2026-11-07-extra-01",
+      "approval_hash": "3de87f889c5ba1367f0a87335883aee7186bfb0d4ae8f37850ee775d1ce9e77a",
+      "completed_anchor_day": "2026-11-06"
     }
   }
 }
