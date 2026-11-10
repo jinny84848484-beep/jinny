@@ -138,12 +138,14 @@ def register_session(ledger, run, identity, day, batch, approval_hash, *, comple
                   previous_session.get('production_date') == day and
                   previous_session.get('approval_hash') == prior.get('approval_hash'),
                   'Continuation source session mismatch')
-    a.require(not any(r.get('status') != 'complete' for key, r in
+    from additional_expiry import batch_resolved, verified_expired_session
+    a.require(not any(not batch_resolved(r) for key, r in
                       ledger.get('additional_batches', {}).items()
                       if not (continuation_record_hash and key == batch)),
               'Unresolved additional production exists')
     sessions = ledger.setdefault('additional_sessions', {})
     a.require(run not in sessions and all(s.get('status') == 'complete' or verified_no_effects_session(s)
+              or verified_expired_session(ledger, s)
               or verified_completed_review_continuation(ledger, key, s) or key == source_run for key, s in sessions.items()),
               'Unresolved or reused additional transport session')
     sessions[run] = {'status': 'waiting', 'identity': identity, 'production_date': day,

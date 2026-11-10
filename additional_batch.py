@@ -143,7 +143,8 @@ def validate(packet, approval, trusted_approval_hash, ledger, config, today):
                     'Completed batch receipt mismatch')
             return {'complete': True, 'publication': matches[0]}
         raise ValueError('Additional batch already reserved; reconcile without replay')
-    require(all(r.get('status') == 'complete' for r in ledger.get('additional_batches', {}).values()),
+    from additional_expiry import batch_resolved
+    require(all(batch_resolved(r) for r in ledger.get('additional_batches', {}).values()),
             'Another additional batch is unresolved; reconcile before starting new work')
     records = list(ledger['days'].values()) + list(ledger.get('additional_batches', {}).values())
     ids = {p.get('job_id') for p in ledger['publications']}

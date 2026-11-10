@@ -418,7 +418,8 @@ def preflight():
     for channel,c in p.cfg()['channels'].items():
         if c['voice_id'] not in voices:raise RuntimeError('Configured narration voice unavailable')
         verify_channel(channel,youtube_token(channel))
-    if p.subscription()['character_limit']-p.subscription()['character_count']<1800:raise RuntimeError('Insufficient narration credit reserve')
+    sub=p.subscription()
+    if sub['character_limit']-sub['character_count']<1800:raise RuntimeError('Insufficient narration credit reserve')
     media_renderer.font(30);p.ffmpeg()
     print('Preflight passed: models, voices, fonts and both channel identities verified.',flush=True)
 
@@ -615,7 +616,9 @@ def produce():
     if record.get('status') in {'research_submitted','draft_submitted','narration_correction_submitted','editorial_review_submitted','tts_submitted','rendered','upload_submitted','staged_waiting','staged_review_submitted'} or any(v.get('status')=='submitted' for v in record.get('checkpoints',{}).values()):raise RuntimeError('Interrupted external request: reconcile journal before retrying')
     assert_no_unresolved_additional(ledger)
     preflight()
-    collect_metrics(ledger)
+    # Public view counts are informational. A metrics API hiccup must not stop publishing.
+    try:collect_metrics(ledger)
+    except Exception as exc:print('Metrics skipped: '+str(exc)[:120],file=sys.stderr,flush=True)
     if not record.get('jobs'):
         recent={x.get('topic_key','').lower() for x in ledger.get('publications',[])[-40:]}
         if 'research' in record.get('checkpoints',{}):
@@ -749,8 +752,20 @@ Return ONLY JSON with exactly status, issues, selection. status is PASS or FAIL.
     return sha
 
 
+def expire_stale_additional():
+    """Operator-run, dry-run by default. Needs EXPIRE_BATCH_ID and EXPIRE_RECORD_HASH."""
+    import additional_expiry as x, additional_batch as ab
+    batch=os.environ['EXPIRE_BATCH_ID'];want=os.environ['EXPIRE_RECORD_HASH']
+    ledger,sha=journal_get();rec=ledger.get('additional_batches',{}).get(batch,{})
+    print('Batch '+batch+' status='+str(rec.get('status'))+' record_hash='+ab.digest(rec),flush=True)
+    new=x.expire_stale_batch(ledger,batch,today=p.now().date().isoformat(),expected_record_hash=want)
+    if os.environ.get('EXPIRE_APPLY')!='true':print('Dry run OK; set EXPIRE_APPLY=true to write.');return
+    if os.environ.get('EXPIRE_CONFIRM_NO_UPLOAD')!='true':raise RuntimeError('Operator must confirm no YouTube upload exists')
+    journal_put(new,sha);print('Expired '+batch+'; scheduled production unblocked.')
+
 def assert_no_unresolved_additional(ledger):
-    if any(record.get('status')!='complete' for record in ledger.get('additional_batches',{}).values()):
+    from additional_expiry import batch_resolved
+    if not all(batch_resolved(record) for record in ledger.get('additional_batches',{}).values()):
         raise RuntimeError('Unresolved additional production requires reconciliation before scheduled production')
 
 
@@ -820,10 +835,11 @@ def publish_reviewed(ledger,sha,day,*,slots=None,stage_callback=None):
     record['status']='complete';record['completed_at']=p.now().isoformat();journal_put(ledger,sha)
 
 if __name__=='__main__':
-    a=argparse.ArgumentParser();a.add_argument('mode',choices=['preflight','produce','stage_produce']);args=a.parse_args()
+    a=argparse.ArgumentParser();a.add_argument('mode',choices=['preflight','produce','stage_produce','expire_stale_additional']);args=a.parse_args()
     try:
         if args.mode=='preflight':preflight()
         elif args.mode=='produce':produce()
+        elif args.mode=='expire_stale_additional':expire_stale_additional()
         else:
             from staged_runner import run_staged
             run_staged()
