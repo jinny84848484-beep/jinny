@@ -1325,6 +1325,32 @@
       },
       "active_job": "2026-11-06-grimes-ai-film-casting",
       "completed_at": "2026-11-06T10:07:12.177227+09:00"
+    },
+    "2026-11-10": {
+      "status": "complete",
+      "method": "external_manual_user_publication",
+      "completion_scope": "Two verified public videos per channel; not an automated production execution",
+      "completed_at": "2026-11-10T04:09:50Z",
+      "recorded_at": "2026-11-10T14:27:02.180611+00:00",
+      "video_ids": [
+        "RosnIxnkh2w",
+        "t-Sen0Li3EU",
+        "GawnhGCT40M",
+        "A3GhMdBa0Rg"
+      ],
+      "job_ids": [
+        "2026-11-10-ojirap-delivery-app-parity",
+        "2026-11-10-ojirap-an-se-young-korea-open",
+        "2026-11-10-korean-disney-adobe-alliance",
+        "2026-11-10-korean-instagram-ai-age-estimation"
+      ],
+      "channel_counts": {
+        "ojirap": 2,
+        "korean": 2
+      },
+      "automation_run_id": null,
+      "verification_source": "authenticated_youtube_upload_inventory",
+      "generation_cost_reconciliation": "Provider usage retained separately in production receipts; no cost inferred from publication"
     }
   },
   "publications": [
@@ -1533,6 +1559,86 @@
       "experiment": {},
       "publication_method": "external_manual",
       "additional_batch_id": "2026-11-07-extra-01"
+    },
+    {
+      "job_id": "2026-11-10-ojirap-delivery-app-parity",
+      "topic_key": "ojirap-delivery-app-parity",
+      "event_keys": [
+        "kr-ftc-food-delivery-platform-decision-announced-2026-11-09"
+      ],
+      "category": "commentary",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "배달앱 과징금 6천억, 최저가의 역설",
+      "video_id": "RosnIxnkh2w",
+      "url": "https://www.youtube.com/shorts/RosnIxnkh2w",
+      "at": "2026-11-10T04:08:26Z",
+      "publication_method": "external_manual",
+      "published_by": "user",
+      "file_sha256": "07f434d4177d7e5de1d730ce780daab13e386f85d871a66be04fceb91fc0546e",
+      "verified_at": "2026-11-10T14:27:02.180611+00:00",
+      "verification_source": "authenticated_youtube_upload_inventory",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-10-ojirap-an-se-young-korea-open",
+      "topic_key": "ojirap-an-se-young-korea-open",
+      "event_keys": [
+        "bwf-korea-open-womens-singles-final-2026-11-08"
+      ],
+      "category": "commentary",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "안세영 또 우승? 그 ‘또’가 얼마나 어려운지",
+      "video_id": "t-Sen0Li3EU",
+      "url": "https://www.youtube.com/shorts/t-Sen0Li3EU",
+      "at": "2026-11-10T04:08:41Z",
+      "publication_method": "external_manual",
+      "published_by": "user",
+      "file_sha256": "4fe9777cba32881f540138713022ffa9b947f6fa25a5a076493f3297a7113a46",
+      "verified_at": "2026-11-10T14:27:02.180611+00:00",
+      "verification_source": "authenticated_youtube_upload_inventory",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-10-korean-disney-adobe-alliance",
+      "topic_key": "korean-disney-adobe-alliance",
+      "event_keys": [
+        "disney-adobe-multiyear-alliance-announced-2026-11-09"
+      ],
+      "category": "commentary",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "Disney’s AI Deal: Who Holds the Pencil?",
+      "video_id": "GawnhGCT40M",
+      "url": "https://www.youtube.com/shorts/GawnhGCT40M",
+      "at": "2026-11-10T04:09:33Z",
+      "publication_method": "external_manual",
+      "published_by": "user",
+      "file_sha256": "4fedc0f87a066be07ad993ec5684beb95f7ced569f01d2de6bf289631cbe9410",
+      "verified_at": "2026-11-10T14:27:02.180611+00:00",
+      "verification_source": "authenticated_youtube_upload_inventory",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-10-korean-instagram-ai-age-estimation",
+      "topic_key": "korean-instagram-ai-age-estimation",
+      "event_keys": [
+        "meta-instagram-global-ai-age-estimation-announced-2026-11-09"
+      ],
+      "category": "commentary",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "Instagram May Not Believe Your Birthday",
+      "video_id": "A3GhMdBa0Rg",
+      "url": "https://www.youtube.com/shorts/A3GhMdBa0Rg",
+      "at": "2026-11-10T04:09:50Z",
+      "publication_method": "external_manual",
+      "published_by": "user",
+      "file_sha256": "5c2963b5a1f202ffdc228d627a2711798957aa91905175c832bb936170e190ef",
+      "verified_at": "2026-11-10T14:27:02.180611+00:00",
+      "verification_source": "authenticated_youtube_upload_inventory",
+      "experiment": {}
     }
   ],
   "additional_sessions": {
