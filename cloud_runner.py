@@ -758,9 +758,16 @@ def expire_stale_additional():
     batch=os.environ['EXPIRE_BATCH_ID'];want=os.environ['EXPIRE_RECORD_HASH']
     ledger,sha=journal_get();rec=ledger.get('additional_batches',{}).get(batch,{})
     print('Batch '+batch+' status='+str(rec.get('status'))+' record_hash='+ab.digest(rec),flush=True)
-    new=x.expire_stale_batch(ledger,batch,today=p.now().date().isoformat(),expected_record_hash=want)
+    ext=os.environ.get('EXTERNAL_VIDEO','').strip();today=p.now().date().isoformat()
+    channel,_,video=ext.partition(':') if ':' in ext else ('',None,'')
+    if ext:
+        if not video or channel not in p.cfg()['channels']:raise RuntimeError('external_video must be channel:video_id')
+        cid=p.cfg()['channels'][channel]['channel_id']
+        new=x.resolve_external_upload(ledger,batch,today=today,expected_record_hash=want,video_id=video,channel=channel,channel_id=cid)
+        print('Will record external upload '+video+' on '+channel,flush=True)
+    else:new=x.expire_stale_batch(ledger,batch,today=today,expected_record_hash=want)
     if os.environ.get('EXPIRE_APPLY')!='true':print('Dry run OK; set EXPIRE_APPLY=true to write.');return
-    if os.environ.get('EXPIRE_CONFIRM_NO_UPLOAD')!='true':raise RuntimeError('Operator must confirm no YouTube upload exists')
+    if os.environ.get('EXPIRE_CONFIRM_NO_UPLOAD')!='true':raise RuntimeError('Operator must confirm the YouTube state (no upload, or the given external video)')
     journal_put(new,sha);print('Expired '+batch+'; scheduled production unblocked.')
 
 def assert_no_unresolved_additional(ledger):
