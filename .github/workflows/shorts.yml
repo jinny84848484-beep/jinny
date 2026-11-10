@@ -5,8 +5,24 @@ on:
       mode:
         description: 'Preflight checks connections; produce publishes four videos'
         type: choice
-        options: [preflight, produce, stage_produce, recover_saved_reviews, resume_reviewed]
+        options: [preflight, produce, stage_produce, recover_saved_reviews, resume_reviewed, expire_stale_additional]
         default: preflight
+      expire_batch_id:
+        description: expire_stale_additional only - batch id (e.g. 2026-11-07-extra-01)
+        type: string
+        required: false
+      expire_record_hash:
+        description: expire_stale_additional only - record hash printed by the dry run
+        type: string
+        required: false
+      expire_apply:
+        description: expire_stale_additional only - write (true) or dry run (false)
+        type: boolean
+        default: false
+      expire_confirm_no_upload:
+        description: expire_stale_additional only - operator checked YouTube, no upload exists
+        type: boolean
+        default: false
       staged_sender_public_key:
         description: One-run Ed25519 public key for stage_produce only
         type: string
@@ -52,6 +68,10 @@ jobs:
           IMAGEIO_FFMPEG_EXE: /usr/bin/ffmpeg
           STAGED_SENDER_PUBLIC_KEY: ${{ inputs.staged_sender_public_key }}
           RUN_MODE: ${{ inputs.mode || 'produce' }}
+          EXPIRE_BATCH_ID: ${{ inputs.expire_batch_id }}
+          EXPIRE_RECORD_HASH: ${{ inputs.expire_record_hash }}
+          EXPIRE_APPLY: ${{ inputs.expire_apply }}
+          EXPIRE_CONFIRM_NO_UPLOAD: ${{ inputs.expire_confirm_no_upload }}
         run: |
           if [ "$RUN_MODE" = "recover_saved_reviews" ]; then
             python cached_review_recovery.py
