@@ -20,9 +20,13 @@ on:
         type: boolean
         default: false
       expire_confirm_no_upload:
-        description: expire_stale_additional only - operator checked YouTube, no upload exists
+        description: expire_stale_additional only - operator checked YouTube (no upload, or the external video below)
         type: boolean
         default: false
+      external_video:
+        description: expire_stale_additional only - optional channel:video_id uploaded outside the pipeline (e.g. ojirap:4B18u-hUPkw)
+        type: string
+        required: false
       staged_sender_public_key:
         description: One-run Ed25519 public key for stage_produce only
         type: string
@@ -72,6 +76,7 @@ jobs:
           EXPIRE_RECORD_HASH: ${{ inputs.expire_record_hash }}
           EXPIRE_APPLY: ${{ inputs.expire_apply }}
           EXPIRE_CONFIRM_NO_UPLOAD: ${{ inputs.expire_confirm_no_upload }}
+          EXTERNAL_VIDEO: ${{ inputs.external_video }}
         run: |
           if [ "$RUN_MODE" = "recover_saved_reviews" ]; then
             python cached_review_recovery.py
