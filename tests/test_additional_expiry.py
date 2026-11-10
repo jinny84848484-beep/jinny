@@ -65,3 +65,27 @@ class MetricsNonBlocking(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'reached research'):
                 c.produce()
         self.assertIn('Metrics skipped', err.getvalue())
+
+
+class ExternalUpload(unittest.TestCase):
+    def test_external_upload_resolves_and_records_publication(self):
+        h = a.digest(LEDGER['additional_batches'][B])
+        new = x.resolve_external_upload(LEDGER, B, today='2026-11-10', expected_record_hash=h,
+                                        video_id='4B18u-hUPkw', channel='ojirap', channel_id='UCZj1FlWDcoiEQNLfpwc5qtw')
+        rec = new['additional_batches'][B]
+        self.assertEqual(rec['status'], x.EXTERNAL)
+        self.assertTrue(x.batch_resolved(rec))
+        self.assertEqual(new['publications'][-1]['video_id'], '4B18u-hUPkw')
+        self.assertFalse(any(s['status'] == 'waiting' for s in new['additional_sessions'].values()))
+        import cloud_runner as c
+        c.assert_no_unresolved_additional(new)
+
+    def test_external_rejects_bad_id_and_duplicates(self):
+        h = a.digest(LEDGER['additional_batches'][B])
+        with self.assertRaises(Exception):
+            x.resolve_external_upload(LEDGER, B, today='2026-11-10', expected_record_hash=h,
+                                      video_id='bad', channel='ojirap', channel_id='x')
+        dup = LEDGER['publications'][0]['video_id']
+        with self.assertRaises(Exception):
+            x.resolve_external_upload(LEDGER, B, today='2026-11-10', expected_record_hash=h,
+                                      video_id=dup, channel='ojirap', channel_id='x')
