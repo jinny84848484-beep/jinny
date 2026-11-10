@@ -1519,6 +1519,20 @@
         "hook_type": "specific_question",
         "topic_category": "film"
       }
+    },
+    {
+      "job_id": "2026-11-07-extra-01-eunpyeong-stalking-protection-gap",
+      "topic_key": "eunpyeong-stalking-protection-gap",
+      "category": null,
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "",
+      "video_id": "4B18u-hUPkw",
+      "url": "https://www.youtube.com/shorts/4B18u-hUPkw",
+      "confirmed_at": "2026-11-10",
+      "experiment": {},
+      "publication_method": "external_manual",
+      "additional_batch_id": "2026-11-07-extra-01"
     }
   ],
   "additional_sessions": {
@@ -1581,7 +1595,7 @@
       }
     },
     "42256600410": {
-      "status": "waiting",
+      "status": "resolved_expired",
       "identity": {
         "run_id": "42256600410",
         "run_attempt": "1",
@@ -1591,10 +1605,11 @@
       "production_date": "2026-11-07",
       "batch_id": "2026-11-07-extra-01",
       "approval_hash": "4af35367a9575ae75bbae29b5fe975ad7c34df76fbe1e6765513014fc5117331",
-      "completed_anchor_day": "2026-11-06"
+      "completed_anchor_day": "2026-11-06",
+      "expired_on": "2026-11-10"
     },
     "42303122623": {
-      "status": "waiting",
+      "status": "resolved_expired",
       "identity": {
         "run_id": "42303122623",
         "run_attempt": "1",
@@ -1604,31 +1619,47 @@
       "production_date": "2026-11-07",
       "batch_id": "2026-11-07-extra-01",
       "approval_hash": "3a0af2f088bcd26e762f7def449ab1e51914a3b04046579317a971e5eca4db28",
-      "completed_anchor_day": "2026-11-06"
+      "completed_anchor_day": "2026-11-06",
+      "expired_on": "2026-11-10"
     }
   },
   "additional_batches": {
     "2026-11-07-extra-01": {
+      "status": "resolved_external_upload",
       "production_date": "2026-11-07",
-      "completed_anchor_day": "2026-11-06",
       "job_id": "2026-11-07-extra-01-eunpyeong-stalking-protection-gap",
-      "packet_hash": "8e5e09a86fba2f13f374c3ebeead41839576f749a6c70193f15e8bd713ef9900",
-      "approval_hash": "4af35367a9575ae75bbae29b5fe975ad7c34df76fbe1e6765513014fc5117331",
       "event_keys": [
         "eunpyeong-stalking-protection-gap"
       ],
-      "tts_reservation": 368,
-      "status": "review_completed",
-      "checkpoints": {
-        "review": {
-          "status": "completed",
-          "request_hash": "162240889219fbb1a2ed04a953c3fb39582940859a3de7da2c1525e1a9de8655",
-          "attempts": 1,
-          "response_hash": "78da7e8a040f19459e8baa8ee0d3cc8e6f224f7deb31898b1b8c91378ca790ed"
-        }
+      "expiry": {
+        "previous_record": {
+          "production_date": "2026-11-07",
+          "completed_anchor_day": "2026-11-06",
+          "job_id": "2026-11-07-extra-01-eunpyeong-stalking-protection-gap",
+          "packet_hash": "8e5e09a86fba2f13f374c3ebeead41839576f749a6c70193f15e8bd713ef9900",
+          "approval_hash": "4af35367a9575ae75bbae29b5fe975ad7c34df76fbe1e6765513014fc5117331",
+          "event_keys": [
+            "eunpyeong-stalking-protection-gap"
+          ],
+          "tts_reservation": 368,
+          "status": "review_completed",
+          "checkpoints": {
+            "review": {
+              "status": "completed",
+              "request_hash": "162240889219fbb1a2ed04a953c3fb39582940859a3de7da2c1525e1a9de8655",
+              "attempts": 1,
+              "response_hash": "78da7e8a040f19459e8baa8ee0d3cc8e6f224f7deb31898b1b8c91378ca790ed"
+            }
+          },
+          "run_id": "42256600410",
+          "created_at": "2026-11-07T01:56:12.488484+09:00"
+        },
+        "previous_record_hash": "802e94a12279c78b08a300e7eb8454b6548c8a6ecfbb2ae9040e6c4dbfac43a1",
+        "expired_on": "2026-11-10",
+        "reason": "uploaded_outside_pipeline",
+        "video_id": "4B18u-hUPkw"
       },
-      "run_id": "42256600410",
-      "created_at": "2026-11-07T01:56:12.488484+09:00"
+      "video_id": "4B18u-hUPkw"
     }
   }
 }
