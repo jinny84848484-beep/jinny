@@ -6,15 +6,18 @@ from test_guards import batch
 class CategorySlots(unittest.TestCase):
     def test_slots_are_distinct_and_balanced(self):
         self.assertEqual(len(c.BATCH_SLOTS),4)
-        self.assertEqual(len({category for channel,category in c.BATCH_SLOTS}),4)
+        self.assertEqual(len({category for channel,category in c.BATCH_SLOTS}),2)
         self.assertEqual(sorted(channel for channel,category in c.BATCH_SLOTS),['korean','korean','ojirap','ojirap'])
 
     def test_wrong_assignment_rejected_even_with_distinct_categories(self):
-        jobs=batch();jobs[0]['category'],jobs[2]['category']=jobs[2]['category'],jobs[0]['category']
+        jobs=batch();jobs[0]['category']='film'
         with self.assertRaisesRegex(ValueError,'slots mismatch'):c.validate_batch(jobs,'2026-11-05',set(),slots=c.BATCH_SLOTS)
 
     def test_default_categories_can_change_daily(self):
-        jobs=batch();jobs[0]['category']='film';jobs[1]['category']='music'
+        jobs=batch()
+        for job in jobs:
+            job['category']='film' if job['topic_key']=='unique-event-0' else 'music'
+            job['fact_packet']['category']=job['category'];job['fact_packet_hash']=c.fingerprint(job['fact_packet'])
         c.validate_batch(jobs,'2026-11-05',set())
 
     def test_order_does_not_change_slot_validity(self):

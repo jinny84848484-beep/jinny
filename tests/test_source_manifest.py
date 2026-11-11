@@ -4,10 +4,12 @@ import cloud_runner as c
 from test_guards import batch
 
 def manifest_for(jobs):
-    stories=[]
+    stories=[];seen=set()
     for job in jobs:
-        sources=[{**source,'role':'primary' if i==0 else 'independent_reporting','accessed':True} for i,source in enumerate(job['sources'])]
-        stories.append({'topic_key':job['topic_key'],'channel':job['channel'],'category':job['category'],'ready':True,'summary':'A dated verified current event.','verified_facts':[{'text':'The actual event happened.','source_indices':list(range(len(sources)))}],'uncertainties':[],'visual_subject':'Exact named person','visual_queries':['Exact named person portrait','Exact named person photograph'],'sources':sources})
+        if job['topic_key'] in seen:continue
+        seen.add(job['topic_key'])
+        packet=copy.deepcopy(job['fact_packet'])
+        stories.append({**packet,'ready':True,'visual_subject':'Exact named person','visual_queries':['Exact named person portrait','Exact named person photograph']})
     return {'stories':stories}
 
 def evidence_for(manifest):return [{'url':s['url']} for story in manifest['stories'] for s in story['sources']]
@@ -57,12 +59,12 @@ class SourceManifest(unittest.TestCase):
         fixed=c.bind_researched_sources(self.jobs,self.manifest)
         self.assertEqual(len(fixed[0]['sources']),2)
 
-    def test_unready_packet_is_not_misreported_as_category_balance(self):
-        self.manifest['stories'][1]['category']=self.manifest['stories'][0]['category']
-        self.manifest['stories'][2]['ready']=False
+    def test_unready_packet_is_not_misreported_as_duplicate_topic(self):
+        self.manifest['stories'][1]['topic_key']=self.manifest['stories'][0]['topic_key']
+        self.manifest['stories'][1]['ready']=False
         with self.assertRaisesRegex(ValueError,'research_manifest_unready'):c.parse_research_manifest(json.dumps(self.manifest),evidence_for(self.manifest),set())
-        self.manifest['stories'][2]['ready']=True
-        with self.assertRaisesRegex(ValueError,'research_manifest_category_diversity'):c.parse_research_manifest(json.dumps(self.manifest),evidence_for(self.manifest),set())
+        self.manifest['stories'][1]['ready']=True
+        with self.assertRaisesRegex(ValueError,'research_manifest_topics'):c.parse_research_manifest(json.dumps(self.manifest),evidence_for(self.manifest),set())
 
     def test_commons_photo_metadata_cannot_count_as_independent_news(self):
         for host in ('commons.wikimedia.org','en.wikipedia.org'):

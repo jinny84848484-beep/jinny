@@ -1,0 +1,32 @@
+name: Shorts offline guards
+on:
+  push:
+    paths:
+      - '**.py'
+      - 'requirements.txt'
+      - 'config.json'
+      - '.github/workflows/shorts-tests.yml'
+  pull_request:
+    paths:
+      - '**.py'
+      - 'requirements.txt'
+      - 'config.json'
+      - '.github/workflows/shorts-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-guards:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Test guards without production or network
+        env:
+          SHORTS_STATE_DIR: ${{ runner.temp }}/shorts-offline-state
+        run: python tests/run_offline.py

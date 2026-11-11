@@ -1,6 +1,6 @@
 # Two-channel Shorts automation
 
-Original daily commentary: 오늘의 오지랖 (Korean) and A Not-So-Polite Korean (English, one Korean's perspective). Four different topics and categories per batch, two videos per channel.
+Original daily commentary: 오늘의 오지랖 (Korean) and A Not-So-Polite Korean (English, one Korean's perspective). Two different Korean issues per daily batch; they may share a category. Each issue becomes one Korean commentary for 오늘의 오지랖 and one English explanatory adaptation for 동방예의없국 (A Not-So-Polite Korean): four separate videos, two per channel. English introduces unfamiliar Korean terms and context rather than mechanically translating the Korean script. Both versions share one verified factual source packet and retain consistent dates, quantities, attribution and uncertainty.
 
 ## Current state
 The first eight videos, including the four November 5 stories, are public (see state/ledger.json). Both channels were verified by the YouTube API during today's uploads. Production is separately controlled by the repository variable PUBLIC_UPLOADS_ENABLED; check that variable and the latest Actions run for live state.
@@ -21,5 +21,15 @@ Google Trends KR/US RSS and web research discover topics. Claims require current
 state/ledger.json records submissions before paid generation and uploads. Ambiguous or interrupted submissions stop for reconciliation; do not clear their markers and rerun blindly. Completed days and published job IDs never upload twice. GitHub Actions artifacts retain produced media for seven days. Public view, like and comment snapshots record video age and category; compare within the same channel at similar ages. Retention, engaged views and revenue need a separate YouTube Analytics connection.
 
 ## Validation
-Run `python -m unittest discover -s tests -v`. Tests cover topic diversity, duplicate prevention, missing credentials, channel identity, interrupted requests, media ownership/relevance gates and caption continuity. A cloud preflight has passed; a successful preflight does not prove a future scheduled production batch will pass editorial review or upload successfully.
+Run `python -m unittest discover -s tests -v`. Tests cover two-issue/four-job pairing, shared facts, language-scoped media, historical recovery, duplicate prevention, missing credentials, channel identity, interrupted requests, media ownership/relevance gates and caption continuity. A cloud preflight has passed; a successful preflight does not prove a future scheduled production batch will pass editorial review or upload successfully.
 
+
+
+## Paired issue contract (from the next uncompleted daily batch)
+Research returns two shared issue packets. Drafting expands each packet into exactly one `ojirap` and one `korean` job with the same canonical topic key and category, but unique job IDs and separate scripts/audio/video. Source binding attaches the exact same factual packet and hash to both adaptations. English background claims require packet citations; no all-Koreans claim or fixed catchphrase is required.
+
+Deterministic checks enforce pairing, factual-packet identity, bibliography, same-channel recent-topic protection, job identity, channel-scoped media and the existing 6000-character cap. Four independent per-video reviews also see the counterpart and shared facts, and can reject inconsistent narration, unsupported background or mechanical translation. This is a review gate, not a guarantee of perfect semantic verification. The two pinned archived batches retain a content-hash-bound recovery path; arbitrary new four-topic batches cannot opt out.
+
+`Shorts offline guards` runs tests on the exact pushed commit with no production credentials or external provider calls. Passing it does not mean a new video was generated or published. Completed production dates return before preflight, metrics, research, TTS, rendering or upload.
+
+Unattended daily candidates are limited to routine low-impact public commentary. New serious allegations, sensitive personal facts or uncertain high-impact scope must fail review with `approval_required`; factual corroboration is not publication permission. Existing separately authorized additional-batch approvals remain unchanged.

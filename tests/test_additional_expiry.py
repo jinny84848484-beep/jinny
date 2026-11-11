@@ -2,13 +2,22 @@ import copy, json, pathlib, sys, unittest
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 import additional_batch as a, additional_expiry as x
 
-LEDGER = json.loads((pathlib.Path(__file__).resolve().parents[1] / 'state/ledger.json').read_text())
 B = '2026-11-07-extra-01'
+LEDGER = {
+    'days': {},
+    'publications': [{'job_id': 'prior-job', 'video_id': 'priorVid001', 'channel': 'ojirap', 'topic_key': 'prior-event'}],
+    'additional_batches': {B: {
+        'status': 'review_completed', 'production_date': '2026-11-07',
+        'job_id': '2026-11-07-fixture-extra', 'event_keys': ['fixture-extra-event'],
+        'checkpoints': {'review': {'status': 'completed'}},
+    }},
+    'additional_sessions': {'fixture-run': {'batch_id': B, 'status': 'waiting'}},
+}
 
 class Expiry(unittest.TestCase):
     def h(self, l): return a.digest(l['additional_batches'][B])
 
-    def test_real_ledger_expires_and_unblocks(self):
+    def test_review_completed_fixture_expires_and_unblocks(self):
         new = x.expire_stale_batch(LEDGER, B, today='2026-11-10', expected_record_hash=self.h(LEDGER))
         self.assertTrue(all(x.batch_resolved(r) for r in new['additional_batches'].values()))
         self.assertFalse(any(s['status'] == 'waiting' for s in new['additional_sessions'].values()))
@@ -46,8 +55,6 @@ class Expiry(unittest.TestCase):
         new = x.expire_stale_batch(LEDGER, B, today='2026-11-10', expected_record_hash=self.h(LEDGER))
         c.assert_no_unresolved_additional(new)
 
-if __name__ == '__main__':
-    unittest.main()
 
 
 class MetricsNonBlocking(unittest.TestCase):
@@ -80,6 +87,14 @@ class ExternalUpload(unittest.TestCase):
         import cloud_runner as c
         c.assert_no_unresolved_additional(new)
 
+    def test_resolved_external_record_is_terminal_and_cannot_be_expired_again(self):
+        resolved=x.resolve_external_upload(LEDGER,B,today='2026-11-10',expected_record_hash=a.digest(LEDGER['additional_batches'][B]),video_id='fixture0001',channel='ojirap',channel_id='fixture-channel')
+        before=copy.deepcopy(resolved)
+        self.assertTrue(x.batch_resolved(resolved['additional_batches'][B]))
+        with self.assertRaisesRegex(ValueError,'review_completed'):
+            x.expire_stale_batch(resolved,B,today='2026-11-11',expected_record_hash=a.digest(resolved['additional_batches'][B]))
+        self.assertEqual(resolved,before)
+
     def test_external_rejects_bad_id_and_duplicates(self):
         h = a.digest(LEDGER['additional_batches'][B])
         with self.assertRaises(Exception):
@@ -89,3 +104,7 @@ class ExternalUpload(unittest.TestCase):
         with self.assertRaises(Exception):
             x.resolve_external_upload(LEDGER, B, today='2026-11-10', expected_record_hash=h,
                                       video_id=dup, channel='ojirap', channel_id='x')
+
+
+if __name__ == '__main__':
+    unittest.main()

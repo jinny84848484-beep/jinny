@@ -89,7 +89,7 @@ def assert_waiting(ledger, day, identity):
 
 
 def reject_unknown_fields(jobs):
-    job_fields={'id','channel','topic_key','category','title','description','sources','scenes','experiment','opening_text','visual_queries','visual_source_titles'}
+    job_fields={'id','channel','topic_key','category','title','description','sources','scenes','experiment','opening_text','visual_queries','visual_source_titles','format_version','fact_packet','fact_packet_hash'}
     source_fields={'title','url'}
     scene_fields={'kind','headline','body','narration','source_indices'}
     for job in jobs:
@@ -117,7 +117,7 @@ def validate_staged(jobs, day, ledger):
     # No correction, research, paid request, ledger write or media search here.
     if not isinstance(jobs, list):
         raise ValueError('Invalid staged schema')
-    recent = {x.get('topic_key', '').lower() for x in ledger.get('publications', [])[-40:]}
+    recent = c.recent_topics(ledger)
     slots=tuple((job['channel'],job['category']) for job in jobs)
     reject_unknown_fields(jobs)
     # The legacy validator stamps provenance while checking. Keep those synthetic

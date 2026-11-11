@@ -122,14 +122,20 @@ class StagedRunner(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError,'metadata rejected'):r.fetch_envelope('state/staging/123-1.json')
 
     def test_film_music_plan_passes_with_diversity_and_balance(self):
-        jobs=valid_jobs();jobs[0]['category']='film';jobs[1]['category']='music'
+        jobs=valid_jobs()
+        for job in jobs:
+            job['category']='film' if job['topic_key']=='unique-event-0' else 'music'
+            job['fact_packet']['category']=job['category'];job['fact_packet_hash']=c.fingerprint(job['fact_packet'])
         plan=r.validate_staged(jobs,DAY,{'publications':[]})
         self.assertIn(('korean','film'),plan);self.assertIn(('korean','music'),plan)
         jobs[1]['category']='film'
-        with self.assertRaisesRegex(ValueError,'distinct categories'):r.validate_staged(jobs,DAY,{'publications':[]})
+        with self.assertRaisesRegex(ValueError,'categories must match'):r.validate_staged(jobs,DAY,{'publications':[]})
 
     def test_selected_plan_reaches_review_and_publish(self):
-        jobs=valid_jobs();jobs[0]['category']='film';jobs[1]['category']='music'
+        jobs=valid_jobs()
+        for job in jobs:
+            job['category']='film' if job['topic_key']=='unique-event-0' else 'music'
+            job['fact_packet']['category']=job['category'];job['fact_packet_hash']=c.fingerprint(job['fact_packet'])
         with ExitStack() as stack:
             ledger,receiver,put,fetch,preflight,review,publish,get=self.setup_run(stack,jobs)
             r.run_staged()
@@ -205,7 +211,7 @@ class StagedRunner(unittest.TestCase):
             jobs=valid_jobs();media={};selection={}
             for index,job in enumerate(jobs):
                 names=[f'image-{index}-a',f'image-{index}-b']
-                for name in names:media[name]={'topic_key':job['topic_key'],'relevance_verified':False}
+                for name in names:media[name]={'topic_key':job['topic_key'],'channel':job['channel'],'relevance_verified':False}
                 selection[job['id']]=names*2
             stack.enter_context(patch.object(c.relevant_media,'candidates',return_value=media))
             def provider(prompt,*args,**kwargs):

@@ -47,11 +47,11 @@ def fetch_candidates(params,topic,channel,expected_titles=None):
         if not url:continue
         source=urllib.parse.urlparse(info.get('descriptionurl',''))
         if source.scheme!='https' or source.hostname!='commons.wikimedia.org':continue
-        key='commons-'+str(page['pageid'])+'-'+hashlib.sha256(topic.encode()).hexdigest()[:8]
+        key='commons-'+str(page['pageid'])+'-'+hashlib.sha256((topic+'|'+channel).encode()).hexdigest()[:8]
         capture_date=get('DateTimeOriginal')[:100]
         year=re.search(r'(?<!\d)(?:18|19|20)\d{2}(?!\d)',capture_date)
         notice=('자료사진 · ' if channel=='ojirap' else 'ARCHIVE PHOTO · ')+(year.group() if year else ('촬영일 미상' if channel=='ojirap' else 'DATE UNKNOWN'))
-        found[key]={'url':url,'source':info['descriptionurl'],'path':'assets/'+key+('.png' if info['mime']=='image/png' else '.jpg'),'media_type':'image','credit':get('Artist')[:350]+' / Wikimedia Commons','license':license,'license_url':license_url,'notice':notice,'description':get('ImageDescription')[:1200],'capture_date':capture_date,'title':page['title'],'topic_key':topic,'relevance_verified':False,'checked_at':p.now().isoformat()}
+        found[key]={'url':url,'source':info['descriptionurl'],'path':'assets/'+key+('.png' if info['mime']=='image/png' else '.jpg'),'media_type':'image','credit':get('Artist')[:350]+' / Wikimedia Commons','license':license,'license_url':license_url,'notice':notice,'description':get('ImageDescription')[:1200],'capture_date':capture_date,'title':page['title'],'topic_key':topic,'channel':channel,'relevance_verified':False,'checked_at':p.now().isoformat()}
     return found
 
 def candidates(jobs):
@@ -75,7 +75,7 @@ def apply_review(jobs,media,selection):
         choices=selection.get(job['id'],[])
         if len(choices)!=len(job['scenes']) or len(set(choices))<2:raise ValueError('Each story needs two reviewed relevant images')
         for scene,key in zip(job['scenes'],choices):
-            if key not in media or media[key]['topic_key']!=job['topic_key']:raise ValueError('Media belongs to another story')
+            if key not in media or media[key]['topic_key']!=job['topic_key'] or media[key].get('channel',None if job.get('format_version') else job['channel'])!=job['channel']:raise ValueError('Media belongs to another story')
             scene['media']=key;media[key]['relevance_verified']=True
     library=p.read(p.ROOT/'assets/media-library.json',{});library.update(media);p.write(p.ROOT/'assets/media-library.json',library)
 

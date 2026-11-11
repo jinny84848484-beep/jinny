@@ -8,12 +8,12 @@ from test_source_manifest import manifest_for,evidence_for
 class ResearchRepair(unittest.TestCase):
     def setUp(self):
         self.original=manifest_for(batch());self.fixed=copy.deepcopy(self.original)
-        for index in (2,3):
+        for index in (1,):
             self.original['stories'][index]['ready']=False
             story=self.fixed['stories'][index];story['topic_key']='replacement-event-'+str(index)
             for source in story['sources']:source['url']+='/replacement-'+str(index)
         self.old_evidence=evidence_for(self.original)
-        self.new_evidence=evidence_for({'stories':self.fixed['stories'][2:]})
+        self.new_evidence=evidence_for({'stories':self.fixed['stories'][1:]})
         self.ledger={'days':{'day':{}},'publications':[]}
 
     def run_repair(self,provider):
@@ -24,7 +24,7 @@ class ResearchRepair(unittest.TestCase):
         self.assertEqual(self.run_repair(provider),self.fixed)
         provider.assert_called_once()
         self.assertEqual(provider.call_args.kwargs['stage'],'research_repair')
-        self.assertIn('unique-event-2',provider.call_args.args[0])
+        self.assertIn('unique-event-1',provider.call_args.args[0])
         self.assertIn('Do not reuse any excluded unready event',provider.call_args.args[0])
 
     def test_still_unready_holds_after_one_repair_without_a_loop(self):

@@ -101,7 +101,7 @@ class EditorialDecision(unittest.TestCase):
         self.media={};self.selection={}
         for index,job in enumerate(self.jobs):
             ids=[f'image-{index}-a',f'image-{index}-b']
-            for key in ids:self.media[key]={'topic_key':job['topic_key'],'relevance_verified':False}
+            for key in ids:self.media[key]={'topic_key':job['topic_key'],'channel':job['channel'],'relevance_verified':False}
             self.selection[job['id']]=ids*2
 
     def test_pass_requires_exact_job_and_scene_selection(self):
@@ -179,7 +179,7 @@ class ProductionResume(unittest.TestCase):
         day='2026-11-05';jobs=batch();media={};selection={}
         for index,job in enumerate(jobs):
             ids=[f'image-{index}-a',f'image-{index}-b']
-            for key in ids:media[key]={'topic_key':job['topic_key'],'relevance_verified':False}
+            for key in ids:media[key]={'topic_key':job['topic_key'],'channel':job['channel'],'relevance_verified':False}
             selection[job['id']]=ids*2
         ledger={'days':{},'publications':[]}
         def save(value,sha):return 'next-sha'

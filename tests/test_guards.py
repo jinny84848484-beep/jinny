@@ -5,9 +5,15 @@ import cloud_runner as c
 
 def batch():
     jobs=[]
-    for i,(channel,category) in enumerate(zip(['korean','korean','ojirap','ojirap'],['politics','sports','technology','entertainment'])):
+    for i,(channel,category) in enumerate(zip(['korean','korean','ojirap','ojirap'],['technology','culture','technology','culture'])):
         narration=('One Korean perspective explains this current event with verified facts and original personal commentary. ' * 2) if channel=='korean' else ('오늘의 소식을 확인하고 제 생각을 덧붙입니다. ' * 3)
-        jobs.append({'id':f'2026-11-05-test-{i}','channel':channel,'category':category,'topic_key':f'unique-event-{i}','title':'Test title','sources':[{'title':'A','url':'https://example.com/news/a'},{'title':'B','url':'https://example.org/news/b'}],'scenes':[{'kind':'fact','headline':'Test','body':'Text','narration':narration,'source_indices':[0,1]} for _ in range(4)]})
+        jobs.append({'id':f'2026-11-05-test-{i}','channel':channel,'category':category,'topic_key':f'unique-event-{i%2}','title':'Test title','sources':[{'title':'A','url':'https://example.com/news/a'},{'title':'B','url':'https://example.org/news/b'}],'scenes':[{'kind':'fact','headline':'Test','body':'Text','narration':narration,'source_indices':[0,1]} for _ in range(4)]})
+    for job in jobs:
+        packet={'topic_key':job['topic_key'],'category':job['category'],
+                'summary':'Dated current event '+job['topic_key'],
+                'verified_facts':[{'text':'Verified event '+job['topic_key'],'source_indices':[0,1]}],
+                'uncertainties':[], 'sources':[{**source,'role':'primary' if i==0 else 'independent_reporting','accessed':True} for i,source in enumerate(job['sources'])]}
+        job.update(format_version=c.PAIRED_FORMAT,fact_packet=packet,fact_packet_hash=c.fingerprint(packet))
     return jobs
 
 class Guards(unittest.TestCase):
@@ -15,7 +21,7 @@ class Guards(unittest.TestCase):
         result={'output':[{'type':'web_search_call','action':{'type':'open_page','url':'https://example.org/report'}},{'type':'message','content':[{'type':'output_text','annotations':[{'type':'url_citation','url':'https://example.org/report','title':'Report'}]}]}]}
         self.assertEqual([s['url'] for s in c.research_sources(result)],['https://example.org/report'])
 
-    def test_batch_accepts_four_different_topics(self):
+    def test_batch_accepts_two_topics_in_two_languages(self):
         c.validate_batch(batch(),'2026-11-05',set())
 
     def test_duplicate_topic_stops(self):
