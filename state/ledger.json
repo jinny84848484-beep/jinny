@@ -1378,6 +1378,18 @@
       "verification_source": "authenticated_youtube_upload_inventory_and_studio",
       "generation_cost_reconciliation": "Provider usage retained separately in production receipts; no cost inferred from publication",
       "publication_actor_note": "English videos published by assistant. Korean videos were already public when inspected; actor not established."
+    },
+    "2026-11-12": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "8232c31b257666bfe134f40a64318d597222934f5eca86e80a7d2af9d2764c92",
+          "attempts": 1,
+          "at": "2026-11-12T08:41:28.071420+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
