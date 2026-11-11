@@ -1351,6 +1351,33 @@
       "automation_run_id": null,
       "verification_source": "authenticated_youtube_upload_inventory",
       "generation_cost_reconciliation": "Provider usage retained separately in production receipts; no cost inferred from publication"
+    },
+    "2026-11-11": {
+      "status": "complete",
+      "method": "external_manual_publication",
+      "completion_scope": "Two verified public videos per channel; not an automated production execution",
+      "completed_at": "2026-11-11T00:35:48Z",
+      "recorded_at": "2026-11-11T00:36:59.624723+00:00",
+      "video_ids": [
+        "GTVA7d75w3g",
+        "n2vPk53caSQ",
+        "rugc5araG3Q",
+        "kx7nmsbnXcA"
+      ],
+      "job_ids": [
+        "2026-11-11-ko-01",
+        "2026-11-11-ko-02",
+        "2026-11-11-en-01",
+        "2026-11-11-en-02"
+      ],
+      "channel_counts": {
+        "ojirap": 2,
+        "korean": 2
+      },
+      "automation_run_id": null,
+      "verification_source": "authenticated_youtube_upload_inventory_and_studio",
+      "generation_cost_reconciliation": "Provider usage retained separately in production receipts; no cost inferred from publication",
+      "publication_actor_note": "English videos published by assistant. Korean videos were already public when inspected; actor not established."
     }
   },
   "publications": [
@@ -1638,6 +1665,86 @@
       "file_sha256": "5c2963b5a1f202ffdc228d627a2711798957aa91905175c832bb936170e190ef",
       "verified_at": "2026-11-10T14:27:02.180611+00:00",
       "verification_source": "authenticated_youtube_upload_inventory",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-11-ko-01",
+      "topic_key": "ojirap-farmers-day-2026",
+      "event_keys": [
+        "kr-farmers-day-2026-11-11"
+      ],
+      "category": "commentary",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "11월 11일, 가래떡에도 사연이 있습니다",
+      "video_id": "GTVA7d75w3g",
+      "url": "https://youtube.com/shorts/GTVA7d75w3g",
+      "at": "2026-11-11T00:35:48Z",
+      "publication_method": "external_manual",
+      "published_by": "unverified_actor",
+      "file_sha256": "d78a77b620d239a71e34e296a804d909e5c01595a37fa5dc388735df50cecf0f",
+      "verified_at": "2026-11-11T00:36:59.624723+00:00",
+      "verification_source": "authenticated_youtube_upload_inventory_and_studio",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-11-ko-02",
+      "topic_key": "ojirap-csat-smart-glasses-2026",
+      "event_keys": [
+        "kr-moe-csat-candidate-guidance-2026-11-09"
+      ],
+      "category": "commentary",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "수능 AI 안경 주의, 모바일 신분증도 안 됩니다",
+      "video_id": "n2vPk53caSQ",
+      "url": "https://youtube.com/shorts/n2vPk53caSQ",
+      "at": "2026-11-11T00:35:33Z",
+      "publication_method": "external_manual",
+      "published_by": "unverified_actor",
+      "file_sha256": "8f6a0b329272f034805eb4f10037acbb9796729daf93b00920672ead504dcb0c",
+      "verified_at": "2026-11-11T00:36:59.624723+00:00",
+      "verification_source": "authenticated_youtube_upload_inventory_and_studio",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-11-en-01",
+      "topic_key": "korean-caltech-astra-orbit-assembly",
+      "event_keys": [
+        "caltech-astra-orbit-assembly-announced-2026-11-05"
+      ],
+      "category": "commentary",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "A Robot Built in Space. Just Not the Whole Thing.",
+      "video_id": "rugc5araG3Q",
+      "url": "https://youtube.com/shorts/rugc5araG3Q",
+      "at": "2026-11-11T00:33:39Z",
+      "publication_method": "external_manual",
+      "published_by": "assistant",
+      "file_sha256": "b581263051bdf9ac6ee968bd6330aca67375884a1358a5b340ad97f3697663ee",
+      "verified_at": "2026-11-11T00:36:59.624723+00:00",
+      "verification_source": "authenticated_youtube_upload_inventory_and_studio",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-11-en-02",
+      "topic_key": "korean-lego-godzilla-launch",
+      "event_keys": [
+        "lego-godzilla-21375-announced-2026-11-03"
+      ],
+      "category": "commentary",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "LEGO Godzilla Has a Housing Problem",
+      "video_id": "kx7nmsbnXcA",
+      "url": "https://youtube.com/shorts/kx7nmsbnXcA",
+      "at": "2026-11-11T00:34:44Z",
+      "publication_method": "external_manual",
+      "published_by": "assistant",
+      "file_sha256": "3e901dc9e73c6e0dc9bcb1b12aa410daecc9ccd43d31cd0278484902c7a5848d",
+      "verified_at": "2026-11-11T00:36:59.624723+00:00",
+      "verification_source": "authenticated_youtube_upload_inventory_and_studio",
       "experiment": {}
     }
   ],
