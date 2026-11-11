@@ -1382,13 +1382,16 @@
     "2026-11-12": {
       "checkpoints": {
         "research": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "8232c31b257666bfe134f40a64318d597222934f5eca86e80a7d2af9d2764c92",
           "attempts": 1,
-          "at": "2026-11-12T08:41:28.071420+09:00"
+          "at": "2026-11-12T08:41:28.071420+09:00",
+          "usable": true,
+          "sha256": "4b58e89490e1b3a815be80ca2ec8b787a619ad96c8cded4a8ff6fc65e872c7ca",
+          "completed_at": "2026-11-12T08:42:20.181957+09:00"
         }
       },
-      "status": "research_submitted",
+      "status": "research_completed",
       "active_stage": "research"
     }
   },
