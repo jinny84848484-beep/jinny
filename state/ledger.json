@@ -1433,13 +1433,16 @@
           "completed_at": "2026-11-13T08:33:27.785236+09:00"
         },
         "draft": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "fd9bb1b2f09cf93a078d82a090db8a3a0c4d2860f45ca245acabdfa33819e40a",
           "attempts": 1,
-          "at": "2026-11-13T08:33:28.874196+09:00"
+          "at": "2026-11-13T08:33:28.874196+09:00",
+          "usable": true,
+          "sha256": "c2d15a08b1cf11989cce9841f225f4a2b3b6a02da544f10a3e35175e74133e1f",
+          "completed_at": "2026-11-13T08:34:22.884548+09:00"
         }
       },
-      "status": "draft_submitted",
+      "status": "draft_completed",
       "active_stage": "draft"
     }
   },
