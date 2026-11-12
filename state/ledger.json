@@ -1779,6 +1779,78 @@
       "verified_at": "2026-11-11T00:36:59.624723+00:00",
       "verification_source": "authenticated_youtube_upload_inventory_and_studio",
       "experiment": {}
+    },
+    {
+      "job_id": "2026-11-12-external-ko-kimjang",
+      "video_id": "EM3TQx3KEuU",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "김장 할인 ‘최대 50%’, 배추가 전부 반값은 아닙니다",
+      "topic_key": "kimjang-discount-support-2026",
+      "event_keys": [
+        "kr-kimjang-discount-plan-2026-11-03"
+      ],
+      "category": "commentary",
+      "url": "https://youtube.com/shorts/EM3TQx3KEuU",
+      "publication_method": "external_manual",
+      "verification_source": "youtube_studio_public_status",
+      "verified_at": "2026-11-12T12:42:40.812Z",
+      "confirmed_at": "2026-11-12",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-12-external-ko-gstar",
+      "video_id": "92NKbzc0yEA",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "지스타 2026 일반표, 현장에서 못 삽니다 | 가기 전 확인",
+      "topic_key": "gstar-2026-online-ticket-guide",
+      "event_keys": [
+        "gstar-2026-btc-online-ticket-policy"
+      ],
+      "category": "commentary",
+      "url": "https://youtube.com/shorts/92NKbzc0yEA",
+      "publication_method": "external_manual",
+      "verification_source": "youtube_studio_public_status",
+      "verified_at": "2026-11-12T12:42:38.037Z",
+      "confirmed_at": "2026-11-12",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-12-external-en-kimjang",
+      "video_id": "BRJz-Q6k6U4",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "Korea’s Kimchi Season: “Up to 50% Off” Isn’t the Whole Story",
+      "topic_key": "kimjang-discount-support-2026",
+      "event_keys": [
+        "kr-kimjang-discount-plan-2026-11-03"
+      ],
+      "category": "commentary",
+      "url": "https://youtube.com/shorts/BRJz-Q6k6U4",
+      "publication_method": "external_manual",
+      "verification_source": "youtube_studio_public_status",
+      "verified_at": "2026-11-12T12:41:19.731Z",
+      "confirmed_at": "2026-11-12",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-12-external-en-gstar",
+      "video_id": "eENFt2n1GPg",
+      "channel": "korean",
+      "channel_id": "UCWFQVq3zxSnMi1sa0dUTVMQ",
+      "title": "G-STAR 2026 in Busan: No On-Site Tickets | Book Before You Go",
+      "topic_key": "gstar-2026-online-ticket-guide",
+      "event_keys": [
+        "gstar-2026-btc-online-ticket-policy"
+      ],
+      "category": "commentary",
+      "url": "https://youtube.com/shorts/eENFt2n1GPg",
+      "publication_method": "external_manual",
+      "verification_source": "youtube_studio_public_status",
+      "verified_at": "2026-11-12T12:41:38.092Z",
+      "confirmed_at": "2026-11-12",
+      "experiment": {}
     }
   ],
   "additional_sessions": {
