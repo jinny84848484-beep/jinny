@@ -1411,6 +1411,18 @@
           "at": "2026-11-12T08:42:51.660772+09:00"
         }
       ]
+    },
+    "2026-11-13": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "89d8e3e92eb3484de9e3f5fca2d401ba44996212c419647643dd3193b5aa44da",
+          "attempts": 1,
+          "at": "2026-11-13T08:32:10.766286+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
