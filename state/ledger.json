@@ -1442,8 +1442,46 @@
           "completed_at": "2026-11-13T08:34:22.884548+09:00"
         }
       },
-      "status": "draft_completed",
-      "active_stage": "draft"
+      "status": "draft_validation_failed",
+      "active_stage": "draft",
+      "retry_hold": true,
+      "draft_failures": [
+        {
+          "reason": "draft_schema_type",
+          "job_count": 4,
+          "narration_counts": [
+            {
+              "job_index": 0,
+              "channel": "ojirap",
+              "characters": 380,
+              "words": 90,
+              "scene_count": 5
+            },
+            {
+              "job_index": 1,
+              "channel": "korean",
+              "characters": 720,
+              "words": 112,
+              "scene_count": 5
+            },
+            {
+              "job_index": 2,
+              "channel": "ojirap",
+              "characters": 372,
+              "words": 86,
+              "scene_count": 5
+            },
+            {
+              "job_index": 3,
+              "channel": "korean",
+              "characters": 803,
+              "words": 116,
+              "scene_count": 5
+            }
+          ],
+          "at": "2026-11-13T08:34:23.925688+09:00"
+        }
+      ]
     }
   },
   "publications": [
