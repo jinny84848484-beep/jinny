@@ -511,7 +511,10 @@ def validate_batch(jobs,day,recent,*,slots=None):
         job.update(channel_id=p.cfg()['channels'][job['channel']]['channel_id'],editorial_status='verified',verified_at=p.now().isoformat())
         for source in job['sources']:source['checked_at']=job['verified_at']
         for scene in job['scenes']:
-            if scene.get('media') not in library:scene.pop('media',None)
+            # Draft media is advisory only; editorial review selects reviewed assets.
+            # A non-string value (e.g. {"relevance": ...}) must never reach a dict lookup.
+            media=scene.get('media')
+            if not isinstance(media,str) or media not in library:scene.pop('media',None)
         characters+=len(p.validate(job))
     if characters>p.cfg()['daily_character_cap']:raise ValueError('Daily narration cap exceeded')
 
@@ -628,7 +631,7 @@ class MediaDownloadError(RuntimeError):
 
 def download_media(jobs):
     lib=p.read(p.ROOT/'assets/media-library.json')
-    for name in {s.get('media') for j in jobs for s in j['scenes']} - {None}:
+    for name in {s.get('media') for j in jobs for s in j['scenes'] if isinstance(s.get('media'),str)}:
         media=lib[name];target=(p.ROOT/media['path']).resolve()
         if not target.is_relative_to(p.ROOT.resolve()):raise ValueError('Unsafe media path')
         if target.exists():continue
@@ -900,7 +903,7 @@ def publish_reviewed(ledger,sha,day,*,slots=None,stage_callback=None):
     assert_additional_day_budget(ledger,day,jobs)
     for job in jobs:
         for scene in job['scenes']:
-            media=library.get(scene.get('media'),{})
+            media=library.get(scene.get('media'),{}) if isinstance(scene.get('media'),str) else {}
             if not media.get('relevance_verified') or media.get('topic_key')!=job['topic_key'] or not media_matches_channel(media,job):raise RuntimeError('Direct media relevance is not verified')
     stage('download')
     download_media(jobs)
