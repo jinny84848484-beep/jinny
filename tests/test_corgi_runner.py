@@ -110,3 +110,8 @@ class Corgi(unittest.TestCase):
         with patch.object(r.c,'journal_put',return_value='new'),patch.object(r,'upload',return_value='abcdefghijk'),patch.object(r.c,'http',return_value={'items':[{'id':'abcdefghijk','snippet':{'channelId':'other'},'status':{'privacyStatus':'public'}}]}):
             with self.assertRaisesRegex(RuntimeError,'verification incomplete'):r.run()
         self.assertEqual(ledger['corgi_publications']['corgi-01']['status'],'verification_pending')
+
+    def test_publish_step_has_writable_state_directory(self):
+        workflow=(Path(r.__file__).resolve().parent/'.github/workflows/corgi.yml').read_text()
+        publish=workflow.split('      - name: Publish approved artifact only',1)[1]
+        self.assertIn('SHORTS_STATE_DIR: ${{ runner.temp }}/corgi-state',publish)

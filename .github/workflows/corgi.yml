@@ -36,6 +36,7 @@ jobs:
       - name: Publish approved artifact only
         run: python corgi_runner.py
         env:
+          SHORTS_STATE_DIR: ${{ runner.temp }}/corgi-state
           CORGI_MODE: ${{ github.event_name == 'schedule' && 'publish' || inputs.mode }}
           YOUTUBE_KOREAN_OAUTH: ${{ secrets.YOUTUBE_KOREAN_OAUTH }}
           GITHUB_TOKEN: ${{ github.token }}
