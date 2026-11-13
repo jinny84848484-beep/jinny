@@ -97,7 +97,7 @@ class StageCheckpoints(unittest.TestCase):
 
 class EditorialDecision(unittest.TestCase):
     def setUp(self):
-        self.jobs=batch()
+        self.jobs=[job for job in batch() if job['channel']=='ojirap']
         self.media={};self.selection={}
         for index,job in enumerate(self.jobs):
             ids=[f'image-{index}-a',f'image-{index}-b']
@@ -153,16 +153,16 @@ class EditorialDecision(unittest.TestCase):
         ledger={'days':{'2026-11-05':{}},'publications':[]};requests=[]
         def provider(prompt,*args,**kwargs):
             job=json.loads(prompt.split('\nJOB:\n',1)[1].split('\nIMAGE METADATA:\n',1)[0]);requests.append((job,kwargs['instructions']))
-            code='english_hook' if job['channel']=='ojirap' else 'source_inaccessible'
+            code='source_inaccessible' if len(requests)==1 else 'english_hook'
             return json.dumps({'status':'FAIL','issues':[{'code':code,'job_index':0,'scene_index':-1,'explanation':'PRIVATE exact missing evidence'}],'selection':{}}),[{'url':'https://example.org'}]
         with tempfile.TemporaryDirectory() as directory,patch.object(c.p,'ROOT',Path(directory)),patch.object(c,'journal_put',return_value='sha'),patch.object(c.relevant_media,'candidates',return_value=self.media),patch.object(c,'openai',side_effect=provider) as api,redirect_stdout(io.StringIO()) as log:
             with self.assertRaisesRegex(RuntimeError,'Editorial review did not pass'):c.review_jobs(ledger,'sha','2026-11-05',self.jobs)
-            self.assertEqual(api.call_count,4)
+            self.assertEqual(api.call_count,2)
             details=(c.p.ROOT/'runs/2026-11-05/checkpoints/editorial-details.json').read_text()
             self.assertIn('PRIVATE exact missing evidence',details)
             self.assertNotIn('PRIVATE',log.getvalue())
         self.assertNotIn('PRIVATE',json.dumps(ledger))
-        self.assertEqual([x['code'] for x in ledger['days']['2026-11-05']['editorial_diagnostic']['issues']],['source_inaccessible','source_inaccessible','review_contract','review_contract'])
+        self.assertEqual([x['code'] for x in ledger['days']['2026-11-05']['editorial_diagnostic']['issues']],['source_inaccessible','review_contract'])
         for job,instructions in requests:
             self.assertIn('ONLY the ONE',instructions)
             if job['channel']=='ojirap':self.assertIn('english_hook check does not apply',instructions)
@@ -176,7 +176,7 @@ class EditorialDecision(unittest.TestCase):
 
 class ProductionResume(unittest.TestCase):
     def test_media_outage_resumes_saved_research_and_draft_without_paid_repeats(self):
-        day='2026-11-05';jobs=batch();media={};selection={}
+        day='2026-11-05';jobs=[job for job in batch() if job['channel']=='ojirap'];media={};selection={}
         for index,job in enumerate(jobs):
             ids=[f'image-{index}-a',f'image-{index}-b']
             for key in ids:media[key]={'topic_key':job['topic_key'],'channel':job['channel'],'relevance_verified':False}
@@ -185,8 +185,13 @@ class ProductionResume(unittest.TestCase):
         def save(value,sha):return 'next-sha'
         def provider(prompt,*args,**kwargs):
             stage=kwargs['stage']
-            if stage=='research':return json.dumps(manifest_for(jobs)),evidence_for(manifest_for(jobs))
-            if stage=='draft':return json.dumps({'jobs':jobs}),[]
+            if stage=='research':
+                self.assertNotIn('English explanatory adaptation',prompt)
+                self.assertNotIn(c.ADAPTATION_INSTRUCTIONS,kwargs['instructions'])
+                return json.dumps(manifest_for(jobs)),evidence_for(manifest_for(jobs))
+            if stage=='draft':
+                self.assertIn('exactly two Korean-only jobs',prompt)
+                return json.dumps({'jobs':jobs}),[]
             self.assertEqual(stage,'editorial_review')
             job=json.loads(prompt.split('\nJOB:\n',1)[1].split('\nIMAGE METADATA:\n',1)[0])
             return json.dumps({'status':'PASS','issues':[],'selection':{job['id']:selection[job['id']]}}),[{'url':'https://example.org/report'}]
@@ -197,7 +202,7 @@ class ProductionResume(unittest.TestCase):
                 self.assertEqual(ledger['days'][day]['status'],'draft_completed')
                 self.assertEqual(api.call_count,2);publish.assert_not_called()
                 c.produce()
-                self.assertEqual(api.call_count,6);collect.assert_called_once();publish.assert_called_once()
+                self.assertEqual(api.call_count,4);collect.assert_called_once();publish.assert_called_once()
                 self.assertEqual(ledger['days'][day]['status'],'reviewed')
                 self.assertFalse(ledger['days'][day]['retry_hold'])
 

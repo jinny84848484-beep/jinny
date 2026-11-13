@@ -115,7 +115,7 @@ class Enabled(unittest.TestCase):
         self.assertIn('Never relax factual, source independence or primary-source requirements', text)
 
     def test_one_story_without_photos_no_longer_holds_the_batch(self):
-        jobs = batch()
+        jobs = [job for job in batch() if job['channel']=='ojirap']
         def fake(group):
             if group[0]['topic_key'] == jobs[0]['topic_key']:
                 raise RuntimeError('Not enough relevant licensed photo candidates; batch held')
@@ -126,7 +126,7 @@ class Enabled(unittest.TestCase):
         self.assertFalse(any(v['topic_key'] == jobs[0]['topic_key'] for v in media.values()))
 
     def test_story_without_photos_passes_with_graphics_after_full_review(self):
-        jobs = batch()
+        jobs = [job for job in batch() if job['channel']=='ojirap']
         media = {k: v for k, v in photos(jobs).items() if v['topic_key'] != jobs[0]['topic_key']}
         seen = []
         def provider(prompt, *args, **kwargs):
@@ -136,7 +136,7 @@ class Enabled(unittest.TestCase):
             keys = [g.media_key(job, i) for i in range(len(job['scenes']))] if not own else (own * 4)[:len(job['scenes'])]
             return json.dumps({'status': 'PASS', 'issues': [], 'selection': {job['id']: keys}}), URLS
         ledger, api = self.run_review(jobs, provider, media)
-        self.assertEqual(api.call_count, 4)
+        self.assertEqual(api.call_count, 2)
         record = ledger['days'][DAY]
         self.assertEqual(record['status'], 'reviewed')
         graphic_jobs = {job['id'] for job in jobs if job['topic_key'] == jobs[0]['topic_key']}
@@ -151,7 +151,7 @@ class Enabled(unittest.TestCase):
                 self.assertIn('report only media issue codes', instructions)
 
     def test_media_only_failure_switches_that_story_to_graphics(self):
-        jobs = batch()
+        jobs = [job for job in batch() if job['channel']=='ojirap']
         media = photos(jobs)
         def provider(prompt, *args, **kwargs):
             job = job_of(prompt)
@@ -167,7 +167,7 @@ class Enabled(unittest.TestCase):
         self.assertEqual(details['decisions'][1]['replaced_media_decision']['issues'][0]['code'], 'media_relevance')
 
     def test_factual_issue_still_holds_even_with_media_issue(self):
-        jobs = batch()
+        jobs = [job for job in batch() if job['channel']=='ojirap']
         media = photos(jobs)
         fail = json.dumps({'status': 'FAIL', 'issues': [
             {'code': 'media_relevance', 'job_index': 0, 'scene_index': 1, 'explanation': 'Wrong photo.'},
@@ -176,7 +176,7 @@ class Enabled(unittest.TestCase):
             self.run_review(jobs, lambda *a, **k: (fail, URLS), media)
 
     def test_invalid_graphics_selection_is_a_contract_failure(self):
-        jobs = batch()
+        jobs = [job for job in batch() if job['channel']=='ojirap']
         def provider(prompt, *args, **kwargs):
             job = job_of(prompt)
             return json.dumps({'status': 'PASS', 'issues': [], 'selection': {job['id']: ['invented-a', 'invented-b', 'invented-a', 'invented-b']}}), URLS

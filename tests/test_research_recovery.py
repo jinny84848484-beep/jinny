@@ -91,7 +91,7 @@ class ResearchRecovery(unittest.TestCase):
                     return 'new-sha'
                 researched=response(True,json.dumps(manifest_for(batch())))
                 researched['output'][-1]['action']['sources']=evidence_for(manifest_for(batch()))
-                responses=[response()] if failure_stage=='research' else [researched,response(text=json.dumps({'jobs':batch()})),response()]
+                responses=[response()] if failure_stage=='research' else [researched,response(text=json.dumps({'jobs':[job for job in batch() if job['channel']=='ojirap']})),response()]
                 with patch.dict(c.os.environ,{'PUBLIC_UPLOADS_ENABLED':'true','OPENAI_API_KEY':'test'}),patch.object(c,'journal_get',return_value=(ledger,'sha')),patch.object(c,'journal_put',side_effect=save),patch.object(c,'preflight'),patch.object(c,'collect_metrics'),patch.object(c.p,'collect',return_value={'path':'unused'}),patch.object(c.p,'read',return_value={}),patch.object(c,'validate_batch'),patch.object(c.relevant_media,'candidates',return_value={}),patch.object(c,'http',side_effect=responses) as network,patch.object(c.media_renderer,'render') as render,patch.object(c,'upload') as upload:
                     with self.assertRaises(c.CompletedResearchUnusable):c.produce()
                     self.assertEqual(network.call_count,len(responses))

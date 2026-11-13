@@ -119,7 +119,7 @@ def news_candidates():
 
 def collect():
     results=[]; errors=[]
-    for geo in ("KR","US"):
+    for geo in ("KR",):
         url="https://trends.google.com/trending/rss?geo="+geo
         try:
             req=urllib.request.Request(url,headers={"User-Agent":"ShortsResearch/1.0"})
@@ -178,7 +178,13 @@ def process_lock(name):
         os.write(handle,str(os.getpid()).encode()); os.close(handle); yield
     finally: path.unlink(missing_ok=True)
 
+def assert_active_news_jobs(jobs):
+    for job in jobs:
+        if job.get('channel')=='korean' or job.get('channel_id')=='UCWFQVq3zxSnMi1sa0dUTVMQ':
+            raise ValueError('Retired English news production is disabled')
+
 def synthesize(d,folder,*,billing_guard=None):
+    assert_active_news_jobs([d])
     text=validate(d); c=cfg(); voice=c["channels"][d["channel"]]["voice_id"]
     if not voice: raise RuntimeError("Choose the saved ElevenLabs voice on the local setup page")
     model=c['channels'][d['channel']].get('model_id',c['model_id'])
@@ -285,7 +291,7 @@ def scene_image(scene,channel,index,total,path,title):
     im.save(path)
 
 def render(job_path,smoke=False):
-    d=read(job_path); text=validate(d); c=cfg(); channel=c["channels"][d["channel"]]
+    d=read(job_path); assert_active_news_jobs([d]); text=validate(d); c=cfg(); channel=c["channels"][d["channel"]]
     folder=ROOT/"runs"/now().date().isoformat()/d["channel"]/d["id"]
     folder.mkdir(parents=True,exist_ok=True)
     final=folder/("test-silent.mp4" if smoke else "short.mp4")

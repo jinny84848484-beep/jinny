@@ -1,3 +1,9 @@
+## 현재 생산 범위 (2026-11-13 변경)
+
+매일 08:00 KST 뉴스 생산은 **오늘의 오지랖 한국어 2편만** 대상으로 한다. 동방/`korean` 영어 뉴스 조사·대본 생성·보정·검수·음성·영상·업로드는 중단했다. 과거 4편 기록과 채널 설정은 역사 검증용으로 보존하지만, 영어 작업이 들어 있는 기존 복구 배치는 자동 재개하지 않고 차단한다. 새 일일 대본은 오지랖 2개 이슈만 허용한다. 영어 OAuth secret은 삭제하지 않았으나 일일 workflow에는 전달하지 않는다. 기존 원장 보류와 재시도 방지 규칙은 유지하며 운영 재실행은 이번 변경에 포함되지 않는다.
+
+코기 19:00 자동 제작·게시 경로는 아직 미활성이다. 최종 영상, 권리·품질 검수, 업로드 어댑터와 중복 방지 검증이 완료되기 전 자동 게시 성공으로 표시하지 않는다. 아래 옛 2채널/4편 설명은 역사적 운영 설명이며 현재 생산 범위를 넓히지 않는다.
+
 # Two-channel Shorts automation
 
 Original daily commentary: 오늘의 오지랖 (Korean) and A Not-So-Polite Korean (English, one Korean's perspective). Two different Korean issues per daily batch; they may share a category. Each issue becomes one Korean commentary for 오늘의 오지랖 and one English explanatory adaptation for 동방예의없국 (A Not-So-Polite Korean): four separate videos, two per channel. English introduces unfamiliar Korean terms and context rather than mechanically translating the Korean script. Both versions share one verified factual source packet and retain consistent dates, quantities, attribution and uncertainty.

@@ -80,6 +80,7 @@ class Runtime:
         return sub['character_limit'] - sub['character_count']
 
     def validate_job(self, job):
+        c.p.assert_active_news_jobs([job])
         candidate = copy.deepcopy(job)
         candidate.update(editorial_status='verified', verified_at=self.now())
         for source in candidate['sources']:
@@ -198,6 +199,7 @@ class Runtime:
         return 'data:image/jpeg;base64,' + base64.b64encode(output.getvalue()).decode()
 
     def review_request(self, packet, model, output_tokens, tool_calls):
+        c.p.assert_active_news_jobs([packet['job']])
         allowed = c.REVIEW_ISSUES - {'review_contract', 'english_hook'}
         instructions = '''Independently audit ONLY this ONE Korean personal-commentary Short, not a batch.
 Browse the actual cited source articles and inspect all attached image bytes. Check current material developments as of the supplied production_date, including warrant status. A later production date does not turn older reporting into fresh evidence. Fail rather than rewrite or publish if later developments make the approved script or graphic labels misleading. Check material factual claims,

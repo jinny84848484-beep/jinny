@@ -26,11 +26,10 @@ class CategorySlots(unittest.TestCase):
     def test_prompts_have_consistent_slots_and_language(self):
         for prompt in [c.PROMPT,c.RESEARCH_PROMPT,c.REVIEW_PROMPT]:
             self.assertIn(c.SLOT_INSTRUCTIONS,prompt)
-            self.assertIn('korean means ENGLISH',prompt)
-            self.assertIn('ojirap means KOREAN',prompt)
-        self.assertIn('Headlines, body, description and sources do not count',c.PROMPT)
-        self.assertIn('100-110 total words',c.PROMPT)
-        self.assertIn('280-340 total characters',c.PROMPT)
+            self.assertNotIn('korean means ENGLISH',prompt)
+            self.assertIn('ojirap',prompt)
+        self.assertNotIn('100-110 total words',c.PROMPT)
+        self.assertIn('280-340 total Korean narration characters',c.PROMPT)
 
     def test_short_narration_still_rejected_not_padded(self):
         jobs=batch()

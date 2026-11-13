@@ -116,17 +116,14 @@ class PairedIssues(unittest.TestCase):
             for effect in effects:effect.assert_not_called()
         self.assertEqual(ledger,before)
 
-    def test_adaptation_instructions_are_explicit_without_forced_catchphrase(self):
+    def test_active_prompts_do_not_request_english_adaptation(self):
         for prompt in (c.PROMPT,c.RESEARCH_PROMPT,c.REVIEW_PROMPT):
-            self.assertIn(c.ADAPTATION_INSTRUCTIONS,prompt)
-            self.assertIn('one individual',prompt)
-            self.assertIn('plain English at first use',prompt)
-            self.assertIn('do not mechanically translate',prompt)
-        self.assertIn('Any added background fact',c.ADAPTATION_INSTRUCTIONS)
-        self.assertIn('Do not require a fixed catchphrase',c.ADAPTATION_INSTRUCTIONS)
+            self.assertNotIn(c.ADAPTATION_INSTRUCTIONS,prompt)
+            self.assertNotIn('plain English at first use',prompt)
+            self.assertIn('exactly two',prompt.lower())
 
     def test_each_review_gets_counterpart_and_shared_facts_with_four_calls(self):
-        jobs=batch();media={};requests=[]
+        jobs=[job for job in batch() if job['channel']=='ojirap'];media={};requests=[]
         for job in jobs:
             for suffix in ('a','b'):
                 media[job['id']+suffix]={'topic_key':job['topic_key'],'channel':job['channel'],'relevance_verified':False}
@@ -138,11 +135,10 @@ class PairedIssues(unittest.TestCase):
         ledger={'days':{DAY:{}},'publications':[]}
         with tempfile.TemporaryDirectory() as directory,patch.object(c.p,'ROOT',Path(directory)),patch.object(c,'journal_put',return_value='sha'),patch.object(c.relevant_media,'candidates',return_value=media),patch.object(c,'openai',side_effect=provider) as api,redirect_stdout(io.StringIO()):
             c.review_jobs(ledger,'sha',DAY,jobs)
-        self.assertEqual(api.call_count,4)
+        self.assertEqual(api.call_count,2)
         for job,context,kwargs in requests:
             self.assertEqual(context['shared_facts'],job['fact_packet'])
-            self.assertEqual(len(context['counterpart']),1)
-            self.assertNotEqual(context['counterpart'][0]['channel'],job['channel'])
+            self.assertEqual(context['counterpart'],[])
             self.assertEqual(len(context['other_issue_packets']),1)
             self.assertIn('paired_fact_mismatch',kwargs['instructions'])
             self.assertIn(c.DAILY_PUBLICATION_SCOPE,kwargs['instructions'])
@@ -162,7 +158,7 @@ class PairedIssues(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'packet required'):c.validate_batch(jobs,DAY,set())
 
     def test_pair_contradiction_review_never_publishes(self):
-        jobs=batch();media={}
+        jobs=[job for job in batch() if job['channel']=='ojirap'];media={}
         for job in jobs:
             for suffix in ('a','b'):media[job['id']+suffix]={'topic_key':job['topic_key'],'channel':job['channel'],'relevance_verified':False}
         fail=json.dumps({'status':'FAIL','issues':[{'code':'paired_fact_mismatch','job_index':0,'scene_index':-1,'explanation':'Numbers differ between the supplied scripts.'}],'selection':{}})
@@ -173,7 +169,7 @@ class PairedIssues(unittest.TestCase):
         self.assertTrue(ledger['days'][DAY]['retry_hold'])
 
     def test_high_impact_approval_review_holds_without_publication(self):
-        jobs=batch();media={}
+        jobs=[job for job in batch() if job['channel']=='ojirap'];media={}
         for job in jobs:
             for suffix in ('a','b'):media[job['id']+suffix]={'topic_key':job['topic_key'],'channel':job['channel'],'relevance_verified':False}
         fail=json.dumps({'status':'FAIL','issues':[{'code':'approval_required','job_index':0,'scene_index':-1,'explanation':'Specific user approval is required for the consequential allegation.'}],'selection':{}})

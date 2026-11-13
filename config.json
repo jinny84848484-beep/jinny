@@ -39,5 +39,11 @@
       },
       "delivery": "Casual conversational voice, calm and personal, understated dry wit, talking to a friend"
     }
-  }
+  },
+  "active_news_channels": [
+    "ojirap"
+  ],
+  "retired_news_channels": [
+    "korean"
+  ]
 }

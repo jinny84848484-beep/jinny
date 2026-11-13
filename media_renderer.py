@@ -81,7 +81,7 @@ def run_ff(args,cwd):
     if result.returncode:raise RuntimeError(result.stderr[-2000:])
 
 def render(job_path,*,billing_guard=None):
-    d=p.read(job_path);spoken=p.validate(d);ch=p.cfg()['channels'][d['channel']]
+    d=p.read(job_path);p.assert_active_news_jobs([d]);spoken=p.validate(d);ch=p.cfg()['channels'][d['channel']]
     day=d['id'][:10];folder=p.ROOT/'runs'/day/d['channel']/d['id'];folder.mkdir(parents=True,exist_ok=True)
     library=p.read(p.ROOT/'assets/media-library.json',{})
     alignment=p.synthesize(d,folder,**({'billing_guard':billing_guard} if billing_guard is not None else {}))['alignment'];duration=alignment['character_end_times_seconds'][-1]+0.35

@@ -53,12 +53,12 @@ class NewsCandidates(unittest.TestCase):
         self.assertEqual(errors,[])
         self.assertEqual({publisher:sum(row['publisher']==publisher for row in leads) for publisher in ('NASA','BBC','The Verge')},{'NASA':8,'BBC':8,'The Verge':8})
 
-    def test_news_leads_keep_collection_usable_when_both_trends_regions_fail(self):
+    def test_news_leads_keep_collection_usable_when_korean_trends_fail(self):
         lead={'title':'Fresh story','url':'https://example.org/article','published_at':NOW.isoformat(),'publisher':'BBC','role_hint':'original_reporting','verified':False}
         with patch.object(p,'now',return_value=NOW),patch.object(p.urllib.request,'urlopen',side_effect=urllib.error.URLError('simulated trend failure')),patch.object(p,'news_candidates',return_value=([lead],[])),patch.object(p,'write') as save:
             result=p.collect()
         self.assertEqual(result['topic_count'],0)
-        self.assertEqual(len(result['errors']),2)
+        self.assertEqual(len(result['errors']),1)
         packet=save.call_args_list[0].args[1]
         self.assertEqual(packet['news_article_candidates'],[lead])
         self.assertIn('not verified evidence',packet['notice'])

@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: 'Preflight checks connections; produce publishes four videos'
+        description: 'Preflight checks connections; produce publishes two Ojirap videos'
         type: choice
         options: [preflight, produce, stage_produce, recover_saved_reviews, resume_reviewed, expire_stale_additional]
         default: preflight
@@ -62,7 +62,6 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           YOUTUBE_OJIRAP_OAUTH: ${{ secrets.YOUTUBE_OJIRAP_OAUTH }}
-          YOUTUBE_KOREAN_OAUTH: ${{ secrets.YOUTUBE_KOREAN_OAUTH }}
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           PUBLIC_UPLOADS_ENABLED: ${{ vars.PUBLIC_UPLOADS_ENABLED }}

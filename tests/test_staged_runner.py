@@ -142,14 +142,12 @@ class StagedRunner(unittest.TestCase):
             self.assertEqual(review.call_args.kwargs['slots'],publish.call_args.kwargs['slots'])
             self.assertIn(('korean','music'),review.call_args.kwargs['slots'])
 
-    def test_review_instruction_uses_selected_plan_not_fixed_baseline(self):
+    def test_retired_selected_plan_is_rejected_before_paid_review(self):
         plan=(('korean','film'),('korean','music'),('ojirap','technology'),('ojirap','entertainment'))
-        with patch.object(c,'openai',return_value=('PASS',[])) as api:
-            c.guarded_research({},'sha',DAY,'editorial_review','review',True,editorial_slots=plan)
-        instructions=api.call_args.kwargs['instructions']
-        self.assertIn('korean/film',instructions)
-        self.assertNotIn('korean/politics',instructions)
-        self.assertIn('Independently audit',instructions)
+        with patch.object(c,'openai') as api:
+            with self.assertRaisesRegex(ValueError,'slots mismatch'):
+                c.guarded_research({},'sha',DAY,'editorial_review','review',True,editorial_slots=plan)
+            api.assert_not_called()
 
     def test_submission_write_failure_never_calls_paid_review(self):
         with ExitStack() as stack:
@@ -199,41 +197,16 @@ class StagedRunner(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError,'hold remains'):r.run_staged()
             review.assert_not_called();publish.assert_not_called()
 
-    def test_full_pass_to_publication_uses_real_helpers_mocking_external_io(self):
-        import tempfile
-        from pathlib import Path
-        actual_review=c.review_jobs;actual_publish=c.publish_reviewed
+    def test_retired_staged_batch_cannot_restart_paid_review(self):
+        actual_review=c.review_jobs
         with ExitStack() as stack:
             ledger,receiver,put,fetch,preflight,review,publish,get=self.setup_run(stack)
-            review.side_effect=actual_review;publish.side_effect=actual_publish
-            root=Path(stack.enter_context(tempfile.TemporaryDirectory()))
-            stack.enter_context(patch.object(c.p,'ROOT',root))
-            jobs=valid_jobs();media={};selection={}
-            for index,job in enumerate(jobs):
-                names=[f'image-{index}-a',f'image-{index}-b']
-                for name in names:media[name]={'topic_key':job['topic_key'],'channel':job['channel'],'relevance_verified':False}
-                selection[job['id']]=names*2
-            stack.enter_context(patch.object(c.relevant_media,'candidates',return_value=media))
-            def provider(prompt,*args,**kwargs):
-                self.assertNotIn('"editorial_status"',prompt)
-                self.assertNotIn('"checked_at"',prompt)
-                self.assertEqual(kwargs['stage'],'editorial_review')
-                job=json.loads(prompt.split('\nJOB:\n',1)[1].split('\nIMAGE METADATA:\n',1)[0])
-                return 'PASS\n'+json.dumps({job['id']:selection[job['id']]}),[{'url':'https://example.org/report'}]
-            stack.enter_context(patch.object(c,'openai',side_effect=provider))
-            stack.enter_context(patch.object(c,'download_media'))
-            render=stack.enter_context(patch.object(c.media_renderer,'render'))
-            stack.enter_context(patch.object(c,'youtube_token',return_value='test'))
-            verify=stack.enter_context(patch.object(c,'verify_channel'))
-            upload=stack.enter_context(patch.object(c,'upload',side_effect=['video1','video2','video3','video4']))
-            r.run_staged()
-            self.assertEqual(render.call_count,2);self.assertEqual(upload.call_count,2);self.assertEqual(verify.call_count,2)
-            self.assertTrue(all(call.args[1]["channel"]=="ojirap" for call in upload.call_args_list))
-            self.assertEqual(len(ledger["days"][DAY]["publication_exclusions"]),2)
-            self.assertEqual(ledger['days'][DAY]['status'],'complete')
-            self.assertEqual(len(ledger['publications']),3)
-            self.assertFalse(ledger['days'][DAY]['retry_hold'])
-            self.assertTrue(all(j['editorial_status']=='verified' for j in ledger['days'][DAY]['jobs']))
+            review.side_effect=actual_review
+            api=stack.enter_context(patch.object(c,'openai'))
+            with self.assertRaisesRegex(RuntimeError,'Staged attempt stopped'):
+                r.run_staged()
+            api.assert_not_called();publish.assert_not_called()
+            self.assertTrue(ledger['days'][DAY]['retry_hold'])
 
 
 class StagedFailureLabel(unittest.TestCase):
