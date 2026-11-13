@@ -1,0 +1,42 @@
+name: Daily Corgi Approved Upload
+on:
+  schedule:
+    - cron: '0 10 * * *' # 19:00 KST; GitHub may start late
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [validate, publish]
+        default: validate
+        description: Validate by default; publish requires approved artifact and 19 KST window
+permissions:
+  contents: write
+concurrency:
+  group: shorts-production
+  cancel-in-progress: false
+jobs:
+  corgi:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.12'
+      - name: Install offline test dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk
+          python -m pip install -r requirements.txt
+      - name: Offline guards
+        run: python tests/run_offline.py
+        env:
+          SHORTS_STATE_DIR: ${{ runner.temp }}/corgi-test-state
+      - name: Publish approved artifact only
+        run: python corgi_runner.py
+        env:
+          CORGI_MODE: ${{ github.event_name == 'schedule' && 'publish' || inputs.mode }}
+          YOUTUBE_KOREAN_OAUTH: ${{ secrets.YOUTUBE_KOREAN_OAUTH }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}

@@ -6,12 +6,16 @@ on:
       - 'requirements.txt'
       - 'config.json'
       - '.github/workflows/shorts-tests.yml'
+      - '.github/workflows/corgi.yml'
+      - 'corgi/**'
   pull_request:
     paths:
       - '**.py'
       - 'requirements.txt'
       - 'config.json'
       - '.github/workflows/shorts-tests.yml'
+      - '.github/workflows/corgi.yml'
+      - 'corgi/**'
   workflow_dispatch:
 permissions:
   contents: read
