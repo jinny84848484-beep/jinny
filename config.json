@@ -3,6 +3,7 @@
   "daily_time": "08:00",
   "videos_per_channel": 2,
   "daily_character_cap": 6000,
+  "daily_graphics_fallback": false,
   "model_id": "eleven_multilingual_v2",
   "publishing": "github_actions",
   "channels": {

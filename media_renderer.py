@@ -116,7 +116,7 @@ def render(job_path,*,billing_guard=None):
     final=folder/'short.mp4'
     run_ff(['-f','concat','-safe','0','-i','parts.txt','-i','narration.mp3','-vf',f"subtitles=captions.srt:force_style='{style}'",'-af','loudnorm=I=-16:TP=-1.5:LRA=11','-t',str(duration),'-c:v','libx264','-preset','veryfast','-crf','21','-threads','4','-pix_fmt','yuv420p','-c:a','aac','-b:a','160k','-movflags','+faststart',final.name],folder)
     desc=d.get('description','')+'\n\nSources:\n'+'\n'.join(s['url'] for s in d['sources'])
-    desc+='\n\nVisual credits (resized and captioned):\n'+'\n'.join(m['credit']+' — '+m['source']+'\n'+m.get('license','')+' '+m.get('license_url','')+'\n'+m.get('disclaimer','') for m in credits.values())
+    desc+='\n\nVisual credits (resized and captioned):\n'+'\n'.join(dict.fromkeys(m['credit']+' — '+m['source']+'\n'+m.get('license','')+' '+m.get('license_url','')+'\n'+m.get('disclaimer','') for m in credits.values()))
     desc+='\n\n#Shorts'
     p.write(folder/'script.json',d)
     p.write(folder/'upload-metadata.json',{'channel_id':d['channel_id'],'title':d['title'],'description':desc,'privacyStatus':'public','language':ch['language'],'category':d['category'],'uploaded':False})
