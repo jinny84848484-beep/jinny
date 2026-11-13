@@ -650,7 +650,16 @@ def download_media(jobs):
         if len(raw)>80_000_000:raise RuntimeError('Media size limit')
         target.write_bytes(raw)
 
+# Owner retired this channel's news publishing on 2026-11-13.
+# Keep the paired editorial contract intact until the corgi pipeline is ready.
+RETIRED_NEWS_CHANNEL_ID='UCWFQVq3zxSnMi1sa0dUTVMQ'
+
+def news_publication_blocked(job):
+    return job.get('channel')=='korean' or job.get('channel_id')==RETIRED_NEWS_CHANNEL_ID
+
 def upload(folder,job,token):
+    if news_publication_blocked(job):
+        raise RuntimeError('Dongbang news publication retired by owner')
     metadata=p.read(folder/'upload-metadata.json');path=folder/'short.mp4';size=path.stat().st_size
     body={'snippet':{'title':metadata['title'],'description':metadata['description'],'categoryId':CATEGORIES[job['category']],'defaultLanguage':metadata['language']},'status':{'privacyStatus':'public','selfDeclaredMadeForKids':False,'containsSyntheticMedia':True}}
     req=urllib.request.Request('https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status',data=json.dumps(body).encode(),headers={'Authorization':'Bearer '+token,'Content-Type':'application/json; charset=UTF-8','X-Upload-Content-Length':str(size),'X-Upload-Content-Type':'video/mp4'},method='POST')
@@ -941,6 +950,9 @@ def publish_reviewed(ledger,sha,day,*,slots=None,stage_callback=None):
     prior={'publications':[row for row in ledger.get('publications',[]) if row.get('job_id') not in {job['id'] for job in jobs}]}
     validate_batch(jobs,day,recent_topics(prior),slots=slots)
     assert_additional_day_budget(ledger,day,jobs)
+    excluded=[job for job in jobs if news_publication_blocked(job)]
+    record['publication_exclusions']=[{'job_id':job['id'],'channel':job['channel'],'reason':'owner_retired_news_channel'} for job in excluded]
+    jobs=[job for job in jobs if not news_publication_blocked(job)]
     for job in jobs:
         for scene in job['scenes']:
             media=library.get(scene.get('media'),{}) if isinstance(scene.get('media'),str) else {}

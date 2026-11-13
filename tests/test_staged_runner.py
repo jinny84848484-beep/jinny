@@ -227,9 +227,11 @@ class StagedRunner(unittest.TestCase):
             verify=stack.enter_context(patch.object(c,'verify_channel'))
             upload=stack.enter_context(patch.object(c,'upload',side_effect=['video1','video2','video3','video4']))
             r.run_staged()
-            self.assertEqual(render.call_count,4);self.assertEqual(upload.call_count,4);self.assertEqual(verify.call_count,4)
+            self.assertEqual(render.call_count,2);self.assertEqual(upload.call_count,2);self.assertEqual(verify.call_count,2)
+            self.assertTrue(all(call.args[1]["channel"]=="ojirap" for call in upload.call_args_list))
+            self.assertEqual(len(ledger["days"][DAY]["publication_exclusions"]),2)
             self.assertEqual(ledger['days'][DAY]['status'],'complete')
-            self.assertEqual(len(ledger['publications']),5)
+            self.assertEqual(len(ledger['publications']),3)
             self.assertFalse(ledger['days'][DAY]['retry_hold'])
             self.assertTrue(all(j['editorial_status']=='verified' for j in ledger['days'][DAY]['jobs']))
 
