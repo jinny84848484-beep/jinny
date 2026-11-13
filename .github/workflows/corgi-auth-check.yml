@@ -1,0 +1,27 @@
+name: Corgi read-only authentication check
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'corgi_auth_check.py'
+      - '.github/workflows/corgi-auth-check.yml'
+permissions:
+  contents: read
+concurrency:
+  group: corgi-auth-check
+  cancel-in-progress: false
+jobs:
+  auth-check:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: '3.12'
+      - name: Check identity only without publishing
+        run: python corgi_auth_check.py
+        env:
+          YOUTUBE_KOREAN_OAUTH: ${{ secrets.YOUTUBE_KOREAN_OAUTH }}

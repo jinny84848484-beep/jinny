@@ -29,3 +29,7 @@ The existing remote `state/ledger.json` is updated with a separate `corgi_public
 Any incomplete journal entry blocks further corgi uploads. A timeout can mean the video exists: do not clear the entry or rerun blindly. An operator must inspect YouTube Studio, reconcile actual video ID/visibility, and record the resolution. Duplicate date, asset hash and item ID are blocked. HTTP errors never print OAuth/session tokens. CI only performs mocked offline validation and does not prove actual publishing.
 
 Daily scope is one approved video per date; any separate request for two consecutive uploads is not automatically covered by this queue. Evidence should be a sanitized reference plus review conclusion, never private drafts, user chats, signed URLs, credentials, or personal-data-containing license documents.
+
+## Read-only authentication check
+
+`corgi-auth-check.yml` runs manually or when its own checker/workflow changes on main. Its standalone standard-library checker only refreshes the existing OAuth token and reads `channels?mine=true`. It rejects redirects and never uploads, alters videos, writes the ledger, or invokes paid generation. Success proves current authentication and target channel identity only; upload permissions, quota, processing and public visibility are not proven. Errors expose fixed local codes only, not credentials or provider payloads. No scheduled authentication polling is added.
