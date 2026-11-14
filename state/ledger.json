@@ -1504,8 +1504,17 @@
           "completed_at": "2026-11-14T11:09:07.014159+09:00"
         }
       },
-      "status": "research_repair_completed",
-      "active_stage": "research_repair"
+      "status": "research_validation_failed",
+      "active_stage": "research_repair",
+      "retry_hold": true,
+      "research_failures": [
+        {
+          "reason": "research_manifest_news_source",
+          "stage": "research_manifest",
+          "repair_attempted": true,
+          "at": "2026-11-14T11:09:08.231260+09:00"
+        }
+      ]
     }
   },
   "publications": [
