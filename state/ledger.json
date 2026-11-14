@@ -1504,9 +1504,9 @@
           "completed_at": "2026-11-14T11:09:07.014159+09:00"
         }
       },
-      "status": "research_validation_failed",
+      "status": "research_recovered",
       "active_stage": "research_repair",
-      "retry_hold": true,
+      "retry_hold": false,
       "research_failures": [
         {
           "reason": "research_manifest_news_source",
@@ -1514,7 +1514,50 @@
           "repair_attempted": true,
           "at": "2026-11-14T11:09:08.231260+09:00"
         }
-      ]
+      ],
+      "research_recovery": {
+        "bundle_sha256": "ec076f46281b3ac098bb8dedbc5688304aef2dadfff23d92ffdc51c3d5e79b9a",
+        "source_run": "43544491120",
+        "source_head": "f954db8f7d1f26988dd30d317be7a0f10753d7ca",
+        "artifact_id": 14093348101,
+        "archive_sha256": "ef7242b08f870dd1880c59b0bb6b7b7e908483c2259272a04c766be4e0bc2ce2",
+        "previous_record_hash": "eb0e49cc6f686513fc1060c8492f092ff925f916d131cc0345de7a81cdf25792",
+        "previous_record": {
+          "checkpoints": {
+            "research": {
+              "status": "completed",
+              "request_hash": "3157653b696aaefc59fe30a4a2935fb5f93fb910713964a866bf9e925ce6f255",
+              "attempts": 1,
+              "at": "2026-11-14T11:08:01.799159+09:00",
+              "usable": true,
+              "sha256": "d29e166702000de5f8f7985a699cc124b3ba68872d4c333f4940bea1f28b067a",
+              "completed_at": "2026-11-14T11:08:32.683119+09:00"
+            },
+            "research_repair": {
+              "status": "completed",
+              "request_hash": "9cdbfe018586e21b70a2cbdaea68e45cd05641c827740c517152229a06534420",
+              "attempts": 1,
+              "at": "2026-11-14T11:08:33.854205+09:00",
+              "usable": true,
+              "sha256": "0a9eeced7e7842c8a93b9fa4c04322d2e2fb96c01a4bb368028b7ed658b9e951",
+              "completed_at": "2026-11-14T11:09:07.014159+09:00"
+            }
+          },
+          "status": "research_validation_failed",
+          "active_stage": "research_repair",
+          "retry_hold": true,
+          "research_failures": [
+            {
+              "reason": "research_manifest_news_source",
+              "stage": "research_manifest",
+              "repair_attempted": true,
+              "at": "2026-11-14T11:09:08.231260+09:00"
+            }
+          ]
+        },
+        "at": "2026-11-14T11:21:20.414616+09:00",
+        "method": "operator_observed_research_only"
+      }
     }
   },
   "publications": [
