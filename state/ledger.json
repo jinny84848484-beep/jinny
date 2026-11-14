@@ -1513,13 +1513,16 @@
           "completed_at": "2026-11-14T11:21:45.700856+09:00"
         },
         "editorial_review_0": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "ee45f8bf544c20573e66b49ce941c6c0e9998e9ae45429473a625077d6a1607e",
           "attempts": 1,
-          "at": "2026-11-14T11:21:47.814042+09:00"
+          "at": "2026-11-14T11:21:47.814042+09:00",
+          "usable": true,
+          "sha256": "4229fdfa55bb42533253be4e12dd3466ebb69d2625b97329c81efca915466757",
+          "completed_at": "2026-11-14T11:21:52.883786+09:00"
         }
       },
-      "status": "editorial_review_0_submitted",
+      "status": "editorial_review_0_completed",
       "active_stage": "editorial_review_0",
       "retry_hold": false,
       "research_failures": [
