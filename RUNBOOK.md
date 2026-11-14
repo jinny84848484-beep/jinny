@@ -73,3 +73,13 @@ recovery or clear a hold. The schedule remains 23:00 UTC (08:00 KST).
 `tests/run_offline.py` now executes in an isolated temporary checkout with real
 network disabled and provider credentials removed. Production uses this runner
 so fixture checkpoints cannot leak into the uploaded production artifact.
+
+The first recovery run `43545735451` passed the first editorial review and stopped
+on the second reviewer's invented blanket approval requirement for public
+political/diplomatic schedules. `recheck_editorial_policy` is pinned to that exact
+failed journal and artifact `14093473524`. It restores the unchanged draft and
+actual reviews, keeps the original FAIL, and permits exactly one additional full
+review of story two with the actual scope rule clarified. Serious allegations,
+sensitive disclosures and all factual/media checks still require rejection.
+Only real PASS decisions for both stories can release the hold. The original
+first PASS is reused by exact input hash. Re-invocation cannot repeat paid work.

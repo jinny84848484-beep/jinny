@@ -22,7 +22,7 @@ BUNDLE_PATH = c.p.ROOT / 'records/recovery/2026-11-14-research.json'
 BUNDLE_SHA256 = 'ec076f46281b3ac098bb8dedbc5688304aef2dadfff23d92ffdc51c3d5e79b9a'
 RECORD_HASH = 'eb0e49cc6f686513fc1060c8492f092ff925f916d131cc0345de7a81cdf25792'
 
-def download_archive():
+def download_archive(*, source_run=SOURCE_RUN, source_head=SOURCE_HEAD, artifact_id=ARTIFACT_ID, archive_sha256=ARCHIVE_SHA256, archive_size=38905):
     """Read fixed repository artifact. Never forward the token to its signed URL."""
     import urllib.request
     import urllib.parse
@@ -35,24 +35,24 @@ def download_archive():
         req = urllib.request.Request(API_BASE + path, headers=c.gh_headers())
         with opener.open(req, timeout=60) as response:
             return json.loads(response.read(1_000_001))
-    run = api('/actions/runs/' + SOURCE_RUN)
-    if (str(run.get('id')) != SOURCE_RUN or run.get('run_attempt') != 1
+    run = api('/actions/runs/' + source_run)
+    if (str(run.get('id')) != source_run or run.get('run_attempt') != 1
             or run.get('status') != 'completed' or run.get('conclusion') != 'failure'
-            or run.get('head_sha') != SOURCE_HEAD or run.get('head_branch') != 'main'
+            or run.get('head_sha') != source_head or run.get('head_branch') != 'main'
             or run.get('workflow_id') != 407256129 or run.get('path') != '.github/workflows/shorts.yml'
             or run.get('event') != 'workflow_dispatch'
             or run.get('head_repository',{}).get('full_name') != REPOSITORY
             or run.get('actor',{}).get('id') != 341766743):
         raise ValueError('Recovery source run rejected')
-    artifact = api('/actions/artifacts/' + str(ARTIFACT_ID))
-    if (artifact.get('id') != ARTIFACT_ID or artifact.get('expired') is not False
-            or artifact.get('name') != 'shorts-' + SOURCE_RUN
-            or artifact.get('workflow_run',{}).get('id') != int(SOURCE_RUN)
-            or artifact.get('workflow_run',{}).get('head_sha') != SOURCE_HEAD
-            or artifact.get('size_in_bytes') != 38905
-            or artifact.get('digest') != 'sha256:' + ARCHIVE_SHA256):
+    artifact = api('/actions/artifacts/' + str(artifact_id))
+    if (artifact.get('id') != artifact_id or artifact.get('expired') is not False
+            or artifact.get('name') != 'shorts-' + source_run
+            or artifact.get('workflow_run',{}).get('id') != int(source_run)
+            or artifact.get('workflow_run',{}).get('head_sha') != source_head
+            or artifact.get('size_in_bytes') != archive_size
+            or artifact.get('digest') != 'sha256:' + archive_sha256):
         raise ValueError('Recovery source artifact rejected')
-    request = urllib.request.Request(API_BASE + '/actions/artifacts/' + str(ARTIFACT_ID) + '/zip', headers=c.gh_headers())
+    request = urllib.request.Request(API_BASE + '/actions/artifacts/' + str(artifact_id) + '/zip', headers=c.gh_headers())
     try:
         response = opener.open(request, timeout=60)
     except urllib.error.HTTPError as exc:
@@ -68,7 +68,7 @@ def download_archive():
         response = opener.open(urllib.request.Request(location), timeout=60)
     with response:
         raw = response.read(5_000_001)
-    if len(raw) > 5_000_000 or hashlib.sha256(raw).hexdigest() != ARCHIVE_SHA256:
+    if len(raw) > 5_000_000 or hashlib.sha256(raw).hexdigest() != archive_sha256:
         raise ValueError('Recovery archive identity mismatch')
     return raw
 
