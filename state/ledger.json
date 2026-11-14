@@ -1540,7 +1540,7 @@
           "completed_at": "2026-11-14T11:27:23.784702+09:00"
         }
       },
-      "status": "uploaded",
+      "status": "complete",
       "active_stage": "editorial_review_1_policy_recheck",
       "retry_hold": false,
       "research_failures": [
@@ -2009,7 +2009,8 @@
       ],
       "created_at": "2026-11-14T11:27:25.355785+09:00",
       "publication_exclusions": [],
-      "active_job": "2026-11-14-ojirap-lee-jae-myung-asean-apec-trip-announced"
+      "active_job": "2026-11-14-ojirap-lee-jae-myung-asean-apec-trip-announced",
+      "completed_at": "2026-11-14T11:28:48.582872+09:00"
     }
   },
   "publications": [
