@@ -1529,10 +1529,16 @@
           "usable": true,
           "sha256": "6ee37cb386dc7fa6dda6ab9061bb49777d507478d61df9a34ad8e140a475838a",
           "completed_at": "2026-11-14T11:22:00.249215+09:00"
+        },
+        "editorial_review_1_policy_recheck": {
+          "status": "submitted",
+          "request_hash": "475c7bcce9b751d9a5872fb16f5eb391a8dcb4206693164949258f2dbcd427a0",
+          "attempts": 1,
+          "at": "2026-11-14T11:27:15.701161+09:00"
         }
       },
-      "status": "editorial_review_failed",
-      "active_stage": "editorial_review_1",
+      "status": "editorial_review_1_policy_recheck_submitted",
+      "active_stage": "editorial_review_1_policy_recheck",
       "retry_hold": true,
       "research_failures": [
         {
