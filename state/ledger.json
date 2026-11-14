@@ -1531,9 +1531,9 @@
           "completed_at": "2026-11-14T11:22:00.249215+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
+      "status": "editorial_review_failed",
       "active_stage": "editorial_review_1",
-      "retry_hold": false,
+      "retry_hold": true,
       "research_failures": [
         {
           "reason": "research_manifest_news_source",
@@ -1585,7 +1585,20 @@
         "at": "2026-11-14T11:21:20.414616+09:00",
         "method": "operator_observed_research_only"
       },
-      "review_input_hash": "a55569e75ef2cac199205af7dd6c9acb589c735c1f7b44df220be3548abf17b7"
+      "review_input_hash": "a55569e75ef2cac199205af7dd6c9acb589c735c1f7b44df220be3548abf17b7",
+      "editorial_diagnostic": {
+        "status": "FAIL",
+        "issues": [
+          {
+            "code": "approval_required",
+            "job_index": 1,
+            "scene_index": -1
+          }
+        ],
+        "source_count": 2,
+        "candidate_count": 6,
+        "input_hash": "a55569e75ef2cac199205af7dd6c9acb589c735c1f7b44df220be3548abf17b7"
+      }
     }
   },
   "publications": [
