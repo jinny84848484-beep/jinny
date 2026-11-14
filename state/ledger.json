@@ -1540,7 +1540,7 @@
           "completed_at": "2026-11-14T11:27:23.784702+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_1_policy_recheck",
       "retry_hold": false,
       "research_failures": [
@@ -1642,12 +1642,12 @@
             {
               "title": "충청권 메가프로젝트 착공식 및 제4차 점검회의 개최",
               "url": "https://www.president.go.kr/actually/y7Y7uPlW",
-              "checked_at": "2026-11-14T11:27:25.355602+09:00"
+              "checked_at": "2026-11-14T11:27:27.100870+09:00"
             },
             {
               "title": "삼성 온양캠퍼스, 최첨단 HBM 거점으로",
               "url": "https://www.yna.co.kr/view/AKR20261112094900003",
-              "checked_at": "2026-11-14T11:27:25.355602+09:00"
+              "checked_at": "2026-11-14T11:27:27.100870+09:00"
             }
           ],
           "visual_queries": [
@@ -1759,7 +1759,7 @@
           "fact_packet_hash": "165435830e455ec7c5ceca0ee56a229759eaf08419f7ebd1416c2d330205ac19",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-14T11:27:25.355602+09:00"
+          "verified_at": "2026-11-14T11:27:27.100870+09:00"
         },
         {
           "id": "2026-11-14-ojirap-lee-jae-myung-asean-apec-trip-announced",
@@ -1772,12 +1772,12 @@
             {
               "title": "아세안 및 APEC 정상회의 참석 관련 위성락 국가안보실장 브리핑",
               "url": "https://www.president.go.kr/briefings/tNz0idHE",
-              "checked_at": "2026-11-14T11:27:25.355706+09:00"
+              "checked_at": "2026-11-14T11:27:27.100990+09:00"
             },
             {
               "title": "이 대통령, 16∼19일 필리핀 아세안·중국 APEC 정상회의 참석",
               "url": "https://www.yna.co.kr/view/AKR20261112043900001",
-              "checked_at": "2026-11-14T11:27:25.355706+09:00"
+              "checked_at": "2026-11-14T11:27:27.100990+09:00"
             }
           ],
           "visual_queries": [
@@ -1895,7 +1895,7 @@
           "fact_packet_hash": "88b5d910e5ff16268847fe60834ae997fa853c045c4930700d967806dd1f3982",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-14T11:27:25.355706+09:00"
+          "verified_at": "2026-11-14T11:27:27.100990+09:00"
         }
       ],
       "media": {
@@ -2007,7 +2007,9 @@
         "https://www.president.go.kr/actually/y7Y7uPlW",
         "https://www.president.go.kr/briefings/tNz0idHE"
       ],
-      "created_at": "2026-11-14T11:27:25.355785+09:00"
+      "created_at": "2026-11-14T11:27:25.355785+09:00",
+      "publication_exclusions": [],
+      "active_job": "2026-11-14-ojirap-chungcheong-megaproject-groundbreaking-onyang"
     }
   },
   "publications": [
