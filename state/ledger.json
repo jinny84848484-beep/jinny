@@ -1598,6 +1598,28 @@
         "source_count": 2,
         "candidate_count": 6,
         "input_hash": "a55569e75ef2cac199205af7dd6c9acb589c735c1f7b44df220be3548abf17b7"
+      },
+      "editorial_policy_recheck": {
+        "source_run": "43545735451",
+        "artifact_id": 14093473524,
+        "archive_sha256": "dc04e1491806f13b891ebdf899b1880ed74ab2cc98bc57d0f5bb639ceac6cc1a",
+        "previous_record_hash": "acb8fdfd680f50dd408a7a60d60872a3407f71ea194a37d80f524e6fe64ea23d",
+        "previous_diagnostic": {
+          "status": "FAIL",
+          "issues": [
+            {
+              "code": "approval_required",
+              "job_index": 1,
+              "scene_index": -1
+            }
+          ],
+          "source_count": 2,
+          "candidate_count": 6,
+          "input_hash": "a55569e75ef2cac199205af7dd6c9acb589c735c1f7b44df220be3548abf17b7"
+        },
+        "clarification_sha256": "894c805f86ed47b4e46bae0f23858c06a407c5662f77730d5ac6a490634a88fe",
+        "at": "2026-11-14T11:27:14.098097+09:00",
+        "maximum_new_review_requests": 1
       }
     }
   },
