@@ -1504,13 +1504,16 @@
           "completed_at": "2026-11-14T11:09:07.014159+09:00"
         },
         "draft": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "ae5ed282fa29c1f0db9dc27f596205b54e04e6aeeb82ffb6ed43d8f34c51c546",
           "attempts": 1,
-          "at": "2026-11-14T11:21:25.217779+09:00"
+          "at": "2026-11-14T11:21:25.217779+09:00",
+          "usable": true,
+          "sha256": "282b217d9f2806deb6effb16972c7c69bd4c43ed7a5fb5877497b5afc84500f3",
+          "completed_at": "2026-11-14T11:21:45.700856+09:00"
         }
       },
-      "status": "draft_submitted",
+      "status": "draft_completed",
       "active_stage": "draft",
       "retry_hold": false,
       "research_failures": [
