@@ -53,3 +53,23 @@ Google OAuth 앱은 Production 상태로 전환했으며 두 채널 인증을 �
 - 사진 후보가 2장 미만인 이슈가 더는 배치 전체를 멈추지 않는다. 그 이슈의 검토자는 사진 없이, 장면마다 자체 텍스트 카드(`graphic-<job id>-<장면>`)를 쓴다는 안내를 받는다.
 - 사진 이슈가 사진 관련 코드(`media_identity`, `media_relevance`, `media_license`, `archive_context`, `insufficient_media`)만으로 불합격하면 그 이슈만 자체 카드로 바꾼다. 사실·출처·언어·승인 문제가 하나라도 있으면 기존대로 보류한다. 바뀐 원래 판정은 `editorial-details.json`의 `replaced_media_decision`에 남는다.
 - 카드(`daily_graphics.py`)에는 각 장면의 구분 라벨, 헤드라인, 본문, 인용 출처 도메인과 "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님" 표시만 들어간다. 사진, 얼굴, 로고, 재연은 없다. 게시 단계는 없는 카드를 다시 만들고, 검토된 sha256과 바이트가 다르면 멈춘다.
+
+### Pinned research recovery, 2026-11-14
+
+`Daily Shorts` → `recover_research_manifest` is a single-use recovery for failed
+run `43544491120`, artifact `14093348101`. It accepts only the exact research-only
+hold record and archive hashes in `research_manifest_recovery.py`, on 2026-11-14
+KST. It preserves both original provider checkpoints and the original diagnostic,
+records the separately observed factual packet and source response hashes from
+`records/recovery/2026-11-14-research.json`, and continues normal Ojirap-only
+production. It does not mark editorial PASS or restore old draft/review files.
+A changed journal, previous publication, uncertain provider state, dirty run
+folder, changed evidence, or second invocation fails closed. No paid research
+retry is made. Subsequent draft, narration correction, two editorial reviews,
+photo license/relevance, duplicate, TTS budget and upload guards remain active.
+If a later stage fails, inspect its new artifact and journal; do not rerun this
+recovery or clear a hold. The schedule remains 23:00 UTC (08:00 KST).
+
+`tests/run_offline.py` now executes in an isolated temporary checkout with real
+network disabled and provider credentials removed. Production uses this runner
+so fixture checkpoints cannot leak into the uploaded production artifact.

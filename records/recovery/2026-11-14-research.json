@@ -1,0 +1,163 @@
+{
+  "day": "2026-11-14",
+  "source_run": "43544491120",
+  "manifest": {
+    "stories": [
+      {
+        "topic_key": "chungcheong-megaproject-groundbreaking-onyang-2026-11-12",
+        "category": "business",
+        "ready": true,
+        "summary": "2026년 11월 12일 이재명 대통령이 참석한 아산 삼성전자 온양캠퍼스 착공식. 온양 HBM 투자 규모와 새 공장 가동 목표는 향후 계획이다.",
+        "verified_facts": [
+          {
+            "text": "청와대는 11월 12일 이재명 대통령의 삼성전자 온양캠퍼스 착공식 참석 일정을 발표했고, 연합뉴스는 같은 날 현장에서 열린 행사를 보도했다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          },
+          {
+            "text": "연합뉴스에 따르면 삼성전자는 온양캠퍼스에 총 46조원을 순차적으로 투자해 HBM 생산라인 다섯 개를 구축할 계획이다.",
+            "source_indices": [
+              1
+            ]
+          },
+          {
+            "text": "이번에 착공한 새 공장의 가동 목표는 2028년 6월이다. 확정된 가동 실적이 아니라 목표다.",
+            "source_indices": [
+              1
+            ]
+          }
+        ],
+        "uncertainties": [
+          "YouTube와 Instagram의 개별 관심 지표는 확인되지 않았다. 인기 순위나 조회수를 주장하지 않는다.",
+          "사진은 해당 인물의 자료사진이며 이번 착공식이나 순방 현장 사진이 아니다."
+        ],
+        "visual_subject": "Lee Jae-myung",
+        "visual_queries": [
+          "President Lee Jae Myung 260302",
+          "Lee Jae-myung 20250823"
+        ],
+        "sources": [
+          {
+            "title": "충청권 메가프로젝트 착공식 및 제4차 점검회의 개최",
+            "url": "https://www.president.go.kr/actually/y7Y7uPlW",
+            "role": "primary",
+            "accessed": true
+          },
+          {
+            "title": "삼성 온양캠퍼스, 최첨단 HBM 거점으로",
+            "url": "https://www.yna.co.kr/view/AKR20261112094900003",
+            "role": "original_reporting",
+            "accessed": true
+          }
+        ]
+      },
+      {
+        "topic_key": "lee-jae-myung-asean-apec-trip-announced-2026-11-12",
+        "category": "politics",
+        "ready": true,
+        "summary": "11월 12일 발표된 이재명 대통령의 11월 16~19일 마닐라 아세안 및 선전 APEC 참석 계획. 향후 논의 의제와 이미 달성한 성과를 구분한다.",
+        "verified_facts": [
+          {
+            "text": "청와대와 연합뉴스에 따르면 11월 12일 위성락 국가안보실장이 이재명 대통령의 11월 16일부터 19일까지 순방 일정을 발표했다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          },
+          {
+            "text": "대통령은 필리핀 마닐라의 아세안 관련 정상회의에 참석한 뒤 중국 선전의 APEC 정상회의에 참석할 예정이다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          },
+          {
+            "text": "발표된 논의 의제에는 에너지 공급망과 초국가 범죄 대응 등이 포함됐다. 이는 앞으로 논의할 계획이며 합의 결과가 아니다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          }
+        ],
+        "uncertainties": [
+          "YouTube와 Instagram의 개별 관심 지표는 확인되지 않았다. 인기 순위나 조회수를 주장하지 않는다.",
+          "사진은 해당 인물의 자료사진이며 이번 착공식이나 순방 현장 사진이 아니다.",
+          "정상회의와 개별 회담의 실제 결과는 아직 발표되지 않았다."
+        ],
+        "visual_subject": "Lee Jae-myung",
+        "visual_queries": [
+          "President Lee Jae Myung 260302",
+          "Lee Jae-myung 20250823"
+        ],
+        "sources": [
+          {
+            "title": "아세안 및 APEC 정상회의 참석 관련 위성락 국가안보실장 브리핑",
+            "url": "https://www.president.go.kr/briefings/tNz0idHE",
+            "role": "primary",
+            "accessed": true
+          },
+          {
+            "title": "이 대통령, 16∼19일 필리핀 아세안·중국 APEC 정상회의 참석",
+            "url": "https://www.yna.co.kr/view/AKR20261112043900001",
+            "role": "original_reporting",
+            "accessed": true
+          }
+        ]
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "url": "https://www.president.go.kr/actually/y7Y7uPlW",
+      "title": "충청권 메가프로젝트 착공식 및 제4차 점검회의 개최",
+      "observed_at": "2026-11-14T02:16:27.660781+00:00",
+      "retrieval": "direct HTTPS article; independently read with web open and local HTTP",
+      "response_sha256": "ae219e313456b648f52fb91da271cd2ba50e8f495357ab683c93981ab46f6138",
+      "summary": "2026년 11월 12일 청와대 발표: 이재명 대통령이 아산 삼성전자 온양캠퍼스의 첨단패키징 팹 착공 행사에 참석하고 현장 점검회의를 주재하는 일정이다.",
+      "attribution": "청와대 공식 발표"
+    },
+    {
+      "url": "https://www.yna.co.kr/view/AKR20261112094900003",
+      "title": "삼성 온양캠퍼스, 최첨단 HBM 거점으로",
+      "observed_at": "2026-11-14T02:16:30.286567+00:00",
+      "retrieval": "direct HTTPS article; independently read with web open and local HTTP",
+      "response_sha256": "6dcef774e3801d2bd5577083322b9552659e36cd10b3a42143d114ecaa177313",
+      "summary": "2026년 11월 12일 연합뉴스 보도: 온양캠퍼스 HBM 생산라인 다섯 개에 총 46조원을 순차 투자하는 계획이다. 새 공장 가동 목표는 2028년 6월이다. 이미 투자나 가동이 완료됐다는 뜻은 아니다.",
+      "attribution": "연합뉴스 자체 취재 보도"
+    },
+    {
+      "url": "https://www.president.go.kr/briefings/tNz0idHE",
+      "title": "아세안 및 APEC 정상회의 참석 관련 위성락 국가안보실장 브리핑",
+      "observed_at": "2026-11-14T02:16:31.719328+00:00",
+      "retrieval": "direct HTTPS article; independently read with web open and local HTTP",
+      "response_sha256": "cac6b9d8e76fb1f4da5e3c46fe9eb8b9e90ccdcedbbb3d1213e6f92c8dbdf5f3",
+      "summary": "2026년 11월 12일 국가안보실장 발표: 대통령의 순방 기간은 11월 16일부터 19일까지다. 마닐라 아세안 관련 회의 후 선전 APEC에 참석할 예정이다. 에너지 공급망 및 초국가 범죄 대응 등을 논의한다.",
+      "attribution": "청와대 공식 발표"
+    },
+    {
+      "url": "https://www.yna.co.kr/view/AKR20261112043900001",
+      "title": "이 대통령, 16∼19일 필리핀 아세안·중국 APEC 정상회의 참석",
+      "observed_at": "2026-11-14T02:16:33.097635+00:00",
+      "retrieval": "direct HTTPS article; independently read with web open and local HTTP",
+      "response_sha256": "eb8838ba1b5950e03af3533c26128bb1b0443ed1cf1c3e037f93a139f6334c4d",
+      "summary": "2026년 11월 12일 연합뉴스 보도: 대통령은 16~19일 필리핀과 중국을 방문할 계획이다. 한-아세안 및 한-메콩 회의, 아세안+3와 EAS, 선전의 APEC 일정이 발표됐다. 회의 결과는 아직 없다.",
+      "attribution": "연합뉴스 자체 취재 보도"
+    }
+  ],
+  "media_provenance": [
+    {
+      "title": "File:President Lee Jae Myung 260302.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:President_Lee_Jae_Myung_260302.jpg",
+      "license": "CC BY 4.0",
+      "purpose": "archival exact-subject photograph; never news factual corroboration"
+    },
+    {
+      "title": "File:Lee Jae-myung 20250823.jpg",
+      "url": "https://commons.wikimedia.org/wiki/File:Lee_Jae-myung_20250823.jpg",
+      "license": "CC BY 4.0",
+      "purpose": "archival exact-subject photograph; never news factual corroboration"
+    }
+  ]
+}
