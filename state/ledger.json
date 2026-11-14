@@ -1540,9 +1540,9 @@
           "completed_at": "2026-11-14T11:27:23.784702+09:00"
         }
       },
-      "status": "editorial_review_1_policy_recheck_completed",
+      "status": "reviewed",
       "active_stage": "editorial_review_1_policy_recheck",
-      "retry_hold": true,
+      "retry_hold": false,
       "research_failures": [
         {
           "reason": "research_manifest_news_source",
@@ -1629,7 +1629,385 @@
         "clarification_sha256": "894c805f86ed47b4e46bae0f23858c06a407c5662f77730d5ac6a490634a88fe",
         "at": "2026-11-14T11:27:14.098097+09:00",
         "maximum_new_review_requests": 1
-      }
+      },
+      "jobs": [
+        {
+          "id": "2026-11-14-ojirap-chungcheong-megaproject-groundbreaking-onyang",
+          "channel": "ojirap",
+          "topic_key": "chungcheong-megaproject-groundbreaking-onyang-2026-11-12",
+          "category": "business",
+          "title": "온양 착공식, 숫자는 컸고 일정은 아직",
+          "description": "대통령 참석 착공식은 확인됐고, 투자와 가동은 계획과 목표로 구분해서 봅니다.",
+          "sources": [
+            {
+              "title": "충청권 메가프로젝트 착공식 및 제4차 점검회의 개최",
+              "url": "https://www.president.go.kr/actually/y7Y7uPlW",
+              "checked_at": "2026-11-14T11:27:25.355602+09:00"
+            },
+            {
+              "title": "삼성 온양캠퍼스, 최첨단 HBM 거점으로",
+              "url": "https://www.yna.co.kr/view/AKR20261112094900003",
+              "checked_at": "2026-11-14T11:27:25.355602+09:00"
+            }
+          ],
+          "visual_queries": [
+            "President Lee Jae Myung 260302",
+            "Lee Jae-myung 20250823"
+          ],
+          "opening_text": "착공은 했습니다.",
+          "hook_type": "dry_hook",
+          "topic_category": "public_industry",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "착공은 했습니다",
+              "body": "행사는 확인, 성과는 아직. 이 구분이 오늘 핵심입니다.",
+              "narration": "착공은 했습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-185454682-2f12d7f6"
+            },
+            {
+              "kind": "fact",
+              "headline": "온양캠퍼스 행사 참석 확인",
+              "body": "청와대 발표와 연합뉴스 현장 보도로 11월 12일 행사가 확인됐습니다.",
+              "narration": "청와대와 연합뉴스 보도로, 십일월 십이일 이재명 대통령의 온양캠퍼스 착공식 참석은 확인됐어요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-173408320-2f12d7f6"
+            },
+            {
+              "kind": "fact",
+              "headline": "사십육조 투자는 계획",
+              "body": "연합뉴스는 HBM 생산라인 다섯 개 구축 계획을 전했습니다.",
+              "narration": "삼성전자가 총 사십육조원을 순차 투자해 에이치비엠 생산라인 다섯 개를 짓겠다는 건 계획입니다.",
+              "source_indices": [
+                1
+              ],
+              "media": "commons-188562644-2f12d7f6"
+            },
+            {
+              "kind": "opinion",
+              "headline": "목표와 실적은 다르죠",
+              "body": "새 공장 가동 목표는 2028년 6월. 아직 실적처럼 말할 단계는 아닙니다.",
+              "narration": "새 공장 가동은 이천이십팔년 유월 목표라는데, 저는 이런 숫자일수록 박수보다 밑줄이 먼저더라고요.",
+              "source_indices": [
+                1
+              ],
+              "media": "commons-185454682-2f12d7f6"
+            },
+            {
+              "kind": "closing",
+              "headline": "숫자는 컸고 공장은 이제 시작",
+              "body": "자료사진은 인물 아카이브일 뿐, 착공식 현장 사진은 아닙니다.",
+              "narration": "숫자는 컸고 공장은 이제 시작. 역시 반도체 뉴스는 늘 미래가 먼저 도착하네요.",
+              "source_indices": [
+                1
+              ],
+              "media": "commons-173408320-2f12d7f6"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "chungcheong-megaproject-groundbreaking-onyang-2026-11-12",
+            "category": "business",
+            "summary": "2026년 11월 12일 이재명 대통령이 참석한 아산 삼성전자 온양캠퍼스 착공식. 온양 HBM 투자 규모와 새 공장 가동 목표는 향후 계획이다.",
+            "verified_facts": [
+              {
+                "text": "청와대는 11월 12일 이재명 대통령의 삼성전자 온양캠퍼스 착공식 참석 일정을 발표했고, 연합뉴스는 같은 날 현장에서 열린 행사를 보도했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "연합뉴스에 따르면 삼성전자는 온양캠퍼스에 총 46조원을 순차적으로 투자해 HBM 생산라인 다섯 개를 구축할 계획이다.",
+                "source_indices": [
+                  1
+                ]
+              },
+              {
+                "text": "이번에 착공한 새 공장의 가동 목표는 2028년 6월이다. 확정된 가동 실적이 아니라 목표다.",
+                "source_indices": [
+                  1
+                ]
+              }
+            ],
+            "uncertainties": [
+              "YouTube와 Instagram의 개별 관심 지표는 확인되지 않았다. 인기 순위나 조회수를 주장하지 않는다.",
+              "사진은 해당 인물의 자료사진이며 이번 착공식이나 순방 현장 사진이 아니다."
+            ],
+            "sources": [
+              {
+                "title": "충청권 메가프로젝트 착공식 및 제4차 점검회의 개최",
+                "url": "https://www.president.go.kr/actually/y7Y7uPlW",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "삼성 온양캠퍼스, 최첨단 HBM 거점으로",
+                "url": "https://www.yna.co.kr/view/AKR20261112094900003",
+                "role": "original_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "165435830e455ec7c5ceca0ee56a229759eaf08419f7ebd1416c2d330205ac19",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-14T11:27:25.355602+09:00"
+        },
+        {
+          "id": "2026-11-14-ojirap-lee-jae-myung-asean-apec-trip-announced",
+          "channel": "ojirap",
+          "topic_key": "lee-jae-myung-asean-apec-trip-announced-2026-11-12",
+          "category": "politics",
+          "title": "순방은 확정, 성과는 아직 미정",
+          "description": "대통령의 아세안·APEC 참석 계획은 발표됐고, 의제는 논의 예정 사항으로 봐야 합니다.",
+          "sources": [
+            {
+              "title": "아세안 및 APEC 정상회의 참석 관련 위성락 국가안보실장 브리핑",
+              "url": "https://www.president.go.kr/briefings/tNz0idHE",
+              "checked_at": "2026-11-14T11:27:25.355706+09:00"
+            },
+            {
+              "title": "이 대통령, 16∼19일 필리핀 아세안·중국 APEC 정상회의 참석",
+              "url": "https://www.yna.co.kr/view/AKR20261112043900001",
+              "checked_at": "2026-11-14T11:27:25.355706+09:00"
+            }
+          ],
+          "visual_queries": [
+            "President Lee Jae Myung 260302",
+            "Lee Jae-myung 20250823"
+          ],
+          "opening_text": "이번엔 일정표입니다.",
+          "hook_type": "calendar_hook",
+          "topic_category": "diplomacy_schedule",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "이번엔 일정표입니다",
+              "body": "순방 발표는 사실이고, 성과 전망은 아직 아닙니다.",
+              "narration": "이번엔 일정표입니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-185454682-b6e9f002"
+            },
+            {
+              "kind": "fact",
+              "headline": "십일월 십육일부터 순방",
+              "body": "11월 12일 브리핑과 보도로 16~19일 일정이 발표됐습니다.",
+              "narration": "십일월 십이일 발표 기준으로, 이재명 대통령은 십육일부터 십구일까지 순방 일정이 잡혔습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-173408320-b6e9f002"
+            },
+            {
+              "kind": "fact",
+              "headline": "마닐라 뒤 선전 APEC",
+              "body": "필리핀 아세안 관련 회의 뒤 중국 선전 APEC 참석 계획입니다.",
+              "narration": "필리핀 마닐라의 아세안 관련 정상회의 뒤, 중국 선전의 에이펙 정상회의 참석 계획이 공개됐고요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-185454682-b6e9f002"
+            },
+            {
+              "kind": "opinion",
+              "headline": "의제는 계획일 뿐",
+              "body": "에너지 공급망·초국가 범죄 대응은 논의 예정 의제입니다.",
+              "narration": "에너지 공급망이나 초국가 범죄 대응은 앞으로 논의할 의제라서, 벌써 성과표처럼 읽으면 좀 성급하다는 쪽입니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-173408320-b6e9f002"
+            },
+            {
+              "kind": "closing",
+              "headline": "외교 뉴스의 기본 매너",
+              "body": "자료사진은 인물 아카이브이며, 실제 현장 결과는 아직 없습니다.",
+              "narration": "외교 뉴스는 출발 전보다 도착 후가 본편이죠. 비행기표가 곧 성적표는 아니니까요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-185454682-b6e9f002"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "lee-jae-myung-asean-apec-trip-announced-2026-11-12",
+            "category": "politics",
+            "summary": "11월 12일 발표된 이재명 대통령의 11월 16~19일 마닐라 아세안 및 선전 APEC 참석 계획. 향후 논의 의제와 이미 달성한 성과를 구분한다.",
+            "verified_facts": [
+              {
+                "text": "청와대와 연합뉴스에 따르면 11월 12일 위성락 국가안보실장이 이재명 대통령의 11월 16일부터 19일까지 순방 일정을 발표했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "대통령은 필리핀 마닐라의 아세안 관련 정상회의에 참석한 뒤 중국 선전의 APEC 정상회의에 참석할 예정이다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "발표된 논의 의제에는 에너지 공급망과 초국가 범죄 대응 등이 포함됐다. 이는 앞으로 논의할 계획이며 합의 결과가 아니다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "uncertainties": [
+              "YouTube와 Instagram의 개별 관심 지표는 확인되지 않았다. 인기 순위나 조회수를 주장하지 않는다.",
+              "사진은 해당 인물의 자료사진이며 이번 착공식이나 순방 현장 사진이 아니다.",
+              "정상회의와 개별 회담의 실제 결과는 아직 발표되지 않았다."
+            ],
+            "sources": [
+              {
+                "title": "아세안 및 APEC 정상회의 참석 관련 위성락 국가안보실장 브리핑",
+                "url": "https://www.president.go.kr/briefings/tNz0idHE",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "이 대통령, 16∼19일 필리핀 아세안·중국 APEC 정상회의 참석",
+                "url": "https://www.yna.co.kr/view/AKR20261112043900001",
+                "role": "original_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "88b5d910e5ff16268847fe60834ae997fa853c045c4930700d967806dd1f3982",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-14T11:27:25.355706+09:00"
+        }
+      ],
+      "media": {
+        "commons-185454682-2f12d7f6": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/President_Lee_Jae_Myung_260302.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:President_Lee_Jae_Myung_260302.jpg",
+          "path": "assets/commons-185454682-2f12d7f6.jpg",
+          "media_type": "image",
+          "credit": "플리커 / 대한민국 청와대 / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2026",
+          "description": "이재명 대통령",
+          "capture_date": "2026-03-02",
+          "title": "File:President Lee Jae Myung 260302.jpg",
+          "topic_key": "chungcheong-megaproject-groundbreaking-onyang-2026-11-12",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-14T11:21:47.251671+09:00"
+        },
+        "commons-188562644-2f12d7f6": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/President_Lee_Jae_Myung_260302_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:President_Lee_Jae_Myung_260302_(2).jpg",
+          "path": "assets/commons-188562644-2f12d7f6.jpg",
+          "media_type": "image",
+          "credit": "플리커 / 대한민국 청와대 / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2026",
+          "description": "이재명 대통령",
+          "capture_date": "2026-03-02",
+          "title": "File:President Lee Jae Myung 260302 (2).jpg",
+          "topic_key": "chungcheong-megaproject-groundbreaking-onyang-2026-11-12",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-14T11:21:47.251732+09:00"
+        },
+        "commons-173408320-2f12d7f6": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Lee_Jae-myung_20250823.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:Lee_Jae-myung_20250823.jpg",
+          "path": "assets/commons-173408320-2f12d7f6.jpg",
+          "media_type": "image",
+          "credit": "内閣官房内閣広報室 / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2025",
+          "description": "令和７年８月２３日、石破総理は、総理大臣官邸で大韓民国の李在明（イ・ジェミョン）大統領と首脳会談を行いました。 　両首脳は会談を行い、その後、共同記者発表を行いました。最後に夕食会を行いました。",
+          "capture_date": "2025-08-23",
+          "title": "File:Lee Jae-myung 20250823.jpg",
+          "topic_key": "chungcheong-megaproject-groundbreaking-onyang-2026-11-12",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-14T11:21:47.782973+09:00"
+        },
+        "commons-185454682-b6e9f002": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/President_Lee_Jae_Myung_260302.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:President_Lee_Jae_Myung_260302.jpg",
+          "path": "assets/commons-185454682-b6e9f002.jpg",
+          "media_type": "image",
+          "credit": "플리커 / 대한민국 청와대 / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2026",
+          "description": "이재명 대통령",
+          "capture_date": "2026-03-02",
+          "title": "File:President Lee Jae Myung 260302.jpg",
+          "topic_key": "lee-jae-myung-asean-apec-trip-announced-2026-11-12",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-14T11:21:47.796461+09:00"
+        },
+        "commons-188562644-b6e9f002": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/5/54/President_Lee_Jae_Myung_260302_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:President_Lee_Jae_Myung_260302_(2).jpg",
+          "path": "assets/commons-188562644-b6e9f002.jpg",
+          "media_type": "image",
+          "credit": "플리커 / 대한민국 청와대 / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2026",
+          "description": "이재명 대통령",
+          "capture_date": "2026-03-02",
+          "title": "File:President Lee Jae Myung 260302 (2).jpg",
+          "topic_key": "lee-jae-myung-asean-apec-trip-announced-2026-11-12",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-14T11:21:47.796497+09:00"
+        },
+        "commons-173408320-b6e9f002": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/8/85/Lee_Jae-myung_20250823.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:Lee_Jae-myung_20250823.jpg",
+          "path": "assets/commons-173408320-b6e9f002.jpg",
+          "media_type": "image",
+          "credit": "内閣官房内閣広報室 / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2025",
+          "description": "令和７年８月２３日、石破総理は、総理大臣官邸で大韓民国の李在明（イ・ジェミョン）大統領と首脳会談を行いました。 　両首脳は会談を行い、その後、共同記者発表を行いました。最後に夕食会を行いました。",
+          "capture_date": "2025-08-23",
+          "title": "File:Lee Jae-myung 20250823.jpg",
+          "topic_key": "lee-jae-myung-asean-apec-trip-announced-2026-11-12",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-14T11:21:47.812265+09:00"
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-14-ojirap-chungcheong-megaproject-groundbreaking-onyang\": [\"commons-185454682-2f12d7f6\", \"commons-173408320-2f12d7f6\", \"commons-188562644-2f12d7f6\", \"commons-185454682-2f12d7f6\", \"commons-173408320-2f12d7f6\"], \"2026-11-14-ojirap-lee-jae-myung-asean-apec-trip-announced\": [\"commons-185454682-b6e9f002\", \"commons-173408320-b6e9f002\", \"commons-185454682-b6e9f002\", \"commons-173408320-b6e9f002\", \"commons-185454682-b6e9f002\"]}}",
+      "review_source_urls": [
+        "https://www.president.go.kr/actually/y7Y7uPlW",
+        "https://www.president.go.kr/briefings/tNz0idHE"
+      ],
+      "created_at": "2026-11-14T11:27:25.355785+09:00"
     }
   },
   "publications": [
