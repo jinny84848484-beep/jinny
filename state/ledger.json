@@ -1540,7 +1540,7 @@
           "completed_at": "2026-11-14T11:27:23.784702+09:00"
         }
       },
-      "status": "rendered",
+      "status": "upload_submitted",
       "active_stage": "editorial_review_1_policy_recheck",
       "retry_hold": false,
       "research_failures": [
