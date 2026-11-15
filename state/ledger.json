@@ -2127,6 +2127,132 @@
         "source_count": 2,
         "candidate_count": 0,
         "input_hash": "b4bbab01f268f8e8f3f8ea214ce7d8f8ece08a506dcddb572bfa80886263061d"
+      },
+      "date_clarification": {
+        "source_run": "43684366776",
+        "artifact_id": 14149911491,
+        "archive_sha256": "e7d3bdc998638210b64d9380119eef1a92662382c5ca13c3d4b102ec3b05f87b",
+        "previous_record": {
+          "checkpoints": {
+            "research": {
+              "status": "completed",
+              "request_hash": "f4d4a08d32c1f779832edef7b74ce9ec48e4996c62b656895c4ccbffe8f6d8a3",
+              "attempts": 1,
+              "at": "2026-11-15T11:07:20.846028+09:00",
+              "usable": true,
+              "sha256": "7a6cd9eff9dfe6bce4373bbf4ab5ac44c0fa3fd779dd0282b24ec9b9dee530ca",
+              "completed_at": "2026-11-15T11:07:56.113105+09:00"
+            },
+            "research_repair": {
+              "status": "completed",
+              "request_hash": "2720c3ebe6cecca77d7e3f0ebb8ce1f80f957868bd73917a055758e8d6d1d5f7",
+              "attempts": 1,
+              "at": "2026-11-15T11:07:57.182210+09:00",
+              "usable": true,
+              "sha256": "4507eb79240415add46a55b7dd19b4fa11f582c87c1e257c9df4df63a08ac23c",
+              "completed_at": "2026-11-15T11:08:19.962329+09:00"
+            },
+            "draft": {
+              "status": "completed",
+              "request_hash": "4e5877c6583b736a91a1c1fc4af031de8f066723cefd1d8c3977b1443bc98f9a",
+              "attempts": 1,
+              "at": "2026-11-15T15:13:27.025581+09:00",
+              "usable": true,
+              "sha256": "9225c168907f7b25466c8ba7930b606c12486aac7742ce52fbe683838896cb38",
+              "completed_at": "2026-11-15T15:13:43.675786+09:00"
+            },
+            "editorial_review_0": {
+              "status": "completed",
+              "request_hash": "3d41b4d32557512eca7a9f498b9bbd0cef8293124ebcfe2425b31dd05ffb7e06",
+              "attempts": 1,
+              "at": "2026-11-15T15:13:46.862517+09:00",
+              "usable": true,
+              "sha256": "b58a82986517f4449ca2c5af1aad5724785b2d67c26067b9223bba224dd65597",
+              "completed_at": "2026-11-15T15:13:52.875559+09:00"
+            },
+            "editorial_review_1": {
+              "status": "completed",
+              "request_hash": "5195ef24602e7dd1bba1b9bea5290cfb3467757dd1e0547d9f816143a064af03",
+              "attempts": 1,
+              "at": "2026-11-15T15:13:54.076845+09:00",
+              "usable": true,
+              "sha256": "eb5de4997a944317d706697b21a0243e646bb7c72f6546c49bab87cfe23a99d8",
+              "completed_at": "2026-11-15T15:13:58.893744+09:00"
+            }
+          },
+          "status": "editorial_review_failed",
+          "active_stage": "editorial_review_1",
+          "retry_hold": true,
+          "research_failures": [
+            {
+              "reason": "research_manifest_unready",
+              "stage": "research_manifest",
+              "repair_attempted": true,
+              "at": "2026-11-15T11:08:21.102031+09:00"
+            }
+          ],
+          "research_recovery": {
+            "bundle_sha256": "04269c6d07cf04ae9f95d78320e7b73d16cf096c3134ed63939df40d9704e50b",
+            "source_run": "43666191271",
+            "source_head": "b6f56aa66442d603b23b6c543d70f3cc74cf308d",
+            "artifact_id": 14142445148,
+            "archive_sha256": "ae57def0efca83c2399b4235ac95b6193e5b29adc589433cc1d2a56f7f7013c4",
+            "previous_record_hash": "98e4ee4102688caacb47524640d7397fb3e3c5d78e3339127645f6ca1e5ccdea",
+            "previous_record": {
+              "checkpoints": {
+                "research": {
+                  "status": "completed",
+                  "request_hash": "f4d4a08d32c1f779832edef7b74ce9ec48e4996c62b656895c4ccbffe8f6d8a3",
+                  "attempts": 1,
+                  "at": "2026-11-15T11:07:20.846028+09:00",
+                  "usable": true,
+                  "sha256": "7a6cd9eff9dfe6bce4373bbf4ab5ac44c0fa3fd779dd0282b24ec9b9dee530ca",
+                  "completed_at": "2026-11-15T11:07:56.113105+09:00"
+                },
+                "research_repair": {
+                  "status": "completed",
+                  "request_hash": "2720c3ebe6cecca77d7e3f0ebb8ce1f80f957868bd73917a055758e8d6d1d5f7",
+                  "attempts": 1,
+                  "at": "2026-11-15T11:07:57.182210+09:00",
+                  "usable": true,
+                  "sha256": "4507eb79240415add46a55b7dd19b4fa11f582c87c1e257c9df4df63a08ac23c",
+                  "completed_at": "2026-11-15T11:08:19.962329+09:00"
+                }
+              },
+              "status": "research_validation_failed",
+              "active_stage": "research_repair",
+              "retry_hold": true,
+              "research_failures": [
+                {
+                  "reason": "research_manifest_unready",
+                  "stage": "research_manifest",
+                  "repair_attempted": true,
+                  "at": "2026-11-15T11:08:21.102031+09:00"
+                }
+              ]
+            },
+            "at": "2026-11-15T15:13:23.425489+09:00",
+            "method": "operator_observed_research_only"
+          },
+          "review_input_hash": "b4bbab01f268f8e8f3f8ea214ce7d8f8ece08a506dcddb572bfa80886263061d",
+          "editorial_diagnostic": {
+            "status": "FAIL",
+            "issues": [
+              {
+                "code": "factual_claim",
+                "job_index": 0,
+                "scene_index": 2
+              }
+            ],
+            "source_count": 2,
+            "candidate_count": 0,
+            "input_hash": "b4bbab01f268f8e8f3f8ea214ce7d8f8ece08a506dcddb572bfa80886263061d"
+          }
+        },
+        "previous_record_hash": "53a3ac8e59c1450a5a000e07e88c6fe2ab579d379c4f1dc2c2c5482b2dd6ef33",
+        "original_input_hash": "b4bbab01f268f8e8f3f8ea214ce7d8f8ece08a506dcddb572bfa80886263061d",
+        "corrected_input_hash": "1a2036abdb7e18115c624c29e3b43ab21f748627b0fbdc73ea6999c4244ea468",
+        "maximum_new_review_requests": 2
       }
     }
   },
