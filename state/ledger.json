@@ -2078,7 +2078,7 @@
           "completed_at": "2026-11-15T15:27:23.230649+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1_date_clarification_v1",
       "retry_hold": false,
       "research_failures": [
@@ -3205,6 +3205,18 @@
       "video_id": "wZkD8FesUZM",
       "url": "https://www.youtube.com/shorts/wZkD8FesUZM",
       "at": "2026-11-14T11:28:47.163722+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-15-samsung-intelligent-eyewear",
+      "topic_key": "samsung-intelligent-eyewear-korea-release-2026-11-12",
+      "category": "technology",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "안경도 이제 예고편부터 본다",
+      "video_id": "ozLQmq4CZ-8",
+      "url": "https://www.youtube.com/shorts/ozLQmq4CZ-8",
+      "at": "2026-11-15T15:28:54.788385+09:00",
       "experiment": {}
     }
   ],
