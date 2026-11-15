@@ -2078,9 +2078,9 @@
           "completed_at": "2026-11-15T15:27:23.230649+09:00"
         }
       },
-      "status": "editorial_review_1_date_clarification_v1_completed",
+      "status": "reviewed",
       "active_stage": "editorial_review_1_date_clarification_v1",
-      "retry_hold": true,
+      "retry_hold": false,
       "research_failures": [
         {
           "reason": "research_manifest_unready",
@@ -2272,7 +2272,474 @@
         "corrected_input_hash": "1a2036abdb7e18115c624c29e3b43ab21f748627b0fbdc73ea6999c4244ea468",
         "maximum_new_review_requests": 2
       },
-      "date_clarification_v1_input_hash": "1a2036abdb7e18115c624c29e3b43ab21f748627b0fbdc73ea6999c4244ea468"
+      "date_clarification_v1_input_hash": "1a2036abdb7e18115c624c29e3b43ab21f748627b0fbdc73ea6999c4244ea468",
+      "jobs": [
+        {
+          "id": "2026-11-15-samsung-intelligent-eyewear",
+          "channel": "ojirap",
+          "topic_key": "samsung-intelligent-eyewear-korea-release-2026-11-12",
+          "category": "technology",
+          "title": "안경도 이제 예고편부터 본다",
+          "description": "삼성이 AI 안경 계획을 공개했다. 다만 지금 출시가 아니라 12월10일 예정이라는 점이 핵심이다.",
+          "sources": [
+            {
+              "title": "Samsung Announces December Release for Intelligent Eyewear",
+              "url": "https://news.samsung.com/global/samsung-announces-december-release-for-intelligent-eyewear-bringing-a-smarter-way-to-see-the-world",
+              "checked_at": "2026-11-15T15:27:24.298315+09:00"
+            },
+            {
+              "title": "Samsung unveils Gemini-powered AI glasses, launches Dec. 10 in Korea and US",
+              "url": "https://biz.chosun.com/en/en-it/2026/11/12/7W5J6TW6S5E5NB527RIGT76OCE/?outputType=amp",
+              "checked_at": "2026-11-15T15:27:24.298315+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Samsung Intelligent Eyewear launch",
+            "Samsung Intelligent Eyewear Gentle Monster"
+          ],
+          "hook_type": "date-clarifier",
+          "topic_category": "consumer_tech",
+          "opening_text": "안경은 아직 안 나왔어요.",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "안경은 아직 안 나왔어요",
+              "body": "발표는 됐지만 출시 완료는 아니다.",
+              "narration": "안경은 아직 안 나왔어요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-15-samsung-intelligent-eyewear-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "발표일은 십일월 십이일",
+              "body": "삼성은 협업 제품 계획을 공개했다.",
+              "narration": "삼성은 십일월 십이일 구글, 젠틀몬스터, 워비파커와 협업한 인텔리전트 아이웨어를 발표했어요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-15-samsung-intelligent-eyewear-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "2026년 12월 10일 출시 예정",
+              "body": "한국·미국 출시 예정일. 사전판매와 구분.",
+              "narration": "확인된 건 한국과 미국 판매 시작 예정일이 이천이십육년 십이월 열흘이라는 점, 그리고 사전판매가 같은 날이 아니라 십일월 십이일부터라는 점입니다. 출시는 아직 전이죠.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-15-samsung-intelligent-eyewear-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "제미나이는 설명서 속 기능",
+              "body": "성능 평가는 아직 말할 단계가 아니다.",
+              "narration": "제미나이 탑재는 삼성 설명에 나온 내용이고, 실사용 성능 검증 기사로 확인된 건 아니에요. 저는 이런 제품, 늘 예고편이 본편보다 더 자신만만해서 조금 웃깁니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-15-samsung-intelligent-eyewear-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "이번엔 얼굴보다 날짜",
+              "body": "기대보다 일정 확인이 먼저다.",
+              "narration": "그러니 오늘의 오지랖은 스펙 감탄보다 달력 체크. 안경이 똑똑해져도 출시일 착시는 아직 사람이 고쳐야 하나 봐요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-15-samsung-intelligent-eyewear-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "samsung-intelligent-eyewear-korea-release-2026-11-12",
+            "category": "technology",
+            "summary": "삼성이 11월12일 AI 안경 출시 계획을 공개했다. 한국·미국 판매 시작은 12월10일 예정으로, 현재 출시 완료가 아니다.",
+            "verified_facts": [
+              {
+                "text": "삼성은 구글·젠틀몬스터·워비파커와 협업한 인텔리전트 아이웨어를 11월12일 발표했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "삼성 발표와 조선비즈 보도에 따르면 한국과 미국 출시 예정일은 2026년12월10일이며 사전판매는 11월12일부터다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "삼성은 이 안경에 제미나이가 탑재된다고 밝혔다. 실제 성능 검증 결과가 아니라 제품 설명이다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "uncertainties": [
+              "정확한 제품의 재사용 가능 사진은 미확보. 자체 텍스트 그래픽 전용이며 실제 제품 사진이나 실사용 시연으로 표현하지 않는다.",
+              "인기 순위·조회수·실측 성능은 확인하지 않았으므로 주장하지 않는다."
+            ],
+            "sources": [
+              {
+                "title": "Samsung Announces December Release for Intelligent Eyewear",
+                "url": "https://news.samsung.com/global/samsung-announces-december-release-for-intelligent-eyewear-bringing-a-smarter-way-to-see-the-world",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "Samsung unveils Gemini-powered AI glasses, launches Dec. 10 in Korea and US",
+                "url": "https://biz.chosun.com/en/en-it/2026/11/12/7W5J6TW6S5E5NB527RIGT76OCE/?outputType=amp",
+                "role": "independent_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "a8448bad5702bd01084ed7dc5e52753566d34c32342bf6aca967d166580eff32",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-15T15:27:24.298315+09:00"
+        },
+        {
+          "id": "2026-11-15-asean-week-seoul",
+          "channel": "ojirap",
+          "topic_key": "asean-week-seoul-2026-11-13",
+          "category": "culture",
+          "title": "축제는 열렸고 전시는 요일을 본다",
+          "description": "아세안 위크는 11월13일 개막이 확인됐다. 다만 음식 행사와 전시 운영일은 같은 말로 묶으면 안 된다.",
+          "sources": [
+            {
+              "title": "ASEAN-Korea Centre to Hold 2026 ASEAN Week in Seoul and Jeonju",
+              "url": "https://www.aseankorea.org/eng/board/11/58088/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list&viewYn=Y",
+              "checked_at": "2026-11-15T15:27:24.298460+09:00"
+            },
+            {
+              "title": "코코넛 향 따라가니 동남아…광화문에 차려진 아세안의 식탁",
+              "url": "https://www.yna.co.kr/view/AKR20261113152700371?input=1215m",
+              "checked_at": "2026-11-15T15:27:24.298460+09:00"
+            }
+          ],
+          "visual_queries": [
+            "2026 ASEAN Week Seoul",
+            "2026 ASEAN Week Korea Press Center"
+          ],
+          "hook_type": "schedule-check",
+          "topic_category": "public_culture",
+          "opening_text": "축제도 요일 계산이 필요해요.",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "축제도 요일 계산이 필요해요",
+              "body": "행사와 전시는 운영 시간이 다르다.",
+              "narration": "축제도 요일 계산이 필요해요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-15-asean-week-seoul-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "개막은 십일월 십삼일 확인",
+              "body": "센터 공지와 현장 보도가 만난다.",
+              "narration": "한-아세안센터는 이천이십육 아세안 위크를 십일월 십삼일부터 십오일까지 연다고 공지했고, 연합뉴스는 십삼일 서울 개막을 현장 보도로 확인했어요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-15-asean-week-seoul-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "서울마당 음식 행사는 삼일",
+              "body": "오전 열한시부터 오후 다섯시다.",
+              "narration": "확인된 일정으로는 프레스센터 앞 서울마당 음식 행사가 십삼일부터 십오일까지 오전 열한시부터 오후 다섯시까지예요.",
+              "source_indices": [
+                0
+              ],
+              "media": "graphic-2026-11-15-asean-week-seoul-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "전시는 같은 문장으로 못 묶는다",
+              "body": "평일 운영 안내라 오늘 여부는 다르다.",
+              "narration": "다만 서울아세안홀 전시는 십삼일 시작 보도와 별개로, 센터 안내 운영시간이 공휴일 제외 평일 오전 아홉시부터 오후 여섯시입니다. 저는 이런 일정표, 맛집 메뉴판보다 더 꼼꼼히 보게 돼요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-15-asean-week-seoul-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "오늘은 향보다 달력",
+              "body": "방문 판단은 요일 확인이 먼저다.",
+              "narration": "그래서 오늘 기준으로는 음식 행사와 상설전시를 한 덩어리로 말하면 조금 곤란해요. 코코넛 향 따라갔다가 문 앞에서 요일 공부할 수 있거든요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-15-asean-week-seoul-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "asean-week-seoul-2026-11-13",
+            "category": "culture",
+            "summary": "한-아세안센터가 11월13~15일 행사를 공지했고 연합뉴스 현장 취재로 13일 개막을 확인했다. 음식 행사와 상설전시 운영일을 구분한다.",
+            "verified_facts": [
+              {
+                "text": "한-아세안센터는 2026 아세안 위크를 11월13~15일 개최한다고 공지했으며, 연합뉴스는 13일 서울에서 개막했다고 현장 보도했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "센터 공지에 따르면 프레스센터 앞 서울마당 음식 행사는 11월13~15일 오전11시부터 오후5시까지다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "연합뉴스는 13일 서울아세안홀 전시가 시작됐다고 보도했다. 센터가 밝힌 전시 운영시간은 공휴일을 제외한 평일 오전9시부터 오후6시까지다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "uncertainties": [
+              "11월15일은 일요일이므로 상설전시가 오늘 열린다는 안내를 하지 않는다. 행사 종료 후 업로드될 경우 현재 방문을 권하지 않는다.",
+              "정확한 행사 사진의 사용권은 미확보. 자체 텍스트 그래픽만 사용하고 현장 사진·재현 영상으로 오인시키지 않는다.",
+              "흥행 수치나 현재 실시간 운영은 확인하지 않았다."
+            ],
+            "sources": [
+              {
+                "title": "ASEAN-Korea Centre to Hold 2026 ASEAN Week in Seoul and Jeonju",
+                "url": "https://www.aseankorea.org/eng/board/11/58088/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list&viewYn=Y",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "코코넛 향 따라가니 동남아…광화문에 차려진 아세안의 식탁",
+                "url": "https://www.yna.co.kr/view/AKR20261113152700371?input=1215m",
+                "role": "original_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "39a52d0b38a1deb0db77d6300cde60e8521de835f96dba903453c1479344a518",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-15T15:27:24.298460+09:00"
+        }
+      ],
+      "media": {
+        "graphic-2026-11-15-samsung-intelligent-eyewear-0": {
+          "path": "assets/graphics/2026-11-15/2026-11-15-samsung-intelligent-eyewear/scene-01.png",
+          "sha256": "1d7267f4b426ae9ac79bc9e34204b29dc89efcda9e5af411449af52fb143a692",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "samsung-intelligent-eyewear-korea-release-2026-11-12",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "053bfa82644bf5dcf46f333c2fb19ed49030472e267c10fb4de36256f099038b",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-15-samsung-intelligent-eyewear-1": {
+          "path": "assets/graphics/2026-11-15/2026-11-15-samsung-intelligent-eyewear/scene-02.png",
+          "sha256": "f91a8f1856a75394ca6b5797af17dbc7eacdca1e470a2ee3431e1274974bb68d",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "samsung-intelligent-eyewear-korea-release-2026-11-12",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "7ac6ac303e0d6f3fefacc61302369daf5c33202d5b8fa30c73cf9ea22daa3401",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-15-samsung-intelligent-eyewear-2": {
+          "path": "assets/graphics/2026-11-15/2026-11-15-samsung-intelligent-eyewear/scene-03.png",
+          "sha256": "55f242e878273149fb00b3715f51a00a7b0d0aa9d893a3b3f02cc6632076e0c5",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "samsung-intelligent-eyewear-korea-release-2026-11-12",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "23076346d53087b34808bbc44e68f0b9aec7f3d0816a7373b410b7d616bbe69f",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-15-samsung-intelligent-eyewear-3": {
+          "path": "assets/graphics/2026-11-15/2026-11-15-samsung-intelligent-eyewear/scene-04.png",
+          "sha256": "332a37d96afc3104bd1b1185f185120f03846d3ad5ab7e187d7a751630222c84",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "samsung-intelligent-eyewear-korea-release-2026-11-12",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "6486c969572ed02f871151b3c8e02798d27eae86da5e2dc489ab35aa9609cbe3",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-15-samsung-intelligent-eyewear-4": {
+          "path": "assets/graphics/2026-11-15/2026-11-15-samsung-intelligent-eyewear/scene-05.png",
+          "sha256": "dc34d5323cd619c553afa703a31d720466a16624710664e280e72fb45ed6f18b",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "samsung-intelligent-eyewear-korea-release-2026-11-12",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "4e83ea5e06ba3c6ff9a31111022ea865fc64df705fb5e4163fc784c2ba610f34",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-15-asean-week-seoul-0": {
+          "path": "assets/graphics/2026-11-15/2026-11-15-asean-week-seoul/scene-01.png",
+          "sha256": "62d5805a4ccdc71f36ada12991842661b56d64477bc2b7cba3cd20f070ab557f",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "asean-week-seoul-2026-11-13",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "0c16ccf23210e0adef55ef987abd0639d262b5c4d5ceea8f01b31a9d15950e0c",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-15-asean-week-seoul-1": {
+          "path": "assets/graphics/2026-11-15/2026-11-15-asean-week-seoul/scene-02.png",
+          "sha256": "440852c622b71dac543f63fedf7bdebc3c8e73ccd810d9c991b8a58595e8880e",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "asean-week-seoul-2026-11-13",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "8a6a41fa0df0243d1752a1e35491c1479d0d39cab7bf67a21c9463d320f8ab6f",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-15-asean-week-seoul-2": {
+          "path": "assets/graphics/2026-11-15/2026-11-15-asean-week-seoul/scene-03.png",
+          "sha256": "7f82b0adaa7274843cdbd20f07924c33d86e7c2d11df79594e3c00651b245126",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "asean-week-seoul-2026-11-13",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "a26e730f650be2e9bc0b3b415c7a377631b6393566a05eda0fbe4f17f57938d6",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-15-asean-week-seoul-3": {
+          "path": "assets/graphics/2026-11-15/2026-11-15-asean-week-seoul/scene-04.png",
+          "sha256": "2d237c9a2a2943a08da3753dc44a0b10c6817aa41b147556a94daf3754244714",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "asean-week-seoul-2026-11-13",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "44bd0ab79fdcbf0fc54f20cd52c9d7dbf17e2adc11b0b45f0b06359da9c0f93b",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-15-asean-week-seoul-4": {
+          "path": "assets/graphics/2026-11-15/2026-11-15-asean-week-seoul/scene-05.png",
+          "sha256": "29aef64b766807ed973290ce0291f7305debc3c592d44e7f3834db15beef0d36",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "asean-week-seoul-2026-11-13",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "cb4bd64f1489563fbb9a4293ebd2db33942fe7c269308a5a0034f6a9b3059670",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-15-samsung-intelligent-eyewear\": [\"graphic-2026-11-15-samsung-intelligent-eyewear-0\", \"graphic-2026-11-15-samsung-intelligent-eyewear-1\", \"graphic-2026-11-15-samsung-intelligent-eyewear-2\", \"graphic-2026-11-15-samsung-intelligent-eyewear-3\", \"graphic-2026-11-15-samsung-intelligent-eyewear-4\"], \"2026-11-15-asean-week-seoul\": [\"graphic-2026-11-15-asean-week-seoul-0\", \"graphic-2026-11-15-asean-week-seoul-1\", \"graphic-2026-11-15-asean-week-seoul-2\", \"graphic-2026-11-15-asean-week-seoul-3\", \"graphic-2026-11-15-asean-week-seoul-4\"]}}",
+      "review_source_urls": [
+        "https://news.samsung.com/global/samsung-announces-december-release-for-intelligent-eyewear-bringing-a-smarter-way-to-see-the-world",
+        "https://www.yna.co.kr/view/AKR20261113152700371?input=1215m",
+        "https://www.aseankorea.org/eng/board/11/58088/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list&viewYn=Y",
+        "https://www.aseankorea.org/main/board/2/58087/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list&viewYn=Y",
+        "https://acf.aseankorea.org/main/board/2/58087/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list",
+        "https://www.aseankorea.org/eng/board/11/board_list.do",
+        "https://www.aseankorea.org/eng/aseanhall/aseanhall_list.do",
+        "https://www.aseankorea.org/eng/aseanhall/aseanhall_list.do?ahCd=AR01000000",
+        "https://www.aseankorea.org/eng/search.do",
+        "https://www.aseankorea.org/eng/search.do?sv=2026",
+        "https://www.aseankorea.org/main/search.do",
+        "https://www.aseankorea.org/main/board/2/57904/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list&viewYn=Y",
+        "https://www.aseankorea.org/eng/board/11/57905/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list&viewYn=Y",
+        "https://acf.aseankorea.org/main/board/2/board_list.do",
+        "https://www.aseankorea.org/uploads/2018/12/Collection_Guide.pdf",
+        "https://www.aseankorea.org/uploads/2018/04/2018_AKC_Brochure_EN.pdf",
+        "https://www.aseankorea.org/uploads/2019/06/FY2019_KOR.pdf",
+        "https://www.aseankorea.org/uploads/2019/06/FY2019_ENG.pdf",
+        "https://www.aseankorea.org/uploads/2018/04/2018_AKC_Brochure_KR.pdf",
+        "https://www.aseankorea.org/uploads/2021/03/2021%20%ED%95%9C-%EC%95%84%EC%84%B8%EC%95%88%EC%84%BC%ED%84%B0%20%EB%B8%8C%EB%A1%9C%EC%85%94_KOR_spread.pdf"
+      ],
+      "created_at": "2026-11-15T15:27:24.298587+09:00"
     }
   },
   "publications": [
