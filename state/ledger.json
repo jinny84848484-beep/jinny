@@ -2078,7 +2078,7 @@
           "completed_at": "2026-11-15T15:27:23.230649+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_1_date_clarification_v1",
       "retry_hold": false,
       "research_failures": [
@@ -2285,12 +2285,12 @@
             {
               "title": "Samsung Announces December Release for Intelligent Eyewear",
               "url": "https://news.samsung.com/global/samsung-announces-december-release-for-intelligent-eyewear-bringing-a-smarter-way-to-see-the-world",
-              "checked_at": "2026-11-15T15:27:24.298315+09:00"
+              "checked_at": "2026-11-15T15:27:25.401945+09:00"
             },
             {
               "title": "Samsung unveils Gemini-powered AI glasses, launches Dec. 10 in Korea and US",
               "url": "https://biz.chosun.com/en/en-it/2026/11/12/7W5J6TW6S5E5NB527RIGT76OCE/?outputType=amp",
-              "checked_at": "2026-11-15T15:27:24.298315+09:00"
+              "checked_at": "2026-11-15T15:27:25.401945+09:00"
             }
           ],
           "visual_queries": [
@@ -2407,7 +2407,7 @@
           "fact_packet_hash": "a8448bad5702bd01084ed7dc5e52753566d34c32342bf6aca967d166580eff32",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-15T15:27:24.298315+09:00"
+          "verified_at": "2026-11-15T15:27:25.401945+09:00"
         },
         {
           "id": "2026-11-15-asean-week-seoul",
@@ -2420,12 +2420,12 @@
             {
               "title": "ASEAN-Korea Centre to Hold 2026 ASEAN Week in Seoul and Jeonju",
               "url": "https://www.aseankorea.org/eng/board/11/58088/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list&viewYn=Y",
-              "checked_at": "2026-11-15T15:27:24.298460+09:00"
+              "checked_at": "2026-11-15T15:27:25.402120+09:00"
             },
             {
               "title": "코코넛 향 따라가니 동남아…광화문에 차려진 아세안의 식탁",
               "url": "https://www.yna.co.kr/view/AKR20261113152700371?input=1215m",
-              "checked_at": "2026-11-15T15:27:24.298460+09:00"
+              "checked_at": "2026-11-15T15:27:25.402120+09:00"
             }
           ],
           "visual_queries": [
@@ -2541,7 +2541,7 @@
           "fact_packet_hash": "39a52d0b38a1deb0db77d6300cde60e8521de835f96dba903453c1479344a518",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-15T15:27:24.298460+09:00"
+          "verified_at": "2026-11-15T15:27:25.402120+09:00"
         }
       ],
       "media": {
@@ -2739,7 +2739,9 @@
         "https://www.aseankorea.org/uploads/2018/04/2018_AKC_Brochure_KR.pdf",
         "https://www.aseankorea.org/uploads/2021/03/2021%20%ED%95%9C-%EC%95%84%EC%84%B8%EC%95%88%EC%84%BC%ED%84%B0%20%EB%B8%8C%EB%A1%9C%EC%85%94_KOR_spread.pdf"
       ],
-      "created_at": "2026-11-15T15:27:24.298587+09:00"
+      "created_at": "2026-11-15T15:27:24.298587+09:00",
+      "publication_exclusions": [],
+      "active_job": "2026-11-15-samsung-intelligent-eyewear"
     }
   },
   "publications": [
