@@ -34,7 +34,7 @@ COMMENTARY = {'opinion', 'closing'}
 
 def enabled():
     return p.cfg().get('daily_graphics_fallback') is True or (
-        os.environ.get('RUN_MODE') == 'recover_research_manifest_20261115'
+        os.environ.get('RUN_MODE') in {'recover_research_manifest_20261115','clarify_date_20261115'}
         and p.now().date().isoformat() == '2026-11-15'
     )
 
