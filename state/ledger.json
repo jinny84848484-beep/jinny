@@ -2078,7 +2078,7 @@
           "completed_at": "2026-11-15T15:27:23.230649+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1_date_clarification_v1",
       "retry_hold": false,
       "research_failures": [
@@ -3217,6 +3217,18 @@
       "video_id": "ozLQmq4CZ-8",
       "url": "https://www.youtube.com/shorts/ozLQmq4CZ-8",
       "at": "2026-11-15T15:28:54.788385+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-15-asean-week-seoul",
+      "topic_key": "asean-week-seoul-2026-11-13",
+      "category": "culture",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "축제는 열렸고 전시는 요일을 본다",
+      "video_id": "pyPJhhtf6C8",
+      "url": "https://www.youtube.com/shorts/pyPJhhtf6C8",
+      "at": "2026-11-15T15:30:08.745985+09:00",
       "experiment": {}
     }
   ],
