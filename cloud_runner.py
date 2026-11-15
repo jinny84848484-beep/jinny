@@ -682,9 +682,12 @@ def collect_metrics(ledger):
                 rows.append(row)
     p.write(p.ROOT/'runs'/observed.date().isoformat()/'metrics.json',{'rows':rows,'note':'Public counts only; retention, engaged views and revenue require YouTube Analytics. Compare within channel and similar video age.'})
 
-def produce():
+def produce(*, expected_day=None):
     if os.environ.get('PUBLIC_UPLOADS_ENABLED')!='true':raise RuntimeError('Public production is not enabled')
-    day=p.now().date().isoformat();ledger,sha=journal_get();record=ledger['days'].setdefault(day,{})
+    day=p.now().date().isoformat()
+    if expected_day is not None and day != expected_day:
+        raise RuntimeError('Recovery production date changed; reconcile before continuation')
+    ledger,sha=journal_get();record=ledger['days'].setdefault(day,{})
     if record.get('status')=='complete':print('Daily batch already complete.');return
     if record.get('retry_hold') or record.get('status')=='research_completed_unusable':
         raise RuntimeError('Completed production check is on hold; inspect the saved diagnostic before resuming')
@@ -698,7 +701,7 @@ def produce():
     if not record.get('jobs'):
         recent=recent_topics(ledger)
         if record.get('research_recovery'):
-            from research_manifest_recovery import recovered_manifest
+            from research_recovery_registry import recovered_manifest
             manifest=recovered_manifest(record,recent)
         else:
             if 'research' in record.get('checkpoints',{}):
@@ -724,8 +727,8 @@ def produce():
         jobs=guarded_draft_validation(ledger,lambda:state['sha'],day,draft,recent,allow_length_correction=True,correction_provider=correction_provider,source_manifest=manifest,active_only=True)
         sha=state['sha']
         if record.get('research_recovery'):
-            from research_manifest_recovery import write_source_packets
-            write_source_packets(jobs)
+            from research_recovery_registry import write_source_packets
+            write_source_packets(record,jobs)
         sha=review_jobs(ledger,sha,day,jobs)
     publish_reviewed(ledger,sha,day)
 

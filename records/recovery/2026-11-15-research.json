@@ -1,0 +1,166 @@
+{
+  "day": "2026-11-15",
+  "source_run": "43666191271",
+  "scope": "LOCAL RESEARCH CANDIDATE ONLY; no editorial PASS or execution authorization",
+  "required_media_policy": "daily_original_graphics",
+  "manifest": {
+    "stories": [
+      {
+        "topic_key": "samsung-intelligent-eyewear-korea-release-2026-11-12",
+        "category": "technology",
+        "ready": true,
+        "summary": "삼성이 11월12일 AI 안경 출시 계획을 공개했다. 한국·미국 판매 시작은 12월10일 예정으로, 현재 출시 완료가 아니다.",
+        "verified_facts": [
+          {
+            "text": "삼성은 구글·젠틀몬스터·워비파커와 협업한 인텔리전트 아이웨어를 11월12일 발표했다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          },
+          {
+            "text": "삼성 발표와 조선비즈 보도에 따르면 한국과 미국 출시 예정일은 2026년12월10일이며 사전판매는 11월12일부터다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          },
+          {
+            "text": "삼성은 이 안경에 제미나이가 탑재된다고 밝혔다. 실제 성능 검증 결과가 아니라 제품 설명이다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          }
+        ],
+        "uncertainties": [
+          "정확한 제품의 재사용 가능 사진은 미확보. 자체 텍스트 그래픽 전용이며 실제 제품 사진이나 실사용 시연으로 표현하지 않는다.",
+          "인기 순위·조회수·실측 성능은 확인하지 않았으므로 주장하지 않는다."
+        ],
+        "visual_subject": "Samsung Intelligent Eyewear",
+        "visual_queries": [
+          "Samsung Intelligent Eyewear launch",
+          "Samsung Intelligent Eyewear Gentle Monster"
+        ],
+        "sources": [
+          {
+            "title": "Samsung Announces December Release for Intelligent Eyewear",
+            "url": "https://news.samsung.com/global/samsung-announces-december-release-for-intelligent-eyewear-bringing-a-smarter-way-to-see-the-world",
+            "role": "primary",
+            "accessed": true
+          },
+          {
+            "title": "Samsung unveils Gemini-powered AI glasses, launches Dec. 10 in Korea and US",
+            "url": "https://biz.chosun.com/en/en-it/2026/11/12/7W5J6TW6S5E5NB527RIGT76OCE/?outputType=amp",
+            "role": "independent_reporting",
+            "accessed": true
+          }
+        ]
+      },
+      {
+        "topic_key": "asean-week-seoul-2026-11-13",
+        "category": "culture",
+        "ready": true,
+        "summary": "한-아세안센터가 11월13~15일 행사를 공지했고 연합뉴스 현장 취재로 13일 개막을 확인했다. 음식 행사와 상설전시 운영일을 구분한다.",
+        "verified_facts": [
+          {
+            "text": "한-아세안센터는 2026 아세안 위크를 11월13~15일 개최한다고 공지했으며, 연합뉴스는 13일 서울에서 개막했다고 현장 보도했다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          },
+          {
+            "text": "센터 공지에 따르면 프레스센터 앞 서울마당 음식 행사는 11월13~15일 오전11시부터 오후5시까지다.",
+            "source_indices": [
+              0
+            ]
+          },
+          {
+            "text": "연합뉴스는 13일 서울아세안홀 전시가 시작됐다고 보도했다. 센터가 밝힌 전시 운영시간은 공휴일을 제외한 평일 오전9시부터 오후6시까지다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          }
+        ],
+        "uncertainties": [
+          "11월15일은 일요일이므로 상설전시가 오늘 열린다는 안내를 하지 않는다. 행사 종료 후 업로드될 경우 현재 방문을 권하지 않는다.",
+          "정확한 행사 사진의 사용권은 미확보. 자체 텍스트 그래픽만 사용하고 현장 사진·재현 영상으로 오인시키지 않는다.",
+          "흥행 수치나 현재 실시간 운영은 확인하지 않았다."
+        ],
+        "visual_subject": "2026 ASEAN Week Seoul",
+        "visual_queries": [
+          "2026 ASEAN Week Seoul",
+          "2026 ASEAN Week Korea Press Center"
+        ],
+        "sources": [
+          {
+            "title": "ASEAN-Korea Centre to Hold 2026 ASEAN Week in Seoul and Jeonju",
+            "url": "https://www.aseankorea.org/eng/board/11/58088/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list&viewYn=Y",
+            "role": "primary",
+            "accessed": true
+          },
+          {
+            "title": "코코넛 향 따라가니 동남아…광화문에 차려진 아세안의 식탁",
+            "url": "https://www.yna.co.kr/view/AKR20261113152700371?input=1215m",
+            "role": "original_reporting",
+            "accessed": true
+          }
+        ]
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "url": "https://news.samsung.com/global/samsung-announces-december-release-for-intelligent-eyewear-bringing-a-smarter-way-to-see-the-world",
+      "final_url": "https://news.samsung.com/global/samsung-announces-december-release-for-intelligent-eyewear-bringing-a-smarter-way-to-see-the-world",
+      "status": 200,
+      "observed_at": "2026-11-15T02:18:34.425868+00:00",
+      "response_sha256": "209d72253d2c10d2dcc4555c333a5b7be8ec21278654ad6134294bd20014c9b6",
+      "retrieval": "direct HTTPS; independently read with web open",
+      "local_response": "source-0.html",
+      "title": "Samsung Announces December Release for Intelligent Eyewear",
+      "summary": "삼성은 11월12일 신제품을 발표했다. 미국·한국 출시 예정일은 12월10일이며 사전판매는 11월12일부터다. Google/Gemini 협업과 디자인 브랜드 참여를 명시한다.",
+      "attribution": "삼성 공식 발표"
+    },
+    {
+      "url": "https://biz.chosun.com/en/en-it/2026/11/12/7W5J6TW6S5E5NB527RIGT76OCE/?outputType=amp",
+      "final_url": "https://biz.chosun.com/en/en-it/2026/11/12/7W5J6TW6S5E5NB527RIGT76OCE/?outputType=amp",
+      "status": 200,
+      "observed_at": "2026-11-15T02:18:38.174168+00:00",
+      "response_sha256": "efa629a8d22f2014c1292d4aca1a6e9d33207f52998020c3845d2fc59812b68f",
+      "retrieval": "direct HTTPS; independently read with web open",
+      "local_response": "source-1.html",
+      "title": "Samsung unveils Gemini-powered AI glasses, launches Dec. 10 in Korea and US",
+      "summary": "조선비즈 11월12일 보도는 출시일·사전판매·참여 기업을 확인한다. 제품 성능은 회사의 설명이며 실사용 평가로 취급하지 않는다.",
+      "attribution": "조선비즈 기자 보도; 제품 사양은 기업 설명에 의존"
+    },
+    {
+      "url": "https://www.aseankorea.org/eng/board/11/58088/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list&viewYn=Y",
+      "final_url": "https://www.aseankorea.org/eng/board/11/58088/board_view.do?bdNoticeYn=N&bdOpenYn=Y&listType=list&viewYn=Y",
+      "status": 200,
+      "observed_at": "2026-11-15T02:18:43.635075+00:00",
+      "response_sha256": "c4dc3d1eff5e192611e23b96da5f2f793716c001c09da15691172abc87519709",
+      "retrieval": "direct HTTPS; independently read with web open",
+      "local_response": "source-2.html",
+      "title": "ASEAN-Korea Centre to Hold 2026 ASEAN Week in Seoul and Jeonju",
+      "summary": "센터는 11월13~15일 행사와 서울마당 음식 행사를 공지했다. 음식 행사는 11~17시, 상설전시는 공휴일 제외 평일 09~18시다.",
+      "attribution": "한-아세안센터 공식 행사 공지"
+    },
+    {
+      "url": "https://www.yna.co.kr/view/AKR20261113152700371?input=1215m",
+      "final_url": "https://www.yna.co.kr/view/AKR20261113152700371?input=1215m",
+      "status": 200,
+      "observed_at": "2026-11-15T02:18:47.939556+00:00",
+      "response_sha256": "719c921620aa7b88a25b3041a98872a881aa73173b2f945744efb8fd0da68581",
+      "retrieval": "direct HTTPS; independently read with web open",
+      "local_response": "source-3.html",
+      "title": "코코넛 향 따라가니 동남아…광화문에 차려진 아세안의 식탁",
+      "summary": "연합뉴스 기자가 11월13일 현장에서 행사 개막, 음식 판매와 전시 개시를 취재했다. 기사 사진은 다운로드·재사용하지 않는다.",
+      "attribution": "연합뉴스 정아란 기자 현장 취재"
+    }
+  ],
+  "media_provenance": [],
+  "not_before_policy_review": true
+}
