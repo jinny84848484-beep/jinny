@@ -2058,10 +2058,16 @@
           "usable": true,
           "sha256": "eb5de4997a944317d706697b21a0243e646bb7c72f6546c49bab87cfe23a99d8",
           "completed_at": "2026-11-15T15:13:58.893744+09:00"
+        },
+        "editorial_review_0_date_clarification_v1": {
+          "status": "submitted",
+          "request_hash": "bae6d453d7a2a8a7b33d599501422b6d55c28f406183b38beca9c10ca5af83e6",
+          "attempts": 1,
+          "at": "2026-11-15T15:27:11.506314+09:00"
         }
       },
-      "status": "editorial_review_failed",
-      "active_stage": "editorial_review_1",
+      "status": "editorial_review_0_date_clarification_v1_submitted",
+      "active_stage": "editorial_review_0_date_clarification_v1",
       "retry_hold": true,
       "research_failures": [
         {
@@ -2253,7 +2259,8 @@
         "original_input_hash": "b4bbab01f268f8e8f3f8ea214ce7d8f8ece08a506dcddb572bfa80886263061d",
         "corrected_input_hash": "1a2036abdb7e18115c624c29e3b43ab21f748627b0fbdc73ea6999c4244ea468",
         "maximum_new_review_requests": 2
-      }
+      },
+      "date_clarification_v1_input_hash": "1a2036abdb7e18115c624c29e3b43ab21f748627b0fbdc73ea6999c4244ea468"
     }
   },
   "publications": [
