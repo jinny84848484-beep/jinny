@@ -53,26 +53,42 @@ def approved_item(day):
         if data.get('asset_sha256')!=asset_hash or data.get('approved') is not True or not data.get('reviewer') or not data.get('evidence'):raise ValueError('Missing approved QA/rights evidence')
     return item,path,fingerprint
 
-def upload(item,path,token):
-    meta=item['metadata'];size=path.stat().st_size
+def upload(item,path,token,*,publish_at=None):
+    payload=path.read_bytes();size=len(payload)
+    if not 0<size<=MAX_BYTES or hashlib.sha256(payload).hexdigest()!=item.get('sha256'):raise ValueError('Upload bytes no longer match approval')
+    meta=item['metadata']
     body={'snippet':{'title':meta['title'],'description':meta['description'],'categoryId':'15'},'status':{'privacyStatus':'public','selfDeclaredMadeForKids':meta['made_for_kids'],'containsSyntheticMedia':meta['contains_synthetic_media']}}
+    if publish_at is not None:
+        from corgi_schedule_plan import instant,LEAD
+        if instant(publish_at)-dt.datetime.now(dt.timezone.utc)<LEAD:raise ValueError('Future schedule lead expired')
+        body['status'].update(privacyStatus='private',publishAt=publish_at)
     req=urllib.request.Request('https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status',data=json.dumps(body).encode(),headers={'Authorization':'Bearer '+token,'Content-Type':'application/json','X-Upload-Content-Length':str(size),'X-Upload-Content-Type':'video/mp4'},method='POST')
-    with urllib.request.urlopen(req,timeout=60) as response:session=response.headers['Location']
+    import corgi_google_transport as google
+    with google.open_request(req,timeout=60) as response:session=response.headers['Location']
     url=urllib.parse.urlparse(session)
-    if url.scheme!='https' or url.hostname not in ('www.googleapis.com','youtube.googleapis.com') or url.username or url.password:raise RuntimeError('Unexpected upload endpoint')
-    result=c.http(session,path.read_bytes(),{'Authorization':'Bearer '+token,'Content-Type':'video/mp4','Content-Length':str(size)},'PUT')
+    if url.scheme!='https' or url.hostname not in ('www.googleapis.com','youtube.googleapis.com') or url.username or url.password or url.port not in (None,443):raise RuntimeError('Unexpected upload endpoint')
+    result=google.http(session,payload,{'Authorization':'Bearer '+token,'Content-Type':'video/mp4','Content-Length':str(size)},'PUT')
     vid=result.get('id','')
     if not re.fullmatch(r'[A-Za-z0-9_-]{11}',vid):raise RuntimeError('No valid upload ID; reconcile manually')
     return vid
 
 def run():
     if os.environ.get('GITHUB_REF')!='refs/heads/main':raise RuntimeError('Publisher requires main')
+    mode=os.environ.get('CORGI_MODE','validate')
+    if mode in {'schedule','reconcile'}:
+        import corgi_schedule_adapter as adapter
+        if mode=='schedule':adapter.schedule(os.environ.get('CORGI_PUBLISH_DATE',''))
+        else:adapter.reconcile(os.environ.get('CORGI_ITEM_ID',''))
+        return
     now=dt.datetime.now(KST);day=now.date().isoformat()
     item,path,fingerprint=approved_item(day) # fail closed before even OAuth
     if os.environ.get('CORGI_MODE','validate')!='publish':
         print('Approved corgi artifact validated; no upload requested');return
     if now.hour!=19:raise RuntimeError('OUTSIDE_WINDOW')
-    ledger,sha=c.journal_get();records=ledger.setdefault('corgi_publications',{})
+    ledger,sha=c.journal_get()
+    from corgi_schedule_plan import require_legacy
+    require_legacy(ledger)
+    records=ledger.setdefault('corgi_publications',{})
     if any(r.get('status')!='complete' for r in records.values()):raise RuntimeError('Uncertain prior submission: reconcile manually, no retry')
     if item['id'] in records or any(r.get('date_kst')==day or r.get('asset_sha256')==item['sha256'] for r in records.values()):raise RuntimeError('Duplicate item/date/asset blocked')
     token=c.youtube_token('korean')

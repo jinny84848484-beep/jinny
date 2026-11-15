@@ -6,9 +6,17 @@ on:
     inputs:
       mode:
         type: choice
-        options: [validate, publish]
+        options: [validate, publish, schedule, reconcile]
         default: validate
         description: Validate by default; publish requires approved artifact and 19 KST window
+      publish_date_kst:
+        type: string
+        required: false
+        description: 'schedule only: exact future YYYY-MM-DD (19:00 KST)'
+      item_id:
+        type: string
+        required: false
+        description: 'reconcile only: known ledger item with video receipt'
 permissions:
   contents: write
 concurrency:
@@ -37,7 +45,18 @@ jobs:
         run: python corgi_runner.py
         env:
           SHORTS_STATE_DIR: ${{ runner.temp }}/corgi-state
+          CORGI_RECEIPT_DIR: ${{ runner.temp }}/corgi-receipts
           CORGI_MODE: ${{ github.event_name == 'schedule' && 'publish' || inputs.mode }}
+          CORGI_PUBLISH_DATE: ${{ inputs.publish_date_kst }}
+          CORGI_ITEM_ID: ${{ inputs.item_id }}
           YOUTUBE_KOREAN_OAUTH: ${{ secrets.YOUTUBE_KOREAN_OAUTH }}
           GITHUB_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+      - name: Preserve upload receipts even when journal CAS fails
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: corgi-upload-receipts-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/corgi-receipts/*.json
+          if-no-files-found: ignore
+          retention-days: 90

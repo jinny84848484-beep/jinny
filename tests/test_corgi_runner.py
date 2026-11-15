@@ -1,3 +1,4 @@
+import corgi_google_transport as google
 import copy
 import datetime as dt
 import hashlib
@@ -85,7 +86,7 @@ class Corgi(unittest.TestCase):
     def test_resumable_adapter(self):
         from unittest.mock import MagicMock
         response=MagicMock();response.__enter__.return_value.headers={'Location':'https://www.googleapis.com/upload/session'}
-        with patch.object(r.urllib.request,'urlopen',return_value=response) as start,patch.object(r.c,'http',return_value={'id':'abcdefghijk'}) as send:
+        with patch.object(google,'open_request',return_value=response) as start,patch.object(google,'http',return_value={'id':'abcdefghijk'}) as send:
             self.assertEqual(r.upload(self.item,self.root/self.item['asset'],'test-token'),'abcdefghijk')
             self.assertEqual(start.call_args.args[0].method,'POST')
             self.assertEqual(send.call_args.args[1],b'mp4')
@@ -94,7 +95,7 @@ class Corgi(unittest.TestCase):
     def test_resumable_host_rejected_before_send(self):
         from unittest.mock import MagicMock
         response=MagicMock();response.__enter__.return_value.headers={'Location':'https://evil.example/upload'}
-        with patch.object(r.urllib.request,'urlopen',return_value=response),patch.object(r.c,'http') as send:
+        with patch.object(google,'open_request',return_value=response),patch.object(google,'http') as send:
             with self.assertRaisesRegex(RuntimeError,'endpoint'):r.upload(self.item,self.root/self.item['asset'],'test-token')
             send.assert_not_called()
 
