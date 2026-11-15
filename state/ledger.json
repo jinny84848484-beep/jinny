@@ -2015,13 +2015,16 @@
     "2026-11-15": {
       "checkpoints": {
         "research": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "f4d4a08d32c1f779832edef7b74ce9ec48e4996c62b656895c4ccbffe8f6d8a3",
           "attempts": 1,
-          "at": "2026-11-15T11:07:20.846028+09:00"
+          "at": "2026-11-15T11:07:20.846028+09:00",
+          "usable": true,
+          "sha256": "7a6cd9eff9dfe6bce4373bbf4ab5ac44c0fa3fd779dd0282b24ec9b9dee530ca",
+          "completed_at": "2026-11-15T11:07:56.113105+09:00"
         }
       },
-      "status": "research_submitted",
+      "status": "research_completed",
       "active_stage": "research"
     }
   },
