@@ -2022,10 +2022,16 @@
           "usable": true,
           "sha256": "7a6cd9eff9dfe6bce4373bbf4ab5ac44c0fa3fd779dd0282b24ec9b9dee530ca",
           "completed_at": "2026-11-15T11:07:56.113105+09:00"
+        },
+        "research_repair": {
+          "status": "submitted",
+          "request_hash": "2720c3ebe6cecca77d7e3f0ebb8ce1f80f957868bd73917a055758e8d6d1d5f7",
+          "attempts": 1,
+          "at": "2026-11-15T11:07:57.182210+09:00"
         }
       },
-      "status": "research_completed",
-      "active_stage": "research"
+      "status": "research_repair_submitted",
+      "active_stage": "research_repair"
     }
   },
   "publications": [
