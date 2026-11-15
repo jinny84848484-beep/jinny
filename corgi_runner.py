@@ -75,6 +75,9 @@ def upload(item,path,token,*,publish_at=None):
 def run():
     if os.environ.get('GITHUB_REF')!='refs/heads/main':raise RuntimeError('Publisher requires main')
     mode=os.environ.get('CORGI_MODE','validate')
+    if mode in {'auto_schedule','auto_reconcile'}:
+        import corgi_automatic
+        print(json.dumps(corgi_automatic.tick(),sort_keys=True));return
     if mode in {'schedule','reconcile'}:
         import corgi_schedule_adapter as adapter
         if mode=='schedule':adapter.schedule(os.environ.get('CORGI_PUBLISH_DATE',''))

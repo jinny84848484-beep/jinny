@@ -1,14 +1,15 @@
 name: Daily Corgi Approved Upload
 on:
   schedule:
-    - cron: '0 10 * * *' # 19:00 KST; GitHub may start late
+    - cron: '17 * * * *' # Pre-schedule approved future queue dates, off peak
+    - cron: '7 10 * * *' # 19:07 KST: query existing receipts only
   workflow_dispatch:
     inputs:
       mode:
         type: choice
-        options: [validate, publish, schedule, reconcile]
+        options: [validate, schedule, reconcile, auto_schedule, auto_reconcile]
         default: validate
-        description: Validate by default; publish requires approved artifact and 19 KST window
+        description: Validate by default; scheduling requires approved future artifacts and active ledger mode
       publish_date_kst:
         type: string
         required: false
@@ -46,7 +47,7 @@ jobs:
         env:
           SHORTS_STATE_DIR: ${{ runner.temp }}/corgi-state
           CORGI_RECEIPT_DIR: ${{ runner.temp }}/corgi-receipts
-          CORGI_MODE: ${{ github.event_name == 'schedule' && 'publish' || inputs.mode }}
+          CORGI_MODE: ${{ github.event_name == 'schedule' && (github.event.schedule == '7 10 * * *' && 'auto_reconcile' || 'auto_schedule') || inputs.mode }}
           CORGI_PUBLISH_DATE: ${{ inputs.publish_date_kst }}
           CORGI_ITEM_ID: ${{ inputs.item_id }}
           YOUTUBE_KOREAN_OAUTH: ${{ secrets.YOUTUBE_KOREAN_OAUTH }}

@@ -2,14 +2,14 @@
 import datetime as dt,hashlib,os,urllib.parse
 import cloud_runner as c
 import corgi_google_transport as google
-import json, pathlib
+import json, pathlib, re
 import corgi_schedule_plan as p
 import corgi_runner as legacy
 
 def now():return dt.datetime.now(p.KST)
 def assert_context():
  if os.environ.get('GITHUB_REF')!='refs/heads/main':raise ValueError('main required')
- if os.environ.get('CORGI_MODE') not in {'schedule','reconcile'}:raise ValueError('Explicit scheduling mode required')
+ if os.environ.get('CORGI_MODE') not in {'schedule','reconcile','auto_schedule','auto_reconcile'}:raise ValueError('Explicit scheduling mode required')
 def videos(ids,token):
  return google.http('https://www.googleapis.com/youtube/v3/videos?part=snippet,status,processingDetails&id='+','.join(ids),headers={'Authorization':'Bearer '+token})
 def channel_inventory(token):
@@ -64,7 +64,7 @@ def save_receipt(item_id,record):
 
 def schedule(day,clock=now):
  assert_context()
- if os.environ.get('CORGI_MODE')!='schedule':raise ValueError('Schedule mode required')
+ if os.environ.get('CORGI_MODE') not in {'schedule','auto_schedule'}:raise ValueError('Schedule mode required')
  ledger,sha=c.journal_get();plan=p.plan(day,ledger,clock())
  token=google.token('korean')
  if google.verify_channel('korean',token)!=legacy.CHANNEL:raise ValueError('Wrong corgi channel')
@@ -92,11 +92,12 @@ def schedule(day,clock=now):
 
 def reconcile(item_id,clock=now):
  assert_context()
- if os.environ.get('CORGI_MODE')!='reconcile':raise ValueError('Reconcile mode required')
+ if os.environ.get('CORGI_MODE') not in {'reconcile','auto_schedule','auto_reconcile'}:raise ValueError('Reconcile mode required')
  ledger,sha=c.journal_get()
  if p.mode(ledger)!=p.MODE:raise ValueError('Scheduled delivery mode required')
  rec=ledger.get('corgi_publications',{}).get(item_id,{})
  if rec.get('status') not in {'schedule_verification_pending','scheduled_verified'}:raise ValueError('No known receipt; manual reconcile required, never reupload')
+ if not isinstance(rec.get('video_id'),str) or not re.fullmatch(r'[A-Za-z0-9_-]{11}',rec['video_id']):raise ValueError('Invalid receipt ID; manual reconciliation required')
  token=google.token('korean')
  if google.verify_channel('korean',token)!=legacy.CHANNEL:raise ValueError('Wrong corgi channel')
  result=p.verify(rec,videos([rec['video_id']],token),clock())
