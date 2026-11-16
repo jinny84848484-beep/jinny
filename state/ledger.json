@@ -2792,7 +2792,7 @@
           "completed_at": "2026-11-16T11:08:17.974974+09:00"
         }
       },
-      "status": "tts_submitted",
+      "status": "rendered",
       "active_stage": "editorial_review_1",
       "retry_hold": false,
       "research_failures": [
