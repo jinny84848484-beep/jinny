@@ -2792,7 +2792,7 @@
           "completed_at": "2026-11-16T11:08:17.974974+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
+      "status": "reviewed",
       "active_stage": "editorial_review_1",
       "retry_hold": false,
       "research_failures": [
@@ -2846,7 +2846,378 @@
         "at": "2026-11-16T11:07:36.300875+09:00",
         "method": "operator_observed_research_only"
       },
-      "review_input_hash": "8e3c354e5dd840a2cecb5334fdc98d3a24fe93f2f6c5f4a4f3ec464f8189ed03"
+      "review_input_hash": "8e3c354e5dd840a2cecb5334fdc98d3a24fe93f2f6c5f4a4f3ec464f8189ed03",
+      "jobs": [
+        {
+          "id": "2026-11-16-hanji-unesco-2026-recommendation",
+          "channel": "ojirap",
+          "topic_key": "hanji-unesco-2026-recommendation",
+          "category": "culture",
+          "title": "한지, 아직은 유네스코 권고 단계",
+          "description": "한지 제작 전통이 유네스코 평가기구에서 등재 권고를 받았다. 다만 11월 16일 현재 최종 등재 확정은 아니고, 이달 말 위원회 결정이 남아 있다. 자료사진은 한지 실물 설명용 파일 사진이다.",
+          "sources": [
+            {
+              "title": "한지 제작의 전통 지식과 기술 및 문화적 실천 유네스코 무형유산위원회 평가에서 등재 권고",
+              "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156788003",
+              "checked_at": "2026-11-16T11:08:19.552608+09:00"
+            },
+            {
+              "title": "UNESCO likely to list traditional Korean paper hanji as cultural heritage",
+              "url": "https://en.yna.co.kr/view/AEN20261104010452315",
+              "checked_at": "2026-11-16T11:08:19.552608+09:00"
+            },
+            {
+              "title": "Traditional paper Hanji expected to gain UNESCO heritage status",
+              "url": "https://www.korea.net/NewsFocus/Culture/view?articleId=302320",
+              "checked_at": "2026-11-16T11:08:19.552608+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Hanji paper",
+            "A paper store at Insadong Seoul"
+          ],
+          "opening_text": "한지, 아직 확정은 아닙니다.",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "한지, 아직 확정은 아닙니다",
+              "body": "등재 권고는 나왔지만 최종 결정은 아직 남았습니다.",
+              "narration": "한지, 아직 확정은 아닙니다.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-7265856-245b2595"
+            },
+            {
+              "kind": "fact",
+              "headline": "십일월 오일 권고 발표",
+              "body": "국가유산청은 평가기구의 등재 권고를 알렸습니다.",
+              "narration": "국가유산청은 십일월 오일, 한지 제작의 전통 지식과 기술, 문화적 실천이 유네스코 평가기구에서 등재 권고를 받았다고 밝혔어요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-2661886-245b2595"
+            },
+            {
+              "kind": "fact",
+              "headline": "최종 판단은 이달 말",
+              "body": "위원회는 십일월 삼십일부터 십이월 오일까지 열립니다.",
+              "narration": "다만 십일월 십육일 현재 최종 등재가 된 건 아니고, 결정은 중국 샤먼에서 열릴 위원회에 남아 있습니다.",
+              "source_indices": [
+                1,
+                2
+              ],
+              "media": "commons-7265856-245b2595"
+            },
+            {
+              "kind": "opinion",
+              "headline": "종이 얘기인데 묘하게 든든",
+              "body": "한지는 닥나무 껍질로 만들고 세대 전승이 이어졌습니다.",
+              "narration": "연합 보도에 따르면 한지는 닥나무 껍질로 만드는 전통 종이예요. 저는 이런 소식이 종이 한 장치고 꽤 묵직해서 좋더라고요.",
+              "source_indices": [
+                1
+              ],
+              "media": "commons-2661886-245b2595"
+            },
+            {
+              "kind": "closing",
+              "headline": "파일 사진은 종이 설명용",
+              "body": "자료사진은 한지 실물 예시일 뿐 심의 현장은 아닙니다.",
+              "narration": "참, 화면의 한지는 설명용 파일 사진입니다. 등재도 아직 심의 전인데 종이부터 너무 앞서 접히면 좀 아쉽죠.",
+              "source_indices": [
+                1,
+                2
+              ],
+              "media": "commons-7265856-245b2595"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "hanji-unesco-2026-recommendation",
+            "category": "culture",
+            "summary": "11월 5일 발표된 한지 제작 전통의 유네스코 등재 권고를 정리한다. 11월 16일 현재 최종 등재 확정으로 말하지 않는다. 한지 실물 자료사진으로 종이를 설명하며, 제작 과정·심의 현장 사진인 것처럼 표현하지 않는다.",
+            "verified_facts": [
+              {
+                "text": "국가유산청은 2026년 11월 5일 한지 제작의 전통 지식과 기술 및 문화적 실천이 유네스코 평가기구에서 등재 권고를 받았다고 알렸다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "최종 등재 여부는 11월 30일부터 12월 5일까지 중국 샤먼에서 열리는 위원회에서 결정될 예정이다.",
+                "source_indices": [
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "한지는 닥나무 껍질로 만드는 전통 종이이며, 제작 기술은 세대를 거쳐 전승돼 왔다.",
+                "source_indices": [
+                  1
+                ]
+              }
+            ],
+            "uncertainties": [
+              "11월 5일 발표를 오늘 새 발표로 묘사하지 않는다.",
+              "최종 등재를 확정으로 표현하지 않는다.",
+              "실물 한지 자료사진은 제작 과정이나 유네스코 위원회 현장이 아니다."
+            ],
+            "sources": [
+              {
+                "title": "한지 제작의 전통 지식과 기술 및 문화적 실천 유네스코 무형유산위원회 평가에서 등재 권고",
+                "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156788003",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "UNESCO likely to list traditional Korean paper hanji as cultural heritage",
+                "url": "https://en.yna.co.kr/view/AEN20261104010452315",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "Traditional paper Hanji expected to gain UNESCO heritage status",
+                "url": "https://www.korea.net/NewsFocus/Culture/view?articleId=302320",
+                "role": "primary",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "2844eec8f1893bdd2cb2fe85787f66da6e00c30b2d11ac5d5aaad0e3532ae935",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-16T11:08:19.552608+09:00",
+          "visual_source_titles": [
+            "File:A_paper_store_at_Insadong,_Seoul-01.jpg",
+            "File:Seoul-Insadong-Papers.jpg"
+          ]
+        },
+        {
+          "id": "2026-11-16-donhwamun-repair-public-tour-2026",
+          "channel": "ojirap",
+          "topic_key": "donhwamun-repair-public-tour-2026",
+          "category": "culture",
+          "title": "돈화문 보수, 오늘은 신청 시작일",
+          "description": "창덕궁 돈화문 보수공사가 본격화되고 현장 관람 신청이 11월 16일 시작됐다. 실제 첫 관람은 11월 25일 예정이며, 완료 시점은 2028년 10월 목표다. 자료사진은 보수 전 돈화문 파일 사진이다.",
+          "sources": [
+            {
+              "title": "현존 최고 궁궐 정문 창덕궁 돈화문 보수공사 본격 해체",
+              "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148975304",
+              "checked_at": "2026-11-16T11:08:19.552790+09:00"
+            },
+            {
+              "title": "창덕궁 돈화문, 29년 만에 대대적 보수공사 지붕 해체 착수",
+              "url": "https://www.yna.co.kr/view/AKR20261109041900005",
+              "checked_at": "2026-11-16T11:08:19.552790+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Donhwamun gate Changdeokgung",
+            "Donhwamun Gate detail"
+          ],
+          "opening_text": "돈화문, 오늘은 신청만 시작.",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "돈화문, 오늘은 신청만 시작",
+              "body": "현장 관람은 접수 시작일이고 첫 관람은 아직 아닙니다.",
+              "narration": "돈화문, 오늘은 신청만 시작.",
+              "source_indices": [
+                0
+              ],
+              "media": "commons-9151812-b5c6b6b5"
+            },
+            {
+              "kind": "fact",
+              "headline": "보수는 십일월부터 해체",
+              "body": "국가유산청은 지붕 기와 해체를 포함한 보수를 알렸습니다.",
+              "narration": "국가유산청은 십일월 구일, 창덕궁 돈화문 지붕 기와를 십일월부터 해체하며 보수에 나선다고 밝혔습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-143525333-b5c6b6b5"
+            },
+            {
+              "kind": "fact",
+              "headline": "첫 공개는 십일월 이십오일",
+              "body": "신청은 오늘부터, 실제 현장 관람은 십일월 이십오일 예정입니다.",
+              "narration": "중요한 건 구분이에요. 십일월 십육일은 신청 시작일이고, 첫 현장 관람은 십일월 이십오일 예정입니다.",
+              "source_indices": [
+                0
+              ],
+              "media": "commons-9151812-b5c6b6b5"
+            },
+            {
+              "kind": "opinion",
+              "headline": "완료 시점은 목표치",
+              "body": "매달 두 차례 공개 계획, 완료는 이천이십팔년 시월 목표입니다.",
+              "narration": "매달 두 차례 공개할 계획이고 완료는 이천이십팔년 시월 목표지만, 조사 결과에 따라 늦어질 수 있다네요. 오래된 문은 역시 성격이 신중합니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-143525333-b5c6b6b5"
+            },
+            {
+              "kind": "closing",
+              "headline": "파일 사진은 보수 전 모습",
+              "body": "돈화문은 창덕궁 정문이며 지금 화면은 현재 공사 장면이 아닙니다.",
+              "narration": "돈화문은 창덕궁 정문으로 처음은 천사백십이년, 중수는 천육백구년입니다. 화면은 보수 전 파일 사진이고요. 문은 그대로인데 시간표가 더 바쁩니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-9151812-b5c6b6b5"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "donhwamun-repair-public-tour-2026",
+            "category": "culture",
+            "summary": "11월 9일 발표된 창덕궁 돈화문 보수와 현장관람을 소개한다. 11월 16일은 신청 시작일이며 첫 관람은 11월 25일이다. 보수 전 돈화문 자료사진으로 건축물을 보여주되 현재 공사 장면으로 묘사하지 않는다.",
+            "verified_facts": [
+              {
+                "text": "국가유산청은 2026년 11월 9일 창덕궁 돈화문 지붕 기와를 11월부터 해체하며 보수에 나선다고 밝혔다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "현장 관람 신청은 11월 16일부터 궁능유적본부 누리집에서 받으며 첫 관람은 11월 25일 예정이다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "수리 현장은 매달 두 차례 공개할 계획이며 보수는 2028년 10월 완료 목표지만 조사 결과에 따라 연장될 수 있다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "돈화문은 창덕궁의 정문으로 1412년 처음 세워지고 임진왜란 소실 이후 1609년에 중수됐다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "uncertainties": [
+              "11월 16일 신청 시작과 11월 25일 실제 관람을 구분한다. 잔여석은 확인하지 않아 예약 가능 확정으로 말하지 않는다.",
+              "2028년 완료는 목표이며 확정일이 아니다.",
+              "사진은 2009년/2022년 보수 전 자료사진이다. 현재 공사 또는 2026년 현장이라고 표시하지 않는다."
+            ],
+            "sources": [
+              {
+                "title": "현존 최고 궁궐 정문 창덕궁 돈화문 보수공사 본격 해체",
+                "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148975304",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "창덕궁 돈화문, 29년 만에 대대적 보수공사 지붕 해체 착수",
+                "url": "https://www.yna.co.kr/view/AKR20261109041900005",
+                "role": "original_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "a85aa1f73d26b2656a160fa7c6ac47f90f205cc3cca3477f013b93447f787541",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-16T11:08:19.552790+09:00",
+          "visual_source_titles": [
+            "File:Donhwamun.jpg",
+            "File:Donhwamun_Gate_01.jpg"
+          ]
+        }
+      ],
+      "media": {
+        "commons-7265856-245b2595": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/A_paper_store_at_Insadong%2C_Seoul-01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:A_paper_store_at_Insadong,_Seoul-01.jpg",
+          "path": "assets/commons-7265856-245b2595.jpg",
+          "media_type": "image",
+          "credit": "Richard Fisher from London, UK / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2009",
+          "description": "Hanji paper for sale in a paper store at Insadong, Seoul, South-Korea",
+          "capture_date": "2009-02-15 11:02",
+          "title": "File:A paper store at Insadong, Seoul-01.jpg",
+          "topic_key": "hanji-unesco-2026-recommendation",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-16T11:08:01.443322+09:00"
+        },
+        "commons-2661886-245b2595": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Seoul-Insadong-Papers.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Seoul-Insadong-Papers.jpg",
+          "path": "assets/commons-2661886-245b2595.jpg",
+          "media_type": "image",
+          "credit": "jared / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2006",
+          "description": "Hand pressed papers in Insadong, Seoul, Korea",
+          "capture_date": "2006-11-13",
+          "title": "File:Seoul-Insadong-Papers.jpg",
+          "topic_key": "hanji-unesco-2026-recommendation",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-16T11:08:01.443383+09:00"
+        },
+        "commons-9151812-b5c6b6b5": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Donhwamun.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Donhwamun.jpg",
+          "path": "assets/commons-9151812-b5c6b6b5.jpg",
+          "media_type": "image",
+          "credit": "Ben Han / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2009",
+          "description": "The main gate of Changdeokgung.",
+          "capture_date": "2009-10-17 17:46:06",
+          "title": "File:Donhwamun.jpg",
+          "topic_key": "donhwamun-repair-public-tour-2026",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-16T11:08:01.585318+09:00"
+        },
+        "commons-143525333-b5c6b6b5": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Donhwamun_Gate_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Donhwamun_Gate_01.jpg",
+          "path": "assets/commons-143525333-b5c6b6b5.jpg",
+          "media_type": "image",
+          "credit": "Bernard Gagnon / Wikimedia Commons",
+          "license": "CC0",
+          "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "notice": "자료사진 · 2022",
+          "description": "Detail of Donhwamun Gate in Changdeokgung Palace Complex, Seoul",
+          "capture_date": "2022-09-27",
+          "title": "File:Donhwamun Gate 01.jpg",
+          "topic_key": "donhwamun-repair-public-tour-2026",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-16T11:08:01.585368+09:00"
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-16-hanji-unesco-2026-recommendation\": [\"commons-7265856-245b2595\", \"commons-2661886-245b2595\", \"commons-7265856-245b2595\", \"commons-2661886-245b2595\", \"commons-7265856-245b2595\"], \"2026-11-16-donhwamun-repair-public-tour-2026\": [\"commons-9151812-b5c6b6b5\", \"commons-143525333-b5c6b6b5\", \"commons-9151812-b5c6b6b5\", \"commons-143525333-b5c6b6b5\", \"commons-9151812-b5c6b6b5\"]}}",
+      "review_source_urls": [
+        "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156788003",
+        "https://en.yna.co.kr/view/AEN20261104010452315",
+        "https://www.korea.kr/news/policyNewsView.do?newsId=148975304"
+      ],
+      "created_at": "2026-11-16T11:08:19.552917+09:00"
     }
   },
   "publications": [
