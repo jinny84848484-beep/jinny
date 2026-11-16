@@ -2792,7 +2792,7 @@
           "completed_at": "2026-11-16T11:08:17.974974+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1",
       "retry_hold": false,
       "research_failures": [
@@ -3719,6 +3719,18 @@
       "video_id": "tr1tut_JWvY",
       "url": "https://www.youtube.com/shorts/tr1tut_JWvY",
       "at": "2026-11-16T11:10:07.743297+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-16-donhwamun-repair-public-tour-2026",
+      "topic_key": "donhwamun-repair-public-tour-2026",
+      "category": "culture",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "돈화문 보수, 오늘은 신청 시작일",
+      "video_id": "UH2yiKi1agE",
+      "url": "https://www.youtube.com/shorts/UH2yiKi1agE",
+      "at": "2026-11-16T11:12:49.200596+09:00",
       "experiment": {}
     }
   ],
