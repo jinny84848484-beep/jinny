@@ -2743,6 +2743,18 @@
       "publication_exclusions": [],
       "active_job": "2026-11-15-asean-week-seoul",
       "completed_at": "2026-11-15T15:30:09.770986+09:00"
+    },
+    "2026-11-16": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "b3c0a40056b9e35dd6832cf6fd90bde27ddd5a8dce0fa000f771b94582f509cf",
+          "attempts": 1,
+          "at": "2026-11-16T10:51:37.943513+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
