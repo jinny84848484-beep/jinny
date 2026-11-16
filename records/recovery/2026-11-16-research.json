@@ -1,0 +1,217 @@
+{
+  "day": "2026-11-16",
+  "source_run": "43788629748",
+  "scope": "Operator-observed research recovery; not editorial PASS. Existing independent source/photo review and publication guards remain mandatory.",
+  "required_media_policy": "licensed_relevant_stock",
+  "manifest": {
+    "stories": [
+      {
+        "topic_key": "hanji-unesco-2026-recommendation",
+        "category": "culture",
+        "ready": true,
+        "summary": "11월 5일 발표된 한지 제작 전통의 유네스코 등재 권고를 정리한다. 11월 16일 현재 최종 등재 확정으로 말하지 않는다. 한지 실물 자료사진으로 종이를 설명하며, 제작 과정·심의 현장 사진인 것처럼 표현하지 않는다.",
+        "visual_subject": "한지 (Korean traditional paper)",
+        "visual_queries": [
+          "Hanji paper",
+          "A paper store at Insadong Seoul"
+        ],
+        "sources": [
+          {
+            "title": "한지 제작의 전통 지식과 기술 및 문화적 실천 유네스코 무형유산위원회 평가에서 등재 권고",
+            "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156788003",
+            "role": "primary",
+            "accessed": true
+          },
+          {
+            "title": "UNESCO likely to list traditional Korean paper hanji as cultural heritage",
+            "url": "https://en.yna.co.kr/view/AEN20261104010452315",
+            "role": "original_reporting",
+            "accessed": true
+          },
+          {
+            "title": "Traditional paper Hanji expected to gain UNESCO heritage status",
+            "url": "https://www.korea.net/NewsFocus/Culture/view?articleId=302320",
+            "role": "primary",
+            "accessed": true
+          }
+        ],
+        "verified_facts": [
+          {
+            "text": "국가유산청은 2026년 11월 5일 한지 제작의 전통 지식과 기술 및 문화적 실천이 유네스코 평가기구에서 등재 권고를 받았다고 알렸다.",
+            "source_indices": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "text": "최종 등재 여부는 11월 30일부터 12월 5일까지 중국 샤먼에서 열리는 위원회에서 결정될 예정이다.",
+            "source_indices": [
+              1,
+              2
+            ]
+          },
+          {
+            "text": "한지는 닥나무 껍질로 만드는 전통 종이이며, 제작 기술은 세대를 거쳐 전승돼 왔다.",
+            "source_indices": [
+              1
+            ]
+          }
+        ],
+        "uncertainties": [
+          "11월 5일 발표를 오늘 새 발표로 묘사하지 않는다.",
+          "최종 등재를 확정으로 표현하지 않는다.",
+          "실물 한지 자료사진은 제작 과정이나 유네스코 위원회 현장이 아니다."
+        ]
+      },
+      {
+        "topic_key": "donhwamun-repair-public-tour-2026",
+        "category": "culture",
+        "ready": true,
+        "summary": "11월 9일 발표된 창덕궁 돈화문 보수와 현장관람을 소개한다. 11월 16일은 신청 시작일이며 첫 관람은 11월 25일이다. 보수 전 돈화문 자료사진으로 건축물을 보여주되 현재 공사 장면으로 묘사하지 않는다.",
+        "visual_subject": "창덕궁 돈화문 (Donhwamun Gate)",
+        "visual_queries": [
+          "Donhwamun gate Changdeokgung",
+          "Donhwamun Gate detail"
+        ],
+        "sources": [
+          {
+            "title": "현존 최고 궁궐 정문 창덕궁 돈화문 보수공사 본격 해체",
+            "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148975304",
+            "role": "primary",
+            "accessed": true
+          },
+          {
+            "title": "창덕궁 돈화문, 29년 만에 대대적 보수공사 지붕 해체 착수",
+            "url": "https://www.yna.co.kr/view/AKR20261109041900005",
+            "role": "original_reporting",
+            "accessed": true
+          }
+        ],
+        "verified_facts": [
+          {
+            "text": "국가유산청은 2026년 11월 9일 창덕궁 돈화문 지붕 기와를 11월부터 해체하며 보수에 나선다고 밝혔다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          },
+          {
+            "text": "현장 관람 신청은 11월 16일부터 궁능유적본부 누리집에서 받으며 첫 관람은 11월 25일 예정이다.",
+            "source_indices": [
+              0
+            ]
+          },
+          {
+            "text": "수리 현장은 매달 두 차례 공개할 계획이며 보수는 2028년 10월 완료 목표지만 조사 결과에 따라 연장될 수 있다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          },
+          {
+            "text": "돈화문은 창덕궁의 정문으로 1412년 처음 세워지고 임진왜란 소실 이후 1609년에 중수됐다.",
+            "source_indices": [
+              0,
+              1
+            ]
+          }
+        ],
+        "uncertainties": [
+          "11월 16일 신청 시작과 11월 25일 실제 관람을 구분한다. 잔여석은 확인하지 않아 예약 가능 확정으로 말하지 않는다.",
+          "2028년 완료는 목표이며 확정일이 아니다.",
+          "사진은 2009년/2022년 보수 전 자료사진이다. 현재 공사 또는 2026년 현장이라고 표시하지 않는다."
+        ]
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156788003",
+      "observed": "2026-11-16",
+      "note": "직접 열어 제목/국가유산청/2026.11.05/최종결정 예정 부제 확인. 첨부 전문은 별도이며 웹 제목 이상으로 추정하지 않음."
+    },
+    {
+      "url": "https://en.yna.co.kr/view/AEN20261104010452315",
+      "observed": "2026-11-16",
+      "note": "직접 본문 확인, 등재 권고 및 심의 일정·한지 재료와 전승 설명."
+    },
+    {
+      "url": "https://www.korea.net/NewsFocus/Culture/view?articleId=302320",
+      "observed": "2026-11-16",
+      "note": "직접 본문 확인. 11/5 발표, 권고 단계, 11/30~12/5 최종심의."
+    },
+    {
+      "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148975304",
+      "observed": "2026-11-16",
+      "note": "발행 2026-11-09 본문 직접 열람. 발표시각과 예정 관람/완료일 구분. 기사 사진은 뉴스1/연합뉴스 권리 제한으로 사용하지 않음."
+    },
+    {
+      "url": "https://www.yna.co.kr/view/AKR20261109041900005",
+      "observed": "2026-11-16",
+      "note": "발행 2026-11-09 본문 직접 열람. 발표시각과 예정 관람/완료일 구분. 기사 사진은 뉴스1/연합뉴스 권리 제한으로 사용하지 않음."
+    }
+  ],
+  "images": {
+    "hanji-unesco-2026-recommendation": [
+      {
+        "page": "https://commons.wikimedia.org/wiki/File:A_paper_store_at_Insadong,_Seoul-01.jpg",
+        "author": "Richard Fisher",
+        "license": "CC BY 2.0",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "date": "2009-02-15",
+        "width": 2158,
+        "height": 3425,
+        "depicts": "Hanji paper for sale in a paper store at Insadong, Seoul, South-Korea",
+        "use": "자료사진 표시. 저작자·원본·라이선스 링크 및 크롭/자막 변경 표시 필수.",
+        "visual_verified": true,
+        "visual_verification": "실제 사진 열람: 색색의 종이 선반과 손으로 뜬 종이 섬유 단면. 서로 다른 두 원본. 제작 과정/위원회 장면 아님.",
+        "download_url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/A_paper_store_at_Insadong%2C_Seoul-01.jpg"
+      },
+      {
+        "page": "https://commons.wikimedia.org/wiki/File:Seoul-Insadong-Papers.jpg",
+        "author": "jared",
+        "license": "CC BY 2.0",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "date": "2006-11-13",
+        "width": 2848,
+        "height": 2136,
+        "depicts": "Hand pressed papers in Insadong, Seoul, Korea",
+        "use": "자료사진 표시. 저작자·원본·라이선스 링크 및 크롭/자막 변경 표시 필수.",
+        "visual_verified": true,
+        "visual_verification": "실제 사진 열람: 색색의 종이 선반과 손으로 뜬 종이 섬유 단면. 서로 다른 두 원본. 제작 과정/위원회 장면 아님.",
+        "download_url": "https://upload.wikimedia.org/wikipedia/commons/9/94/Seoul-Insadong-Papers.jpg"
+      }
+    ],
+    "donhwamun-repair-public-tour-2026": [
+      {
+        "page": "https://commons.wikimedia.org/wiki/File:Donhwamun.jpg",
+        "download_url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Donhwamun.jpg",
+        "author": "Ben Han",
+        "license": "CC BY 2.0",
+        "license_url": "https://creativecommons.org/licenses/by/2.0",
+        "date": "2009-10-17",
+        "width": 4272,
+        "height": 2848,
+        "depicts": "Donhwamun Gate, Changdeokgung, Seoul",
+        "visual_verified": true,
+        "visual_verification": "정문 전경, 돈화문 편액 식별. 하단 방문객은 작게 표시되어 주대상 아님.",
+        "use": "보수 전 자료사진 표시. 저작자·원본·라이선스·크롭/자막 변경 표시. 2026년 공사 현장처럼 쓰지 않음."
+      },
+      {
+        "page": "https://commons.wikimedia.org/wiki/File:Donhwamun_Gate_01.jpg",
+        "download_url": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Donhwamun_Gate_01.jpg",
+        "author": "Bernard Gagnon",
+        "license": "CC0 1.0",
+        "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "date": "2022-09-27",
+        "width": 4700,
+        "height": 3133,
+        "depicts": "Donhwamun Gate, Changdeokgung, Seoul",
+        "visual_verified": true,
+        "visual_verification": "돈화문 편액/단청/기와 상세, 첫 사진과 다른 촬영자·연도·구도.",
+        "use": "보수 전 자료사진 표시. 저작자·원본·라이선스·크롭/자막 변경 표시. 2026년 공사 현장처럼 쓰지 않음."
+      }
+    ]
+  }
+}
