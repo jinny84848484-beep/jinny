@@ -2765,9 +2765,9 @@
           "completed_at": "2026-11-16T10:52:37.263365+09:00"
         }
       },
-      "status": "research_validation_failed",
+      "status": "research_recovered",
       "active_stage": "research_repair",
-      "retry_hold": true,
+      "retry_hold": false,
       "research_failures": [
         {
           "reason": "research_manifest_unready",
@@ -2775,7 +2775,50 @@
           "repair_attempted": true,
           "at": "2026-11-16T10:52:38.501271+09:00"
         }
-      ]
+      ],
+      "research_recovery": {
+        "bundle_sha256": "7bec9bf887d71c193b1d22da812488af56fe1298f40e265e6201100a20ed12f7",
+        "source_run": "43788629748",
+        "source_head": "3719f7293f4c94e24025d562f5a37a44f9c13fc4",
+        "artifact_id": 14191482177,
+        "archive_sha256": "909737d3ea114d590996beee2789cfaab81400bd4440278bc4d3bb26374fd619",
+        "previous_record_hash": "248e617ae814963ef9304706c8dbae7514b6dab1c56086cbde3c867bc1fd0c5b",
+        "previous_record": {
+          "checkpoints": {
+            "research": {
+              "status": "completed",
+              "request_hash": "b3c0a40056b9e35dd6832cf6fd90bde27ddd5a8dce0fa000f771b94582f509cf",
+              "attempts": 1,
+              "at": "2026-11-16T10:51:37.943513+09:00",
+              "usable": true,
+              "sha256": "673b3e114e54c38b8248f63de89f43b7d94f97a472a80abfbf042c074a2d94c4",
+              "completed_at": "2026-11-16T10:52:15.137245+09:00"
+            },
+            "research_repair": {
+              "status": "completed",
+              "request_hash": "cc31e15c0f0ff0d1ce22806b0f504c56ca101953f6248bbccb089bc1d6cf14c1",
+              "attempts": 1,
+              "at": "2026-11-16T10:52:16.353212+09:00",
+              "usable": true,
+              "sha256": "5d95ea27b236f6afbe471c78a80422e48864aac102e6d9b2c1678e7989e705b3",
+              "completed_at": "2026-11-16T10:52:37.263365+09:00"
+            }
+          },
+          "status": "research_validation_failed",
+          "active_stage": "research_repair",
+          "retry_hold": true,
+          "research_failures": [
+            {
+              "reason": "research_manifest_unready",
+              "stage": "research_manifest",
+              "repair_attempted": true,
+              "at": "2026-11-16T10:52:38.501271+09:00"
+            }
+          ]
+        },
+        "at": "2026-11-16T11:07:36.300875+09:00",
+        "method": "operator_observed_research_only"
+      }
     }
   },
   "publications": [
