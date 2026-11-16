@@ -3241,16 +3241,51 @@
           "usable": true,
           "sha256": "9fe857992cc91ce9562530a2f53d94131388f363864ed36e72aa52c2284ffb25",
           "completed_at": "2026-11-17T08:08:43.590612+09:00"
-        },
-        "draft": {
-          "status": "submitted",
-          "request_hash": "1509c9a9b7c257151aab210531dc3dfa67506f0a8f4808574233ae393612ccb4",
-          "attempts": 1,
-          "at": "2026-11-17T08:08:44.933489+09:00"
         }
       },
-      "status": "draft_submitted",
-      "active_stage": "draft"
+      "status": "draft_recovery_ready",
+      "active_stage": "draft",
+      "draft_429_recovery": {
+        "source_run": "43976150754",
+        "artifact_id": 14279194944,
+        "archive_sha256": "9fd5fa5152c3a72a1889afe776827336168cafeafd9f457882da9c7e0db78671",
+        "previous_record": {
+          "checkpoints": {
+            "research": {
+              "status": "completed",
+              "request_hash": "18c02cf5d494b5a2b043007daf82431135be36b023575cb29492d6abc6140318",
+              "attempts": 1,
+              "at": "2026-11-17T08:06:57.216815+09:00",
+              "usable": true,
+              "sha256": "8e9b543d02cac8372f54926c74c74285885263dc4fe9741bcdc885a6b6ae274d",
+              "completed_at": "2026-11-17T08:08:00.797324+09:00"
+            },
+            "research_repair": {
+              "status": "completed",
+              "request_hash": "1939e7914df9d422f013a3e4fdc5e7683c5043cfa0ebcfad4f524c52bc47da52",
+              "attempts": 1,
+              "at": "2026-11-17T08:08:02.036384+09:00",
+              "usable": true,
+              "sha256": "9fe857992cc91ce9562530a2f53d94131388f363864ed36e72aa52c2284ffb25",
+              "completed_at": "2026-11-17T08:08:43.590612+09:00"
+            },
+            "draft": {
+              "status": "submitted",
+              "request_hash": "1509c9a9b7c257151aab210531dc3dfa67506f0a8f4808574233ae393612ccb4",
+              "attempts": 1,
+              "at": "2026-11-17T08:08:44.933489+09:00"
+            }
+          },
+          "status": "draft_submitted",
+          "active_stage": "draft"
+        },
+        "original_result_and_billing": "unknown; observed HTTP429; no completed draft artifact",
+        "method": "new_independently_observed_packet_old_topics_rejected",
+        "bundle_sha256": "2503ef50401ce727b03edc0c7bf7fce8a0a7ea16f0650c8e81bf2a3f8973cbb2",
+        "maximum_extra_draft_requests": 1,
+        "maximum_draft_output_tokens": 7500,
+        "at": "2026-11-17T08:27:20.271763+09:00"
+      }
     }
   },
   "publications": [
