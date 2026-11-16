@@ -67,3 +67,6 @@ GitHub concurrency 그룹은 요리 전용 단일 실행이다. 로컬 상태에
 - Caption authorization: https://developers.google.com/youtube/data/reference/rest/v3/captions/insert
 
 수석비서실장 추가 검토: recipe guard 연동, 단계별 CAS 선기록, uncertain submission 후 무재시도, caption 실패 시 비공개, live preflight 권한·사용량 검증, 실제 영문 자막 serving 확인을 중심으로 검증 요청.
+
+### Journal write permission
+Workflow defaults to `contents: read`; only the cooking production job has `contents: write` because it must commit the compare-and-swap journal BEFORE every external submission, then persist the returned receipt. Splitting this into a later write-only job would lose that pre-submission durability. This is not deployment/admin permission; no credentials or authority were added. The token remains job-scoped (not file-scoped), a residual broad-repository-write risk for reviewer approval. Production and publishing gates remain disabled until separately verified.
