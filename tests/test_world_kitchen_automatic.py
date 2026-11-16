@@ -102,7 +102,7 @@ class CookingAutomatic(unittest.TestCase):
     def test_no_schedule_before_caption_serving(self):
         from world_kitchen.providers import Providers,CHANNEL
         p=Providers();p.poll_attempts=1
-        with patch.object(p,'videos',return_value=[dict(snippet={'channelId':CHANNEL},status={'privacyStatus':'private'},processingDetails={'processingStatus':'succeeded'})]), patch.object(p,'caption_ready',return_value=False), patch('corgi_google_transport.http') as write:
+        with patch.object(p,'videos',return_value=[dict(snippet={'channelId':CHANNEL},status={'privacyStatus':'private'},processingDetails={'processingStatus':'succeeded'})]), patch.object(p,'caption_ready',return_value=False), patch('world_kitchen.google_transport.http') as write:
             with self.assertRaisesRegex(RuntimeError,'Exact English caption not serving'):p.schedule('abcdefghijk','2026-11-17T19:00:00+09:00','caption-id')
             write.assert_not_called()
     def test_no_schedule_before_processing(self):

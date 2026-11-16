@@ -5,7 +5,7 @@ from datetime import datetime,timezone
 os.environ.setdefault('SHORTS_STATE_DIR',str(Path('runs/world_kitchen_provider_state').resolve()))
 import cloud_runner as shared
 import pipeline as voice_api
-import corgi_google_transport as google
+from . import google_transport as google
 from .pipeline import TEMPLATE,SIGNATURE
 
 CHANNEL=TEMPLATE['channel_id']

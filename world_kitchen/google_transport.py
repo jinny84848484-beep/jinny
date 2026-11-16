@@ -1,4 +1,4 @@
-"""Corgi-only credential transport: no redirects, retries or response-body errors."""
+"""Cooking-only credential transport: no redirects, retries or response-body errors."""
 import json, urllib.request, urllib.parse, urllib.error
 HOSTS={'www.googleapis.com','youtube.googleapis.com','oauth2.googleapis.com'}
 class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -16,13 +16,3 @@ def http(url,body=None,headers=None,method=None):
  if body is not None and not isinstance(body,bytes):body=json.dumps(body).encode();hdr.setdefault('Content-Type','application/json')
  with open_request(urllib.request.Request(url,data=body,headers=hdr,method=method)) as r:
   raw=r.read();return json.loads(raw) if raw else {}
-def token(channel):
- import cloud_runner as c
- cred=c.credentials(channel)
- body=urllib.parse.urlencode({k:cred[k] for k in ('client_id','client_secret','refresh_token')}|{'grant_type':'refresh_token'}).encode()
- return http('https://oauth2.googleapis.com/token',body,{'Content-Type':'application/x-www-form-urlencoded'})['access_token']
-def verify_channel(channel,token):
- import corgi_runner as r
- result=http('https://www.googleapis.com/youtube/v3/channels?part=id&mine=true',headers={'Authorization':'Bearer '+token})
- if [x.get('id') for x in result.get('items',[])]!=[r.CHANNEL]:raise ValueError('Wrong authenticated corgi channel')
- return r.CHANNEL

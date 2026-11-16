@@ -25,3 +25,11 @@ Independent code review fixes: watt/time pairs are matched together; exact capti
 Independent reviewer reread confirmed both blockers resolved and 45 focused tests passed. Upload/caption IDs are also fsync-saved in local receipt artifacts before a later journal save, for interrupted-CAS reconciliation.
 
 Latest user correction: future first frames require truthful 재료 딱 N개! based on required ingredients; optional additions are excluded explicitly. Missing/false counts reject. 48 focused tests pass. Existing V8 video was not changed by code task.
+
+## Concurrent retirement integration and review branch
+- Integrated main through 429095ec34d3c2719afe8277e15be8b0844350ff without restoring retired corgi files. Removed all cooking runtime imports of retired modules; fixed-host transport is now world_kitchen/google_transport.py.
+- During partial deletion, full suite exposed two missing-module import errors in remaining retired-channel tests. Upstream subsequently removed those tests; post-integration results below supersede that transient run.
+- Cooking-focused suite: 50 passed including independent transport host/redirect tests.
+- Extension is draft PR #1, NOT merged to main. Production flags and credentials unchanged; no live generation or posting.
+
+Final integrated offline suite: 446 passed, zero failures/skips (19.362 s). Earlier 500-test count included retired-channel tests removed upstream; this is not a loss of cooking coverage. Initial PR CI on db817c2 failed during concurrent retirement; rerun required on integrated head.
