@@ -2765,13 +2765,16 @@
           "completed_at": "2026-11-16T10:52:37.263365+09:00"
         },
         "draft": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "871f26cbd58bb092f801f0ae3ef9cac73effadc70de61ee07c9f3438881e204d",
           "attempts": 1,
-          "at": "2026-11-16T11:07:41.131156+09:00"
+          "at": "2026-11-16T11:07:41.131156+09:00",
+          "usable": true,
+          "sha256": "dd33f5dc63d964c27e2a8391801c54530bf618725ffb7ed3556e8940a09eec7c",
+          "completed_at": "2026-11-16T11:08:00.113523+09:00"
         }
       },
-      "status": "draft_submitted",
+      "status": "draft_completed",
       "active_stage": "draft",
       "retry_hold": false,
       "research_failures": [
