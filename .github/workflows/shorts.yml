@@ -5,7 +5,7 @@ on:
       mode:
         description: 'Preflight checks connections; produce publishes two Ojirap videos'
         type: choice
-        options: [preflight, produce, stage_produce, recover_saved_reviews, recover_research_manifest, recover_research_manifest_20261115, recover_research_manifest_20261116, clarify_date_20261115, recheck_editorial_policy, resume_reviewed, expire_stale_additional]
+        options: [preflight, recover_draft_429_20261117, produce, stage_produce, recover_saved_reviews, recover_research_manifest, recover_research_manifest_20261115, recover_research_manifest_20261116, clarify_date_20261115, recheck_editorial_policy, resume_reviewed, expire_stale_additional]
         default: preflight
       expire_batch_id:
         description: expire_stale_additional only - batch id (e.g. 2026-11-07-extra-01)
@@ -78,7 +78,9 @@ jobs:
           EXPIRE_CONFIRM_NO_UPLOAD: ${{ inputs.expire_confirm_no_upload }}
           EXTERNAL_VIDEO: ${{ inputs.external_video }}
         run: |
-          if [ "$RUN_MODE" = "recover_saved_reviews" ]; then
+          if [ "$RUN_MODE" = "recover_draft_429_20261117" ]; then
+            python draft_rate_recovery_20261117.py
+          elif [ "$RUN_MODE" = "recover_saved_reviews" ]; then
             python cached_review_recovery.py
           elif [ "$RUN_MODE" = "recover_research_manifest" ]; then
             python research_manifest_recovery.py
