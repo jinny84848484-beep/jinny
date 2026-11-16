@@ -3234,13 +3234,16 @@
           "completed_at": "2026-11-17T08:08:00.797324+09:00"
         },
         "research_repair": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "1939e7914df9d422f013a3e4fdc5e7683c5043cfa0ebcfad4f524c52bc47da52",
           "attempts": 1,
-          "at": "2026-11-17T08:08:02.036384+09:00"
+          "at": "2026-11-17T08:08:02.036384+09:00",
+          "usable": true,
+          "sha256": "9fe857992cc91ce9562530a2f53d94131388f363864ed36e72aa52c2284ffb25",
+          "completed_at": "2026-11-17T08:08:43.590612+09:00"
         }
       },
-      "status": "research_repair_submitted",
+      "status": "research_repair_completed",
       "active_stage": "research_repair"
     }
   },
