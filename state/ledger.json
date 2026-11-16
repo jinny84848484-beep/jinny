@@ -3232,10 +3232,16 @@
           "usable": true,
           "sha256": "8e9b543d02cac8372f54926c74c74285885263dc4fe9741bcdc885a6b6ae274d",
           "completed_at": "2026-11-17T08:08:00.797324+09:00"
+        },
+        "research_repair": {
+          "status": "submitted",
+          "request_hash": "1939e7914df9d422f013a3e4fdc5e7683c5043cfa0ebcfad4f524c52bc47da52",
+          "attempts": 1,
+          "at": "2026-11-17T08:08:02.036384+09:00"
         }
       },
-      "status": "research_completed",
-      "active_stage": "research"
+      "status": "research_repair_submitted",
+      "active_stage": "research_repair"
     }
   },
   "publications": [
