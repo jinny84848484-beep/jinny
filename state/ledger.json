@@ -2792,7 +2792,7 @@
           "completed_at": "2026-11-16T11:08:17.974974+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1",
       "retry_hold": false,
       "research_failures": [
@@ -3707,6 +3707,18 @@
       "video_id": "pyPJhhtf6C8",
       "url": "https://www.youtube.com/shorts/pyPJhhtf6C8",
       "at": "2026-11-15T15:30:08.745985+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-16-hanji-unesco-2026-recommendation",
+      "topic_key": "hanji-unesco-2026-recommendation",
+      "category": "culture",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "한지, 아직은 유네스코 권고 단계",
+      "video_id": "tr1tut_JWvY",
+      "url": "https://www.youtube.com/shorts/tr1tut_JWvY",
+      "at": "2026-11-16T11:10:07.743297+09:00",
       "experiment": {}
     }
   ],
