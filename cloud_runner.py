@@ -747,6 +747,8 @@ def produce(*, expected_day=None):
         raise RuntimeError('Recovery production date changed; reconcile before continuation')
     ledger,sha=journal_get();record=ledger['days'].setdefault(day,{})
     if record.get('status')=='complete':print('Daily batch already complete.');return
+    if record.get('draft_429_recovery',{}).get('method')=='new_independently_observed_packet_old_topics_rejected':
+        raise RuntimeError('Pinned new-packet recovery cannot resume through generic produce; reconcile explicitly')
     if record.get('retry_hold') or record.get('status')=='research_completed_unusable':
         raise RuntimeError('Completed production check is on hold; inspect the saved diagnostic before resuming')
     if record.get('status') in {'research_submitted','draft_submitted','narration_correction_submitted','editorial_review_submitted','tts_submitted','rendered','upload_submitted','staged_waiting','staged_review_submitted'} or any(v.get('status')=='submitted' for v in record.get('checkpoints',{}).values()):raise RuntimeError('Interrupted external request: reconcile journal before retrying')
