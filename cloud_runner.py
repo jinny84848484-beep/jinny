@@ -132,7 +132,7 @@ class CompletedResearchUnusable(RuntimeError):
         self.result={'text':output,'sources':evidence}
 
 
-PROVIDER_STAGES=frozenset({'editorial_review_0_date_clarification_v1','editorial_review_1_date_clarification_v1','editorial_review_1_policy_recheck','research','research_repair','draft','narration_correction','editorial_review',*(f'editorial_review_{i}' for i in range(4))})
+PROVIDER_STAGES=frozenset({'editorial_review_0_date_clarification_v1','editorial_review_1_date_clarification_v1','editorial_review_1_policy_recheck','research','research_repair','research_repair_2','draft','narration_correction','editorial_review',*(f'editorial_review_{i}' for i in range(4))})
 
 def fingerprint(value):
     return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
@@ -154,15 +154,31 @@ def parse_research_manifest(text,evidence,recent):
     if not isinstance(stories,list) or len(stories)!=2 or any(not isinstance(story,dict) for story in stories):raise ValueError('research_manifest_batch')
     if any('channel' in story for story in stories):raise ValueError('research_manifest_shared_packet')
     if any(s.get('ready') is not True for s in stories):raise ValueError('research_manifest_unready')
+    observed=observed_sources(evidence)
+    keys=set()
+    for story in stories:
+        key=story.get('topic_key')
+        if not isinstance(key,str) or key in keys:raise ValueError('research_manifest_topics')
+        keys.add(key)
+        validate_research_story(story,observed,recent)
+    if fingerprint(stories[0]['verified_facts'])==fingerprint(stories[1]['verified_facts']) or stories[0]['summary'].strip().casefold()==stories[1]['summary'].strip().casefold():raise ValueError('research_manifest_duplicate_event')
+    return manifest
+
+
+def observed_sources(evidence):
     observed=set()
     for entry in evidence:
         try:observed.add(source_identity(entry.get('url')))
         except (ValueError,AttributeError):pass
-    keys=set()
-    for story in stories:
+    return observed
+
+
+def validate_research_story(story,observed,recent):
+    """Every structural, source and readiness rule for ONE story packet."""
+    if True:
         key=story.get('topic_key')
-        if not isinstance(key,str) or not re.fullmatch(r'[a-z0-9][a-z0-9-]{2,180}',key) or key in keys or any(topic_is_recent(key,ch,recent) for ch in ('ojirap','korean')):raise ValueError('research_manifest_topics')
-        keys.add(key)
+        if 'channel' in story:raise ValueError('research_manifest_shared_packet')
+        if not isinstance(key,str) or not re.fullmatch(r'[a-z0-9][a-z0-9-]{2,180}',key) or any(topic_is_recent(key,ch,recent) for ch in ('ojirap','korean')):raise ValueError('research_manifest_topics')
         if story.get('category') not in CATEGORIES or story.get('ready') is not True:raise ValueError('research_manifest_unready')
         if not all(isinstance(story.get(k),str) and story[k].strip() for k in ('summary','visual_subject')):raise ValueError('research_manifest_context')
         queries=story.get('visual_queries')
@@ -188,11 +204,36 @@ def parse_research_manifest(text,evidence,recent):
             used.update(fact['source_indices'])
         if used!=set(range(len(sources))):raise ValueError('research_manifest_unused_source')
         if not isinstance(story.get('uncertainties'),list) or any(not isinstance(u,str) for u in story['uncertainties']):raise ValueError('research_manifest_context')
-    if fingerprint(stories[0]['verified_facts'])==fingerprint(stories[1]['verified_facts']) or stories[0]['summary'].strip().casefold()==stories[1]['summary'].strip().casefold():raise ValueError('research_manifest_duplicate_event')
-    return manifest
 
 
-def guarded_research_manifest(ledger,sha,day,text,evidence,recent,*,allow_repair=False,repair_provider=None):
+def research_stories(text):
+    try:
+        value=text.strip()
+        if value.startswith('```') and value.endswith('```'):value=re.sub(r'^```(?:json)?\s*','',value).removesuffix('```').strip()
+        stories=json.loads(value).get('stories')
+        return [s for s in stories if isinstance(s,dict)] if isinstance(stories,list) else []
+    except (ValueError,TypeError,AttributeError):return []
+
+
+def salvage_ready_stories(texts,evidence,recent,*,excluded=frozenset()):
+    """Keep each story that passes EVERY per-story rule, from any completed attempt.
+
+    One unready story no longer discards a ready one. Nothing is relaxed: each
+    kept packet is individually ready, sourced, observed and non-duplicate.
+    """
+    observed=observed_sources(evidence);kept=[]
+    for text in texts:
+        for story in research_stories(text):
+            if story.get('topic_key') in excluded:continue
+            try:validate_research_story(story,observed,recent)
+            except (ValueError,TypeError,KeyError,AttributeError):continue
+            if any(story['topic_key']==k['topic_key'] or fingerprint(story['verified_facts'])==fingerprint(k['verified_facts']) or story['summary'].strip().casefold()==k['summary'].strip().casefold() for k in kept):continue
+            kept.append(story)
+    return kept
+
+
+def guarded_research_manifest(ledger,sha,day,text,evidence,recent,*,allow_repair=False,repair_provider=None,second_repair_provider=None):
+    salvaged=0
     try:return parse_research_manifest(text,evidence,recent)
     except (ValueError,TypeError,KeyError,AttributeError) as exc:
         reason=str(exc) if isinstance(exc,ValueError) and re.fullmatch(r'research_manifest_[a-z_]+',str(exc)) else 'research_manifest_schema'
@@ -213,8 +254,25 @@ def guarded_research_manifest(ledger,sha,day,text,evidence,recent,*,allow_repair
             return manifest
         except (ValueError,TypeError,KeyError,AttributeError) as exc:
             reason=str(exc) if isinstance(exc,ValueError) and re.fullmatch(r'research_manifest_[a-z_]+',str(exc)) else 'research_manifest_schema'
+        evidence=list(merged.values());texts=[text,repaired]
+        kept=salvage_ready_stories(texts,evidence,recent,excluded=excluded)
+        if len(kept)<2 and second_repair_provider is not None:
+            used={s.get('topic_key') for t in texts for s in research_stories(t) if isinstance(s.get('topic_key'),str)}
+            need=2-len(kept)
+            prompt2=('Find exactly '+str(need)+' NEW ready Korean news story packet'+('s' if need>1 else '')+' for today, using the supplied research schema, returned as JSON {"stories":[...]} containing only the new packet'+('s' if need>1 else '')+'. '
+                'Every rule still applies: at least two independently operated source domains, primary/original reporting, actually accessed article pages and specific article URLs. Prefer stories with a clear public record. '
+                'Do not reuse any of these events, even renamed: '+json.dumps(sorted(used))+'\nRecent topics excluded: '+json.dumps(sorted(recent))+'\nAlready kept (do not duplicate): '+json.dumps([s['summary'] for s in kept],ensure_ascii=False))
+            try:
+                extra,extra_evidence=second_repair_provider(prompt2,True,6500,instructions=research_instructions(),stage='research_repair')
+                evidence=list({s['url']:s for s in [*evidence,*extra_evidence] if isinstance(s,dict) and isinstance(s.get('url'),str)}.values())
+                kept=salvage_ready_stories([*texts,extra],evidence,recent,excluded=excluded)
+            except CompletedResearchUnusable:pass
+        if len(kept)>=2:
+            print('Research salvage: kept two individually ready stories',flush=True)
+            return {'stories':kept[:2]}
+        salvaged=len(kept)
     record=ledger['days'][day];record.update(status='research_validation_failed',retry_hold=True)
-    record.setdefault('research_failures',[]).append({'reason':reason,'stage':'research_manifest','repair_attempted':allow_repair,'at':p.now().isoformat()})
+    record.setdefault('research_failures',[]).append({'reason':reason,'stage':'research_manifest','repair_attempted':allow_repair,'salvaged_ready':salvaged,'at':p.now().isoformat()})
     journal_put(ledger,sha() if callable(sha) else sha)
     raise RuntimeError('Research readiness validation failed: '+reason+'; inspect the saved research artifact') from None
 
@@ -714,7 +772,10 @@ def produce(*, expected_day=None):
             def repair_provider(*args,**kwargs):
                 result,research_state['sha']=stage_checkpoint(ledger,research_state['sha'],day,'research_repair',request={'args':args,'kwargs':kwargs},submit=lambda:openai(*args,**kwargs))
                 return result
-            manifest=guarded_research_manifest(ledger,lambda:research_state['sha'],day,research,evidence,recent,allow_repair=True,repair_provider=repair_provider)
+            def second_repair_provider(*args,**kwargs):
+                result,research_state['sha']=stage_checkpoint(ledger,research_state['sha'],day,'research_repair_2',request={'args':args,'kwargs':kwargs},submit=lambda:openai(*args,**kwargs))
+                return result
+            manifest=guarded_research_manifest(ledger,lambda:research_state['sha'],day,research,evidence,recent,allow_repair=True,repair_provider=repair_provider,second_repair_provider=second_repair_provider)
             sha=research_state['sha']
         prompt='Return JSON with jobs for '+day+'. Use ONLY the ready stories in this research manifest. For EACH of the TWO shared issue packets create one ojirap job, exactly two Korean-only jobs total with distinct date/channel/topic job IDs. Copy each topic_key, category, visual_queries and COMPLETE sources array (title/url only) exactly from its shared packet, in the same order. Use the shared verified facts consistently, for the Korean audience. Do not add unsourced background. Do not drop independent sources, invent URLs, use homepages, change story identity or cite facts beyond the packet. Scene source_indices refer to that exact packet bibliography. The pipeline deterministically preserves and checks those citations. Make the first spoken phrase a concise understandable hook that works as the single opening caption.\nRESEARCH MANIFEST:\n'+json.dumps(manifest,ensure_ascii=False)
         (draft,_),sha=stage_checkpoint(ledger,sha,day,'draft',request={'prompt':prompt,'instructions':PROMPT},submit=lambda:openai(prompt,False,7500,stage='draft'))
@@ -782,8 +843,18 @@ GRAPHICS_RESEARCH_NOTE="""
 ORIGINAL GRAPHICS FALLBACK IS ENABLED. Photo availability alone must NOT make a story unready: when no exact reusable photograph is found, keep ready true if the event facts and sources meet every other requirement, list the photo gap in uncertainties, and still give visual_subject and two visual_queries. The pipeline will illustrate such a story with original text cards. Never relax factual, source independence or primary-source requirements."""
 
 
+NO_GRAPHICS_CLAUSE=', or replace photos with original text graphics'
+
+
+def auto_exclude_enabled():
+    # Owner standing rule: a failing story is dropped, the passing one still publishes.
+    return p.cfg().get('auto_exclude_failed_story') is True
+
+
 def research_instructions():
-    return RESEARCH_PROMPT+GRAPHICS_RESEARCH_NOTE if daily_graphics.enabled() else RESEARCH_PROMPT
+    if not daily_graphics.enabled():return RESEARCH_PROMPT
+    text=RESEARCH_PROMPT.replace(NO_GRAPHICS_CLAUSE,'').replace('Set ready false if material event facts or licensed directly relevant real photos remain unavailable','Set ready false if material event facts remain unavailable; missing photos alone never make a story unready').replace('Require reusable CC0/public-domain/CC BY real photographs directly relevant to each topic','Prefer reusable CC0/public-domain/CC BY real photographs directly relevant to each topic')
+    return text+GRAPHICS_RESEARCH_NOTE
 
 
 def review_candidates(jobs):
@@ -847,6 +918,7 @@ Return ONLY JSON with exactly status, issues, selection. status is PASS or FAIL.
         graphics={}
         if fallback_enabled:
             graphics=daily_graphics.build(job)
+            instructions=instructions.replace(NO_GRAPHICS_CLAUSE,'')
             if own_media:
                 instructions+='\nIf the attached photos are unsuitable, report only media issue codes for them and still audit every factual, source and language point completely; the pipeline may then substitute original text graphics.'
             else:
@@ -883,9 +955,15 @@ Return ONLY JSON with exactly status, issues, selection. status is PASS or FAIL.
         decisions.append({'job_index':index,'decision':decision,**({'replaced_media_decision':replaced} if replaced else {})})
         selection.update(decision['selection'])
         issues.extend({**issue,'job_index':index} for issue in decision['issues'])
+    failed=[d['job_index'] for d in decisions if d['decision']['status']!='PASS']
+    exclusions=[]
+    if issues and failed and len(failed)<len(review_jobs_input) and auto_exclude_enabled() and not cached_only and not policy_recheck and correction_namespace is None:
+        # Never publish a failing story; publish the independently passing one.
+        exclusions=[{'job_id':review_jobs_input[i]['id'],'channel':review_jobs_input[i]['channel'],'reason':'editorial_review_failed','codes':sorted({x['code'] for x in issues if x['job_index']==i})} for i in failed]
+        issues=[]
     decision={'status':'FAIL' if issues else 'PASS','issues':issues,'selection':{} if issues else selection}
     public_issues=[{key:issue[key] for key in ('code','job_index','scene_index')} for issue in issues]
-    diagnostic={'status':decision['status'],'issues':public_issues,'source_count':len(review_sources),'candidate_count':len(media),'input_hash':fingerprint(saved_request)}
+    diagnostic={'status':decision['status'],'issues':public_issues,'excluded':[{k:e[k] for k in ('job_id','codes')} for e in exclusions],'source_count':len(review_sources),'candidate_count':len(media),'input_hash':fingerprint(saved_request)}
     p.write(p.ROOT/'runs'/day/'checkpoints'/('editorial-details'+file_suffix+'.json'),{'decisions':decisions,'issues':issues})
     p.write(p.ROOT/'runs'/day/'checkpoints'/('editorial-diagnostics'+file_suffix+'.json'),diagnostic)
     print('Editorial review decision: '+json.dumps(diagnostic,sort_keys=True),flush=True)
@@ -894,8 +972,10 @@ Return ONLY JSON with exactly status, issues, selection. status is PASS or FAIL.
         journal_put(ledger,sha)
         raise RuntimeError('Editorial review did not pass; batch held')
     if graphics_media:media={**media,**graphics_media}
-    relevant_media.apply_review(jobs,media,decision['selection'])
+    excluded_ids={e['job_id'] for e in exclusions}
+    relevant_media.apply_review([job for job in jobs if job['id'] not in excluded_ids],media,decision['selection'])
     validate_batch(jobs,day,recent_topics(ledger),slots=slots)
+    record['editorial_exclusions']=exclusions
     record.update(status='reviewed',retry_hold=cached_only,jobs=jobs,media=media,review=json.dumps({'status':'PASS','issues':[],'selection':selection}),review_source_urls=[s.get('url') for s in review_sources],created_at=p.now().isoformat())
     sha=journal_put(ledger,sha)
     return sha
@@ -964,8 +1044,10 @@ def publish_reviewed(ledger,sha,day,*,slots=None,stage_callback=None):
     validate_batch(jobs,day,recent_topics(prior),slots=slots)
     assert_additional_day_budget(ledger,day,jobs)
     excluded=[job for job in jobs if news_publication_blocked(job)]
-    record['publication_exclusions']=[{'job_id':job['id'],'channel':job['channel'],'reason':'owner_retired_news_channel'} for job in excluded]
-    jobs=[job for job in jobs if not news_publication_blocked(job)]
+    editorial={e['job_id']:e for e in record.get('editorial_exclusions',[]) if isinstance(e,dict)}
+    record['publication_exclusions']=[{'job_id':job['id'],'channel':job['channel'],'reason':'owner_retired_news_channel'} for job in excluded]+[editorial[job['id']] for job in jobs if job['id'] in editorial and not news_publication_blocked(job)]
+    jobs=[job for job in jobs if not news_publication_blocked(job) and job['id'] not in editorial]
+    if not jobs:raise RuntimeError('No reviewed story is publishable; batch held')
     for job in jobs:
         for scene in job['scenes']:
             media=library.get(scene.get('media'),{}) if isinstance(scene.get('media'),str) else {}

@@ -44,9 +44,9 @@ Google OAuth 앱은 Production 상태로 전환했으며 두 채널 인증을 �
 
 `Shorts offline guards`는 push/PR의 정확한 커밋에서 단위 검사를 실행한다. 생산 시크릿을 전달하지 않고 외부 네트워크 호출을 차단하며 실제 제작·게시를 실행하지 않는다. 기존 매일 08:00 KST 일정과 생산 동시실행·권한·비용한도는 변경하지 않는다. 완료 날짜는 기존 원장을 그대로 보존하며 재생성하지 않는다.
 
-## 매일 영상 자체 그래픽 대체 (기본 꺼짐)
+## 매일 영상 자체 그래픽 대체 (2026-11-16부터 켜짐)
 
-`config.json`의 `"daily_graphics_fallback": true`로 켠다. 기본값 `false`면 기존 사진 전용 동작과 완전히 같다.
+`config.json`의 `"daily_graphics_fallback": true`. 관련 실사진(라이선스 확인된 스톡 포함)이 먼저이고, 쓸 수 있는 사진이 없을 때만 자체 카드로 대체한다. `false`로 바꾸면 사진 전용 동작으로 돌아간다.
 
 켜면:
 - 리서치는 정확한 재사용 사진이 없어도 사실·출처 요건을 채우면 준비 완료로 판정할 수 있다. 사실, 독립 출처, 1차 출처 요건은 그대로다.
@@ -83,3 +83,14 @@ review of story two with the actual scope rule clarified. Serious allegations,
 sensitive disclosures and all factual/media checks still require rejection.
 Only real PASS decisions for both stories can release the hold. The original
 first PASS is reused by exact input hash. Re-invocation cannot repeat paid work.
+
+## 무승인 일일 자동화 (소유자 상시 지시, 2026-11-16)
+
+매일 07:07 KST 실행, 10:37 KST 백업 실행(이미 끝난 날은 바로 종료). 하루 단위 사람 승인이나 수동 복구 없이 아래 순서로 스스로 판단한다. 사실·출처·승인범위·사진 라이선스 기준은 하나도 완화하지 않는다.
+
+1. 리서치 → 1회 보완 → 그래도 2개가 안 되면 **빠진 칸만** 새 이슈 1회 추가 조사(`research_repair_2`). 세 결과 중 각 기준을 개별 통과한 이슈만 모은다(`salvage_ready_stories`). 앞 단계에서 미준비로 판정된 이슈는 다시 쓰지 않는다.
+2. 검토에서 한 이슈만 불합격이면 그 이슈는 게시하지 않고 나머지 1편만 게시한다(`editorial_exclusions`, `publication_exclusions`의 `editorial_review_failed`). 두 이슈 모두 불합격이면 기존대로 보류.
+3. 사진만 문제면 자체 그래픽 카드로 대체(위 절).
+4. 보류(`retry_hold`)는 게시 가능한 이슈가 0개일 때만 생긴다. 다음 날 실행은 영향 없이 새로 진행한다.
+
+끄는 법: `config.json`의 `auto_exclude_failed_story`, `daily_graphics_fallback`을 `false`로.
