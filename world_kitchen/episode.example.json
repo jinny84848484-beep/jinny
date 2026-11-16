@@ -1,0 +1,99 @@
+{
+  "channel_id": "UCkuz6ra5_hZ1MSAbFthqDcg",
+  "title": "전자레인지로 간편하게 만드는 치즈 퀘사디아",
+  "description": "AI 예시 스키마. 게시용 레시피가 아닙니다. 출처와 재료/양을 검증해 교체하세요.",
+  "dish": "퀘사디아",
+  "country": "멕시코",
+  "servings": 1,
+  "ingredients": [
+    {
+      "name": "또띠아",
+      "amount": 1,
+      "unit": "장"
+    },
+    {
+      "name": "치즈",
+      "amount": 28,
+      "unit": "g"
+    }
+  ],
+  "steps": [
+    {
+      "text": "치즈 올리고 접기",
+      "appliance": "none",
+      "seconds": 0
+    },
+    {
+      "text": "700W 45초부터 확인",
+      "appliance": "microwave",
+      "seconds": 45
+    }
+  ],
+  "korean_mart_note": "국내 마트 재료",
+  "allergens": [
+    "밀",
+    "우유"
+  ],
+  "voice_provider": "ElevenLabs",
+  "sources": [
+    "https://example.com/recipe"
+  ],
+  "rights_reviewed": false,
+  "recipe_reviewed": false,
+  "synthetic_disclosure": true,
+  "extra_purchase_allowed": false,
+  "appliance": "microwave",
+  "heating": {
+    "seconds": {
+      "700": 45,
+      "1000": 30
+    },
+    "source": "https://example.com/recipe",
+    "basis": "치즈 28g",
+    "caveat": "기기 차이"
+  },
+  "scenes": [
+    {
+      "kind": "hero",
+      "duration": 3,
+      "image": "0.png",
+      "title": "짧은 제목",
+      "body": "내용 0",
+      "footer": "안내",
+      "narration": "요리 설명",
+      "english": "Recipe instructions."
+    },
+    {
+      "kind": "ingredients",
+      "duration": 3,
+      "image": "1.png",
+      "title": "짧은 제목",
+      "body": "내용 1",
+      "footer": "안내",
+      "narration": "요리 설명",
+      "english": "Recipe instructions."
+    },
+    {
+      "kind": "heating",
+      "duration": 3,
+      "image": "2.png",
+      "title": "짧은 제목",
+      "body": "700W 45초 · 1000W 30초",
+      "footer": "안내",
+      "narration": "요리 설명",
+      "english": "Recipe instructions."
+    },
+    {
+      "kind": "signature",
+      "duration": 3,
+      "image": "3.png",
+      "title": "짧은 제목",
+      "body": "내용 3",
+      "footer": "안내",
+      "narration": "오늘도 방구석에서 세계 한 입, 맛있게 드세요!",
+      "english": "Recipe instructions."
+    }
+  ],
+  "logo": "assets/your-reviewed-wordmark.png",
+  "narration_audio": "assets/your-reviewed-elevenlabs.wav"
+}

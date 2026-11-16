@@ -1,0 +1,16 @@
+{
+  "version": "world-kitchen-v1",
+  "channel_id": "UCkuz6ra5_hZ1MSAbFthqDcg",
+  "width": 720, "height": 1280, "fps": 30,
+  "background": "#FFFDF7", "title_color": "#AF3E20", "body_color": "#173B32",
+  "logo_box": [215, 18, 260, 73], "image_box": [30, 205, 630, 815],
+  "title_box": [30, 108, 630, 90], "body_box": [30, 1040, 630, 115],
+  "footer_box": [30, 1160, 630, 65],
+  "title_size": 44, "body_size": 34, "footer_size": 24,
+  "font": "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+  "voice_provider": "ElevenLabs", "voice_style": "섬세하고 밝으며 명확한 발음",
+  "signature_ko": "오늘도 방구석에서 세계 한 입, 맛있게 드세요!",
+  "signature_en": "A taste of the world, right at home. Enjoy!",
+  "publish_timezone": "Asia/Seoul", "publish_time": "19:00",
+  "automatic_production_enabled": false, "automatic_upload_enabled": false
+}

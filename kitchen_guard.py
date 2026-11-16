@@ -16,7 +16,7 @@ import re
 
 CHANNEL = 'kitchen'
 APPLIANCES = {'microwave', 'rice_cooker'}
-UNITS = {'밥숟가락', '찻숟가락', '종이컵', '개', '장', '줌', '꼬집', '쪽', '팩', '봉지', '약간'}
+UNITS = {'밥숟가락', '찻숟가락', '종이컵', '개', '장', '줌', '꼬집', '쪽', '팩', '봉지', '약간', 'g', '그램'}
 SCENE_ORDER = ('hook', 'ingredients', 'steps', 'finish')
 MAX_MICROWAVE_SECONDS = 600          # one heating step
 MAX_TOTAL_MINUTES = 60               # a 'quick home' recipe
@@ -67,7 +67,8 @@ def validate_recipe(job):
         need(item.get('unit') in UNITS, 'kitchen_unit')
         if item['unit'] != '약간':
             amount = item.get('amount')
-            need(isinstance(amount, (int, float)) and 0 < amount <= 20, 'kitchen_amount')
+            limit = 1000 if item['unit'] in {'g', '그램'} else 20
+            need(isinstance(amount, (int, float)) and not isinstance(amount, bool) and 0 < amount <= limit, 'kitchen_amount')
         if item.get('substitute') is not None:
             need(isinstance(item['substitute'], str) and item['substitute'].strip(), 'kitchen_substitute')
     need(any(item.get('substitute') for item in ingredients) or job.get('korean_mart_note'), 'kitchen_mart_angle')

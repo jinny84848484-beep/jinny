@@ -9,6 +9,8 @@ on:
       - '.github/workflows/corgi.yml'
       - '.github/workflows/corgi-auth-check.yml'
       - 'corgi/**'
+      - 'world_kitchen/**'
+      - '.github/workflows/world-kitchen.yml'
   pull_request:
     paths:
       - '**.py'
@@ -18,6 +20,8 @@ on:
       - '.github/workflows/corgi.yml'
       - '.github/workflows/corgi-auth-check.yml'
       - 'corgi/**'
+      - 'world_kitchen/**'
+      - '.github/workflows/world-kitchen.yml'
   workflow_dispatch:
 permissions:
   contents: read
