@@ -28,9 +28,10 @@ def job_of(prompt):
 
 
 class Disabled(unittest.TestCase):
-    def test_flag_is_off_by_default_and_changes_nothing(self):
-        self.assertIs(c.p.cfg().get('daily_graphics_fallback'), False)
-        self.assertFalse(g.enabled())
+    def test_flag_off_changes_nothing(self):
+        patcher = patch.object(g, 'enabled', return_value=False)
+        patcher.start()
+        self.addCleanup(patcher.stop)
         self.assertEqual(c.research_instructions(), c.RESEARCH_PROMPT)
         with patch.object(c.relevant_media, 'candidates', side_effect=RuntimeError('Not enough relevant licensed photo candidates; batch held')):
             with self.assertRaisesRegex(RuntimeError, 'batch held'):
@@ -110,7 +111,11 @@ class Enabled(unittest.TestCase):
 
     def test_research_keeps_fact_rules_and_drops_photo_readiness(self):
         text = c.research_instructions()
-        self.assertTrue(text.startswith(c.RESEARCH_PROMPT))
+        self.assertNotIn(c.NO_GRAPHICS_CLAUSE, text)
+        self.assertNotIn('or licensed directly relevant real photos remain unavailable', text)
+        self.assertIn('missing photos alone never make a story unready', text)
+        for rule in ('two independently operated source domains', 'primary/official/original reporting', 'Never invent URLs'):
+            self.assertIn(rule, text)
         self.assertIn('Photo availability alone must NOT make a story unready', text)
         self.assertIn('Never relax factual, source independence or primary-source requirements', text)
 

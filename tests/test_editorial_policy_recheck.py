@@ -24,6 +24,8 @@ class EditorialRecheck(unittest.TestCase):
         self.assertIn('sensitive personal disclosure',r.CLARIFICATION)
 
     def exercise(self,second_pass):
+        # Historical recovery scenario: both the hold and its one recheck are exercised as before.
+        patcher=patch.object(c,'auto_exclude_enabled',return_value=False);patcher.start();self.addCleanup(patcher.stop)
         jobs=[j for j in batch() if j['channel']=='ojirap'];media={}
         for j in jobs:
             for suffix in ('a','b'):

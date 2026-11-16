@@ -176,6 +176,8 @@ class EditorialDecision(unittest.TestCase):
 
 class ProductionResume(unittest.TestCase):
     def test_media_outage_resumes_saved_research_and_draft_without_paid_repeats(self):
+        # Photo-only outage semantics; the graphics fallback would otherwise absorb it.
+        patcher=patch.object(c.daily_graphics,'enabled',return_value=False);patcher.start();self.addCleanup(patcher.stop)
         day='2026-11-05';jobs=[job for job in batch() if job['channel']=='ojirap'];media={};selection={}
         for index,job in enumerate(jobs):
             ids=[f'image-{index}-a',f'image-{index}-b']

@@ -86,4 +86,6 @@ class StockPolicy(unittest.TestCase):
   self.assertIn('Never identify a different person', c.PROMPT)
   self.assertNotIn('Media must show the exact named subject', c.PROMPT)
  def test_no_graphics_configuration_change(self):
-  self.assertIs(c.p.cfg().get('daily_graphics_fallback'),False)
+  # The single-use 11/16 stock recovery ran with graphics off; the standing
+  # fallback was enabled afterwards by owner order (2026-11-16), so it must refuse now.
+  self.assertIs(c.p.cfg().get('daily_graphics_fallback'),True)

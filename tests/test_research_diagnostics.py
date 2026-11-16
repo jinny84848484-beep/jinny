@@ -35,7 +35,7 @@ class ResearchDiagnostics(unittest.TestCase):
 
     def test_stages_have_separate_request_instructions(self):
         data={'status':'completed','output':[{'type':'web_search_call','action':{'sources':[{'url':'https://example.org'}]}},{'type':'message','content':[{'type':'output_text','text':'verified'}]}]}
-        for stage,expected in [('research',c.RESEARCH_PROMPT),('editorial_review',c.REVIEW_PROMPT)]:
+        for stage,expected in [('research',c.research_instructions()),('editorial_review',c.REVIEW_PROMPT)]:
             with patch.dict(c.os.environ,{'OPENAI_API_KEY':'test'}),patch.object(c,'http',return_value=data) as network:
                 c.guarded_research({},None,'today',stage,'task',True)
                 body=network.call_args.args[1]

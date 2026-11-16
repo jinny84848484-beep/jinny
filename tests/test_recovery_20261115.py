@@ -76,7 +76,8 @@ class RecoveryPolicy(unittest.TestCase):
  def test_policy_only_explicit_today_mode(self):
   import daily_graphics as g
   for mode,day,expected in [('produce',15,False),('recover_research_manifest',15,False),('recover_research_manifest_20261115',15,True),('recover_research_manifest_20261115',16,False)]:
-   with patch.dict(os.environ,{'RUN_MODE':mode}),patch.object(c.p,'now',return_value=datetime.datetime(2026,11,day,tzinfo=c.p.KST)):
+   # Pinned 11/15 mode rule, evaluated with the standing fallback switched off.
+   with patch.object(c.p,'cfg',return_value={**c.p.read(c.p.CONFIG),'daily_graphics_fallback':False}),patch.dict(os.environ,{'RUN_MODE':mode}),patch.object(c.p,'now',return_value=datetime.datetime(2026,11,day,tzinfo=c.p.KST)):
     self.assertEqual(g.enabled(),expected)
  def test_workflow_preserves_old_and_adds_new_entry(self):
   text=(c.p.ROOT/'.github/workflows/shorts.yml').read_text()
