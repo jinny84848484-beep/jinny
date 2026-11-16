@@ -33,3 +33,8 @@ Latest user correction: future first frames require truthful 재료 딱 N개! ba
 - Extension is draft PR #1, NOT merged to main. Production flags and credentials unchanged; no live generation or posting.
 
 Final integrated offline suite: 446 passed, zero failures/skips (19.362 s). Earlier 500-test count included retired-channel tests removed upstream; this is not a loss of cooking coverage. Initial PR CI on db817c2 failed during concurrent retirement; rerun required on integrated head.
+
+## Claude review follow-up (2026-11-16)
+Reproduced and corrected two blockers: research flags are cleared to false, structural validation is explicitly separate, and approval is assigned only after independent recipe/rights review with explicit true values, reasons and observed recipe/music-rights URLs. Final review requires explicit true no_unapproved_brands/no_unapproved_logos/no_faces fields and reasons; absent/false/string fields block upload. Approved channel wordmark is the sole logo exception. Repeated dishes now stop before paid independent review. Workflow default permissions are read-only; contents:write is job-scoped because the CAS journal must persist submission status before every outbound side effect. No authority/credential expansion or live calls.
+
+Follow-up verification: 451 offline tests passed (20.267s), 55 cooking-focused tests passed. compileall and diff check passed. No live generation/upload.

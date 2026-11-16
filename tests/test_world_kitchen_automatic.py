@@ -18,7 +18,7 @@ class Provider:
     def preflight(self,**kw):self.hit('preflight')
     def research(self,day,recent):self.hit('research');return episode(),[{'url':'https://example.com/recipe'}]
     def review(self,e,folder):
-        stage='final_review' if folder else 'recipe_review';self.hit(stage);return {'approved':self.reject!=stage}
+        stage='final_review' if folder else 'recipe_review';self.hit(stage);return dict(approved=self.reject!=stage,recipe_reviewed=True,rights_reviewed=True,no_unapproved_brands=True,no_unapproved_logos=True,no_faces=True,reasons=['fixture checks passed'],evidence_urls=e['sources']+[self.music_rights_source])
     def image(self,*a):self.hit('image')
     def tts(self,text,root):
         self.hit('tts');p=root/'voice.mp3';p.write_bytes(b'audio')
@@ -39,6 +39,40 @@ class CookingAutomatic(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             result=run('2026-11-17',p,j,Path(d)/'episode',publish=publish,clock=CLOCK,renderer=render)
         return result,p,j
+    def test_unobserved_review_citation_rejected(self):
+        from world_kitchen.providers import Providers
+        data={'status':'completed','output':[{'type':'web_search_call','action':{'sources':[{'url':'https://example.com/observed'}]}},{'content':[{'type':'output_text','text':json.dumps({'approved':True,'evidence_urls':['https://example.com/invented']})}]}]}
+        with patch.dict(os.environ,{'OPENAI_API_KEY':'fixture'}),patch('cloud_runner.http',return_value=data):
+            with self.assertRaisesRegex(RuntimeError,'unobserved'):Providers().review(episode(),None)
+    def test_review_receives_unapproved_flags(self):
+        p=Provider();original=p.review
+        def review(e,folder):
+            if folder is None:
+                self.assertIs(e['recipe_reviewed'],False)
+                self.assertIs(e['rights_reviewed'],False)
+            return original(e,folder)
+        p.review=review;self.execute(provider=p)
+    def test_missing_recipe_review_evidence_blocks_images(self):
+        for key in ('recipe_reviewed','rights_reviewed','reasons','evidence_urls'):
+            p=Provider();original=p.review
+            def review(e,folder,key=key,original=original):
+                r=original(e,folder);r.pop(key,None);return r
+            p.review=review;r,p,j=self.execute(provider=p)
+            self.assertEqual(r['status'],'recipe_rejected');self.assertNotIn('image',p.calls)
+    def test_final_absence_checks_fail_closed(self):
+        for key in ('no_unapproved_brands','no_unapproved_logos','no_faces'):
+            for value in (None,False,'true'):
+                p=Provider();original=p.review
+                def review(e,folder,key=key,value=value,original=original):
+                    r=original(e,folder)
+                    if folder:r[key]=value
+                    return r
+                p.review=review;r,p,j=self.execute(provider=p)
+                self.assertEqual(r['status'],'final_review_rejected');self.assertNotIn('upload',p.calls)
+    def test_repeat_before_paid_review(self):
+        p=Provider();j=Journal();j.data['days']['2026-11-16']={'dish':episode()['dish']}
+        with self.assertRaisesRegex(ValueError,'Repeated'):self.execute(provider=p,journal=j)
+        self.assertNotIn('recipe_review',p.calls);self.assertNotIn('image',p.calls)
     def test_full_mocked_path(self):
         r,p,j=self.execute();self.assertEqual(r['status'],'scheduled_verified')
         self.assertLess(p.calls.index('captions'),p.calls.index('schedule'))

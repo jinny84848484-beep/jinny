@@ -10,12 +10,17 @@ on:
         default: preflight
         description: Read-only connections check or gated production
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: world-kitchen-single-producer
   cancel-in-progress: false
 jobs:
   cooking-production:
+    # CAS journal must persist submitted status BEFORE external calls.
+    # Job-scoped write is required for this durable no-retry receipt, not deployment.
+    # Generation/publication remain separately gated; do not grant workflow/admin scopes.
+    permissions:
+      contents: write
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 20

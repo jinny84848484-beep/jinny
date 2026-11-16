@@ -24,14 +24,15 @@ def require(condition, message):
         raise ValueError(message)
 
 
-def validate(episode):
+def validate(episode, *, require_reviews=True):
     require(episode.get('channel_id') == TEMPLATE['channel_id'], 'wrong channel')
     require(episode.get('title'), 'title required')
     require(episode.get('description'), 'description required')
     require(episode.get('voice_provider') == 'ElevenLabs', 'ElevenLabs narration required')
     require(episode.get('sources'), 'recipe sources required')
-    require(episode.get('rights_reviewed') is True, 'asset rights review required')
-    require(episode.get('recipe_reviewed') is True, 'recipe review required')
+    if require_reviews:
+        require(episode.get('rights_reviewed') is True, 'asset rights review required')
+        require(episode.get('recipe_reviewed') is True, 'recipe review required')
     require(episode.get('synthetic_disclosure') is True, 'synthetic disclosure required')
     require(episode.get('extra_purchase_allowed') is False, 'no extra purchases')
     scenes = episode.get('scenes', [])

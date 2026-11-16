@@ -85,17 +85,24 @@ def run(day,provider,journal,root,*,publish=False,clock=lambda:datetime.now(time
         recipe.pop(field,None)
     # Do not trust model-provided approval flags. Independent review must pass.
     recipe.update(channel_id=CHANNEL,voice_provider='ElevenLabs',synthetic_disclosure=True,
-                  extra_purchase_allowed=False,rights_reviewed=True,recipe_reviewed=True)
+                  extra_purchase_allowed=False,rights_reviewed=False,recipe_reviewed=False)
     recipe['logo']=provider.logo
     recipe.update(music=provider.music,music_rights_source=provider.music_rights_source)
     recipe['description']+='\n\nMusic: '+provider.music_credit+'\n'+provider.music_rights_source
     for i,s in enumerate(recipe['scenes']):s['image']=str(root/f'image_{i}.png')
-    validate(recipe)
+    validate(recipe, require_reviews=False) # structural safety only, never approval
+    if recipe['dish'] in recent:raise ValueError('Repeated recent dish')
     review=step('recipe_review',lambda:provider.review(recipe,None))
     (root/'recipe_review.json').write_text(json.dumps(review,ensure_ascii=False,indent=2))
-    if review.get('approved') is not True:
+    required=('approved','recipe_reviewed','rights_reviewed')
+    evidence=review.get('evidence_urls',[])
+    if (any(review.get(k) is not True for k in required)
+        or not review.get('reasons') or not isinstance(evidence,list)
+        or not set(recipe['sources']).intersection(evidence)
+        or provider.music_rights_source not in evidence):
         rec['status']='recipe_rejected';journal.save();return rec
-    if recipe['dish'] in recent:raise ValueError('Repeated recent dish')
+    recipe.update(recipe_reviewed=True,rights_reviewed=True,review_evidence=review)
+    validate(recipe)
     rec.update(dish=recipe['dish'],recipe_sha256=digest(recipe),sources=recipe['sources']);journal.save()
     for i,s in enumerate(recipe['scenes']):
         step('image_'+str(i),lambda s=s:provider.image(s,recipe))
@@ -111,7 +118,8 @@ def run(day,provider,journal,root,*,publish=False,clock=lambda:datetime.now(time
     video=step('render',lambda:renderer(recipe,root/'render'))
     quality=step('final_review',lambda:provider.review(recipe,root/'render'))
     (root/'final_review.json').write_text(json.dumps(quality,ensure_ascii=False,indent=2))
-    if quality.get('approved') is not True:
+    checks=('approved','no_unapproved_brands','no_unapproved_logos','no_faces')
+    if any(quality.get(k) is not True for k in checks) or not quality.get('reasons'):
         rec['status']='final_review_rejected';journal.save();return rec
     rec.update(video_sha256=hashlib.sha256(Path(video).read_bytes()).hexdigest(),
                review_mode='automated_visual_text_review_not_human_listening')

@@ -84,7 +84,7 @@ Do not fabricate reviewed flags. Schema flags will be independently checked.'''
         return recipe,evidence
     def review(self,recipe,folder):
         content=[{'type':'input_text','text':json.dumps(recipe,ensure_ascii=False)+
-          '\nReturn JSON {approved:boolean,reasons:[string]}. Independently reject unsupported wattage/quantity, unsafe recipe, false ingredients/count, extra toppings not labelled, numbers differing between narration/English/on-screen, deceptive microwave browning, clipped text. If asr_transcript exists, compare all spoken quantities/units and steps against narration; reject missing/inconsistent numbers or unnatural pauses reported in transcription. Review recipe sources via web search before approving. This is automated review, not human listening.'}]
+          '\nReturn JSON {approved:boolean,recipe_reviewed:boolean,rights_reviewed:boolean,no_unapproved_brands:boolean,no_unapproved_logos:boolean,no_faces:boolean,reasons:[string],evidence_urls:[string]}. Each boolean must reflect actual review, never copied input flags. Supply specific reasons and observed recipe/rights source URLs. Before generation verify proposed assets, supplied channel wordmark and music rights; reject missing rights evidence. For final cards explicitly inspect every card for third-party brands, unapproved logos and identifiable faces; set each corresponding absence field true ONLY if absent. The supplied channel wordmark alone is allowed, not other logos. Missing or uncertain checks must be false. Independently reject unsupported wattage/quantity, unsafe recipe, false ingredients/count, extra toppings not labelled, numbers differing between narration/English/on-screen, deceptive microwave browning, clipped text. If asr_transcript exists, compare all spoken quantities/units and steps against narration; reject missing/inconsistent numbers or unnatural pauses reported in transcription. Review recipe sources via web search before approving. This is automated review, not human listening.'}]
         if folder:
             for path in sorted(Path(folder).glob('card_*.png')):
                 content.append({'type':'input_image','image_url':data_image(path),'detail':'high'})
@@ -95,12 +95,17 @@ Do not fabricate reviewed flags. Schema flags will be independently checked.'''
             {'Authorization':'Bearer '+os.environ['OPENAI_API_KEY']})
         if data.get('status')!='completed' or not shared.research_sources(data):raise RuntimeError('Review evidence incomplete')
         text='\n'.join(c.get('text','') for x in data.get('output',[]) for c in x.get('content',[]) if c.get('type')=='output_text')
-        return read_json(text)
+        result=read_json(text)
+        observed={x['url'] for x in shared.research_sources(data)}
+        cited=result.get('evidence_urls',[])
+        if not isinstance(cited,list) or not cited or any(u not in observed for u in cited):
+            raise RuntimeError('Review cites unobserved evidence')
+        return result
     def image(self,scene,recipe):
         prompt=scene.get('image_prompt','')
         if not prompt:raise ValueError('Missing scene image prompt')
         data=shared.http('https://api.openai.com/v1/images/generations',
-             {'model':self.image_model,'prompt':prompt+'\nDo not include any text, watermark or logo. Show the entire food with safe margins. Microwave cooking must not look pan-fried. Depict only the specified ingredients.','n':1,'size':'1024x1536','quality':'low'},
+             {'model':self.image_model,'prompt':prompt+'\nDo not include any text, watermark, logo, third-party brand or identifiable human face. Show the entire food with safe margins. Microwave cooking must not look pan-fried. Depict only the specified ingredients.','n':1,'size':'1024x1536','quality':'low'},
              {'Authorization':'Bearer '+os.environ['OPENAI_API_KEY']})
         raw=base64.b64decode(data['data'][0]['b64_json'],validate=True)
         from PIL import Image
