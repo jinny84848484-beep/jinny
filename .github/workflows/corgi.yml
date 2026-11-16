@@ -1,8 +1,6 @@
 name: Daily Corgi Approved Upload
 on:
-  schedule:
-    - cron: '17 * * * *' # Pre-schedule approved future queue dates, off peak
-    - cron: '7 10 * * *' # 19:07 KST: query existing receipts only
+  # Retired 2026-11-16: owner deleted the target channel. No scheduled runs.
   workflow_dispatch:
     inputs:
       mode:
@@ -25,7 +23,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   corgi:
-    if: github.ref == 'refs/heads/main'
+    if: ${{ false }} # Retired target channel: block manual production as well
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
