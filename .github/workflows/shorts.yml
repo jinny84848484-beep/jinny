@@ -32,7 +32,8 @@ on:
         type: string
         required: false
   schedule:
-    - cron: '0 23 * * *'
+    - cron: '7 22 * * *' # 07:07 KST, off the busy top of the hour
+    - cron: '37 1 * * *' # 10:37 KST backup; a completed day exits immediately
 permissions:
   contents: write
   actions: read
