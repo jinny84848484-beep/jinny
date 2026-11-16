@@ -65,7 +65,7 @@ def validate(episode):
                     and math.isfinite(value) and 0 < value <= 3600, 'invalid heating seconds')
         visible = '\n'.join(s['title']+' '+s['body'] for s in scenes)
         for watt, seconds in heating['seconds'].items():
-            require(f'{watt}W' in visible and f'{seconds:g}초' in visible,
+            require(re.search(rf'(?<!\d){re.escape(watt)}\s*W\s*[:：]?\s*{seconds:g}\s*초(?!\d)', visible) is not None,
                     'visible wattage/time must match source-bound heating data')
     # Reuse the chief-of-staff safety guard against the SAME recipe/text, not a
     # second unchecked recipe copy. Keep its hook/steps/finish naming contract.
@@ -73,6 +73,10 @@ def validate(episode):
     guarded = dict(episode, channel='kitchen', ai_disclosure=episode['synthetic_disclosure'])
     guarded['scenes'] = [dict(s, kind=kind_map.get(s['kind'], s['kind']), headline=s['title']) for s in scenes]
     validate_recipe(guarded)
+    count=sum(1 for item in episode['ingredients'] if item.get('optional') is not True)
+    hook=scenes[0]['title']+' '+scenes[0]['body']
+    require(re.search(rf'재료\s*(?:딱\s*)?{count}\s*개',hook) is not None,
+            'first frame must truthfully emphasize required ingredient count')
     return total
 
 
