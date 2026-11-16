@@ -390,7 +390,12 @@ def openai(prompt,search=False,max_tokens=6500,images=None,*,instructions=None,s
     body={'model':model,'instructions':instructions if instructions is not None else (RESEARCH_PROMPT if search else PROMPT),'input':prompt,'max_output_tokens':max_tokens,'store':False}
     if search:
         body.update(tools=[{'type':'web_search'}],tool_choice='required',include=['web_search_call.action.sources'])
-    else:body['text']={'format':{'type':'json_object'}}
+    else:
+        body['text']={'format':{'type':'json_object'}}
+        # Make JSON intent explicit in input as well as instructions.
+        if isinstance(body['input'],str) and 'json' not in body['input'].lower():
+            body['input']='Return a JSON object.\n'+body['input']
+            prompt=body['input']
     if images:
         content=[{'type':'input_text','text':prompt}]
         for key,value in images.items():
