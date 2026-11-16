@@ -3221,6 +3221,18 @@
       "publication_exclusions": [],
       "active_job": "2026-11-16-donhwamun-repair-public-tour-2026",
       "completed_at": "2026-11-16T11:12:50.669645+09:00"
+    },
+    "2026-11-17": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "18c02cf5d494b5a2b043007daf82431135be36b023575cb29492d6abc6140318",
+          "attempts": 1,
+          "at": "2026-11-17T08:06:57.216815+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
