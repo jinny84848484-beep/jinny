@@ -3241,10 +3241,16 @@
           "usable": true,
           "sha256": "9fe857992cc91ce9562530a2f53d94131388f363864ed36e72aa52c2284ffb25",
           "completed_at": "2026-11-17T08:08:43.590612+09:00"
+        },
+        "draft": {
+          "status": "submitted",
+          "request_hash": "1509c9a9b7c257151aab210531dc3dfa67506f0a8f4808574233ae393612ccb4",
+          "attempts": 1,
+          "at": "2026-11-17T08:08:44.933489+09:00"
         }
       },
-      "status": "research_repair_completed",
-      "active_stage": "research_repair"
+      "status": "draft_submitted",
+      "active_stage": "draft"
     }
   },
   "publications": [
