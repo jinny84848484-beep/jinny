@@ -39,6 +39,22 @@ class CookingAutomatic(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             result=run('2026-11-17',p,j,Path(d)/'episode',publish=publish,clock=CLOCK,renderer=render)
         return result,p,j
+    def test_search_or_citation_is_not_opened_evidence(self):
+        from world_kitchen.providers import opened_review_urls
+        u='https://example.com/recipe'
+        for item in [dict(type='web_search_call',status='completed',action={'type':'search','sources':[{'url':u}]}),dict(type='web_search_call',status='in_progress',action={'type':'open_page','url':u}),dict(type='message',content=[{'annotations':[{'type':'url_citation','url':u}]}])]:
+            self.assertEqual(opened_review_urls({'output':[item]}),set())
+        self.assertEqual(opened_review_urls({'output':[dict(type='web_search_call',status='completed',action={'type':'open_page','url':u})]}),{u})
+    def test_all_recipe_and_rights_pages_must_open(self):
+        from world_kitchen.providers import Providers
+        e=episode();e['music_rights_source']='https://example.com/rights'
+        urls=e['sources']+[e['music_rights_source']]
+        for opened,ok in [(urls,True),(urls[:1],False)]:
+            data={'status':'completed','output':[dict(type='web_search_call',status='completed',action={'type':'open_page','url':u}) for u in opened]+[{'content':[{'type':'output_text','text':json.dumps({'approved':True,'evidence_urls':opened})}]}]}
+            with patch.dict(os.environ,{'OPENAI_API_KEY':'fixture'}),patch('cloud_runner.http',return_value=data):
+                if ok:self.assertEqual(Providers().review(e,None)['opened_evidence_urls'],sorted(urls))
+                else:
+                    with self.assertRaisesRegex(RuntimeError,'Every recipe'):Providers().review(e,None)
     def test_unobserved_review_citation_rejected(self):
         from world_kitchen.providers import Providers
         data={'status':'completed','output':[{'type':'web_search_call','action':{'sources':[{'url':'https://example.com/observed'}]}},{'content':[{'type':'output_text','text':json.dumps({'approved':True,'evidence_urls':['https://example.com/invented']})}]}]}

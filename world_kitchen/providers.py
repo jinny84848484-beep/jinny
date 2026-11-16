@@ -17,6 +17,15 @@ def read_json(text):
     return json.loads(text)
 
 
+def opened_review_urls(data):
+    """Only completed page-open actions; search hits/citations are not page reads."""
+    return {item['action']['url'] for item in data.get('output',[])
+            if item.get('type')=='web_search_call' and item.get('status')=='completed'
+            and item.get('action',{}).get('type')=='open_page'
+            and isinstance(item['action'].get('url'),str)
+            and item['action']['url'].startswith('https://')}
+
+
 def data_image(path):
     from PIL import Image
     with Image.open(path) as im:
@@ -84,7 +93,7 @@ Do not fabricate reviewed flags. Schema flags will be independently checked.'''
         return recipe,evidence
     def review(self,recipe,folder):
         content=[{'type':'input_text','text':json.dumps(recipe,ensure_ascii=False)+
-          '\nReturn JSON {approved:boolean,recipe_reviewed:boolean,rights_reviewed:boolean,no_unapproved_brands:boolean,no_unapproved_logos:boolean,no_faces:boolean,reasons:[string],evidence_urls:[string]}. Each boolean must reflect actual review, never copied input flags. Supply specific reasons and observed recipe/rights source URLs. Before generation verify proposed assets, supplied channel wordmark and music rights; reject missing rights evidence. For final cards explicitly inspect every card for third-party brands, unapproved logos and identifiable faces; set each corresponding absence field true ONLY if absent. The supplied channel wordmark alone is allowed, not other logos. Missing or uncertain checks must be false. Independently reject unsupported wattage/quantity, unsafe recipe, false ingredients/count, extra toppings not labelled, numbers differing between narration/English/on-screen, deceptive microwave browning, clipped text. If asr_transcript exists, compare all spoken quantities/units and steps against narration; reject missing/inconsistent numbers or unnatural pauses reported in transcription. Review recipe sources via web search before approving. This is automated review, not human listening.'}]
+          '\nReturn JSON {approved:boolean,recipe_reviewed:boolean,rights_reviewed:boolean,no_unapproved_brands:boolean,no_unapproved_logos:boolean,no_faces:boolean,reasons:[string],evidence_urls:[string]}. Each boolean must reflect actual review, never copied input flags. Open every supplied recipe source and music-rights URL using open_page; search snippets or citations alone do not qualify. Supply specific reasons and opened recipe/rights source URLs. Before generation verify proposed assets, supplied channel wordmark and music rights; reject missing rights evidence. For final cards explicitly inspect every card for third-party brands, unapproved logos and identifiable faces; set each corresponding absence field true ONLY if absent. The supplied channel wordmark alone is allowed, not other logos. Missing or uncertain checks must be false. Independently reject unsupported wattage/quantity, unsafe recipe, false ingredients/count, extra toppings not labelled, numbers differing between narration/English/on-screen, deceptive microwave browning, clipped text. If asr_transcript exists, compare all spoken quantities/units and steps against narration; reject missing/inconsistent numbers or unnatural pauses reported in transcription. Review recipe sources via web search before approving. This is automated review, not human listening.'}]
         if folder:
             for path in sorted(Path(folder).glob('card_*.png')):
                 content.append({'type':'input_image','image_url':data_image(path),'detail':'high'})
@@ -96,10 +105,15 @@ Do not fabricate reviewed flags. Schema flags will be independently checked.'''
         if data.get('status')!='completed' or not shared.research_sources(data):raise RuntimeError('Review evidence incomplete')
         text='\n'.join(c.get('text','') for x in data.get('output',[]) for c in x.get('content',[]) if c.get('type')=='output_text')
         result=read_json(text)
-        observed={x['url'] for x in shared.research_sources(data)}
+        observed=opened_review_urls(data)
         cited=result.get('evidence_urls',[])
         if not isinstance(cited,list) or not cited or any(u not in observed for u in cited):
             raise RuntimeError('Review cites unobserved evidence')
+        required=set(recipe.get('sources',[]))|{recipe.get('music_rights_source','')}
+        if not required.issubset(set(cited)) or not required.issubset(observed):
+            raise RuntimeError('Every recipe and music-rights page must be opened')
+        result['opened_evidence_urls']=sorted(observed)
+        result['evidence_scope']='completed_open_page_log_not_full_content_or_truth_guarantee'
         return result
     def image(self,scene,recipe):
         prompt=scene.get('image_prompt','')
