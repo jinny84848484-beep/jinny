@@ -3225,13 +3225,16 @@
     "2026-11-17": {
       "checkpoints": {
         "research": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "18c02cf5d494b5a2b043007daf82431135be36b023575cb29492d6abc6140318",
           "attempts": 1,
-          "at": "2026-11-17T08:06:57.216815+09:00"
+          "at": "2026-11-17T08:06:57.216815+09:00",
+          "usable": true,
+          "sha256": "8e9b543d02cac8372f54926c74c74285885263dc4fe9741bcdc885a6b6ae274d",
+          "completed_at": "2026-11-17T08:08:00.797324+09:00"
         }
       },
-      "status": "research_submitted",
+      "status": "research_completed",
       "active_stage": "research"
     }
   },
