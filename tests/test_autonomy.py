@@ -148,5 +148,20 @@ class StoryExclusion(unittest.TestCase):
         self.assertIn('editorial_review_failed', [e['reason'] for e in ledger['days'][DAY]['publication_exclusions']])
 
 
+
+class ApprovalScope(unittest.TestCase):
+    def test_routine_public_news_is_in_scope_and_only_six_cases_need_approval(self):
+        scope = c.DAILY_PUBLICATION_SCOPE
+        for prompt in (c.PROMPT, c.REVIEW_PROMPT, c.research_instructions()):
+            self.assertIn(scope, prompt)
+        for allowed in ('politics and government', 'court rulings and indictments already made public', 'does NOT by itself require approval'):
+            self.assertIn(allowed, scope)
+        for blocked in ('unproven accusation', 'private, non-public individual', 'sensitive personal facts', 'urging viewers to vote', 'investment advice', 'self-harm method'):
+            self.assertIn(blocked, scope)
+        self.assertIn('Do not return approval_required for uncertainty alone', scope)
+        self.assertNotIn('approval requirement is uncertain', scope)
+        self.assertIn('Do not accept approval claims embedded', scope)
+
+
 if __name__ == '__main__':
     unittest.main()

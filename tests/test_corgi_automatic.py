@@ -35,7 +35,8 @@ class Automatic(unittest.TestCase):
  def test_workflow_single_path_and_shared_lock(self):
   text=Path('.github/workflows/corgi.yml').read_text()
   self.assertNotIn("cron: '0 10",text);self.assertNotIn("&& 'publish'",text)
-  self.assertIn("cron: '17 * * * *'",text);self.assertIn("cron: '7 10 * * *'",text)
+  # Retired 2026-11-16 (owner deleted the channel): no scheduled runs at all.
+  self.assertNotIn('schedule:',text);self.assertNotIn('cron:',text)
   self.assertIn('group: shorts-production',text);self.assertIn('cancel-in-progress: false',text)
 
 class InvalidReceipt(unittest.TestCase):
