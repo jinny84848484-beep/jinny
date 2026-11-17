@@ -5617,9 +5617,15 @@
           "usable": true,
           "sha256": "0c8a528c32d2597f7749b874c22d589517d7003e8bb1e67ccbc43027872c89a6",
           "completed_at": "2026-11-18T08:52:46.775058+09:00"
+        },
+        "editorial_review_1": {
+          "status": "submitted",
+          "request_hash": "1150aa49a55ac88e91edfb5fb8aecabcf1bb172995b815b308a97223e2572564",
+          "attempts": 1,
+          "at": "2026-11-18T08:52:48.450794+09:00"
         }
       },
-      "status": "editorial_review_0_completed",
+      "status": "editorial_review_1_submitted",
       "quota_recovery": {
         "method": "explicit_quota_rejection_one_time_reconciliation",
         "consumed": true,
@@ -5647,7 +5653,7 @@
         },
         "note": "This consumed marker is an operator audit record, not a code-enforced gate. Existing submitted checkpoints and workflow concurrency remain enforced. Exactly one new daily-production dispatch is authorized; no blind redispatch."
       },
-      "active_stage": "editorial_review_0",
+      "active_stage": "editorial_review_1",
       "review_input_hash": "70da0e94fd8e1be9fb570da0e11ec76cb1538cbb9152b923b12fccdace285e68"
     }
   },
