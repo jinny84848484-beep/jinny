@@ -5581,8 +5581,15 @@
       "publication_method": "external_manual_studio"
     },
     "2026-11-18": {
-      "checkpoints": {},
-      "status": "ready_after_confirmed_quota_rejection",
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "f39f15319d70cb80660c33dfaf0d6292f7a5dfac8b521ad4bd95df721cae8dee",
+          "attempts": 1,
+          "at": "2026-11-18T08:50:27.940649+09:00"
+        }
+      },
+      "status": "research_submitted",
       "quota_recovery": {
         "method": "explicit_quota_rejection_one_time_reconciliation",
         "consumed": true,
@@ -5609,7 +5616,8 @@
           "quota_check": "Authenticated provider billing shows positive available credits after account funding; no payment/settings changes by assistant"
         },
         "note": "This consumed marker is an operator audit record, not a code-enforced gate. Existing submitted checkpoints and workflow concurrency remain enforced. Exactly one new daily-production dispatch is authorized; no blind redispatch."
-      }
+      },
+      "active_stage": "research"
     }
   },
   "publications": [
