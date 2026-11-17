@@ -5581,16 +5581,35 @@
       "publication_method": "external_manual_studio"
     },
     "2026-11-18": {
-      "checkpoints": {
-        "research": {
-          "status": "submitted",
+      "checkpoints": {},
+      "status": "ready_after_confirmed_quota_rejection",
+      "quota_recovery": {
+        "method": "explicit_quota_rejection_one_time_reconciliation",
+        "consumed": true,
+        "previous_record": {
+          "checkpoints": {
+            "research": {
+              "status": "submitted",
+              "request_hash": "06c2ce471c06ccff45db4b8284543cec5d299fcdde0a9a00488b35a98c201dff",
+              "attempts": 1,
+              "at": "2026-11-18T08:19:39.372726+09:00"
+            }
+          },
+          "status": "research_submitted",
+          "active_stage": "research"
+        },
+        "evidence": {
+          "run_id": 44198028123,
+          "artifact_id": 14378844695,
+          "http_status": 429,
+          "error_type": "insufficient_quota",
           "request_hash": "06c2ce471c06ccff45db4b8284543cec5d299fcdde0a9a00488b35a98c201dff",
-          "attempts": 1,
-          "at": "2026-11-18T08:19:39.372726+09:00"
-        }
-      },
-      "status": "research_submitted",
-      "active_stage": "research"
+          "artifact_contents": "research-input.json, metrics.json, google-trends.json only; no response, rendered media or upload receipt",
+          "publication_check": "No 2026-11-18 publications; newest verified public videos are 2026-11-17 Q6MKnKhsmVs and eZfi1mj5E1I",
+          "quota_check": "Authenticated provider billing shows positive available credits after account funding; no payment/settings changes by assistant"
+        },
+        "note": "This consumed marker is an operator audit record, not a code-enforced gate. Existing submitted checkpoints and workflow concurrency remain enforced. Exactly one new daily-production dispatch is authorized; no blind redispatch."
+      }
     }
   },
   "publications": [
