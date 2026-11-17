@@ -5628,7 +5628,7 @@
           "completed_at": "2026-11-18T08:52:56.394595+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "quota_recovery": {
         "method": "explicit_quota_rejection_one_time_reconciliation",
         "consumed": true,
@@ -6737,6 +6737,18 @@
       "video_id": "7w3A-Td8oSM",
       "url": "https://www.youtube.com/shorts/7w3A-Td8oSM",
       "at": "2026-11-18T08:53:59.539566+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-18-korea-foreign-tourists-20-million",
+      "topic_key": "korea-foreign-tourists-20-million-2026-11-12",
+      "category": "culture",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "방한객 이천만, 숫자는 웃고 숙제는 남고",
+      "video_id": "NRqOGZc6yb8",
+      "url": "https://www.youtube.com/shorts/NRqOGZc6yb8",
+      "at": "2026-11-18T08:55:02.252978+09:00",
       "experiment": {}
     }
   ],
