@@ -81,7 +81,7 @@ def safe_provider_error_fields(raw):
         error=json.loads(raw).get('error',{})
         if not isinstance(error,dict):return 'code=unknown parameter=unknown'
         code=error.get('code')
-        allowed={'invalid_image','invalid_image_url','image_parse_error','image_too_large','invalid_value','invalid_request_error','unsupported_parameter','unsupported_value','context_length_exceeded','invalid_prompt','model_not_found','insufficient_quota','rate_limit_exceeded'}
+        allowed={'invalid_image','invalid_image_url','image_parse_error','image_too_large','invalid_value','invalid_request_error','unsupported_parameter','unsupported_value','context_length_exceeded','invalid_prompt','model_not_found','insufficient_quota','rate_limit_exceeded','slow_down','billing_hard_limit_reached','billing_not_active'}
         if not isinstance(code,str) or code not in allowed:code='unknown'
         param=error.get('param')
         if isinstance(param,str):
@@ -89,8 +89,35 @@ def safe_provider_error_fields(raw):
             elif re.fullmatch(r'input(?:\[\d+\]|\.\d+)?\.content(?:\[\d+\]|\.\d+)?\.image_url',param):param='input.image_url'
             else:param='unknown'
         else:param='unknown'
-        return 'code='+code+' parameter='+param
+        error_type=error.get('type')
+        suffix=(' type='+error_type) if isinstance(error_type,str) and error_type in {'rate_limit_error','invalid_request_error','insufficient_quota','server_error','authentication_error','permission_error'} else ''
+        return 'code='+code+' parameter='+param+suffix
     except (ValueError,TypeError,AttributeError):return 'code=unknown parameter=unknown'
+
+def safe_provider_error_headers(headers):
+    """Strict bounded numeric/duration diagnostics only. Never IDs or raw headers.
+
+    Retry-After HTTP dates are deliberately omitted. Values describe the provider
+    response, not a billing diagnosis or permission to retry any request.
+    """
+    if not headers:return ''
+    counts={'x-ratelimit-'+kind+'-'+scope for kind in ('limit','remaining')
+            for scope in ('requests','tokens','project-tokens')}
+    durations={'retry-after'} | {'x-ratelimit-reset-'+scope
+                                for scope in ('requests','tokens','project-tokens')}
+    fields=[]
+    for key in sorted(counts | durations):
+        value=headers.get(key)
+        if not isinstance(value,str) or len(value)>32:continue
+        if key in counts:
+            if not re.fullmatch(r'[0-9]{1,12}',value):continue
+            value=str(int(value))
+        elif key=='retry-after':
+            if not re.fullmatch(r'[0-9]{1,6}(?:\.[0-9]{1,3})?',value):continue
+        elif not re.fullmatch(r'(?=.{1,32}$)(?:[0-9]{1,6}h)?(?:[0-9]{1,6}m)?(?:[0-9]{1,6}(?:\.[0-9]{1,3})?s)?(?:[0-9]{1,6}ms)?',value) or not value:
+            continue
+        fields.append(key+'='+value)
+    return ' '.join(fields)
 
 def http(url,body=None,headers=None,method=None):
     hdr={'User-Agent':'JinnyShortsAutomation/1.0',**(headers or {})}
@@ -102,7 +129,11 @@ def http(url,body=None,headers=None,method=None):
             raw=r.read();return json.loads(raw) if raw else {}
     except urllib.error.HTTPError as exc:
         host=urllib.parse.urlparse(url).hostname
-        detail=' '+safe_provider_error_fields(exc.read(65536)) if host=='api.openai.com' else ''
+        detail=''
+        if host=='api.openai.com':
+            detail=' '+safe_provider_error_fields(exc.read(65536))
+            safe_headers=safe_provider_error_headers(exc.headers)
+            if safe_headers:detail+=' '+safe_headers
         raise RuntimeError(f'{host} HTTP {exc.code}'+detail) from None
     except urllib.error.URLError:
         raise RuntimeError('Network request failed; submission state must be reconciled') from None
