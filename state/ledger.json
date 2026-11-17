@@ -5628,7 +5628,7 @@
           "completed_at": "2026-11-18T08:52:56.394595+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "quota_recovery": {
         "method": "explicit_quota_rejection_one_time_reconciliation",
         "consumed": true,
@@ -5672,22 +5672,22 @@
             {
               "title": "행정안전부 장관, 충남 태안군 해역 인근 위치소실 어선 발생 관련 긴급지시 - 대한민국 정책브리핑",
               "url": "https://www.korea.kr/briefing/pressReleaseView.do?endDate=2026-11-18&newsId=156789675&pageIndex=1&period=&repCode=&repCodeType=&srchWord=&startDate=2025-11-18",
-              "checked_at": "2026-11-18T08:52:57.626917+09:00"
+              "checked_at": "2026-11-18T08:52:59.075009+09:00"
             },
             {
               "title": "태안 서격렬비도 해상서 7명 탄 어선 실종…수색 총력(종합) | 연합뉴스",
               "url": "https://www.yna.co.kr/view/AKR20261118007451065",
-              "checked_at": "2026-11-18T08:52:57.626917+09:00"
+              "checked_at": "2026-11-18T08:52:59.075009+09:00"
             },
             {
               "title": "태안 앞바다서 7명 탄 어선 연락 두절…해경 수색 총력 :: 공감언론 뉴시스 ::",
               "url": "https://www.newsis.com/view/NISX20261118_0003872344",
-              "checked_at": "2026-11-18T08:52:57.626917+09:00"
+              "checked_at": "2026-11-18T08:52:59.075009+09:00"
             },
             {
               "title": "행안장관, 태안 어선 실종에 \"신속·안전하게 구조\" 지시 | 연합뉴스",
               "url": "https://www.yna.co.kr/view/AKR20261118014500530",
-              "checked_at": "2026-11-18T08:52:57.626917+09:00"
+              "checked_at": "2026-11-18T08:52:59.075009+09:00"
             }
           ],
           "visual_queries": [
@@ -5830,7 +5830,7 @@
           "fact_packet_hash": "34fe46cfdfa9ee98ca09e895955054e057ef706477bc47a271298f6a7d5c632f",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-18T08:52:57.626917+09:00"
+          "verified_at": "2026-11-18T08:52:59.075009+09:00"
         },
         {
           "id": "2026-11-18-korea-foreign-tourists-20-million",
@@ -5843,17 +5843,17 @@
             {
               "title": "방한 외국인 관광객 2,000만 명 돌파, 대한민국 관광의 새 역사 | 문화체육관광부",
               "url": "https://www.mcst.go.kr/site/s_notice/press/pressView.jsp?pMenuCD=0302000000&pSeq=22845",
-              "checked_at": "2026-11-18T08:52:57.627048+09:00"
+              "checked_at": "2026-11-18T08:52:59.075134+09:00"
             },
             {
               "title": "연간 방한 외국인 관광객 사상 최초 2천만 명 돌파 | MBCNEWS",
               "url": "https://imnews.imbc.com/news/2026/econo/article/6865180_36933.html",
-              "checked_at": "2026-11-18T08:52:57.627048+09:00"
+              "checked_at": "2026-11-18T08:52:59.075134+09:00"
             },
             {
               "title": "관광객 2천만 돌파...'K-문화' 업고 14년 만 두 배로 | YTN",
               "url": "https://www.ytn.co.kr/_ln/0106_202611122023158039",
-              "checked_at": "2026-11-18T08:52:57.627048+09:00"
+              "checked_at": "2026-11-18T08:52:59.075134+09:00"
             }
           ],
           "visual_queries": [
@@ -5991,7 +5991,7 @@
           "fact_packet_hash": "c7c261f0acd6e40c368c6d492eb1215379a00cc919c20b4a0f7325bf58425b3b",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-18T08:52:57.627048+09:00"
+          "verified_at": "2026-11-18T08:52:59.075134+09:00"
         }
       ],
       "media": {
@@ -6171,7 +6171,9 @@
         "https://www.korea.kr/briefing/pressReleaseView.do?endDate=2026-11-18&newsId=156789675&pageIndex=1&period=&repCode=&repCodeType=&srchWord=&startDate=2025-11-18",
         "https://www.mcst.go.kr/site/s_notice/press/pressView.jsp?pMenuCD=0302000000&pSeq=22845"
       ],
-      "created_at": "2026-11-18T08:52:57.627147+09:00"
+      "created_at": "2026-11-18T08:52:57.627147+09:00",
+      "publication_exclusions": [],
+      "active_job": "2026-11-18-taean-missing-fishing-vessel"
     }
   },
   "publications": [
