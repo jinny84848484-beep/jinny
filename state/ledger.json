@@ -5628,7 +5628,7 @@
           "completed_at": "2026-11-18T08:52:56.394595+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "quota_recovery": {
         "method": "explicit_quota_rejection_one_time_reconciliation",
         "consumed": true,
@@ -6726,6 +6726,18 @@
       "time_basis": "public_status_verification_time_not_upload_time",
       "audio_listening": "NOT_PERFORMED",
       "qa_scope": "visual_technical_and_metadata_only"
+    },
+    {
+      "job_id": "2026-11-18-taean-missing-fishing-vessel",
+      "topic_key": "taean-missing-fishing-vessel-230-haegwangho-2026-11-18",
+      "category": "society",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "태안 실종 어선, 아직은 수색 중",
+      "video_id": "7w3A-Td8oSM",
+      "url": "https://www.youtube.com/shorts/7w3A-Td8oSM",
+      "at": "2026-11-18T08:53:59.539566+09:00",
+      "experiment": {}
     }
   ],
   "additional_sessions": {
