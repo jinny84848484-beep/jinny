@@ -1,10 +1,14 @@
 import copy,hashlib,json,tempfile,unittest
+import datetime as dt
 from pathlib import Path
 from unittest.mock import patch
 import operator_review_recovery_20261117 as r
 
 class OperatorReviewGuards(unittest.TestCase):
     def setUp(self):
+        # This recovery is intentionally date-pinned; fixtures must not use wall clock.
+        clock=patch.object(r.c.p,'now',return_value=dt.datetime.fromisoformat(r.DAY+'T12:00:00+09:00'))
+        clock.start();self.addCleanup(clock.stop)
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
         self.ledger={'days':{r.DAY:{'status':'draft_submitted','checkpoints':{'draft':{'status':'submitted'}}}},'publications':[]}
         self.jobs=[{'id':r.DAY+'-test-'+str(n),'channel':'ojirap','topic_key':'topic-'+str(n),'scenes':[{'kind':'fact','headline':'Test','body':'Body','narration':'Text'}], 'sources':[]} for n in range(2)]
