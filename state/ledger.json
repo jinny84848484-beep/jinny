@@ -3241,9 +3241,15 @@
           "usable": true,
           "sha256": "9fe857992cc91ce9562530a2f53d94131388f363864ed36e72aa52c2284ffb25",
           "completed_at": "2026-11-17T08:08:43.590612+09:00"
+        },
+        "draft": {
+          "status": "submitted",
+          "request_hash": "12dda1abc637c2aaad7511a9c3ca7cdfb6b50561596ff8237a26fdfeadc45459",
+          "attempts": 1,
+          "at": "2026-11-17T09:02:48.893660+09:00"
         }
       },
-      "status": "draft_recovery_ready",
+      "status": "draft_submitted",
       "active_stage": "draft",
       "draft_429_recovery": {
         "source_run": "43976150754",
