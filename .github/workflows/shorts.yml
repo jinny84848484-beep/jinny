@@ -5,7 +5,7 @@ on:
       mode:
         description: 'Preflight checks connections; produce publishes two Ojirap videos'
         type: choice
-        options: [preflight, recover_json_input_20261117, recover_new_packet_20261117, recover_draft_429_20261117, produce, stage_produce, recover_saved_reviews, recover_research_manifest, recover_research_manifest_20261115, recover_research_manifest_20261116, clarify_date_20261115, recheck_editorial_policy, resume_reviewed, expire_stale_additional]
+        options: [preflight, operator_preview_20261117, recover_json_input_20261117, recover_new_packet_20261117, recover_draft_429_20261117, produce, stage_produce, recover_saved_reviews, recover_research_manifest, recover_research_manifest_20261115, recover_research_manifest_20261116, clarify_date_20261115, recheck_editorial_policy, resume_reviewed, expire_stale_additional]
         default: preflight
       expire_batch_id:
         description: expire_stale_additional only - batch id (e.g. 2026-11-07-extra-01)
@@ -78,7 +78,9 @@ jobs:
           EXPIRE_CONFIRM_NO_UPLOAD: ${{ inputs.expire_confirm_no_upload }}
           EXTERNAL_VIDEO: ${{ inputs.external_video }}
         run: |
-          if [ "$RUN_MODE" = "recover_json_input_20261117" ]; then
+          if [ "$RUN_MODE" = "operator_preview_20261117" ]; then
+            python operator_review_recovery_20261117.py
+          elif [ "$RUN_MODE" = "recover_json_input_20261117" ]; then
             python json_input_recovery_20261117.py
           elif [ "$RUN_MODE" = "recover_new_packet_20261117" ]; then
             python new_packet_recovery_20261117.py

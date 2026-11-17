@@ -787,6 +787,7 @@ def produce(*, expected_day=None):
         raise RuntimeError('Pinned new-packet recovery cannot resume through generic produce; reconcile explicitly')
     if record.get('retry_hold') or record.get('status')=='research_completed_unusable':
         raise RuntimeError('Completed production check is on hold; inspect the saved diagnostic before resuming')
+    if str(record.get('status','')).startswith('operator_'):raise RuntimeError('Operator preview/final QA hold requires explicit reconciliation')
     if record.get('status') in {'research_submitted','draft_submitted','narration_correction_submitted','editorial_review_submitted','tts_submitted','rendered','upload_submitted','staged_waiting','staged_review_submitted'} or any(v.get('status')=='submitted' for v in record.get('checkpoints',{}).values()):raise RuntimeError('Interrupted external request: reconcile journal before retrying')
     assert_no_unresolved_additional(ledger)
     if record.get('jobs'):p.assert_active_news_jobs(record['jobs'])
