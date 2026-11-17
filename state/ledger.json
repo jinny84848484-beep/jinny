@@ -5583,13 +5583,16 @@
     "2026-11-18": {
       "checkpoints": {
         "research": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "f39f15319d70cb80660c33dfaf0d6292f7a5dfac8b521ad4bd95df721cae8dee",
           "attempts": 1,
-          "at": "2026-11-18T08:50:27.940649+09:00"
+          "at": "2026-11-18T08:50:27.940649+09:00",
+          "usable": true,
+          "sha256": "bc590203cb3cdd6c16fccf48abd477cee1f47203437b6b0b3c7380794f5cf8aa",
+          "completed_at": "2026-11-18T08:51:20.330128+09:00"
         }
       },
-      "status": "research_submitted",
+      "status": "research_completed",
       "quota_recovery": {
         "method": "explicit_quota_rejection_one_time_reconciliation",
         "consumed": true,
