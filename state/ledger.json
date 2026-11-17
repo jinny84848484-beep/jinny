@@ -5628,7 +5628,7 @@
           "completed_at": "2026-11-18T08:52:56.394595+09:00"
         }
       },
-      "status": "uploaded",
+      "status": "tts_submitted",
       "quota_recovery": {
         "method": "explicit_quota_rejection_one_time_reconciliation",
         "consumed": true,
@@ -6173,7 +6173,7 @@
       ],
       "created_at": "2026-11-18T08:52:57.627147+09:00",
       "publication_exclusions": [],
-      "active_job": "2026-11-18-taean-missing-fishing-vessel"
+      "active_job": "2026-11-18-korea-foreign-tourists-20-million"
     }
   },
   "publications": [
