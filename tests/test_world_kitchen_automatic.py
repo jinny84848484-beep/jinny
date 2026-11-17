@@ -85,6 +85,17 @@ class CookingAutomatic(unittest.TestCase):
                     return r
                 p.review=review;r,p,j=self.execute(provider=p)
                 self.assertEqual(r['status'],'final_review_rejected');self.assertNotIn('upload',p.calls)
+    def test_verified_manual_publication_blocks_provider_calls(self):
+        p=Provider();j=Journal()
+        j.data['days']['2026-11-17']={'status':'published_verified_manual','dish':'카프레제','video_id':'MlM-NJYHBkE'}
+        result,p,j=self.execute(provider=p,journal=j)
+        self.assertEqual(result['status'],'already_attempted')
+        self.assertEqual(p.calls,[])
+    def test_shipped_manual_ledger_preserves_both_videos(self):
+        ledger=json.loads((Path(__file__).resolve().parents[1]/'world_kitchen/production-state.json').read_text())
+        for day,vid in [('2026-11-16','UQNDeho8LxI'),('2026-11-17','MlM-NJYHBkE')]:
+            self.assertEqual(ledger['days'][day]['video_id'],vid)
+            self.assertEqual(ledger['days'][day]['status'],'published_verified_manual')
     def test_repeat_before_paid_review(self):
         p=Provider();j=Journal();j.data['days']['2026-11-16']={'dish':episode()['dish']}
         with self.assertRaisesRegex(ValueError,'Repeated'):self.execute(provider=p,journal=j)
@@ -136,6 +147,30 @@ class CookingAutomatic(unittest.TestCase):
         from world_kitchen.providers import Providers
         with patch.dict(os.environ,{},clear=True):
             with self.assertRaisesRegex(RuntimeError,'Missing cooking configuration'):Providers().preflight(publish=True)
+    def test_shared_voice_verified_by_exact_read_only_id(self):
+        from world_kitchen.providers import Providers
+        p=Providers();p.voice='uyVNoMrnUku1dZyVEXwD'
+        with patch('pipeline.api',return_value={'voice_id':p.voice,'name':'Anna Kim - Tender, Calm and Clear'}) as api, patch('pipeline.list_voices',side_effect=AssertionError('Do not require saved-library listing')):
+            self.assertTrue(p.verify_voice())
+            api.assert_called_once_with('/v1/voices/'+p.voice)
+    def test_unexpected_voice_identity_rejected(self):
+        from world_kitchen.providers import Providers
+        p=Providers();p.voice='uyVNoMrnUku1dZyVEXwD'
+        for result in ({'voice_id':'other','name':'Anna Kim'}, {'voice_id':p.voice,'name':'Other'}, {'voice_id':p.voice,'name':'Anna Kim Other'}, {}):
+            with patch('pipeline.api',return_value=result):
+                with self.assertRaisesRegex(RuntimeError,'not verified'):p.verify_voice()
+    def test_unapproved_well_formed_voice_id_never_calls_api(self):
+        from world_kitchen.providers import Providers
+        p=Providers();p.voice='12345678901234567890'
+        with patch('pipeline.api') as api:
+            with self.assertRaisesRegex(RuntimeError,'Invalid configured'):p.verify_voice()
+            api.assert_not_called()
+    def test_invalid_voice_id_never_calls_api(self):
+        from world_kitchen.providers import Providers
+        p=Providers();p.voice='../voices'
+        with patch('pipeline.api') as api:
+            with self.assertRaisesRegex(RuntimeError,'Invalid configured'):p.verify_voice()
+            api.assert_not_called()
     def test_included_credits_not_overage(self):
         from world_kitchen.providers import Providers
         with patch('pipeline.subscription',return_value={'character_count':100,'character_limit':101}):

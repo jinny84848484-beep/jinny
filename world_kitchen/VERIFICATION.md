@@ -44,3 +44,10 @@ Earlier a8fd89a matched URLs to search results/citations, not necessarily opened
 Local configuration existence (values not read/output): OpenAI/ElevenLabs/voice/OAuth and logo/music-path/rights/credit variables all absent. GitHub connector excludes Secrets API, so remote secret names/existence and scope remain unknown. Local V8 package assets exist but are not CI runner deployment evidence. Auth code checks returned youtube.force-ssl and exact channel; voice check matches configured voice ID plus Anna Kim name prefix, not a guarantee of voice quality or licensing. Brand/BGM legal provenance and remote deployment remain release blockers.
 
 Verification: 453 offline tests passed (18.707s), 57 cooking-focused tests passed; compileall/diff check passed.
+
+## 2026-11-17 live recovery follow-up
+- Anna Kim existing voice ID actually produced the new caprese narration once within existing included credits. No extra subscription was purchased. Direct listening remains unperformed; technical audio and raw alignment checked.
+- Preflight now resolves the configured voice via read-only GET /v1/voices/{voice_id}, avoiding false failure when a shared voice is absent from the account list. Approved ID and full Anna Kim display name are pinned by equality after independent review (prefix-only names and other well-formed IDs reject); no voice import or fallback.
+- Recorded manually published 11/16 UQNDeho8LxI and 11/17 MlM-NJYHBkE in the dedicated cooking journal. These entries represent Studio-confirmed public videos, not automatic pipeline success.
+- Full offline suite after these changes: 459 tests passed, zero failures/skips (21.567 s). Six regressions cover direct lookup, wrong identity, malformed ID, manual-post no-provider repeat, and both shipped manual receipts. git diff --check passed.
+- No credentials generated, scopes expanded, gates enabled, merge performed, paid test repeated, or video uploaded by this change. OAuth, runner media deployment and OpenAI429 remain separate blockers documented in OPERATIONS-20261117.md.

@@ -9,6 +9,8 @@ from . import google_transport as google
 from .pipeline import TEMPLATE,SIGNATURE
 
 CHANNEL=TEMPLATE['channel_id']
+APPROVED_VOICE_ID='uyVNoMrnUku1dZyVEXwD'
+APPROVED_VOICE_NAME='Anna Kim - Tender, Calm and Clear'
 
 
 def read_json(text):
@@ -56,12 +58,18 @@ class Providers:
         models=shared.http('https://api.openai.com/v1/models',headers={'Authorization':'Bearer '+os.environ['OPENAI_API_KEY']})
         ids={m['id'] for m in models['data']}
         if self.model not in ids or self.image_model not in ids:raise RuntimeError('Configured cooking model unavailable')
-        voices=voice_api.list_voices()
-        chosen=next((v for v in voices if v['voice_id']==self.voice),None)
-        if not chosen or not chosen.get('name','').startswith('Anna Kim'):
-            raise RuntimeError('Selected Anna Kim voice not verified')
+        self.verify_voice()
         self.credit_check(1200)
         if publish:self.auth()
+    def verify_voice(self):
+        # Shared/library voices need not appear in the account's paginated list.
+        # Resolve only the configured voice; GET is read-only, no import or TTS.
+        if self.voice!=APPROVED_VOICE_ID:
+            raise RuntimeError('Invalid configured cooking voice ID')
+        chosen=voice_api.api('/v1/voices/'+urllib.parse.quote(self.voice,safe=''))
+        if chosen.get('voice_id')!=self.voice or chosen.get('name')!=APPROVED_VOICE_NAME:
+            raise RuntimeError('Selected Anna Kim voice not verified')
+        return True
     def credit_check(self,n):
         sub=voice_api.subscription()
         if not isinstance(sub.get('character_limit'),int) or not isinstance(sub.get('character_count'),int):
