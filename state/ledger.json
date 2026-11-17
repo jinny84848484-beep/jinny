@@ -5628,7 +5628,7 @@
           "completed_at": "2026-11-18T08:52:56.394595+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
+      "status": "reviewed",
       "quota_recovery": {
         "method": "explicit_quota_rejection_one_time_reconciliation",
         "consumed": true,
@@ -5657,7 +5657,521 @@
         "note": "This consumed marker is an operator audit record, not a code-enforced gate. Existing submitted checkpoints and workflow concurrency remain enforced. Exactly one new daily-production dispatch is authorized; no blind redispatch."
       },
       "active_stage": "editorial_review_1",
-      "review_input_hash": "70da0e94fd8e1be9fb570da0e11ec76cb1538cbb9152b923b12fccdace285e68"
+      "review_input_hash": "70da0e94fd8e1be9fb570da0e11ec76cb1538cbb9152b923b12fccdace285e68",
+      "editorial_exclusions": [],
+      "retry_hold": false,
+      "jobs": [
+        {
+          "id": "2026-11-18-taean-missing-fishing-vessel",
+          "channel": "ojirap",
+          "topic_key": "taean-missing-fishing-vessel-230-haegwangho-2026-11-18",
+          "category": "society",
+          "title": "태안 실종 어선, 아직은 수색 중",
+          "description": "태안 해역에서 230해광호가 연락 두절돼 수색이 진행 중이다. 확인된 사실과 아직 모르는 점을 가려 본다.",
+          "sources": [
+            {
+              "title": "행정안전부 장관, 충남 태안군 해역 인근 위치소실 어선 발생 관련 긴급지시 - 대한민국 정책브리핑",
+              "url": "https://www.korea.kr/briefing/pressReleaseView.do?endDate=2026-11-18&newsId=156789675&pageIndex=1&period=&repCode=&repCodeType=&srchWord=&startDate=2025-11-18",
+              "checked_at": "2026-11-18T08:52:57.626917+09:00"
+            },
+            {
+              "title": "태안 서격렬비도 해상서 7명 탄 어선 실종…수색 총력(종합) | 연합뉴스",
+              "url": "https://www.yna.co.kr/view/AKR20261118007451065",
+              "checked_at": "2026-11-18T08:52:57.626917+09:00"
+            },
+            {
+              "title": "태안 앞바다서 7명 탄 어선 연락 두절…해경 수색 총력 :: 공감언론 뉴시스 ::",
+              "url": "https://www.newsis.com/view/NISX20261118_0003872344",
+              "checked_at": "2026-11-18T08:52:57.626917+09:00"
+            },
+            {
+              "title": "행안장관, 태안 어선 실종에 \"신속·안전하게 구조\" 지시 | 연합뉴스",
+              "url": "https://www.yna.co.kr/view/AKR20261118014500530",
+              "checked_at": "2026-11-18T08:52:57.626917+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Wikimedia Commons Korea Coast Guard patrol vessel",
+            "Wikimedia Commons South Korea fishing boat Yellow Sea"
+          ],
+          "opening_text": "지금은 수색 중입니다.",
+          "hook_type": "plain",
+          "topic_category": "public-safety",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "지금은 수색 중입니다",
+              "body": "인명 상태와 원인은 아직 확정되지 않았습니다.",
+              "narration": "지금은 수색 중입니다.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-18-taean-missing-fishing-vessel-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "일곱 명 탄 230해광호",
+              "body": "정부와 언론은 실종 선박과 승선원 수를 같게 전했습니다.",
+              "narration": "열한월 십팔일, 태안 인근 해역에서 칠 명이 탄 이백삼십해광호 연락 두절이 확인됐고요. 정부 자료와 보도는 선명과 승선원 수를 같이 적었습니다.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-18-taean-missing-fishing-vessel-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "마지막 위치 보고 뒤 신고",
+              "body": "연합뉴스는 출항 경위와 신고 시각을 구체적으로 전했습니다.",
+              "narration": "연합뉴스 보도 기준으론 십육일 안흥외항 출항 뒤, 십칠일 새벽 서격렬비도 근처에서 마지막 위치 보고가 있었고 십팔일 새벽 신고가 접수됐습니다.",
+              "source_indices": [
+                1
+              ],
+              "media": "graphic-2026-11-18-taean-missing-fishing-vessel-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "아는 것과 모르는 것",
+              "body": "해경 수색 투입은 확인됐지만 결론을 서두를 단계는 아닙니다.",
+              "narration": "뉴시스는 해경이 광역구조본부를 가동했다고 전했고, 행안부도 총동원을 지시했죠. 제 생각엔 이런 날은 해석보다 확인이 먼저입니다.",
+              "source_indices": [
+                2,
+                3
+              ],
+              "media": "graphic-2026-11-18-taean-missing-fishing-vessel-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "결말보다 구조가 먼저",
+              "body": "자료사진은 파일사진임을 분명히 밝혀야 합니다.",
+              "narration": "자료사진은 어디까지나 파일사진이고 실제 선박이나 현장은 아닙니다. 오지랖도 오늘만큼은 추정보다 무전이 더 반갑습니다.",
+              "source_indices": [
+                0,
+                2
+              ],
+              "media": "graphic-2026-11-18-taean-missing-fishing-vessel-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "taean-missing-fishing-vessel-230-haegwangho-2026-11-18",
+            "category": "society",
+            "summary": "2026년 11월 18일 충남 태안 서격렬비도 인근 해상에서 승선원 7명이 탄 7.93톤급 연안통발어선 230해광호가 연락 두절돼 해경과 관계기관이 수색에 나섰다. 행정안전부는 같은 날 긴급지시를 냈고, 연합뉴스와 뉴시스가 신고 시각·출항 경위·수색 투입 상황을 별도로 보도했다.",
+            "verified_facts": [
+              {
+                "text": "행정안전부는 2026년 11월 18일 충남 태안군 해역 인근 위치소실 어선 발생과 관련한 긴급지시 보도자료를 게재했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "실종 선박은 230해광호이며 승선원은 7명이라고 정부 자료와 언론 보도에서 일치하게 전했다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "연합뉴스는 230해광호가 11월 16일 태안 안흥외항에서 출항한 뒤 17일 오전 3시 9분께 서격렬비도 인근에서 마지막 위치 보고를 했고, 18일 오전 1시 9분께 연락 두절 신고가 접수됐다고 보도했다.",
+                "source_indices": [
+                  1
+                ]
+              },
+              {
+                "text": "뉴시스는 해경이 광역구조본부를 가동해 경비함정과 항공기 등을 투입하고 수색에 나섰다고 보도했다.",
+                "source_indices": [
+                  2
+                ]
+              },
+              {
+                "text": "행정안전부는 가용 장비와 인력을 총동원해 실종자 수색과 구조에 최선을 다하라고 지시했다.",
+                "source_indices": [
+                  0,
+                  3
+                ]
+              }
+            ],
+            "uncertainties": [
+              "사건은 진행 중인 수색 사안이어서 인명 상태와 최종 사고 원인은 아직 확정되지 않았다.",
+              "정책브리핑 보도자료 페이지는 본문보다 첨부문서 중심 구조여서 세부 지시 문구 전부는 언론 보도와 함께 교차 확인했다."
+            ],
+            "sources": [
+              {
+                "title": "행정안전부 장관, 충남 태안군 해역 인근 위치소실 어선 발생 관련 긴급지시 - 대한민국 정책브리핑",
+                "url": "https://www.korea.kr/briefing/pressReleaseView.do?endDate=2026-11-18&newsId=156789675&pageIndex=1&period=&repCode=&repCodeType=&srchWord=&startDate=2025-11-18",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "태안 서격렬비도 해상서 7명 탄 어선 실종…수색 총력(종합) | 연합뉴스",
+                "url": "https://www.yna.co.kr/view/AKR20261118007451065",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "태안 앞바다서 7명 탄 어선 연락 두절…해경 수색 총력 :: 공감언론 뉴시스 ::",
+                "url": "https://www.newsis.com/view/NISX20261118_0003872344",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "행안장관, 태안 어선 실종에 \"신속·안전하게 구조\" 지시 | 연합뉴스",
+                "url": "https://www.yna.co.kr/view/AKR20261118014500530",
+                "role": "independent_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "34fe46cfdfa9ee98ca09e895955054e057ef706477bc47a271298f6a7d5c632f",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-18T08:52:57.626917+09:00"
+        },
+        {
+          "id": "2026-11-18-korea-foreign-tourists-20-million",
+          "channel": "ojirap",
+          "topic_key": "korea-foreign-tourists-20-million-2026-11-12",
+          "category": "culture",
+          "title": "방한객 이천만, 숫자는 웃고 숙제는 남고",
+          "description": "문체부가 방한 외국인 관광객 연간 2천만 명 돌파를 발표했다. 기록의 의미와 확인된 범위만 짚는다.",
+          "sources": [
+            {
+              "title": "방한 외국인 관광객 2,000만 명 돌파, 대한민국 관광의 새 역사 | 문화체육관광부",
+              "url": "https://www.mcst.go.kr/site/s_notice/press/pressView.jsp?pMenuCD=0302000000&pSeq=22845",
+              "checked_at": "2026-11-18T08:52:57.627048+09:00"
+            },
+            {
+              "title": "연간 방한 외국인 관광객 사상 최초 2천만 명 돌파 | MBCNEWS",
+              "url": "https://imnews.imbc.com/news/2026/econo/article/6865180_36933.html",
+              "checked_at": "2026-11-18T08:52:57.627048+09:00"
+            },
+            {
+              "title": "관광객 2천만 돌파...'K-문화' 업고 14년 만 두 배로 | YTN",
+              "url": "https://www.ytn.co.kr/_ln/0106_202611122023158039",
+              "checked_at": "2026-11-18T08:52:57.627048+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Wikimedia Commons Incheon International Airport arrivals hall",
+            "Wikimedia Commons Seoul tourists information center"
+          ],
+          "opening_text": "이천만 명이 왔답니다.",
+          "hook_type": "number-led",
+          "topic_category": "tourism",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "이천만 명이 왔답니다",
+              "body": "문체부 발표 기준, 연간 방한객이 처음 2천만 명을 넘었습니다.",
+              "narration": "이천만 명이 왔답니다.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-18-korea-foreign-tourists-20-million-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "처음 찍은 이천만 고지",
+              "body": "정부와 방송 보도는 사상 첫 기록이라고 전했습니다.",
+              "narration": "문체부는 십일월 십이일, 방한 외국인 관광객이 사상 처음 연간 이천만 명을 돌파했다고 밝혔습니다. 이천십이년 천만 명 뒤 십사 년 만이고요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-18-korea-foreign-tourists-20-million-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "소비와 지방 유입도 증가",
+              "body": "MBC와 YTN은 소비액과 비수도권 유입 증가를 각각 전했습니다.",
+              "narration": "엠비시는 일월부터 구월까지 관련 소비액이 전년 동기보다 사십칠 점 칠 퍼센트 늘었다고 했고, 와이티엔은 비수도권 공항과 항만 유입 증가도 짚었습니다.",
+              "source_indices": [
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-18-korea-foreign-tourists-20-million-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "기록은 좋은데 체감은 숙제",
+              "body": "성과 배경은 정부 설명이고, 현장 체감은 별도 점검이 필요합니다.",
+              "narration": "케이컬처 확산과 환대는 정부의 설명입니다. 제 생각엔 숫자 잔치는 반갑지만, 관광객이 길 안 잃는 나라가 진짜 실력 같아요.",
+              "source_indices": [
+                0
+              ],
+              "media": "graphic-2026-11-18-korea-foreign-tourists-20-million-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "파일사진은 어디까지나 파일",
+              "body": "공항·관광지 사진은 설명용 자료사진임을 밝혀야 합니다.",
+              "narration": "그래서 자료사진은 행사 당일 현장처럼 보이면 안 됩니다. 손님은 늘었는데, 이제 남은 건 덜 헤매게 하는 오지랖이겠네요.",
+              "source_indices": [
+                0,
+                2
+              ],
+              "media": "graphic-2026-11-18-korea-foreign-tourists-20-million-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "korea-foreign-tourists-20-million-2026-11-12",
+            "category": "culture",
+            "summary": "2026년 11월 12일 문화체육관광부가 한국 연간 방한 외국인 관광객 수가 사상 처음으로 2천만 명을 돌파했다고 발표했다. 정부는 K-컬처 확산과 관광 활성화 정책, 지역관광 확대를 배경으로 제시했고, MBC와 YTN 등 별도 보도가 같은 날 이를 확인했다.",
+            "verified_facts": [
+              {
+                "text": "문화체육관광부는 2026년 11월 12일 방한 외국인 관광객이 사상 처음으로 연간 2천만 명을 돌파했다고 발표했다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "이번 기록은 2012년 연간 방한객 1천만 명 달성 이후 14년 만의 2천만 명 돌파라고 정부와 방송 보도가 전했다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "문화체육관광부는 K-컬처의 세계적 확산, 범부처 협조 체계, 국민의 환대가 성과 배경이라고 설명했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "MBC는 2026년 1월부터 9월까지 외국인 관광 분야 소비액이 전년 동기 대비 47.7% 증가한 15조 9천416억 원이라고 보도했다.",
+                "source_indices": [
+                  1
+                ]
+              },
+              {
+                "text": "YTN은 비수도권 공항과 항만을 통한 방한객도 각각 37.4%, 14.5% 증가했다고 전했다.",
+                "source_indices": [
+                  2
+                ]
+              }
+            ],
+            "uncertainties": [
+              "문체부 원문 페이지는 첨부파일 참조형 구조라 세부 통계 산식 전체는 기사 본문에서 모두 노출되지 않는다.",
+              "정확한 2천만 번째 입국자 개인 식별 정보는 보도 핵심이 아니며, 본 패킷에서도 사용하지 않았다."
+            ],
+            "sources": [
+              {
+                "title": "방한 외국인 관광객 2,000만 명 돌파, 대한민국 관광의 새 역사 | 문화체육관광부",
+                "url": "https://www.mcst.go.kr/site/s_notice/press/pressView.jsp?pMenuCD=0302000000&pSeq=22845",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "연간 방한 외국인 관광객 사상 최초 2천만 명 돌파 | MBCNEWS",
+                "url": "https://imnews.imbc.com/news/2026/econo/article/6865180_36933.html",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "관광객 2천만 돌파...'K-문화' 업고 14년 만 두 배로 | YTN",
+                "url": "https://www.ytn.co.kr/_ln/0106_202611122023158039",
+                "role": "independent_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "c7c261f0acd6e40c368c6d492eb1215379a00cc919c20b4a0f7325bf58425b3b",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-18T08:52:57.627048+09:00"
+        }
+      ],
+      "media": {
+        "graphic-2026-11-18-taean-missing-fishing-vessel-0": {
+          "path": "assets/graphics/2026-11-18/2026-11-18-taean-missing-fishing-vessel/scene-01.png",
+          "sha256": "3970574e3b300ff9dcac9404b080a2e08b039c91b7bd68034b5a48119ae66d15",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "taean-missing-fishing-vessel-230-haegwangho-2026-11-18",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "716d83990de244e14f0573116f93aca0bb8ef6fc32fc453e87b6a02fbc995f31",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-18-taean-missing-fishing-vessel-1": {
+          "path": "assets/graphics/2026-11-18/2026-11-18-taean-missing-fishing-vessel/scene-02.png",
+          "sha256": "79690ad246a7171afcb472607476bb85e02de223bef902516176985add4edea2",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "taean-missing-fishing-vessel-230-haegwangho-2026-11-18",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "a2759be478ae46c84e267ac6672f4c7c92575309c8d90ad4960dbfc9ed7a1f50",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-18-taean-missing-fishing-vessel-2": {
+          "path": "assets/graphics/2026-11-18/2026-11-18-taean-missing-fishing-vessel/scene-03.png",
+          "sha256": "70517db82b04b2b18de31400a65ad3eebe13fc2cfca9acea1a279c7279b1e85a",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "taean-missing-fishing-vessel-230-haegwangho-2026-11-18",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "725889fd83e20a004eaccea33f33d4c4a0305bce49636046a980e3482218f2f2",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-18-taean-missing-fishing-vessel-3": {
+          "path": "assets/graphics/2026-11-18/2026-11-18-taean-missing-fishing-vessel/scene-04.png",
+          "sha256": "4d14c65c376488110761a585b91581aa9cd26188ae5404dc11fb173563ee7c0e",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "taean-missing-fishing-vessel-230-haegwangho-2026-11-18",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "4e0d5a6ef4c334fbda2bc1fccb09f2d1cff0895b7db66d8b0063f12af15cc0ad",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-18-taean-missing-fishing-vessel-4": {
+          "path": "assets/graphics/2026-11-18/2026-11-18-taean-missing-fishing-vessel/scene-05.png",
+          "sha256": "86a4ece43e04f487f538d2b1b96c5ee6811ac56d0f7e90c2d0daa9fa5129913e",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "taean-missing-fishing-vessel-230-haegwangho-2026-11-18",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "13ac48756f233567d050234ebb32ac450ca9257f0080965e5f6e70a6af59d3ae",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-18-korea-foreign-tourists-20-million-0": {
+          "path": "assets/graphics/2026-11-18/2026-11-18-korea-foreign-tourists-20-million/scene-01.png",
+          "sha256": "dd168bae23043bdcb2548baf51096cb8f3b1158e367884869e80907f4dfa9988",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-foreign-tourists-20-million-2026-11-12",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "6239b69f0f2e09d115fdea19fe40c6394af7dad22c13c423bd73791db29f63c8",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-18-korea-foreign-tourists-20-million-1": {
+          "path": "assets/graphics/2026-11-18/2026-11-18-korea-foreign-tourists-20-million/scene-02.png",
+          "sha256": "3631a263941d9e2d304c2bf347b9b8695cd3eeded6d209cc0857f3980944c127",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-foreign-tourists-20-million-2026-11-12",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "7cfd7414e5f3d10f3a8f9cc1a55e18e5ec3a603f8a55d127c0055509c1303722",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-18-korea-foreign-tourists-20-million-2": {
+          "path": "assets/graphics/2026-11-18/2026-11-18-korea-foreign-tourists-20-million/scene-03.png",
+          "sha256": "a3e15050ca336a498b8265ea823a01d80d40022c37bf69123659d9955cc5b8be",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-foreign-tourists-20-million-2026-11-12",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "3e82e071cfe9cb3b4c3e2a16918c434af8fbec7332be1d18aef210eb484ed333",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-18-korea-foreign-tourists-20-million-3": {
+          "path": "assets/graphics/2026-11-18/2026-11-18-korea-foreign-tourists-20-million/scene-04.png",
+          "sha256": "2049d6911e49d46b11ce6f3747270e3fc1eec7c7cc6e35a9a3bf3e288dee5daf",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-foreign-tourists-20-million-2026-11-12",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "bca1dd3ba0b850d747663caf3ae42282ac42afadbe09759175a163246ce56f95",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-18-korea-foreign-tourists-20-million-4": {
+          "path": "assets/graphics/2026-11-18/2026-11-18-korea-foreign-tourists-20-million/scene-05.png",
+          "sha256": "f4f299854d24c4cc7e469ec36030836b96292ae5b3163fd0dee281db64861346",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-foreign-tourists-20-million-2026-11-12",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "923b2f12b98fc078b8f51d20eb6ea3688d2d26a1a7a3fc6aeaea19372aa151f8",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-18-taean-missing-fishing-vessel\": [\"graphic-2026-11-18-taean-missing-fishing-vessel-0\", \"graphic-2026-11-18-taean-missing-fishing-vessel-1\", \"graphic-2026-11-18-taean-missing-fishing-vessel-2\", \"graphic-2026-11-18-taean-missing-fishing-vessel-3\", \"graphic-2026-11-18-taean-missing-fishing-vessel-4\"], \"2026-11-18-korea-foreign-tourists-20-million\": [\"graphic-2026-11-18-korea-foreign-tourists-20-million-0\", \"graphic-2026-11-18-korea-foreign-tourists-20-million-1\", \"graphic-2026-11-18-korea-foreign-tourists-20-million-2\", \"graphic-2026-11-18-korea-foreign-tourists-20-million-3\", \"graphic-2026-11-18-korea-foreign-tourists-20-million-4\"]}}",
+      "review_source_urls": [
+        "https://www.korea.kr/briefing/pressReleaseView.do?endDate=2026-11-18&newsId=156789675&pageIndex=1&period=&repCode=&repCodeType=&srchWord=&startDate=2025-11-18",
+        "https://www.mcst.go.kr/site/s_notice/press/pressView.jsp?pMenuCD=0302000000&pSeq=22845"
+      ],
+      "created_at": "2026-11-18T08:52:57.627147+09:00"
     }
   },
   "publications": [
