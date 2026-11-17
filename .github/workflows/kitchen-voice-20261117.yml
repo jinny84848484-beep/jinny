@@ -1,0 +1,59 @@
+name: Kitchen Voice 20261117 One Shot
+on:
+  push:
+    branches: [kitchen-voice-20261117-oneoff]
+    paths: [.github/workflows/kitchen-voice-20261117.yml]
+permissions:
+  contents: read
+concurrency:
+  group: kitchen-voice-20261117-once
+  cancel-in-progress: false
+jobs:
+  voice:
+    if: github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check voice and included quota then generate once
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          python - <<'PY'
+          import os,json,urllib.request,urllib.error,base64,pathlib,hashlib
+          out=pathlib.Path('voice');out.mkdir()
+          text="불 없이 만드는 이탈리아 카프레제. 재료는 딱 다섯 가지예요.\n토마토 한 개, 생모차렐라 백 그램, 바질 다섯 장, 올리브유 한 작은술, 소금 한 꼬집.\n토마토와 바질은 씻고, 치즈는 물기를 빼요. 토마토와 치즈를 얇게 썰어 주세요.\n접시에 토마토와 치즈를 번갈아 놓고, 바질을 올려요.\n올리브유를 두르고, 소금을 살짝 뿌리면 완성!\n오늘도 방구석에서 세계 한 입, 맛있게 드세요!"
+          voice='uyVNoMrnUku1dZyVEXwD'
+          def call(path,payload=None):
+              req=urllib.request.Request('https://api.elevenlabs.io'+path,data=None if payload is None else json.dumps(payload).encode(),headers={'xi-api-key':os.environ['ELEVENLABS_API_KEY'],'Content-Type':'application/json'})
+              try:
+                  with urllib.request.urlopen(req,timeout=150) as r:return json.load(r)
+              except urllib.error.HTTPError as e:
+                  raise SystemExit('ElevenLabs HTTP '+str(e.code)+'; no retry performed')
+          sub=call('/v1/user/subscription')
+          v=call('/v1/voices/'+voice)
+          report={'voice_id':voice,'voice_name':v.get('name'),'tier':sub.get('tier'),'character_count':sub.get('character_count'),'character_limit':sub.get('character_limit'),'characters_requested':len(text),'text_sha256':hashlib.sha256(text.encode()).hexdigest(),'state':'preflight'}
+          (out/'status.json').write_text(json.dumps(report,ensure_ascii=False))
+          assert v.get('voice_id')==voice, 'Voice mismatch'
+          sharing=v.get('sharing') or {}
+          assert not sharing.get('financial_rewards_enabled'), 'Premium library voice requires separate pricing review'
+          limit,count=sub.get('character_limit'),sub.get('character_count')
+          assert type(limit) is int and type(count) is int and limit-count>=len(text)*2, 'Included quota insufficient'
+          assert len(text)<600, 'Unexpected script size'
+          report['state']='submitted_no_automatic_retry'
+          (out/'status.json').write_text(json.dumps(report,ensure_ascii=False))
+          d=call('/v1/text-to-speech/'+voice+'/with-timestamps?output_format=mp3_44100_128',{'text':text,'model_id':'eleven_multilingual_v2','language_code':'ko','voice_settings':{'stability':0.5,'similarity_boost':0.75,'style':0,'use_speaker_boost':False}})
+          (out/'narration.mp3').write_bytes(base64.b64decode(d['audio_base64'],validate=True))
+          (out/'alignment.json').write_text(json.dumps({'alignment':d.get('alignment'),'normalized_alignment':d.get('normalized_alignment')},ensure_ascii=False))
+          (out/'narration.txt').write_text(text)
+          report['state']='completed'
+          (out/'status.json').write_text(json.dumps(report,ensure_ascii=False))
+          print(json.dumps(report,ensure_ascii=False))
+          PY
+      - name: Preserve voice and sanitized status
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: kitchen-caprese-voice-20261117
+          path: voice/
+          retention-days: 3
+          if-no-files-found: warn
