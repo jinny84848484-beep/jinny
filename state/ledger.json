@@ -3249,7 +3249,7 @@
           "at": "2026-11-17T09:02:48.893660+09:00"
         }
       },
-      "status": "operator_preview_rendered",
+      "status": "tts_submitted",
       "active_stage": "draft",
       "draft_429_recovery": {
         "source_run": "43976150754",
@@ -4138,7 +4138,7 @@
           "status": "rendered_pending_final_qa"
         }
       },
-      "active_job": "2026-11-17-ojirap-operator-1"
+      "active_job": "2026-11-17-ojirap-operator-2"
     }
   },
   "publications": [
