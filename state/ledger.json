@@ -3249,7 +3249,7 @@
           "at": "2026-11-17T09:02:48.893660+09:00"
         }
       },
-      "status": "draft_submitted",
+      "status": "operator_review_ready",
       "active_stage": "draft",
       "draft_429_recovery": {
         "source_run": "43976150754",
@@ -3375,6 +3375,762 @@
         "maximum_extra_draft_requests": 1,
         "maximum_draft_output_tokens": 7500,
         "at": "2026-11-17T09:02:47.569463+09:00"
+      },
+      "operator_review_recovery": {
+        "source_run": "43984170067",
+        "previous_record": {
+          "checkpoints": {
+            "research": {
+              "status": "completed",
+              "request_hash": "18c02cf5d494b5a2b043007daf82431135be36b023575cb29492d6abc6140318",
+              "attempts": 1,
+              "at": "2026-11-17T08:06:57.216815+09:00",
+              "usable": true,
+              "sha256": "8e9b543d02cac8372f54926c74c74285885263dc4fe9741bcdc885a6b6ae274d",
+              "completed_at": "2026-11-17T08:08:00.797324+09:00"
+            },
+            "research_repair": {
+              "status": "completed",
+              "request_hash": "1939e7914df9d422f013a3e4fdc5e7683c5043cfa0ebcfad4f524c52bc47da52",
+              "attempts": 1,
+              "at": "2026-11-17T08:08:02.036384+09:00",
+              "usable": true,
+              "sha256": "9fe857992cc91ce9562530a2f53d94131388f363864ed36e72aa52c2284ffb25",
+              "completed_at": "2026-11-17T08:08:43.590612+09:00"
+            },
+            "draft": {
+              "status": "submitted",
+              "request_hash": "12dda1abc637c2aaad7511a9c3ca7cdfb6b50561596ff8237a26fdfeadc45459",
+              "attempts": 1,
+              "at": "2026-11-17T09:02:48.893660+09:00"
+            }
+          },
+          "status": "draft_submitted",
+          "active_stage": "draft",
+          "draft_429_recovery": {
+            "source_run": "43976150754",
+            "artifact_id": 14279194944,
+            "archive_sha256": "9fd5fa5152c3a72a1889afe776827336168cafeafd9f457882da9c7e0db78671",
+            "previous_record": {
+              "checkpoints": {
+                "research": {
+                  "status": "completed",
+                  "request_hash": "18c02cf5d494b5a2b043007daf82431135be36b023575cb29492d6abc6140318",
+                  "attempts": 1,
+                  "at": "2026-11-17T08:06:57.216815+09:00",
+                  "usable": true,
+                  "sha256": "8e9b543d02cac8372f54926c74c74285885263dc4fe9741bcdc885a6b6ae274d",
+                  "completed_at": "2026-11-17T08:08:00.797324+09:00"
+                },
+                "research_repair": {
+                  "status": "completed",
+                  "request_hash": "1939e7914df9d422f013a3e4fdc5e7683c5043cfa0ebcfad4f524c52bc47da52",
+                  "attempts": 1,
+                  "at": "2026-11-17T08:08:02.036384+09:00",
+                  "usable": true,
+                  "sha256": "9fe857992cc91ce9562530a2f53d94131388f363864ed36e72aa52c2284ffb25",
+                  "completed_at": "2026-11-17T08:08:43.590612+09:00"
+                },
+                "draft": {
+                  "status": "submitted",
+                  "request_hash": "1509c9a9b7c257151aab210531dc3dfa67506f0a8f4808574233ae393612ccb4",
+                  "attempts": 1,
+                  "at": "2026-11-17T08:08:44.933489+09:00"
+                }
+              },
+              "status": "draft_submitted",
+              "active_stage": "draft"
+            },
+            "original_result_and_billing": "unknown; observed HTTP429; no completed draft artifact",
+            "method": "new_independently_observed_packet_old_topics_rejected",
+            "bundle_sha256": "2503ef50401ce727b03edc0c7bf7fce8a0a7ea16f0650c8e81bf2a3f8973cbb2",
+            "maximum_extra_draft_requests": 1,
+            "maximum_draft_output_tokens": 7500,
+            "at": "2026-11-17T08:27:20.271763+09:00"
+          },
+          "json_input_recovery": {
+            "source_run": "43979286293",
+            "artifact_id": 14281164705,
+            "archive_sha256": "6cfa2300068dcb23ab6b96ff73fbba9d0501c2db651fb169a592825f8aa96c4f",
+            "previous_record": {
+              "checkpoints": {
+                "research": {
+                  "status": "completed",
+                  "request_hash": "18c02cf5d494b5a2b043007daf82431135be36b023575cb29492d6abc6140318",
+                  "attempts": 1,
+                  "at": "2026-11-17T08:06:57.216815+09:00",
+                  "usable": true,
+                  "sha256": "8e9b543d02cac8372f54926c74c74285885263dc4fe9741bcdc885a6b6ae274d",
+                  "completed_at": "2026-11-17T08:08:00.797324+09:00"
+                },
+                "research_repair": {
+                  "status": "completed",
+                  "request_hash": "1939e7914df9d422f013a3e4fdc5e7683c5043cfa0ebcfad4f524c52bc47da52",
+                  "attempts": 1,
+                  "at": "2026-11-17T08:08:02.036384+09:00",
+                  "usable": true,
+                  "sha256": "9fe857992cc91ce9562530a2f53d94131388f363864ed36e72aa52c2284ffb25",
+                  "completed_at": "2026-11-17T08:08:43.590612+09:00"
+                },
+                "draft": {
+                  "status": "submitted",
+                  "request_hash": "68e57522e8406602be3e9f9f3f73cdb2e902f065a67fa6c1cdaa3a100bccff79",
+                  "attempts": 1,
+                  "at": "2026-11-17T08:27:21.598671+09:00"
+                }
+              },
+              "status": "draft_submitted",
+              "active_stage": "draft",
+              "draft_429_recovery": {
+                "source_run": "43976150754",
+                "artifact_id": 14279194944,
+                "archive_sha256": "9fd5fa5152c3a72a1889afe776827336168cafeafd9f457882da9c7e0db78671",
+                "previous_record": {
+                  "checkpoints": {
+                    "research": {
+                      "status": "completed",
+                      "request_hash": "18c02cf5d494b5a2b043007daf82431135be36b023575cb29492d6abc6140318",
+                      "attempts": 1,
+                      "at": "2026-11-17T08:06:57.216815+09:00",
+                      "usable": true,
+                      "sha256": "8e9b543d02cac8372f54926c74c74285885263dc4fe9741bcdc885a6b6ae274d",
+                      "completed_at": "2026-11-17T08:08:00.797324+09:00"
+                    },
+                    "research_repair": {
+                      "status": "completed",
+                      "request_hash": "1939e7914df9d422f013a3e4fdc5e7683c5043cfa0ebcfad4f524c52bc47da52",
+                      "attempts": 1,
+                      "at": "2026-11-17T08:08:02.036384+09:00",
+                      "usable": true,
+                      "sha256": "9fe857992cc91ce9562530a2f53d94131388f363864ed36e72aa52c2284ffb25",
+                      "completed_at": "2026-11-17T08:08:43.590612+09:00"
+                    },
+                    "draft": {
+                      "status": "submitted",
+                      "request_hash": "1509c9a9b7c257151aab210531dc3dfa67506f0a8f4808574233ae393612ccb4",
+                      "attempts": 1,
+                      "at": "2026-11-17T08:08:44.933489+09:00"
+                    }
+                  },
+                  "status": "draft_submitted",
+                  "active_stage": "draft"
+                },
+                "original_result_and_billing": "unknown; observed HTTP429; no completed draft artifact",
+                "method": "new_independently_observed_packet_old_topics_rejected",
+                "bundle_sha256": "2503ef50401ce727b03edc0c7bf7fce8a0a7ea16f0650c8e81bf2a3f8973cbb2",
+                "maximum_extra_draft_requests": 1,
+                "maximum_draft_output_tokens": 7500,
+                "at": "2026-11-17T08:27:20.271763+09:00"
+              }
+            },
+            "original_result_and_billing": "unknown; observed HTTP400 parameter=input; no completed draft artifact",
+            "method": "explicit_json_input_only_same_new_packet",
+            "previous_request_hash": "68e57522e8406602be3e9f9f3f73cdb2e902f065a67fa6c1cdaa3a100bccff79",
+            "replacement_request_hash": "12dda1abc637c2aaad7511a9c3ca7cdfb6b50561596ff8237a26fdfeadc45459",
+            "bundle_sha256": "2503ef50401ce727b03edc0c7bf7fce8a0a7ea16f0650c8e81bf2a3f8973cbb2",
+            "maximum_extra_draft_requests": 1,
+            "maximum_draft_output_tokens": 7500,
+            "at": "2026-11-17T09:02:47.569463+09:00"
+          }
+        },
+        "package_sha256": "789f30b4d4bcb7a7ec4b14e4d76c352de3aec4cbea1f515a1139dab9d005afec",
+        "review": {
+          "reviewer": "coord_check",
+          "creator": "automation_code",
+          "checked_at": "2026-11-17T04:10:50.575386+00:00",
+          "status": "PASS_PRE_RENDER_ONLY",
+          "package_sha256": "6fe4de4b98edc09a094657b645d422ce69fa037849cce9f60001f91c96f8e0b4",
+          "source_package_sha256": "74404985743b170a4d4383f1a52d24df7cdbbe3d7e96d33214d03756d8fe0d87",
+          "jobs_sha256": "7577ac22010ea5e5de2a6dd20a8e4e711eb8691ca94a03ec08619096dcce6394",
+          "media_sha256": "2fe65bb2b14e9544adeb2d81c24ce71ef45d413e39381fdd33089e3cf7dc2c16",
+          "checks": {
+            "facts": "PASS_AS_OF_CITED_REPORTS",
+            "source_independence": "PASS_SEPARATE_OFFICIAL_AND_NEWS_OUTLETS",
+            "freshness": "PASS_AS_OF_REVIEW_LIMITED_SEARCH",
+            "duplicate_event": "PASS_SNAPSHOT_SCOPED",
+            "rights": "PASS_STATIC_GRAPHICS_ONLY",
+            "visual_content": "PASS_STATIC_PNG_ONLY",
+            "legibility": "PASS_STATIC_PNG_ONLY",
+            "sensitive_claims": "PASS",
+            "channel_scope": "PASS_PACKAGE_OJIRAP_ONLY"
+          },
+          "evidence": {
+            "facts": [
+              {
+                "topic": "gyeonggi-2027-budget-total-versus-flexible-funds-2026-11-16",
+                "findings": "42조1946억원·5.3% 증가·보완 후 가용재원25% 감소는 경기도 공식 설명과 일치. 보완 전1조6500억원과 보완 후3조494억원을 혼동하지 않음. 예산안임을 명시. 전자신문은25%의 별도 뒷받침 출처가 아니라 총액/보완과정 보조 출처.",
+                "sources": [
+                  "https://gnews.gg.go.kr/news/news_detail_m.do?number=202611161441402015C117&s_code=C500",
+                  "https://files.newsis.com/view/NISX20261116_0003870336",
+                  "https://www.etnews.com/20261115000146"
+                ]
+              },
+              {
+                "topic": "korea-mekong-summit-resumed-action-plan-pending-2026-11-16",
+                "findings": "11월16일 현지 필리핀 제3차 회의·6년만 재개·범죄/광물 협력 제안·새 행동계획 조속 채택 기대가 공식 브리핑 및 연합뉴스와 일치. 채택/성과 완료로 과장하지 않음.",
+                "sources": [
+                  "https://www.president.go.kr/briefings/qGiPgnQ8",
+                  "https://www.yna.co.kr/view/AKR20261116170851001"
+                ]
+              }
+            ],
+            "freshness": "11월17일 추가 검색: 경기도 예산안 가용재원 및 한메콩 행동계획 채택. 기존 표현을 뒤집는 최신 확정 결과는 검색결과에서 확인하지 못함. 검색 부재는 완전성 보장이 아님. 원고 자체는11월16일 기준임을 식별 가능.",
+            "visual": "10개 PNG contact sheet 전체와 각 job scene03 원본을 직접 시각 검수. 한글/숫자 잘림·누락·사진 오인 요소 없음. 사실/논평 라벨, 출처 도메인, 실제 사진 아님 고지 확인. 어두운 배경 대비 양호. 정적 카드 판정이며 완성 영상은 미검수.",
+            "rights": "외부 보도 사진/로고/기사 스크린샷 없이 독자 문장과 자체 typography. Noto CJK 로컬 copyright의 SIL OFL1.1 확인. 음성/음악/후속 영상 권리까지 포괄하지 않음.",
+            "duplicate_local": "로컬 state/ledger.json의11월14일 순방 발표 원고 전체와 비교: 이전은11월12일 발표된 향후 순방 일정, 신규는11월16일 실제 한메콩회의 개최와 제안/미채택 행동계획. 사건 업데이트는 구분되나 논평 논지는 유사함. 최신 원장 동시변경·기존 실제 게시본 동일성은 미확인.",
+            "ledger_sha256": "9409a1ec01dd4c4a071e746ffae105cae3ae7b146f64648004b1d25c8195bdc0",
+            "duplicate_authoritative": {
+              "ledger_path": "/workspace/shared/ojirap-manual-20261117/authoritative-ledger-45f2134.json",
+              "ledger_sha256": "9409a1ec01dd4c4a071e746ffae105cae3ae7b146f64648004b1d25c8195bdc0",
+              "commit": "45f21343ac6dfc9efa69875db5c5d15d88e770ba",
+              "ledger_check": "직접 원장 읽기 및11월14~16일 jobs/publications 비교. 양 주제 동일 이벤트 없고11월17일 publication 없음. 기존11월14일 순방발표 원고와 신규 실제 한메콩 회의 원고의 사실범위 차이 확인.",
+              "studio_evidence_source": "coordination 직접 로그인 Studio 확인 보고 및 root 전달; coord_check가 Studio를 직접 재열람한 것은 아님.",
+              "studio_observation": "@todays_ojirap UCZj1FlWDcoiEQNLfpwc5qtw Shorts 전체22개 모두공개, 일반0, 비공개/예약0,11월17일없음. 두 신규주제 제목/설명 일치없음.11월14일wZkD8FesUZM 순방계획.",
+              "scope": "전체 목록 제목·설명과 원장 원고 비교이며 전영상 재생/음성전사 비교 아님. 후속 actual event로 구분되며 논평 논지 일부 유사성은 있음. 업로드 직전 동시변경 확인 필요."
+            }
+          },
+          "media_files": [
+            {
+              "key": "graphic-2026-11-17-ojirap-operator-1-0",
+              "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-1/scene-01.png",
+              "sha256": "c035a3cc6247a2fe5aeb787f68c42eac6853f8397ff065fb60fc8af71655b525",
+              "package_sha256_matches": true,
+              "text_hash": "f9df487be878776d1c939e07a8707545996bdcb9b20b7693ee4a9f9572b34a8f"
+            },
+            {
+              "key": "graphic-2026-11-17-ojirap-operator-1-1",
+              "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-1/scene-02.png",
+              "sha256": "fa43f4f8be00b37da649671e3407b8217c7a2ae0631435b1233d393e70d504d6",
+              "package_sha256_matches": true,
+              "text_hash": "2550a046eed427a3a724c875aa00d86a6bb0923f41769ecc6f62eea5751c609f"
+            },
+            {
+              "key": "graphic-2026-11-17-ojirap-operator-1-2",
+              "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-1/scene-03.png",
+              "sha256": "2c26166922bd0159fd5197a8badc9c10a215da9948ce00bc55f01f7a98fe8734",
+              "package_sha256_matches": true,
+              "text_hash": "5f66edaaeaa8eff3806df194481810fd35ccde9c93c7c202b1eef5f838df9f3d"
+            },
+            {
+              "key": "graphic-2026-11-17-ojirap-operator-1-3",
+              "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-1/scene-04.png",
+              "sha256": "2b70c182dd784beccf22dbc731f9a90ccf655f68e8dedf07ca345626bfe87b4d",
+              "package_sha256_matches": true,
+              "text_hash": "64d96fe90a40d8cc0db6ca72070cf744953782e3263d6ad31bd60423e0a307a0"
+            },
+            {
+              "key": "graphic-2026-11-17-ojirap-operator-1-4",
+              "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-1/scene-05.png",
+              "sha256": "f9403672b4025eb1e725340d51a7b5675f1e7f205ad07ee205bbfe549d59222b",
+              "package_sha256_matches": true,
+              "text_hash": "6d9d4aa0618635a179a745d6c64c4bac21c665aa82d598a7cf95fe79fdc5522b"
+            },
+            {
+              "key": "graphic-2026-11-17-ojirap-operator-2-0",
+              "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-2/scene-01.png",
+              "sha256": "861906aaae9647bc3ab122a6d8100fd9ef5abed746c7c57e468ec5a54b781bd2",
+              "package_sha256_matches": true,
+              "text_hash": "5a5f9270808040f21c5d67b02a910087dae8efcab3f782f74bc97f56e304e5bd"
+            },
+            {
+              "key": "graphic-2026-11-17-ojirap-operator-2-1",
+              "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-2/scene-02.png",
+              "sha256": "93a01b4c6bca873d427749565c97901e4a78a3aedc08f4630f11e831a60f7834",
+              "package_sha256_matches": true,
+              "text_hash": "09e43b9545a081768d5bf13df3a2d4f265d484a35225a2f092b77c6c62c9b308"
+            },
+            {
+              "key": "graphic-2026-11-17-ojirap-operator-2-2",
+              "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-2/scene-03.png",
+              "sha256": "1f01aa9ee97c9f56f274d901c4ccc62b1a444d580e0832d32b5a8a4974e82479",
+              "package_sha256_matches": true,
+              "text_hash": "98cefd5d42f997044e202fbe1ebc3a0ff0d42c0b77b5afa4d13d2cf8d7985b5d"
+            },
+            {
+              "key": "graphic-2026-11-17-ojirap-operator-2-3",
+              "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-2/scene-04.png",
+              "sha256": "8fbc365e0d38d69bd45e703dad82bc21035a1f38dd96e0af4adf70cd25717bf6",
+              "package_sha256_matches": true,
+              "text_hash": "8eca98e73b2f553b877f1c2989c74ad8857e61fbae829488dc3d4bba5d1d4e9f"
+            },
+            {
+              "key": "graphic-2026-11-17-ojirap-operator-2-4",
+              "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-2/scene-05.png",
+              "sha256": "0dbd82e3eb70ac9b27cdc763ebfff189f807964d5165e152bd8698bf11f2f0fe",
+              "package_sha256_matches": true,
+              "text_hash": "c091600287104d7ab371247cb9007e946f6b35273ac3aadfc1b1356d27cb9159"
+            }
+          ],
+          "limitations": [
+            "이 PASS는 지정 해시의 원고·정적 그래픽을 사용한 미리보기 렌더 전 검수에만 해당. 최종 영상/음성 검수 또는 게시 승인이 아님.",
+            "최종 영상 음성·타이밍·자막 중복/잘림·플랫폼 safe area·최종메타데이터 미검수.",
+            "중복 확인은 지정 authoritative commit 및 coordination의 Studio목록 확인 시점 기준. 실제 업로드 전 최신원장/목록 재확인 필요."
+          ],
+          "optional_editorial_notes": [
+            "예산 hook의 돈이 없다?는 본문 쓸 돈 감소보다 강함. 본문 즉시 한정되어 사실 오류 판정은 아니지만 쓸 돈은 줄었다?로 통일하면 더 정확함.",
+            "카드 본문이 발음용 한글 수사와 전체 내레이션을 반복함. 가독성은 있으나 최종 영상 자막과 겹치지 않는지 검수 필요."
+          ],
+          "publication_authorization": false,
+          "previous_review_sha256": "4b3c00108c4143a086f3f8a6352d7d11402163bd065492cba00d227f1b164ed9",
+          "pre_render_checks": {
+            "facts": true,
+            "source_independence": true,
+            "freshness": true,
+            "duplicate_event": true,
+            "rights": true,
+            "visual_content": true,
+            "legibility": true,
+            "sensitive_claims": true,
+            "channel_scope": true
+          },
+          "final_video_audio_qa": "PENDING"
+        },
+        "method": "independent_operator_review_original_graphics_no_openai",
+        "previous_outcome": "HTTP429; no completed draft; prior billing unknown",
+        "at": "2026-11-17T13:23:54.828036+09:00"
+      },
+      "jobs": [
+        {
+          "id": "2026-11-17-ojirap-operator-1",
+          "channel": "ojirap",
+          "category": "business",
+          "topic_key": "gyeonggi-2027-budget-total-versus-flexible-funds-2026-11-16",
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "gyeonggi-2027-budget-total-versus-flexible-funds-2026-11-16",
+            "category": "business",
+            "summary": "11월 16일 경기도의 2027년 예산안 설명을 바탕으로 총액 증가와 자유롭게 배분할 재원의 감소를 구분한다. 예산안 제출은 11월 13일이며 확정 예산이 아니다. 11월 17일 새 발표로 표현하지 않는다.",
+            "verified_facts": [
+              {
+                "text": "경기도가 제출한 2027년 예산안은 42조 1,946억 원으로 올해 본예산보다 5.3% 늘었다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "경기도는 증가분 대부분이 쓰임이 정해진 국고보조사업이며, 자체 가용재원은 올해 4조 595억 원에서 내년 1조 6,500억 원으로 감소했다고 설명했다.",
+                "source_indices": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "text": "경기도는 지방채와 기금 등을 활용해 가용재원을 3조 494억 원까지 확보했지만 올해보다 약 25% 적다고 설명했다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "공무원 인건비 3개월분과 법정경비 일부는 본예산안에 반영되지 않았으며 경기도는 추경 등으로 보완할 방침을 밝혔다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "예산안의 도의회 제출일은 11월 13일이다.",
+                "source_indices": [
+                  2
+                ]
+              }
+            ],
+            "uncertainties": [
+              "예산안 단계이며 의회 의결·최종 확정을 확인하지 않았다.",
+              "가용재원 1조6500억원은 차입 등 보완 전, 3조494억원은 보완 후 수치다. 둘을 섞거나 재원을 중복 합산하지 않는다.",
+              "미반영을 임금 미지급 확정 또는 환승할인 폐지 확정으로 바꾸지 않는다.",
+              "직접 인용 대신 독자 문장으로 요약한다. 관련 사진은 아직 확보·권리검수하지 않았다."
+            ],
+            "sources": [
+              {
+                "title": "2027년 본예산 편성 관련 기자회견",
+                "url": "https://gnews.gg.go.kr/news/news_detail_m.do?number=202611161441402015C117&s_code=C500",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "경기도, 내년 예산 9개 사업 2424억 미반영…인건비·교통예산 등",
+                "url": "https://files.newsis.com/view/NISX20261116_0003870336",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "경기도, 42조1946억원 내년도 예산안 제출…인건비 3개월분 미반영",
+                "url": "https://www.etnews.com/20261115000146",
+                "role": "original_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "0aa0b31dd259f3b6382404e09ba0277021d26d16ce964ee521031a8465015e95",
+          "sources": [
+            {
+              "title": "2027년 본예산 편성 관련 기자회견",
+              "url": "https://gnews.gg.go.kr/news/news_detail_m.do?number=202611161441402015C117&s_code=C500",
+              "role": "primary",
+              "accessed": true
+            },
+            {
+              "title": "경기도, 내년 예산 9개 사업 2424억 미반영…인건비·교통예산 등",
+              "url": "https://files.newsis.com/view/NISX20261116_0003870336",
+              "role": "original_reporting",
+              "accessed": true
+            },
+            {
+              "title": "경기도, 42조1946억원 내년도 예산안 제출…인건비 3개월분 미반영",
+              "url": "https://www.etnews.com/20261115000146",
+              "role": "original_reporting",
+              "accessed": true
+            }
+          ],
+          "title": "42조 예산안인데, 경기도가 쓸 돈은 줄었다?",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "예산은 늘었는데 돈이 없다?",
+              "narration": "예산은 늘었는데, 쓸 돈은 줄었다? 경기도 예산안 이야기입니다.",
+              "body": "예산은 늘었는데, 쓸 돈은 줄었다? 경기도 예산안 이야기입니다.",
+              "media": "graphic-2026-11-17-ojirap-operator-1-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "2027년 예산안 42조 1,946억 원",
+              "narration": "경기도가 제출한 내년 예산안은 사십이조 천구백사십육억 원. 올해 본예산보다 오 점 삼 퍼센트 늘었습니다.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "body": "경기도가 제출한 내년 예산안은 사십이조 천구백사십육억 원. 올해 본예산보다 오 점 삼 퍼센트 늘었습니다.",
+              "media": "graphic-2026-11-17-ojirap-operator-1-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "총액과 가용재원은 다릅니다",
+              "narration": "그런데 도는 증가분 대부분이 용도가 정해진 국고보조사업이라고 설명합니다. 지방채와 기금으로 보완한 가용재원도 올해보다 약 이십오 퍼센트 적다는 겁니다.",
+              "source_indices": [
+                0,
+                2
+              ],
+              "body": "그런데 도는 증가분 대부분이 용도가 정해진 국고보조사업이라고 설명합니다. 지방채와 기금으로 보완한 가용재원도 올해보다 약 이십오 퍼센트 적다는 겁니다.",
+              "media": "graphic-2026-11-17-ojirap-operator-1-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "제 생각엔 총액보다 사용처",
+              "narration": "제 생각엔 예산 총액만 볼 게 아니라, 어디에 쓸 수 있는 돈인지도 봐야 합니다.",
+              "body": "제 생각엔 예산 총액만 볼 게 아니라, 어디에 쓸 수 있는 돈인지도 봐야 합니다.",
+              "media": "graphic-2026-11-17-ojirap-operator-1-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "아직 확정 예산은 아닙니다",
+              "narration": "십일월 십육일 설명 기준, 아직 예산안 단계입니다. 앞으로 심의에서 무엇을 지키고 조정하는지, 같이 지켜보죠.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "body": "십일월 십육일 설명 기준, 아직 예산안 단계입니다. 앞으로 심의에서 무엇을 지키고 조정하는지, 같이 지켜보죠.",
+              "media": "graphic-2026-11-17-ojirap-operator-1-4"
+            }
+          ]
+        },
+        {
+          "id": "2026-11-17-ojirap-operator-2",
+          "channel": "ojirap",
+          "category": "politics",
+          "topic_key": "korea-mekong-summit-resumed-action-plan-pending-2026-11-16",
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "korea-mekong-summit-resumed-action-plan-pending-2026-11-16",
+            "category": "politics",
+            "summary": "11월 16일 현지시간 열린 제3차 한-메콩 정상회의의 실제 개최와 협력 논의를 전달하되, 새 행동계획은 아직 조속한 채택을 기대하는 단계임을 분리한다. 11월 12일 순방 일정 발표를 다룬 기존 영상의 후속이며 일정 소개를 반복하지 않는다.",
+            "verified_facts": [
+              {
+                "text": "11월 16일 현지시간 이재명 대통령과 태국 총리가 제3차 한-메콩 정상회의를 공동 주재했다. 2020년 이후 6년 만의 개최다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "회의에서 초국가범죄 대응, 치안당국 공조, 핵심광물 공급망 분야 협력 확대가 제안됐다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "새 한-메콩 행동계획에 대해서는 조속한 채택을 통해 구체적인 실천방안이 마련되기를 기대한다고 밝혔다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              }
+            ],
+            "uncertainties": [
+              "행동계획의 채택 완료, 계약 체결, 공급망 확보 완료, 범죄 감소를 확인한 것이 아니다.",
+              "수치로 확인되지 않은 투자액·경제효과·성과를 덧붙이지 않는다.",
+              "메콩 5개국 모두 정상이 참석했다고 단정하지 않는다. 정상과 대표가 참석했다.",
+              "공식 페이지의 사진·영상·문장 사용권은 사실 확인과 별개다. 청와대 페이지는 공공누리 제4유형 고지를 포함한다. 원문·사진을 복제하지 않고 독자 표현 및 별도 허용 사진 사용.",
+              "관련 사진은 아직 확보·권리검수하지 않았다."
+            ],
+            "sources": [
+              {
+                "title": "제3차 한-메콩 정상회의 참석 관련 서면브리핑",
+                "url": "https://www.president.go.kr/briefings/qGiPgnQ8",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "메콩 협력 지평 확대 관련 한-메콩 정상회의 종합 보도",
+                "url": "https://www.yna.co.kr/view/AKR20261116170851001",
+                "role": "original_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "ff6efe01dcc1c8933f10a17d84b41b0aeec9b258ff708bd547dce37d3ba06fae",
+          "sources": [
+            {
+              "title": "제3차 한-메콩 정상회의 참석 관련 서면브리핑",
+              "url": "https://www.president.go.kr/briefings/qGiPgnQ8",
+              "role": "primary",
+              "accessed": true
+            },
+            {
+              "title": "메콩 협력 지평 확대 관련 한-메콩 정상회의 종합 보도",
+              "url": "https://www.yna.co.kr/view/AKR20261116170851001",
+              "role": "original_reporting",
+              "accessed": true
+            }
+          ],
+          "title": "6년 만의 한·메콩 정상회의, 회의와 실행은 다릅니다",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "회의 재개, 이제 실행은?",
+              "narration": "한·메콩 정상회의가 육 년 만에 열렸습니다. 그런데 회의가 끝났다고, 일도 끝난 건 아니죠.",
+              "body": "한·메콩 정상회의가 육 년 만에 열렸습니다. 그런데 회의가 끝났다고, 일도 끝난 건 아니죠.",
+              "media": "graphic-2026-11-17-ojirap-operator-2-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "11월 16일 필리핀에서 개최",
+              "narration": "현지 시각 십일월 십육일, 필리핀에서 제삼차 한·메콩 정상회의가 열렸습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "body": "현지 시각 십일월 십육일, 필리핀에서 제삼차 한·메콩 정상회의가 열렸습니다.",
+              "media": "graphic-2026-11-17-ojirap-operator-2-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "초국가범죄·핵심광물 협력 제안",
+              "narration": "한국은 초국가범죄 대응과 핵심광물 분야의 협력을 제안했습니다. 새 행동계획은 조속한 채택을 기대하는 단계입니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "body": "한국은 초국가범죄 대응과 핵심광물 분야의 협력을 제안했습니다. 새 행동계획은 조속한 채택을 기대하는 단계입니다.",
+              "media": "graphic-2026-11-17-ojirap-operator-2-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "제안 다음에 확인할 것",
+              "narration": "제 생각엔 외교 뉴스는 만났다는 사진보다, 제안이 어떤 실행으로 이어지는지가 더 중요합니다.",
+              "body": "제 생각엔 외교 뉴스는 만났다는 사진보다, 제안이 어떤 실행으로 이어지는지가 더 중요합니다.",
+              "media": "graphic-2026-11-17-ojirap-operator-2-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "채택과 실행을 구분해서",
+              "narration": "이번에는 회의가 실제 열렸고, 협력이 제안됐다는 데까지 확인된 겁니다. 행동계획 채택과 구체적인 실행은 따로 지켜보겠습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "body": "이번에는 회의가 실제 열렸고, 협력이 제안됐다는 데까지 확인된 겁니다. 행동계획 채택과 구체적인 실행은 따로 지켜보겠습니다.",
+              "media": "graphic-2026-11-17-ojirap-operator-2-4"
+            }
+          ]
+        }
+      ],
+      "media": {
+        "graphic-2026-11-17-ojirap-operator-1-0": {
+          "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-1/scene-01.png",
+          "sha256": "c035a3cc6247a2fe5aeb787f68c42eac6853f8397ff065fb60fc8af71655b525",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "gyeonggi-2027-budget-total-versus-flexible-funds-2026-11-16",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "f9df487be878776d1c939e07a8707545996bdcb9b20b7693ee4a9f9572b34a8f",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": false
+        },
+        "graphic-2026-11-17-ojirap-operator-1-1": {
+          "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-1/scene-02.png",
+          "sha256": "fa43f4f8be00b37da649671e3407b8217c7a2ae0631435b1233d393e70d504d6",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "gyeonggi-2027-budget-total-versus-flexible-funds-2026-11-16",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "2550a046eed427a3a724c875aa00d86a6bb0923f41769ecc6f62eea5751c609f",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": false
+        },
+        "graphic-2026-11-17-ojirap-operator-1-2": {
+          "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-1/scene-03.png",
+          "sha256": "2c26166922bd0159fd5197a8badc9c10a215da9948ce00bc55f01f7a98fe8734",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "gyeonggi-2027-budget-total-versus-flexible-funds-2026-11-16",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "5f66edaaeaa8eff3806df194481810fd35ccde9c93c7c202b1eef5f838df9f3d",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": false
+        },
+        "graphic-2026-11-17-ojirap-operator-1-3": {
+          "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-1/scene-04.png",
+          "sha256": "2b70c182dd784beccf22dbc731f9a90ccf655f68e8dedf07ca345626bfe87b4d",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "gyeonggi-2027-budget-total-versus-flexible-funds-2026-11-16",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "64d96fe90a40d8cc0db6ca72070cf744953782e3263d6ad31bd60423e0a307a0",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": false
+        },
+        "graphic-2026-11-17-ojirap-operator-1-4": {
+          "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-1/scene-05.png",
+          "sha256": "f9403672b4025eb1e725340d51a7b5675f1e7f205ad07ee205bbfe549d59222b",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "gyeonggi-2027-budget-total-versus-flexible-funds-2026-11-16",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "6d9d4aa0618635a179a745d6c64c4bac21c665aa82d598a7cf95fe79fdc5522b",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": false
+        },
+        "graphic-2026-11-17-ojirap-operator-2-0": {
+          "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-2/scene-01.png",
+          "sha256": "861906aaae9647bc3ab122a6d8100fd9ef5abed746c7c57e468ec5a54b781bd2",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-mekong-summit-resumed-action-plan-pending-2026-11-16",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "5a5f9270808040f21c5d67b02a910087dae8efcab3f782f74bc97f56e304e5bd",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": false
+        },
+        "graphic-2026-11-17-ojirap-operator-2-1": {
+          "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-2/scene-02.png",
+          "sha256": "93a01b4c6bca873d427749565c97901e4a78a3aedc08f4630f11e831a60f7834",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-mekong-summit-resumed-action-plan-pending-2026-11-16",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "09e43b9545a081768d5bf13df3a2d4f265d484a35225a2f092b77c6c62c9b308",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": false
+        },
+        "graphic-2026-11-17-ojirap-operator-2-2": {
+          "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-2/scene-03.png",
+          "sha256": "1f01aa9ee97c9f56f274d901c4ccc62b1a444d580e0832d32b5a8a4974e82479",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-mekong-summit-resumed-action-plan-pending-2026-11-16",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "98cefd5d42f997044e202fbe1ebc3a0ff0d42c0b77b5afa4d13d2cf8d7985b5d",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": false
+        },
+        "graphic-2026-11-17-ojirap-operator-2-3": {
+          "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-2/scene-04.png",
+          "sha256": "8fbc365e0d38d69bd45e703dad82bc21035a1f38dd96e0af4adf70cd25717bf6",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-mekong-summit-resumed-action-plan-pending-2026-11-16",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "8eca98e73b2f553b877f1c2989c74ad8857e61fbae829488dc3d4bba5d1d4e9f",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": false
+        },
+        "graphic-2026-11-17-ojirap-operator-2-4": {
+          "path": "assets/graphics/2026-11-17/2026-11-17-ojirap-operator-2/scene-05.png",
+          "sha256": "0dbd82e3eb70ac9b27cdc763ebfff189f807964d5165e152bd8698bf11f2f0fe",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-mekong-summit-resumed-action-plan-pending-2026-11-16",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "c091600287104d7ab371247cb9007e946f6b35273ac3aadfc1b1356d27cb9159",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": false
+        }
       }
     }
   },
