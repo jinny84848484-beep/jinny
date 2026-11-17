@@ -5579,6 +5579,18 @@
       },
       "completed_at": "2026-11-17T15:38:07+09:00",
       "publication_method": "external_manual_studio"
+    },
+    "2026-11-18": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "06c2ce471c06ccff45db4b8284543cec5d299fcdde0a9a00488b35a98c201dff",
+          "attempts": 1,
+          "at": "2026-11-18T08:19:39.372726+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
