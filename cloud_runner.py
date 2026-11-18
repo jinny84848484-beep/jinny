@@ -11,6 +11,7 @@ import pipeline as p
 import media_renderer
 import relevant_media
 import daily_graphics
+import owner_directive
 
 CATEGORIES={'technology':'28','entertainment':'24','sports':'17','politics':'25','science':'28','culture':'22','internet':'24','society':'25','business':'25','film':'1','music':'10'}
 # Historical inspection fixtures only; active production has two Ojirap jobs.
@@ -797,6 +798,11 @@ def produce(*, expected_day=None):
     except Exception as exc:print('Metrics skipped: '+str(exc)[:120],file=sys.stderr,flush=True)
     if not record.get('jobs'):
         recent=recent_topics(ledger)
+        # Owner order 2026-11-19: a work order issued the day before is followed first.
+        directive,directive_sha=(None,None) if record.get('research_recovery') else owner_directive.load(day)
+        if directive:
+            record['owner_directive']={'sha256':directive_sha,'topics':[t['title'] for t in directive['topics']],'issued_at':directive['issued_at']}
+            print('Owner directive applied: '+str(len(directive['topics']))+' priority topic(s)',flush=True)
         if record.get('research_recovery'):
             from research_recovery_registry import recovered_manifest
             manifest=recovered_manifest(record,recent)
@@ -805,7 +811,7 @@ def produce(*, expected_day=None):
                 (research,evidence),sha=stage_checkpoint(ledger,sha,day,'research')
             else:
                 collection=p.collect();trends=p.read(collection['path'])
-                prompt='Today is '+p.now().isoformat()+'. Research two different recent Korean issues, for Ojirap Korean commentary only, using YouTube, public Instagram and Google Trends signals plus official/original reporting. Compare YouTube and Instagram signals separately with dated specific URLs; do not invent view counts, growth rates or trending rankings. If a platform signal is inaccessible or unverified, say so and prioritize verified news importance over unsupported popularity. Social posts identify interest, not factual proof or reuse permission. Public TikTok/Reels may identify a trend but are not proof or permission to reuse video. Do not research or prepare retired English-channel adaptations. Verify facts against at least two independent sources per story. Exclude recent topics: '+json.dumps(sorted(recent))+'\nTrend candidates:\n'+json.dumps(trends,ensure_ascii=False)
+                prompt='Today is '+p.now().isoformat()+'. Research two different recent Korean issues, for Ojirap Korean commentary only, using YouTube, public Instagram and Google Trends signals plus official/original reporting. Compare YouTube and Instagram signals separately with dated specific URLs; do not invent view counts, growth rates or trending rankings. If a platform signal is inaccessible or unverified, say so and prioritize verified news importance over unsupported popularity. Social posts identify interest, not factual proof or reuse permission. Public TikTok/Reels may identify a trend but are not proof or permission to reuse video. Do not research or prepare retired English-channel adaptations. Verify facts against at least two independent sources per story. Exclude recent topics: '+json.dumps(sorted(recent))+owner_directive.research_clause(directive)+'\nTrend candidates:\n'+json.dumps(trends,ensure_ascii=False)
                 (research,evidence),sha=stage_checkpoint(ledger,sha,day,'research',request={'prompt':prompt,'instructions':research_instructions()},submit=lambda:openai(prompt,True,5000,instructions=research_instructions(),stage='research'))
             research_state={'sha':sha}
             def repair_provider(*args,**kwargs):
@@ -816,7 +822,7 @@ def produce(*, expected_day=None):
                 return result
             manifest=guarded_research_manifest(ledger,lambda:research_state['sha'],day,research,evidence,recent,allow_repair=True,repair_provider=repair_provider,second_repair_provider=second_repair_provider)
             sha=research_state['sha']
-        prompt='Return JSON with jobs for '+day+'. Use ONLY the ready stories in this research manifest. For EACH of the TWO shared issue packets create one ojirap job, exactly two Korean-only jobs total with distinct date/channel/topic job IDs. Copy each topic_key, category, visual_queries and COMPLETE sources array (title/url only) exactly from its shared packet, in the same order. Use the shared verified facts consistently, for the Korean audience. Do not add unsourced background. Do not drop independent sources, invent URLs, use homepages, change story identity or cite facts beyond the packet. Scene source_indices refer to that exact packet bibliography. The pipeline deterministically preserves and checks those citations. Make the first spoken phrase a concise understandable hook that works as the single opening caption.\nRESEARCH MANIFEST:\n'+json.dumps(manifest,ensure_ascii=False)
+        prompt='Return JSON with jobs for '+day+'. Use ONLY the ready stories in this research manifest. For EACH of the TWO shared issue packets create one ojirap job, exactly two Korean-only jobs total with distinct date/channel/topic job IDs. Copy each topic_key, category, visual_queries and COMPLETE sources array (title/url only) exactly from its shared packet, in the same order. Use the shared verified facts consistently, for the Korean audience. Do not add unsourced background. Do not drop independent sources, invent URLs, use homepages, change story identity or cite facts beyond the packet. Scene source_indices refer to that exact packet bibliography. The pipeline deterministically preserves and checks those citations. Make the first spoken phrase a concise understandable hook that works as the single opening caption.'+owner_directive.draft_clause(directive)+'\nRESEARCH MANIFEST:\n'+json.dumps(manifest,ensure_ascii=False)
         (draft,_),sha=stage_checkpoint(ledger,sha,day,'draft',request={'prompt':prompt,'instructions':PROMPT},submit=lambda:openai(prompt,False,7500,stage='draft'))
         # At most six requests: research + optional one research repair + draft
         # + optional one length correction + two reviews. No provider retry loop.
