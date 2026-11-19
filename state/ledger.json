@@ -6203,10 +6203,17 @@
           "usable": true,
           "sha256": "3960395fab0bc2be95ac7cffc6bf95ac83823c0e4704f64ffd5192c8bca2b87f",
           "completed_at": "2026-11-19T12:41:20.677399+09:00"
+        },
+        "editorial_review_0": {
+          "status": "submitted",
+          "request_hash": "713726b7c4176d7a095d90b6c48882398ec44686336e5c81551b0eb70528e0e6",
+          "attempts": 1,
+          "at": "2026-11-19T12:41:24.692673+09:00"
         }
       },
-      "status": "draft_completed",
-      "active_stage": "draft"
+      "status": "editorial_review_0_submitted",
+      "active_stage": "editorial_review_0",
+      "review_input_hash": "4c1667c7fca35376f279d5ba740c61fbaac2bf5fbc0b4a9c3691a4a5989d5be8"
     }
   },
   "publications": [
