@@ -6223,7 +6223,7 @@
           "completed_at": "2026-11-19T12:41:48.376224+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1",
       "review_input_hash": "4c1667c7fca35376f279d5ba740c61fbaac2bf5fbc0b4a9c3691a4a5989d5be8",
       "editorial_exclusions": [
@@ -7294,6 +7294,18 @@
       "video_id": "NRqOGZc6yb8",
       "url": "https://www.youtube.com/shorts/NRqOGZc6yb8",
       "at": "2026-11-18T08:55:02.252978+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-19-ojirap-korea-household-credit-q3-record-high",
+      "topic_key": "korea-household-credit-q3-2026-record-high",
+      "category": "business",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "대출은 줄었는데, 카드 할부가 오조 늘었습니다",
+      "video_id": "HANS58XSgQI",
+      "url": "https://www.youtube.com/shorts/HANS58XSgQI",
+      "at": "2026-11-19T12:42:41.451643+09:00",
       "experiment": {}
     }
   ],
