@@ -6223,7 +6223,7 @@
           "completed_at": "2026-11-19T12:41:48.376224+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_1",
       "review_input_hash": "4c1667c7fca35376f279d5ba740c61fbaac2bf5fbc0b4a9c3691a4a5989d5be8",
       "editorial_exclusions": [
@@ -6249,27 +6249,27 @@
             {
               "title": "[뉴스1 PICK] 추경호 1심 무죄, 국민의힘 축제 분위기",
               "url": "https://www.news1.kr/society/court-prosecution/6358338",
-              "checked_at": "2026-11-19T12:41:49.779793+09:00"
+              "checked_at": "2026-11-19T12:41:51.254626+09:00"
             },
             {
               "title": "추경호 '계엄해제 표결방해' 1심 무죄…\"尹요청·승낙 없어\"(종합2보)",
               "url": "https://www.yna.co.kr/view/AKR20261118118453004",
-              "checked_at": "2026-11-19T12:41:49.779793+09:00"
+              "checked_at": "2026-11-19T12:41:51.254626+09:00"
             },
             {
               "title": "[2보] '계엄 해제표결 방해' 혐의 추경호 무죄…\"尹요청 없었다\"",
               "url": "https://www.yna.co.kr/view/AKR20261118118400004?section=society%2Fall",
-              "checked_at": "2026-11-19T12:41:49.779793+09:00"
+              "checked_at": "2026-11-19T12:41:51.254626+09:00"
             },
             {
               "title": "與, 추경호 1심무죄에 \"역사에 대한 반역…특검, 즉각 항소해야\"",
               "url": "https://www.yna.co.kr/view/AKR20261118131900001",
-              "checked_at": "2026-11-19T12:41:49.779793+09:00"
+              "checked_at": "2026-11-19T12:41:51.254626+09:00"
             },
             {
               "title": "Trending Now - Google Trends",
               "url": "https://trends.google.com/trending?geo=KR&hours=24",
-              "checked_at": "2026-11-19T12:41:49.779793+09:00"
+              "checked_at": "2026-11-19T12:41:51.254626+09:00"
             }
           ],
           "visual_queries": [
@@ -6418,7 +6418,7 @@
           "fact_packet_hash": "ac52bd673a2bee271b2aa01651f81e3a4f7f89c76472fa78a7a94b0b6d7a6cae",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-19T12:41:49.779793+09:00"
+          "verified_at": "2026-11-19T12:41:51.254626+09:00"
         },
         {
           "id": "2026-11-19-ojirap-korea-household-credit-q3-record-high",
@@ -6431,22 +6431,22 @@
             {
               "title": "2026년 3/4분기중 가계신용(잠정)",
               "url": "https://www.bok.or.kr/portal/bbs/B0000501/view.do?depth=201150&menuNo=201264&nttId=11066748&oldMenuNo=200761&pageIndex=1&pageUnit=10&programType=newsData",
-              "checked_at": "2026-11-19T12:41:49.779910+09:00"
+              "checked_at": "2026-11-19T12:41:51.254746+09:00"
             },
             {
               "title": "2026년 3/4분기 가계신용(잠정) 기자설명회",
               "url": "https://www.bok.or.kr/portal/bbs/B0000170/view.do?depth=201297&menuNo=201297&nttId=11066778&oldMenuNo=201151&programType=multiCont&relate=Y",
-              "checked_at": "2026-11-19T12:41:49.779910+09:00"
+              "checked_at": "2026-11-19T12:41:51.254746+09:00"
             },
             {
               "title": "2026년 1월 30일 통계공표일정 PDF",
               "url": "https://file-cdn.bok.or.kr/portal/c0215cc928794bc6b1b295dcd7ad548e/2/b9f0b6736a7d4872a7813f67720f2b97.pdf?token=st%3D1769731889~exp%3D1769735489~acl%3D%2Fportal%2Fc0215cc928794bc6b1b295dcd7ad548e%2F2%2Fb9f0b6736a7d4872a7813f67720f2b97.pdf%2A~hmac%3D0293ff7cbd3d7fb0c073d691eb177e32754d5959a6c3c7d2a0c28de1ff57f02e",
-              "checked_at": "2026-11-19T12:41:49.779910+09:00"
+              "checked_at": "2026-11-19T12:41:51.254746+09:00"
             },
             {
               "title": "■ 11월 18일(화) 경제 캘린더 / YTN - YouTube",
               "url": "https://www.youtube.com/watch?v=FrlRGyRgv30",
-              "checked_at": "2026-11-19T12:41:49.779910+09:00"
+              "checked_at": "2026-11-19T12:41:51.254746+09:00"
             }
           ],
           "visual_queries": [
@@ -6596,7 +6596,7 @@
           "fact_packet_hash": "03572613db6887323da2cc225bd864fb3749faf06ddf8640b1d9cabf7173459c",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-19T12:41:49.779910+09:00"
+          "verified_at": "2026-11-19T12:41:51.254746+09:00"
         }
       ],
       "media": {
@@ -6707,7 +6707,18 @@
         "https://file-cdn.bok.or.kr/portal/2b3cc3a3ef1b4488b23ede831803fec2/2/f404874c20ef45c5a1b616f7fdd51341.pdf?token=st%3D1771610876~exp%3D1771614476~acl%3D%2Fportal%2F2b3cc3a3ef1b4488b23ede831803fec2%2F2%2Ff404874c20ef45c5a1b616f7fdd51341.pdf%2A~hmac%3Dcb448379cc9c1b0f35cea5497642ee4c2c6df3496871a00023cfb53f959b3301",
         "https://www.bok.or.kr/portal/stats/statsPublictSchdul/listCldr.do?date=2016-03&menuNo=200775"
       ],
-      "created_at": "2026-11-19T12:41:49.780096+09:00"
+      "created_at": "2026-11-19T12:41:49.780096+09:00",
+      "publication_exclusions": [
+        {
+          "job_id": "2026-11-19-ojirap-choo-kyung-ho-not-guilty-first-trial",
+          "channel": "ojirap",
+          "reason": "editorial_review_failed",
+          "codes": [
+            "unsupported_claim"
+          ]
+        }
+      ],
+      "active_job": "2026-11-19-ojirap-korea-household-credit-q3-record-high"
     }
   },
   "publications": [
