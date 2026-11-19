@@ -6187,13 +6187,16 @@
       },
       "checkpoints": {
         "research": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "122cd0ce2d909cd69e1aaac555e80f2e13593cdf27ca9482dfae734b0ef474ec",
           "attempts": 1,
-          "at": "2026-11-19T12:40:17.973783+09:00"
+          "at": "2026-11-19T12:40:17.973783+09:00",
+          "usable": true,
+          "sha256": "263c5808e585fb62f847b132860e3b18a72f5f1942f92703e6fcb9e9e8c0d515",
+          "completed_at": "2026-11-19T12:40:56.850135+09:00"
         }
       },
-      "status": "research_submitted",
+      "status": "research_completed",
       "active_stage": "research"
     }
   },
