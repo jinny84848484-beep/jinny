@@ -6223,7 +6223,7 @@
           "completed_at": "2026-11-19T12:41:48.376224+09:00"
         }
       },
-      "status": "uploaded",
+      "status": "complete",
       "active_stage": "editorial_review_1",
       "review_input_hash": "4c1667c7fca35376f279d5ba740c61fbaac2bf5fbc0b4a9c3691a4a5989d5be8",
       "editorial_exclusions": [
@@ -6718,7 +6718,8 @@
           ]
         }
       ],
-      "active_job": "2026-11-19-ojirap-korea-household-credit-q3-record-high"
+      "active_job": "2026-11-19-ojirap-korea-household-credit-q3-record-high",
+      "completed_at": "2026-11-19T12:42:42.906557+09:00"
     }
   },
   "publications": [
