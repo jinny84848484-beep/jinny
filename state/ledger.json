@@ -6212,10 +6212,16 @@
           "usable": true,
           "sha256": "02a3978a43bacb1e59a5e8d3da0bcf886d0e5bed2e82a8a184274a419036c7d4",
           "completed_at": "2026-11-19T12:41:35.610003+09:00"
+        },
+        "editorial_review_1": {
+          "status": "submitted",
+          "request_hash": "fdde14b82c0b5f6d1b787e95b538a9b8f379c96208886c3b2cb9078da8248064",
+          "attempts": 1,
+          "at": "2026-11-19T12:41:37.279316+09:00"
         }
       },
-      "status": "editorial_review_0_completed",
-      "active_stage": "editorial_review_0",
+      "status": "editorial_review_1_submitted",
+      "active_stage": "editorial_review_1",
       "review_input_hash": "4c1667c7fca35376f279d5ba740c61fbaac2bf5fbc0b4a9c3691a4a5989d5be8"
     }
   },
