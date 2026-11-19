@@ -6223,9 +6223,491 @@
           "completed_at": "2026-11-19T12:41:48.376224+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
+      "status": "reviewed",
       "active_stage": "editorial_review_1",
-      "review_input_hash": "4c1667c7fca35376f279d5ba740c61fbaac2bf5fbc0b4a9c3691a4a5989d5be8"
+      "review_input_hash": "4c1667c7fca35376f279d5ba740c61fbaac2bf5fbc0b4a9c3691a4a5989d5be8",
+      "editorial_exclusions": [
+        {
+          "job_id": "2026-11-19-ojirap-choo-kyung-ho-not-guilty-first-trial",
+          "channel": "ojirap",
+          "reason": "editorial_review_failed",
+          "codes": [
+            "unsupported_claim"
+          ]
+        }
+      ],
+      "retry_hold": false,
+      "jobs": [
+        {
+          "id": "2026-11-19-ojirap-choo-kyung-ho-not-guilty-first-trial",
+          "channel": "ojirap",
+          "topic_key": "choo-kyung-ho-not-guilty-first-trial-2026-11-18",
+          "category": "politics",
+          "title": "구형은 징역 스무 해, 선고는 무죄",
+          "description": "서울중앙지법이 추경호 대구시장에게 2026년 11월 18일 1심 무죄를 선고했습니다. 다만 1심은 확정판결이 아니어서 상급심 가능성은 남아 있습니다.",
+          "sources": [
+            {
+              "title": "[뉴스1 PICK] 추경호 1심 무죄, 국민의힘 축제 분위기",
+              "url": "https://www.news1.kr/society/court-prosecution/6358338",
+              "checked_at": "2026-11-19T12:41:49.779793+09:00"
+            },
+            {
+              "title": "추경호 '계엄해제 표결방해' 1심 무죄…\"尹요청·승낙 없어\"(종합2보)",
+              "url": "https://www.yna.co.kr/view/AKR20261118118453004",
+              "checked_at": "2026-11-19T12:41:49.779793+09:00"
+            },
+            {
+              "title": "[2보] '계엄 해제표결 방해' 혐의 추경호 무죄…\"尹요청 없었다\"",
+              "url": "https://www.yna.co.kr/view/AKR20261118118400004?section=society%2Fall",
+              "checked_at": "2026-11-19T12:41:49.779793+09:00"
+            },
+            {
+              "title": "與, 추경호 1심무죄에 \"역사에 대한 반역…특검, 즉각 항소해야\"",
+              "url": "https://www.yna.co.kr/view/AKR20261118131900001",
+              "checked_at": "2026-11-19T12:41:49.779793+09:00"
+            },
+            {
+              "title": "Trending Now - Google Trends",
+              "url": "https://trends.google.com/trending?geo=KR&hours=24",
+              "checked_at": "2026-11-19T12:41:49.779793+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Seoul Central District Court building file photo",
+            "South Korea courthouse exterior CC BY Wikimedia Commons"
+          ],
+          "opening_text": "구형은 징역 스무 해, 선고는 무죄",
+          "hook_type": "contrast",
+          "topic_category": "directive-topic",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "구형과 선고의 온도차",
+              "body": "구형은 무거웠는데, 1심 선고는 무죄였습니다.",
+              "narration": "구형은 징역 스무 해, 선고는 무죄.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "kind": "fact",
+              "headline": "확인된 1심 판단",
+              "body": "서울중앙지법이 십일월 십팔일 1심 무죄를 선고했습니다.",
+              "narration": "서울중앙지법은 이십육 년 십일월 십팔일 추경호 대구시장에게 일심 무죄를 선고했습니다.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "kind": "fact",
+              "headline": "재판부가 본 쟁점",
+              "body": "연합뉴스 보도엔 요청·승낙과 내란행위 인정이 어렵다고 전했습니다.",
+              "narration": "연합뉴스 보도 기준으론 재판부가 윤석열 전 대통령의 요청·승낙과 내란행위 인정이 어렵다고 봤습니다.",
+              "source_indices": [
+                1,
+                2
+              ]
+            },
+            {
+              "kind": "opinion",
+              "headline": "여기서 끝은 아닙니다",
+              "body": "제 의견엔 무죄보다 중요한 건 아직 1심이란 점입니다.",
+              "narration": "다만 이건 확정판결이 아니고 상급심 가능성이 남아 있어, 저는 오늘의 결론보다 다음 절차가 더 또렷해 보입니다.",
+              "source_indices": [
+                1,
+                2,
+                3
+              ]
+            },
+            {
+              "kind": "closing",
+              "headline": "검색은 뜨고 결론은 남음",
+              "body": "관심은 커졌지만, 판결의 마침표는 아직 아닙니다.",
+              "narration": "민주당은 즉각 항소를 촉구했고 검색어도 올랐죠. 법원 뉴스는 늘 그렇듯, 끝난 듯 보여도 보통 다음 줄이 있습니다.",
+              "source_indices": [
+                3,
+                4
+              ]
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "choo-kyung-ho-not-guilty-first-trial-2026-11-18",
+            "category": "politics",
+            "summary": "2026년 11월 18일 서울중앙지법 형사합의34부가 12·3 비상계엄 당시 국회의 계엄 해제 요구 결의안 표결 방해 관련 혐의로 기소된 추경호 대구시장에게 1심 무죄를 선고했다. 결심공판에서 특검은 징역 20년을 구형했지만, 이번 판단은 1심이어서 확정판결은 아니고 상급심 절차 가능성이 남아 있다. 구글 트렌드에서는 11월 19일 기준 한국 실시간 인기 주제에 '추경호'가 노출돼 관심 신호는 확인됐지만, 유튜브·인스타그램의 공적이고 검증 가능한 동일 이슈 신호는 본 요청 범위에서 충분히 확인하지 못했다.",
+            "verified_facts": [
+              {
+                "text": "서울중앙지법 형사합의34부는 2026년 11월 18일 추경호 대구시장에게 1심 무죄를 선고했다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "사건은 12·3 비상계엄 당시 국회의 계엄 해제 표결을 방해했다는 취지의 내란중요임무종사 혐의로 기소된 내용이다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "연합뉴스 보도에 따르면 재판부는 윤석열 전 대통령의 요청·승낙이 있었다고 보기 어렵고 내란행위로 인정하지 않았다는 취지로 판단했다.",
+                "source_indices": [
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "더불어민주당은 판결 직후 특검의 즉각 항소를 촉구하는 입장을 냈다.",
+                "source_indices": [
+                  3
+                ]
+              },
+              {
+                "text": "구글 트렌드 한국 실시간 인기에서 11월 19일 기준 '추경호', '추경호 무죄' 관련 묶음이 활성 추세로 노출됐다.",
+                "source_indices": [
+                  4
+                ]
+              }
+            ],
+            "uncertainties": [
+              "1심 판결이므로 확정판결이 아니며 실제 항소 제기 여부와 이후 상급심 결과는 아직 확정되지 않았다.",
+              "요청에서 제시된 '징역 20년 구형'은 읽은 기사들에서 직접 확인된 범위가 제한적이어서 이번 팩트 배열에는 넣지 않았다.",
+              "유튜브와 공개 인스타그램에서 이 사안을 특정한 검증 가능한 조회 수·증가율·랭킹은 확인하지 못했다.",
+              "소셜 플랫폼 게시물은 관심 신호일 뿐 사실 증명이나 재사용 허가가 아니다."
+            ],
+            "sources": [
+              {
+                "title": "[뉴스1 PICK] 추경호 1심 무죄, 국민의힘 축제 분위기",
+                "url": "https://www.news1.kr/society/court-prosecution/6358338",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "추경호 '계엄해제 표결방해' 1심 무죄…\"尹요청·승낙 없어\"(종합2보)",
+                "url": "https://www.yna.co.kr/view/AKR20261118118453004",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "[2보] '계엄 해제표결 방해' 혐의 추경호 무죄…\"尹요청 없었다\"",
+                "url": "https://www.yna.co.kr/view/AKR20261118118400004?section=society%2Fall",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "與, 추경호 1심무죄에 \"역사에 대한 반역…특검, 즉각 항소해야\"",
+                "url": "https://www.yna.co.kr/view/AKR20261118131900001",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "Trending Now - Google Trends",
+                "url": "https://trends.google.com/trending?geo=KR&hours=24",
+                "role": "primary",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "ac52bd673a2bee271b2aa01651f81e3a4f7f89c76472fa78a7a94b0b6d7a6cae",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-19T12:41:49.779793+09:00"
+        },
+        {
+          "id": "2026-11-19-ojirap-korea-household-credit-q3-record-high",
+          "channel": "ojirap",
+          "topic_key": "korea-household-credit-q3-2026-record-high",
+          "category": "business",
+          "title": "대출은 줄었는데, 카드 할부가 오조 늘었습니다",
+          "description": "한국은행 발표에 따르면 2026년 3분기말 가계신용은 2,030조5천억원으로 역대 최대였습니다. 가계대출은 4조7천억원, 판매신용은 5조원 늘었습니다.",
+          "sources": [
+            {
+              "title": "2026년 3/4분기중 가계신용(잠정)",
+              "url": "https://www.bok.or.kr/portal/bbs/B0000501/view.do?depth=201150&menuNo=201264&nttId=11066748&oldMenuNo=200761&pageIndex=1&pageUnit=10&programType=newsData",
+              "checked_at": "2026-11-19T12:41:49.779910+09:00"
+            },
+            {
+              "title": "2026년 3/4분기 가계신용(잠정) 기자설명회",
+              "url": "https://www.bok.or.kr/portal/bbs/B0000170/view.do?depth=201297&menuNo=201297&nttId=11066778&oldMenuNo=201151&programType=multiCont&relate=Y",
+              "checked_at": "2026-11-19T12:41:49.779910+09:00"
+            },
+            {
+              "title": "2026년 1월 30일 통계공표일정 PDF",
+              "url": "https://file-cdn.bok.or.kr/portal/c0215cc928794bc6b1b295dcd7ad548e/2/b9f0b6736a7d4872a7813f67720f2b97.pdf?token=st%3D1769731889~exp%3D1769735489~acl%3D%2Fportal%2Fc0215cc928794bc6b1b295dcd7ad548e%2F2%2Fb9f0b6736a7d4872a7813f67720f2b97.pdf%2A~hmac%3D0293ff7cbd3d7fb0c073d691eb177e32754d5959a6c3c7d2a0c28de1ff57f02e",
+              "checked_at": "2026-11-19T12:41:49.779910+09:00"
+            },
+            {
+              "title": "■ 11월 18일(화) 경제 캘린더 / YTN - YouTube",
+              "url": "https://www.youtube.com/watch?v=FrlRGyRgv30",
+              "checked_at": "2026-11-19T12:41:49.779910+09:00"
+            }
+          ],
+          "visual_queries": [
+            "credit card payment terminal Korea file photo",
+            "Bank of Korea headquarters exterior CC BY Wikimedia Commons"
+          ],
+          "opening_text": "대출은 줄었는데, 카드 할부가 오조 늘었습니다",
+          "hook_type": "numbers-question",
+          "topic_category": "directive-topic",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "빚의 모양이 바뀐 걸까",
+              "body": "대출보다 카드 쪽 숫자가 더 도드라졌습니다.",
+              "narration": "대출은 줄었는데, 카드 할부가 오조 늘었습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "공식 발표 나온 날",
+              "body": "한국은행은 십일월 십팔일 삼분기 잠정치를 발표했습니다.",
+              "narration": "한국은행은 이십육 년 십일월 십팔일, 삼 분기 가계신용 잠정치를 발표했습니다.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "가계신용은 이천삼십조",
+              "body": "분기말 잔액은 이천삼십조 오천억 원이었습니다.",
+              "narration": "가계신용 잔액은 이천삼십조 오천억 원, 전 분기보다 구조 팔천억 원 늘었습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "숫자는 줄다리기 중",
+              "body": "가계대출 사조 칠천억, 판매신용 오조 증가였습니다.",
+              "narration": "세부로는 가계대출이 사조 칠천억, 판매신용이 오조 늘었는데, 제 눈엔 빚이 줄었다기보다 자리를 옮긴 느낌이 납니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "통계는 차갑고 체감은 뜨겁죠",
+              "body": "대중 화제는 약했지만 공공성은 분명한 숫자입니다.",
+              "narration": "다만 강한 플랫폼 화제는 확인이 제한됐습니다. 그래도 숫자는 조용히 쌓이니, 명세서는 늘 검색어보다 성실하더라고요.",
+              "source_indices": [
+                3
+              ],
+              "media": "graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "korea-household-credit-q3-2026-record-high",
+            "category": "business",
+            "summary": "한국은행이 2026년 11월 18일 발표한 2026년 3분기 가계신용 잠정치에 따르면 가계신용 잔액은 2,030조5천억원으로 역대 최대였다. 전분기 대비 증가액은 9조8천억원으로 커졌지만 증가폭은 둔화했고, 세부적으로는 가계대출이 4조7천억원 늘고 판매신용이 5조원 늘었다. 구글 트렌드 제공 목록과 유튜브 검색 결과만으로는 이 통계 이슈가 대중 플랫폼에서 강한 자생 화제를 만들었는지 검증하기 어려웠고, 공개 인스타그램 신호도 확인이 제한적이었다. 따라서 사회적 관심도보다는 한국은행 공식 발표의 공공성에 무게를 둔 이슈다.",
+            "verified_facts": [
+              {
+                "text": "한국은행은 2026년 11월 18일 2026년 3분기 가계신용 잠정치를 발표했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "2026년 3분기말 가계신용 잔액은 2,030조5천억원이었다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "전분기말 대비 가계신용은 9조8천억원 증가했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "같은 발표에서 가계대출 잔액은 1,896조8천억원으로 전분기말 대비 4조7천억원 증가했고, 판매신용 잔액은 133조7천억원으로 5조원 증가했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "한국은행 통계 공표 일정 문서에도 2026년 11월 18일 '2026년 3/4분기 가계신용(잠정)' 공표가 예고돼 있었다.",
+                "source_indices": [
+                  2
+                ]
+              },
+              {
+                "text": "유튜브에서 이 통계를 직접 다루는 검증 가능한 강한 대중 반응 지표는 확인하지 못했고, 확인 가능한 것은 한국은행 발표를 예고한 YTN 경제 캘린더 수준이었다.",
+                "source_indices": [
+                  3
+                ]
+              }
+            ],
+            "uncertainties": [
+              "사용자 리드에 있던 '기타대출 -4.9조'와 '판매신용 증가 원인(가전 환급 행사·장기 할부·스마트폰 판매)'은 이번에 직접 읽은 공식 보도자료 본문 노출 범위에서는 확인이 충분하지 않아 제외했다.",
+              "'증가폭이 6분기 만에 최소'라는 표현은 보도 리드에는 있었지만 이번 직접 확인한 공식 원문 줄 범위만으로는 보수적으로 확정하지 않았다.",
+              "공개 인스타그램에서 이 이슈의 검증 가능한 관심 신호를 확보하지 못했다.",
+              "소셜 플랫폼 신호는 관심 지표일 뿐 통계 사실의 증거가 아니다."
+            ],
+            "sources": [
+              {
+                "title": "2026년 3/4분기중 가계신용(잠정)",
+                "url": "https://www.bok.or.kr/portal/bbs/B0000501/view.do?depth=201150&menuNo=201264&nttId=11066748&oldMenuNo=200761&pageIndex=1&pageUnit=10&programType=newsData",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "2026년 3/4분기 가계신용(잠정) 기자설명회",
+                "url": "https://www.bok.or.kr/portal/bbs/B0000170/view.do?depth=201297&menuNo=201297&nttId=11066778&oldMenuNo=201151&programType=multiCont&relate=Y",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "2026년 1월 30일 통계공표일정 PDF",
+                "url": "https://file-cdn.bok.or.kr/portal/c0215cc928794bc6b1b295dcd7ad548e/2/b9f0b6736a7d4872a7813f67720f2b97.pdf?token=st%3D1769731889~exp%3D1769735489~acl%3D%2Fportal%2Fc0215cc928794bc6b1b295dcd7ad548e%2F2%2Fb9f0b6736a7d4872a7813f67720f2b97.pdf%2A~hmac%3D0293ff7cbd3d7fb0c073d691eb177e32754d5959a6c3c7d2a0c28de1ff57f02e",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "■ 11월 18일(화) 경제 캘린더 / YTN - YouTube",
+                "url": "https://www.youtube.com/watch?v=FrlRGyRgv30",
+                "role": "independent_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "03572613db6887323da2cc225bd864fb3749faf06ddf8640b1d9cabf7173459c",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-19T12:41:49.779910+09:00"
+        }
+      ],
+      "media": {
+        "graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-0": {
+          "path": "assets/graphics/2026-11-19/2026-11-19-ojirap-korea-household-credit-q3-record-high/scene-01.png",
+          "sha256": "8f50de1f6ca374d008b816984048a5103d6636fc8d9855c5ee0a6839df0e9889",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-household-credit-q3-2026-record-high",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "d8025bbb43896ae500674510532c8f6fd8934524ef76bf463e17168219d4a045",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-1": {
+          "path": "assets/graphics/2026-11-19/2026-11-19-ojirap-korea-household-credit-q3-record-high/scene-02.png",
+          "sha256": "9c72c64c2ca8c6f089f11014b298696ceb64fd766cadcd5c97dbdf98a709d865",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-household-credit-q3-2026-record-high",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "383262e98e45c4ad911860225db2876418ae50c5760fa405d3604448ac418cec",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-2": {
+          "path": "assets/graphics/2026-11-19/2026-11-19-ojirap-korea-household-credit-q3-record-high/scene-03.png",
+          "sha256": "54ae82a98311c288afee7361551b7937ebb1421067ad5d0e559325782c93e53b",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-household-credit-q3-2026-record-high",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "15f9a8f80dc02ad59a7249cef4ad49b3daf0c25700ef9955a8217ff550e6c993",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-3": {
+          "path": "assets/graphics/2026-11-19/2026-11-19-ojirap-korea-household-credit-q3-record-high/scene-04.png",
+          "sha256": "3075a6a8395e7f51d8ffc3e20c0af9f5631ed5e482c80c0590ba4c98117eab56",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-household-credit-q3-2026-record-high",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "807b3516ab6268220458bfb7109dc545e8076f35041eabc43504a78d8006b02c",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-4": {
+          "path": "assets/graphics/2026-11-19/2026-11-19-ojirap-korea-household-credit-q3-record-high/scene-05.png",
+          "sha256": "045fecf495a981cfc94d6ca7ff31c59c8c2c9f7a27241a99b6fe97a50dc9191d",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-household-credit-q3-2026-record-high",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "7ca31f272162aa3ad9ff38530a797e39440dca04cc21a0b6d120554d542002fe",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-19-ojirap-korea-household-credit-q3-record-high\": [\"graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-0\", \"graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-1\", \"graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-2\", \"graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-3\", \"graphic-2026-11-19-ojirap-korea-household-credit-q3-record-high-4\"]}}",
+      "review_source_urls": [
+        "https://www.news1.kr/society/court-prosecution/6358338",
+        "https://www.yna.co.kr/view/AKR20261118118453004",
+        "https://www.yna.co.kr/view/AKR20261118131900001",
+        "https://www.bok.or.kr/portal/bbs/B0000501/view.do?depth=201150&menuNo=201264&nttId=11066748&oldMenuNo=200761&pageIndex=1&pageUnit=10&programType=newsData",
+        "https://www.bok.or.kr/portal/bbs/B0000501/view.do?depth=201264&menuNo=201264&nttId=11066748&oldMenuNo=201150&programType=newsData&relate=Y",
+        "https://www.bok.or.kr/portal/main/main.do?atchFileId=KO_00000000000033494",
+        "https://www.bok.or.kr/portal/main/main.do?atchFileId=KO_00000000000033494&fileSn=1&menuNo=200560",
+        "https://www.bok.or.kr/portal/stats/statsPublictSchdul/listCldr.do?date=20802-09&menuNo=200775",
+        "https://www.bok.or.kr/portal/stats/statsPublictSchdul/listCldr.do?date=63560-07&menuNo=200775",
+        "https://www.bok.or.kr/eng/bbs/E0000634/view.do?depth=400423&menuNo=400423&nttId=11066749&programType=newsDataEng&relate=Y",
+        "https://www.bok.or.kr/portal/bbs/B0000170/view.do?depth=200060&menuNo=200060&nttId=11066778&oldMenuNo=201151&programType=multiCont&relate=Y",
+        "https://www.bok.or.kr/portal/bbs/B0000170/view.do?depth=201297&menuNo=201297&nttId=11066778&oldMenuNo=201151&programType=multiCont&relate=Y",
+        "https://www.bok.or.kr/portal/bbs/B0000170/view.do?depth=201297&menuNo=201297&nttId=10098053",
+        "https://file-cdn.bok.or.kr/portal/8f1240dcf91947009ccee9fb2cc7a0fb/2/tempFile.pdf?token=st%3D1775201352~exp%3D1775204952~acl%3D%2Fportal%2F8f1240dcf91947009ccee9fb2cc7a0fb%2F2%2FtempFile.pdf%2A~hmac%3Db8d4ab92c5160367f349c79bb140574646404182429db9a3550873e659b84b8d",
+        "https://www.bok.or.kr/portal/stats/statsPublictSchdul/listCldr.do?date=2010-09&menuNo=200775",
+        "https://file-cdn.bok.or.kr/portal/98b1d4a7595942e2aebd664be69d2ec4/2/tempFile.pdf?token=st%3D1774392802~exp%3D1774396402~acl%3D%2Fportal%2F98b1d4a7595942e2aebd664be69d2ec4%2F2%2FtempFile.pdf%2A~hmac%3D314903b5b052619595a9c53bb80d025a76e712f293c0859e37330fb2c68f576c",
+        "https://file-cdn.bok.or.kr/portal/2b3cc3a3ef1b4488b23ede831803fec2/2/f404874c20ef45c5a1b616f7fdd51341.pdf?token=st%3D1771610876~exp%3D1771614476~acl%3D%2Fportal%2F2b3cc3a3ef1b4488b23ede831803fec2%2F2%2Ff404874c20ef45c5a1b616f7fdd51341.pdf%2A~hmac%3Dcb448379cc9c1b0f35cea5497642ee4c2c6df3496871a00023cfb53f959b3301",
+        "https://www.bok.or.kr/portal/stats/statsPublictSchdul/listCldr.do?date=2016-03&menuNo=200775"
+      ],
+      "created_at": "2026-11-19T12:41:49.780096+09:00"
     }
   },
   "publications": [
