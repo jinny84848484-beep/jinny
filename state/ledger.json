@@ -6214,13 +6214,16 @@
           "completed_at": "2026-11-19T12:41:35.610003+09:00"
         },
         "editorial_review_1": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "fdde14b82c0b5f6d1b787e95b538a9b8f379c96208886c3b2cb9078da8248064",
           "attempts": 1,
-          "at": "2026-11-19T12:41:37.279316+09:00"
+          "at": "2026-11-19T12:41:37.279316+09:00",
+          "usable": true,
+          "sha256": "a94752d23ed860c0f32ca49c1fe1b757486ae6f2d44b968f4e48202ba3a9afb0",
+          "completed_at": "2026-11-19T12:41:48.376224+09:00"
         }
       },
-      "status": "editorial_review_1_submitted",
+      "status": "editorial_review_1_completed",
       "active_stage": "editorial_review_1",
       "review_input_hash": "4c1667c7fca35376f279d5ba740c61fbaac2bf5fbc0b4a9c3691a4a5989d5be8"
     }
