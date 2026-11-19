@@ -6175,6 +6175,26 @@
       "publication_exclusions": [],
       "active_job": "2026-11-18-korea-foreign-tourists-20-million",
       "completed_at": "2026-11-18T08:55:03.645387+09:00"
+    },
+    "2026-11-19": {
+      "owner_directive": {
+        "sha256": "f9c2602cbefbcb2b9fd9d0c6c22ca1da7e7460a271d1ca54bbfe75ff9c820cd1",
+        "topics": [
+          "추경호 대구시장 1심 무죄",
+          "가계빚 2,030조 역대 최대, 대출은 줄고 카드 외상은 5조 증가"
+        ],
+        "issued_at": "2026-11-19T00:10:00+09:00"
+      },
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "122cd0ce2d909cd69e1aaac555e80f2e13593cdf27ca9482dfae734b0ef474ec",
+          "attempts": 1,
+          "at": "2026-11-19T12:40:17.973783+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
