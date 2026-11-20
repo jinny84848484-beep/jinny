@@ -762,14 +762,16 @@ def collect_metrics(ledger):
     observed=p.now()
     rows=[]
     for channel in ('ojirap',):
-        items=[x for x in ledger.get('publications',[])[-100:] if x['channel']==channel]
+        items=[x for x in ledger.get('publications',[]) if x['channel']==channel and x.get('privacy_status', 'public')=='public'][-100:]
         token=youtube_token(channel)
         for start in range(0,len(items),50):
             group=items[start:start+50]
-            url='https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id='+','.join(x['video_id'] for x in group)
+            url='https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,status&id='+','.join(x['video_id'] for x in group)
             result=http(url,headers={'Authorization':'Bearer '+token})
             by_id={x['video_id']:x for x in group}
             for video in result.get('items',[]):
+                # Owner OAuth also returns private and unlisted videos. Fail closed.
+                if video.get('status',{}).get('privacyStatus')!='public':continue
                 if video['snippet']['channelId']!=p.cfg()['channels'][channel]['channel_id']:raise RuntimeError('Metrics channel mismatch')
                 published=dt.datetime.fromisoformat(video['snippet']['publishedAt'].replace('Z','+00:00'))
                 row={k:by_id[video['id']].get(k) for k in ['video_id','channel','category','experiment','url']}

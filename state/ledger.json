@@ -6738,38 +6738,6 @@
   },
   "publications": [
     {
-      "job_id": "2026-11-20-ojirap-operator-economy",
-      "video_id": "vncHsTlcSmU",
-      "privacy_status": "public",
-      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
-      "file_sha256": "0665c15a2bcb4a07a5429ec640611d14c70311182d9131d59b282035600cc2ff",
-      "payload_binding_basis": "reviewed local release file and completed uploader receipt; remote bytes not downloaded",
-      "topic_key": "kr-producer-price-index-2026-10",
-      "category": "business",
-      "channel": "ojirap",
-      "title": "물가 하락? 비교 날짜부터 보세요 #Shorts",
-      "url": "https://www.youtube.com/shorts/vncHsTlcSmU",
-      "at": "2026-11-20T11:34:46+09:00",
-      "publication_method": "external_manual_vidiq",
-      "time_basis": "public_status_verification_time_not_upload_time"
-    },
-    {
-      "job_id": "2026-11-20-ojirap-operator-sports",
-      "video_id": "dwEvToHIVSQ",
-      "privacy_status": "public",
-      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
-      "file_sha256": "fa6394bc93cca3c83155e0275c7ef6b83c08e1f6f1458bc17efdea4aa35aafe8",
-      "payload_binding_basis": "reviewed local release file and completed uploader receipt; remote bytes not downloaded",
-      "topic_key": "lee-kang-in-afc-international-player-2026",
-      "category": "sports",
-      "channel": "ojirap",
-      "title": "이강인, AFC 국제선수상 2년 연속 #Shorts",
-      "url": "https://www.youtube.com/shorts/dwEvToHIVSQ",
-      "at": "2026-11-20T11:34:46+09:00",
-      "publication_method": "external_manual_vidiq",
-      "time_basis": "public_status_verification_time_not_upload_time"
-    },
-    {
       "job_id": "2026-11-04-midterms-korean",
       "topic_key": "midterms-korean",
       "category": "politics",
@@ -7344,6 +7312,36 @@
       "experiment": {}
     },
     {
+      "job_id": "2026-11-19-ojirap-manual-QRjupyRArH4",
+      "topic_key": "korea-household-credit-q3-2026-record-high",
+      "category": "business",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "가계빚 역대급인데 아무도 말 안 하는 이유 #오늘의오지랖 #경제 #Shorts",
+      "video_id": "QRjupyRArH4",
+      "url": "https://www.youtube.com/shorts/QRjupyRArH4",
+      "at": "2026-11-19T10:00:44+09:00",
+      "privacy_status": "public",
+      "privacy_observed_date_kst": "2026-11-19",
+      "publication_method": "external_manual_vidiq",
+      "time_basis": "uploader_completion_receipt_time_not_exact_publication_time"
+    },
+    {
+      "job_id": "2026-11-19-ojirap-manual-qJSmwqWeMoM",
+      "topic_key": "korea-school-life-satisfaction-2026-social-survey",
+      "category": "society",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "학교 만족도 떨어졌는데 아무도 말 안 하는 이유 #학교생활 #교육",
+      "video_id": "qJSmwqWeMoM",
+      "url": "https://www.youtube.com/shorts/qJSmwqWeMoM",
+      "at": "2026-11-19T11:02:09+09:00",
+      "privacy_status": "public",
+      "privacy_observed_date_kst": "2026-11-19",
+      "publication_method": "external_manual_vidiq",
+      "time_basis": "uploader_completion_receipt_time_not_exact_publication_time"
+    },
+    {
       "job_id": "2026-11-19-ojirap-korea-household-credit-q3-record-high",
       "topic_key": "korea-household-credit-q3-2026-record-high",
       "category": "business",
@@ -7353,9 +7351,44 @@
       "video_id": "HANS58XSgQI",
       "url": "https://www.youtube.com/shorts/HANS58XSgQI",
       "at": "2026-11-19T12:42:41.451643+09:00",
-      "experiment": {}
+      "experiment": {},
+      "privacy_status": "private",
+      "privacy_observed_date_kst": "2026-11-19",
+      "withdrawn_reason": "fact_direction_error"
+    },
+    {
+      "job_id": "2026-11-20-ojirap-operator-economy",
+      "video_id": "vncHsTlcSmU",
+      "privacy_status": "public",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "file_sha256": "0665c15a2bcb4a07a5429ec640611d14c70311182d9131d59b282035600cc2ff",
+      "payload_binding_basis": "reviewed local release file and completed uploader receipt; remote bytes not downloaded",
+      "topic_key": "kr-producer-price-index-2026-10",
+      "category": "business",
+      "channel": "ojirap",
+      "title": "물가 하락? 비교 날짜부터 보세요 #Shorts",
+      "url": "https://www.youtube.com/shorts/vncHsTlcSmU",
+      "at": "2026-11-20T11:34:46+09:00",
+      "publication_method": "external_manual_vidiq",
+      "time_basis": "public_status_verification_time_not_upload_time"
+    },
+    {
+      "job_id": "2026-11-20-ojirap-operator-sports",
+      "video_id": "dwEvToHIVSQ",
+      "privacy_status": "public",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "file_sha256": "fa6394bc93cca3c83155e0275c7ef6b83c08e1f6f1458bc17efdea4aa35aafe8",
+      "payload_binding_basis": "reviewed local release file and completed uploader receipt; remote bytes not downloaded",
+      "topic_key": "lee-kang-in-afc-international-player-2026",
+      "category": "sports",
+      "channel": "ojirap",
+      "title": "이강인, AFC 국제선수상 2년 연속 #Shorts",
+      "url": "https://www.youtube.com/shorts/dwEvToHIVSQ",
+      "at": "2026-11-20T11:34:46+09:00",
+      "publication_method": "external_manual_vidiq",
+      "time_basis": "public_status_verification_time_not_upload_time"
     }
-  ],
+],
   "additional_sessions": {
     "42241148266": {
       "status": "resolved_no_effects",
