@@ -140,7 +140,7 @@ def render_card(scene, logo, destination):
     canvas.save(destination)
 
 
-def render(episode, output):
+def render(episode, output, *, local_audio_formats=None):
     total = validate(episode)
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)  # never overwrite another/repeated run
@@ -149,7 +149,20 @@ def render(episode, output):
     require(audio.is_file() and logo.is_file(), 'missing narration or wordmark')
     for scene in episode['scenes']:
         require(Path(scene['image']).is_file(), 'missing scene image')
-    probe = json.loads(subprocess.check_output(['ffprobe','-v','error','-show_format','-of','json',str(audio)]))
+    # Private handoff pins the demuxer and limits input protocols to local files.
+    # The ordinary legacy caller retains its existing renderer interface.
+    def audio_options(name):
+        if local_audio_formats is None:
+            return []
+        kind = local_audio_formats.get(name)
+        require(kind in ('wav', 'mp3', 'mov'), 'invalid private input audio format')
+        options = ['-protocol_whitelist','file','-f',kind]
+        if kind == 'mov':
+            options += ['-enable_drefs','0','-use_absolute_path','0']
+        return options
+    voice_input = audio_options('narration_audio')
+    probe = json.loads(subprocess.check_output(['ffprobe','-v','error','-show_format','-of','json',
+                                               *voice_input,'-i',str(audio)]))
     require(abs(float(probe['format']['duration'])-total) < 0.3, 'audio/timeline duration mismatch')
     clips = []
     for i, scene in enumerate(episode['scenes']):
@@ -163,10 +176,10 @@ def render(episode, output):
     concat.write_text(''.join(f"file '{clip}'\n" for clip in clips))
     silent = output/'silent.mp4'
     subprocess.run(['ffmpeg','-y','-v','error','-f','concat','-safe','0','-i',str(concat),'-c','copy',str(silent)],check=True)
-    args = ['ffmpeg','-y','-v','error','-i',str(silent),'-i',str(audio)]
+    args = ['ffmpeg','-y','-v','error','-i',str(silent),*voice_input,'-i',str(audio)]
     if episode.get('music'):
         require(episode.get('music_rights_source'), 'music license evidence required')
-        args += ['-stream_loop','-1','-i',str(Path(episode['music']).resolve()),'-filter_complex',
+        args += ['-stream_loop','-1',*audio_options('music'),'-i',str(Path(episode['music']).resolve()),'-filter_complex',
                  f'[1:a]apad,loudnorm=I=-16:TP=-2:LRA=9[v];[2:a]volume=0.04,afade=t=out:st={max(0,total-2)}:d=2[b];[v][b]amix=inputs=2:normalize=0:duration=longest,alimiter=limit=0.84[a]']
     else:
         args += ['-filter_complex','[1:a]apad,loudnorm=I=-16:TP=-2:LRA=9,alimiter=limit=0.84[a]']
