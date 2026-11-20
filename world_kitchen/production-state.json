@@ -1,0 +1,22 @@
+{
+  "days": {
+    "2026-11-16": {
+      "status": "published_verified_manual",
+      "channel_id": "UCkuz6ra5_hZ1MSAbFthqDcg",
+      "dish": "퀘사디아",
+      "video_id": "UQNDeho8LxI",
+      "publication_method": "youtube_studio",
+      "verification": "Studio public state readback by operator; not an automatic pipeline run",
+      "url": "https://www.youtube.com/shorts/UQNDeho8LxI"
+    },
+    "2026-11-17": {
+      "status": "published_verified_manual",
+      "channel_id": "UCkuz6ra5_hZ1MSAbFthqDcg",
+      "dish": "카프레제",
+      "video_id": "MlM-NJYHBkE",
+      "publication_method": "youtube_studio",
+      "verification": "Studio public state readback by operator; not an automatic pipeline run",
+      "url": "https://www.youtube.com/shorts/MlM-NJYHBkE"
+    }
+  }
+}
