@@ -23,5 +23,5 @@ jobs:
           sudo apt-get install -y ffmpeg
       - name: Exercise approval handoff with isolated fixtures
         run: python -m unittest discover -s tests -p 'test_world_kitchen_release_runner.py' -v
-      - name: Inspect checked-out cooking queue without publishing
-        run: python -m world_kitchen.release_runner
+      - name: Require empty public cooking queue
+        run: python -m world_kitchen.public_queue_guard

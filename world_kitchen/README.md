@@ -1,7 +1,7 @@
 # 방구석 세계요리 자동 제작 경로 v1
 
 ## 구현 범위
-`python -m world_kitchen.runner`는 검토된 요리 큐를 읽어 **고정 양식 영상 + 선택형 영어 SRT + 설명 + 검수 결과 파일**을 자동 제작한다. 뉴스/코기 제작 코드와 OAuth·원장을 공유하지 않는다. `.github/workflows/world-kitchen.yml`은 매일 17:00 KST 또는 수동 실행으로 준비된 입력을 렌더하며, 목표 게시 시간은 19:00 KST 메타데이터다.
+`python -m world_kitchen.runner`는 검토된 요리 큐를 읽어 **고정 양식 영상 + 선택형 영어 SRT + 설명 + 검수 결과 파일**을 자동 제작한다. 뉴스/코기 제작 코드와 OAuth·원장을 공유하지 않는다. `.github/workflows/world-kitchen.yml`은 매일 17:00 KST 또는 수동 실행을 유지하되, 공개 GitHub에서는 빈 큐인지 확인만 한다. 실제 검수 자료 렌더는 승인된 비공개 작업환경에서 실행하며, 목표 게시 시간은 19:00 KST 메타데이터다.
 
 **아직 종단간 자동 채널 운영이 아니다.** 현재 큐는 비어 있다. 자동 트렌드 선정, 사실·안전·권리 심사, 이미지 생성, ElevenLabs API 생성, 미디어 저장소 동기화, YouTube 업로드/영어 자막 트랙 게시/19시 예약 어댑터는 연결되지 않았다. 해당 작업을 했다고 표시하거나 자동 결제를 요청하지 않는다. 새 큐가 없으면 `no_ready_episode`로 종료한다. 기존 브라우저에서 예약한 첫 영상을 큐에 다시 넣지 않는다.
 
@@ -24,14 +24,14 @@
 2. 권리 확인된 이미지, 로고/워드마크 PNG, 시간 정렬된 ElevenLabs 음성 파일을 실행 환경에 준비한다. 저장소에는 비밀키, 비공개 사용량 내역, 계정 파일을 넣지 않는다. 파일 경로는 manifest에서 지정한다.
 3. `python -m world_kitchen.pipeline episode.json`으로 검증한다.
 4. `python -m world_kitchen.pipeline episode.json --output runs/world_kitchen/review-name`으로 로컬 렌더한다. 기존 출력 디렉터리는 덮어쓰지 않는다.
-5. 준비된 파일이 GitHub runner에서도 접근 가능한 경우에만 queue.json에 `{"date":"YYYY-MM-DD","reviewed":true,"manifest":"world_kitchen/episodes/episode.json"}`을 추가한다. 로컬 경로만으로 CI에서 자산이 있다고 가정하지 않는다.
-6. `python -m world_kitchen.runner --date YYYY-MM-DD`가 큐에서 1편을 렌더한다. 실패나 시도 이력이 있으면 자동 반복하지 않는다.
+5. 공개 저장소의 `world_kitchen/queue.json`은 항상 `[]`로 둔다. 별도 승인된 비공개 환경에서 `{"date":"YYYY-MM-DD","reviewed":true,"manifest":"world_kitchen/episodes/episode.json"}` 형태의 로컬 큐를 준비하며, 공개 commit/artifact/cache로 전송하지 않는다.
+6. 비공개 환경에서만 `python -m world_kitchen.runner --queue /private/path/queue.json --state /private/path/state.json --output /private/path/renders --date YYYY-MM-DD`로 1편을 렌더한다. 실패나 시도 이력이 있으면 자동 반복하지 않는다.
 7. 실제 화면·음성 청취·영문 동기화·안전·권리·채널·중복을 검수한 뒤 별도의 승인된 게시 경로를 사용한다.
 
 큐 및 결과는 제목·설명·자막·음성의 숫자 일치와 사람의 의미 검수까지 보장하지 않는다. API 자격증명/사용량 확인·게시 어댑터 없이 `automatic_upload_enabled`를 켜지 않는다. 기본 상태의 두 자동화 플래그 false는 완전 자동 생성/업로드 미연결을 뜻하며 검토 입력 렌더 workflow의 실행 여부와 다르다.
 
 ## 실패·중복 처리
-GitHub concurrency 그룹은 요리 전용 단일 실행이다. 로컬 상태에는 렌더 시작을 먼저 기록하고 애매한 실패는 자동 재시도하지 않는다. workflow는 상태를 캐시에 보존하지만 캐시는 영구 DB가 아니므로 유실될 수 있다. **게시 기능이 없기에 이 원장은 업로드 중복 방지 보장이 아니다.** 게시 연결 전 채널/영상 해시 기반 영구 원장과 외부 상태 재조회가 필요하다.
+공개 GitHub의 요리 전용 concurrency 그룹은 빈 큐 확인을 직렬화할 뿐이다. 비공개 렌더 상태에는 시작을 먼저 기록하고 애매한 실패는 자동 재시도하지 않는다. 공개 Actions에는 실제 MP4·SRT·검수 결과·상태 파일을 업로드하거나 캐시하지 않는다. **로컬 렌더 상태는 업로드 중복 방지 보장이 아니다.** 게시 연결 전 채널/영상 해시 기반 영구 원장과 외부 상태 재조회가 필요하다.
 
 ## 검수·재현
 - `python -m unittest discover -s tests -p test_world_kitchen.py -v`

@@ -12,8 +12,7 @@
 - 승인된 대상의 비공개 업로드 후 알려진 ID가 처리 중이면 `publication.resume_known_private`로 원장 기반 읽기 재확인만 이어간다. 불명확한 업로드나 예약 요청은 절대 재호출하지 않는다.
 - 19:00 KST 예약 확인과 실제 공개 확인은 별개다. 기존 공개 영상을 큐에 재입력하지 않는다.
 
-옵션 수동 GitHub workflow는 cron·YouTube 권한·서비스 비밀값 없이 가짜 로컬 자산 테스트와 큐 조회만 수행한다. 별도 workflow로 새 runner를 실행하므로, 17시 workflow의 로컬 파일이 자동 공유되지 않는다. 현재 빈 큐에는 정상적으로 부작용 없이 종료하며, 큐에 항목이 있는데 결과물이 체크아웃에 없으면 실패를 숨기지 않는다. 실제 렌더 결과는 승인된 작업환경에서 `--output-root`로 지정한다. 현행 17시 렌더 워크플로와 19시 목표 시각은 변경하지 않았다.
-
+수동 공개 GitHub workflow는 cron·YouTube 권한·서비스 비밀값 없이 테스트용 로컬 자산과 빈 공개 큐만 확인한다. 17시 공개 workflow도 같은 빈 큐 확인만 하며 영상 렌더·개인 원장·원본 검수 자료는 공개 아티팩트로 저장하지 않는다. 기존 17시 트리거와 19시 목표는 바뀌지 않았다. 실제 결과물을 검토하려면 승인된 비공개 작업환경에서 해당 날짜 출력에 `--output-root`를 지정한다. 두 공개 workflow 사이에 실제 렌더 파일 공유는 없다.
 ## Journal/transport composition
 `CookingJournal` validates a dedicated private day ledger and binds each
 write to the current atomic snapshot revision. `JournaledReleaseAdapter`
@@ -28,3 +27,11 @@ in the public repository or run artifacts. No automatic replay on network or
 CAS uncertainty. A live transport must still verify the authenticated YouTube
 owner/channel, exact immutable upload, current permissions, time deadline and
 known private readbacks; the draft dry-run workflow never supplies it.
+
+### 2026-11-20 integration rehearsal
+The actual local renderer processed four synthetic fixture images and a
+generated 12-second test tone in private temp storage. The release entrypoint
+then verified the MP4/result/SRT/description and returned
+`dry_run_local_checks_only_approval_required`, scheduled false. This evidence
+doesn't represent a reviewed episode, spoken-narration QA, data handoff to a
+hosted worker, an account login, or a real schedule.
