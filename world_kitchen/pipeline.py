@@ -39,7 +39,8 @@ def validate(episode):
     require(scenes[0].get('kind') == 'hero', 'finished dish must appear immediately')
     require(scenes[1].get('kind') == 'ingredients', 'ingredients follow hero')
     require(scenes[-1].get('kind') == 'signature', 'signature ending required')
-    require(scenes[-1].get('narration') == SIGNATURE, 'fixed signature required')
+    require(scenes[-1].get('narration') == SIGNATURE, 'fixed spoken signature required')
+    require(scenes[-1].get('body') == SIGNATURE, 'fixed on-screen signature required')
     total = 0
     for i, scene in enumerate(scenes):
         duration = scene.get('duration', 0)
@@ -132,7 +133,10 @@ def render_card(scene, logo, destination):
             canvas.paste(image, (x, y), image)
     draw = ImageDraw.Draw(canvas)
     for field, color in (('title', t['title_color']), ('body', t['body_color']), ('footer', '#4F514B')):
-        draw_fit(draw, scene[field], t[field+'_box'], t['font'], t[field+'_size'], color)
+        label = scene[field]
+        if field == 'body' and scene.get('kind') == 'signature' and label == SIGNATURE:
+            label = label.replace('. ', '.\n', 1)  # two short mobile-safe lines; punctuation unchanged
+        draw_fit(draw, label, t[field+'_box'], t['font'], t[field+'_size'], color)
     canvas.save(destination)
 
 
