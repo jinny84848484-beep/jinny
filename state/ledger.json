@@ -1,5 +1,11 @@
 {
   "days": {
+    "2026-11-20": {
+      "status": "operator_manual_release_pending",
+      "channel": "ojirap",
+      "slots": 2,
+      "note": "Hold automatic base production while the two independently reviewed November 20 Korean Shorts are reconciled."
+    },
     "2026-11-04": {
       "status": "complete",
       "completed_at": "2026-11-05T03:02:50.127885+09:00",
