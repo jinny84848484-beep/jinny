@@ -33,3 +33,26 @@ deployment, active scheduler, live OAuth check, or publish command.
 Official reference:
 - https://developers.google.com/youtube/v3/docs/videos#status.publishAt
 - https://developers.google.com/youtube/v3/docs/videos/update
+
+### Durable asynchronous readiness
+After both private receipts, CAS-write `awaiting_processing` with exact date,
+channel, job IDs, media hashes, private IDs and publishAt. Persist it before
+readback. Use owner-authenticated `videos.list(part=snippet,status,processingDetails)`
+on only those IDs. Map YouTube's `processingDetails.processingStatus`
+verbatim; only `processing` is pending, only `succeeded` is ready.
+Absent/failed/terminated, inconsistent identities or external state require
+reconciliation, not an upload retry.
+
+The runner may catch only `ProcessingPending`, then perform bounded read-only
+checks using the same durable reservation, e.g. 15→30→60s, max 60s per interval,
+stop at the earlier of cutoff and runner time budget. No open-ended polling;
+report missed cutoff and leave uploads private. Explicitly route later attempts
+to `resume_processing` with current same-day manifest, never re-run initial
+staging. `load` and `checkpoint` must share durable revision/phase CAS, not a
+local copy or a second permissive reservation. The first `schedule_requested`
+must atomically leave awaiting_processing; a CAS conflict prevents any send.
+Once any schedule write has an intent marker, no automated resume; verify
+existing IDs separately, including late readbacks, and reconcile partials.
+The patch adds the one-readback resume hook, not the runner/timer or CAS adapter.
+
+Official processing field: https://developers.google.com/youtube/v3/docs/videos#processingDetails.processingStatus
