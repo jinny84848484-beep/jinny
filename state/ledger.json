@@ -6783,7 +6783,7 @@
           "completed_at": "2026-11-21T12:11:10.628816+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_1",
       "review_input_hash": "82a343e5bf4a7500e8e2abbaa1d81ea3b9582ba3df8a2465a88c8e44e1f60fc5",
       "editorial_exclusions": [],
@@ -6800,22 +6800,22 @@
             {
               "title": "한국, 유엔 전자정부 평가 12년 만에 세계 1위 탈환",
               "url": "https://www.yna.co.kr/amp/view/AKR20261120036900530",
-              "checked_at": "2026-11-21T12:11:11.916229+09:00"
+              "checked_at": "2026-11-21T12:11:13.334567+09:00"
             },
             {
               "title": "한국, UN 전자정부평가 '세계 1위'…정부24·모바일 신분증 등 호평 - 정책뉴스 | 뉴스 | 대한민국 정책브리핑",
               "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148976159&pWise=sub&pWiseSub=R5",
-              "checked_at": "2026-11-21T12:11:11.916229+09:00"
+              "checked_at": "2026-11-21T12:11:13.334567+09:00"
             },
             {
               "title": "UN 전자정부평가 결과 관련 브리핑 - 부처 브리핑 | 브리핑 자료 | 브리핑룸 | 대한민국 정책브리핑",
               "url": "https://m.korea.kr/briefing/policyBriefingView.do?endDate=2026-11-20&gubun=policyBriefing&newsId=156790048&pageIndex=1&srchType=&srchWord=&startDate=2026-05-20",
-              "checked_at": "2026-11-21T12:11:11.916229+09:00"
+              "checked_at": "2026-11-21T12:11:13.334567+09:00"
             },
             {
               "title": "행정 | 정치 | 뉴시스",
               "url": "https://nwww.newsis.com/politic/administration/2",
-              "checked_at": "2026-11-21T12:11:11.916229+09:00"
+              "checked_at": "2026-11-21T12:11:13.334567+09:00"
             }
           ],
           "visual_queries": [
@@ -6950,7 +6950,7 @@
           "fact_packet_hash": "c0fc191ab01c42346f19484547d43c22bdb9dc265fff48044d8f7f7b9546b2ab",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-21T12:11:11.916229+09:00"
+          "verified_at": "2026-11-21T12:11:13.334567+09:00"
         },
         {
           "id": "2026-11-21-korea-exports-one-trillion",
@@ -6963,32 +6963,32 @@
             {
               "title": "대한민국 수출 1조 달러 돌파, 기업이 뛰고 국민이 함께 이룬 성과 - 보도자료 | 브리핑룸 | 대한민국 정책브리핑",
               "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156789969",
-              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+              "checked_at": "2026-11-21T12:11:13.334690+09:00"
             },
             {
               "title": "보도자료 | 브리핑룸 | 대한민국 정책브리핑",
               "url": "https://www.korea.kr/briefing/pressReleaseList.do?pageIndex=1",
-              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+              "checked_at": "2026-11-21T12:11:13.334690+09:00"
             },
             {
               "title": "보도자료 | 브리핑룸 | 대한민국 정책브리핑",
               "url": "https://www.korea.kr/briefing/pressReleaseList.do%3BJSESSIONID_KOREA%3Dd54xcTLW1WQRbXrwDvpyp2QTDCyyZdwnXhS75lr2BG9x2Jj5mWk0%21112436470%21739974995%26pageIndex%3D4258%26repCode%3D%26repCodeType%3D%26srchWord%3D%26startDate%3D2008-02-29",
-              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+              "checked_at": "2026-11-21T12:11:13.334690+09:00"
             },
             {
               "title": "[수출 1조달러] ① 19년만에 깨진 벽…AI 날개 달고 꿈의 숫자 현실로 | 연합뉴스",
               "url": "https://www.yna.co.kr/view/AKR20261119064800003?section=economy%2Fall",
-              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+              "checked_at": "2026-11-21T12:11:13.334690+09:00"
             },
             {
               "title": "[수출 1조달러] ⑤ 주요 일지·수출품목 변화 | 연합뉴스",
               "url": "https://www.yna.co.kr/amp/view/AKR20261119066500003",
-              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+              "checked_at": "2026-11-21T12:11:13.334690+09:00"
             },
             {
               "title": "수출 60% 늘었다…반도체 3배·8개 품목 신기록 쓴 '1조달러' - 머니투데이",
               "url": "https://www.mt.co.kr/index.php/economy/2026/11/19/2026111908161431201",
-              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+              "checked_at": "2026-11-21T12:11:13.334690+09:00"
             }
           ],
           "visual_queries": [
@@ -7140,7 +7140,7 @@
           "fact_packet_hash": "5a21d797279d385b60e01f67b6fbdf3ff4f91f78d9b42ad7459e24e0a82449fe",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-21T12:11:11.916350+09:00"
+          "verified_at": "2026-11-21T12:11:13.334690+09:00"
         }
       ],
       "media": {
@@ -7423,7 +7423,9 @@
         "https://www.korea.kr/news/policyNewsView.do?newsId=148976159&pWise=sub&pWiseSub=R5",
         "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156789969"
       ],
-      "created_at": "2026-11-21T12:11:11.916453+09:00"
+      "created_at": "2026-11-21T12:11:11.916453+09:00",
+      "publication_exclusions": [],
+      "active_job": "2026-11-21-korea-un-egovernment-ranking"
     }
   },
   "publications": [
