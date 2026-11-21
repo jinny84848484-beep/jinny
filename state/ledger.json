@@ -6763,10 +6763,17 @@
           "usable": true,
           "sha256": "27c50aeb16afa4d10741525f27d63dd86f3dd94f2f184fbfcc33ab5ba6107ec6",
           "completed_at": "2026-11-21T12:10:42.497023+09:00"
+        },
+        "editorial_review_0": {
+          "status": "submitted",
+          "request_hash": "277eb29bbc8d63f19707647748aec441ac90225afee4fc59f73db4752d9f1373",
+          "attempts": 1,
+          "at": "2026-11-21T12:10:47.185307+09:00"
         }
       },
-      "status": "draft_completed",
-      "active_stage": "draft"
+      "status": "editorial_review_0_submitted",
+      "active_stage": "editorial_review_0",
+      "review_input_hash": "82a343e5bf4a7500e8e2abbaa1d81ea3b9582ba3df8a2465a88c8e44e1f60fc5"
     }
   },
   "publications": [
