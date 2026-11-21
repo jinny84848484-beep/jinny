@@ -88,10 +88,10 @@
       "duration": 3,
       "image": "3.png",
       "title": "짧은 제목",
-      "body": "내용 3",
+      "body": "오늘도 방구석에서 세계요리 한입. 맛있게 드세요.",
       "footer": "안내",
-      "narration": "오늘도 방구석에서 세계 한 입, 맛있게 드세요!",
-      "english": "Recipe instructions."
+      "narration": "오늘도 방구석에서 세계요리 한입. 맛있게 드세요.",
+      "english": "A taste of the world, right at home. Enjoy!"
     }
   ],
   "logo": "assets/your-reviewed-wordmark.png",
