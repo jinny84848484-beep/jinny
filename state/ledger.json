@@ -6783,9 +6783,647 @@
           "completed_at": "2026-11-21T12:11:10.628816+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
+      "status": "reviewed",
       "active_stage": "editorial_review_1",
-      "review_input_hash": "82a343e5bf4a7500e8e2abbaa1d81ea3b9582ba3df8a2465a88c8e44e1f60fc5"
+      "review_input_hash": "82a343e5bf4a7500e8e2abbaa1d81ea3b9582ba3df8a2465a88c8e44e1f60fc5",
+      "editorial_exclusions": [],
+      "retry_hold": false,
+      "jobs": [
+        {
+          "id": "2026-11-21-korea-un-egovernment-ranking",
+          "channel": "ojirap",
+          "topic_key": "korea-un-egovernment-ranking-2026-11-20",
+          "category": "technology",
+          "title": "전자정부 일 위, 제일 놀란 건 로그인",
+          "description": "한국이 유엔 전자정부평가에서 십이 년 만에 일 위로 복귀했습니다. 정부 설명과 독립 보도를 나눠 보며, 편해진 민원과 남는 숙제를 같이 짚어봅니다. 화면은 관련 파일사진일 수 있습니다.",
+          "sources": [
+            {
+              "title": "한국, 유엔 전자정부 평가 12년 만에 세계 1위 탈환",
+              "url": "https://www.yna.co.kr/amp/view/AKR20261120036900530",
+              "checked_at": "2026-11-21T12:11:11.916229+09:00"
+            },
+            {
+              "title": "한국, UN 전자정부평가 '세계 1위'…정부24·모바일 신분증 등 호평 - 정책뉴스 | 뉴스 | 대한민국 정책브리핑",
+              "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148976159&pWise=sub&pWiseSub=R5",
+              "checked_at": "2026-11-21T12:11:11.916229+09:00"
+            },
+            {
+              "title": "UN 전자정부평가 결과 관련 브리핑 - 부처 브리핑 | 브리핑 자료 | 브리핑룸 | 대한민국 정책브리핑",
+              "url": "https://m.korea.kr/briefing/policyBriefingView.do?endDate=2026-11-20&gubun=policyBriefing&newsId=156790048&pageIndex=1&srchType=&srchWord=&startDate=2026-05-20",
+              "checked_at": "2026-11-21T12:11:11.916229+09:00"
+            },
+            {
+              "title": "행정 | 정치 | 뉴시스",
+              "url": "https://nwww.newsis.com/politic/administration/2",
+              "checked_at": "2026-11-21T12:11:11.916229+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Wikimedia Commons South Korea Government24",
+            "Wikimedia Commons South Korea mobile ID"
+          ],
+          "opening_text": "로그인도 국격인가",
+          "hook_type": "dry",
+          "topic_category": "public-digital-service",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "로그인도 국격인가",
+              "body": "편해지면 티 안 나는데, 순위 오르면 갑자기 다들 뿌듯하죠.",
+              "narration": "로그인도 국격인가.",
+              "source_indices": [],
+              "media": "graphic-2026-11-21-korea-un-egovernment-ranking-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "유엔 평가 일 위 복귀",
+              "body": "십일월 이십일 보도 기준, 한국은 유엔 전자정부평가 일 위였습니다.",
+              "narration": "십일월 이십일 기준, 한국이 유엔 전자정부평가에서 일 위로 돌아왔대요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-21-korea-un-egovernment-ranking-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "정부가 든 근거는 이렇다",
+              "body": "정부는 정부이십사, 모바일 신분증과 균형 발전을 배경으로 들었습니다.",
+              "narration": "행안부 설명으론 정부이십사, 모바일 신분증, 온라인 서비스와 인프라, 인적 자본의 균형이 배경이었고요.",
+              "source_indices": [
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-21-korea-un-egovernment-ranking-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "좋은데 늘 숙제는 남죠",
+              "body": "이건 정부 발표와 보도된 사실이고, 세부 비교표는 이번 범위 밖입니다.",
+              "narration": "연합뉴스는 십이 년 만의 복귀라고 전했는데, 저는 이런 순위보다 실제 민원 한 번 덜 헤매는지가 더 중요하다고 봐요.",
+              "source_indices": [
+                0,
+                3
+              ],
+              "media": "graphic-2026-11-21-korea-un-egovernment-ranking-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "제발 비밀번호만 그만",
+              "body": "화면은 관련 파일사진일 수 있습니다. 실제 현장과 다를 수 있어요.",
+              "narration": "그래도 일 위 뉴스 들은 날만큼은, 비밀번호 찾기 창도 조금 덜 얄밉네요.",
+              "source_indices": [
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-21-korea-un-egovernment-ranking-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "korea-un-egovernment-ranking-2026-11-20",
+            "category": "technology",
+            "summary": "2026년 11월 20일 행정안전부가 유엔의 2026년 전자정부평가에서 한국이 194개국 중 1위를 기록했다고 발표했다. 정부는 전자정부발전지수(EGDI) 0.9794점을 제시했고, 정부24·모바일 신분증 등 디지털 공공서비스와 인공지능 기반 행정 혁신을 주요 배경으로 설명했다. 독립 보도도 한국이 12년 만에 정상에 복귀했다고 전했다.",
+            "verified_facts": [
+              {
+                "text": "행정안전부는 2026년 11월 20일 유엔의 2026년 전자정부평가에서 한국이 194개국 가운데 전자정부발전지수(EGDI) 1위(0.9794점)를 기록했다고 밝혔다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "정책브리핑에 실린 행정안전부 브리핑은 온라인 서비스, 통신 인프라, 인적 자본의 균형 발전이 이번 1위의 배경이라고 설명했다.",
+                "source_indices": [
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "연합뉴스는 한국이 2014년 이후 12년 만에 유엔 전자정부평가 1위에 복귀했다고 보도했다.",
+                "source_indices": [
+                  0,
+                  3
+                ]
+              },
+              {
+                "text": "정책브리핑 기사에는 정부24와 모바일 신분증 등이 한국 전자정부 서비스의 강점 사례로 언급됐다.",
+                "source_indices": [
+                  1,
+                  2
+                ]
+              }
+            ],
+            "uncertainties": [
+              "유엔 원문 보고서 세부 평가 항목별 국가 비교표 전체는 이번 확인 범위에서 직접 열람하지 못했다.",
+              "평가 결과에 대한 후속 정책 발표나 추가 해설은 기사 공개 이후 더 나올 수 있다."
+            ],
+            "sources": [
+              {
+                "title": "한국, 유엔 전자정부 평가 12년 만에 세계 1위 탈환",
+                "url": "https://www.yna.co.kr/amp/view/AKR20261120036900530",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "한국, UN 전자정부평가 '세계 1위'…정부24·모바일 신분증 등 호평 - 정책뉴스 | 뉴스 | 대한민국 정책브리핑",
+                "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148976159&pWise=sub&pWiseSub=R5",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "UN 전자정부평가 결과 관련 브리핑 - 부처 브리핑 | 브리핑 자료 | 브리핑룸 | 대한민국 정책브리핑",
+                "url": "https://m.korea.kr/briefing/policyBriefingView.do?endDate=2026-11-20&gubun=policyBriefing&newsId=156790048&pageIndex=1&srchType=&srchWord=&startDate=2026-05-20",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "행정 | 정치 | 뉴시스",
+                "url": "https://nwww.newsis.com/politic/administration/2",
+                "role": "independent_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "c0fc191ab01c42346f19484547d43c22bdb9dc265fff48044d8f7f7b9546b2ab",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-21T12:11:11.916229+09:00"
+        },
+        {
+          "id": "2026-11-21-korea-exports-one-trillion",
+          "channel": "ojirap",
+          "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+          "category": "business",
+          "title": "수출 일조 달러, 숫자는 큰데 체감은 아직",
+          "description": "한국의 연간 누적 수출이 처음으로 일조 달러를 넘었습니다. 공식 보도자료와 독립 보도를 바탕으로 확인된 사실과 해석의 여지를 나눠 봅니다. 화면은 관련 파일사진일 수 있습니다.",
+          "sources": [
+            {
+              "title": "대한민국 수출 1조 달러 돌파, 기업이 뛰고 국민이 함께 이룬 성과 - 보도자료 | 브리핑룸 | 대한민국 정책브리핑",
+              "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156789969",
+              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+            },
+            {
+              "title": "보도자료 | 브리핑룸 | 대한민국 정책브리핑",
+              "url": "https://www.korea.kr/briefing/pressReleaseList.do?pageIndex=1",
+              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+            },
+            {
+              "title": "보도자료 | 브리핑룸 | 대한민국 정책브리핑",
+              "url": "https://www.korea.kr/briefing/pressReleaseList.do%3BJSESSIONID_KOREA%3Dd54xcTLW1WQRbXrwDvpyp2QTDCyyZdwnXhS75lr2BG9x2Jj5mWk0%21112436470%21739974995%26pageIndex%3D4258%26repCode%3D%26repCodeType%3D%26srchWord%3D%26startDate%3D2008-02-29",
+              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+            },
+            {
+              "title": "[수출 1조달러] ① 19년만에 깨진 벽…AI 날개 달고 꿈의 숫자 현실로 | 연합뉴스",
+              "url": "https://www.yna.co.kr/view/AKR20261119064800003?section=economy%2Fall",
+              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+            },
+            {
+              "title": "[수출 1조달러] ⑤ 주요 일지·수출품목 변화 | 연합뉴스",
+              "url": "https://www.yna.co.kr/amp/view/AKR20261119066500003",
+              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+            },
+            {
+              "title": "수출 60% 늘었다…반도체 3배·8개 품목 신기록 쓴 '1조달러' - 머니투데이",
+              "url": "https://www.mt.co.kr/index.php/economy/2026/11/19/2026111908161431201",
+              "checked_at": "2026-11-21T12:11:11.916350+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Wikimedia Commons Busan Port container terminal",
+            "Wikimedia Commons Incheon Airport cargo terminal"
+          ],
+          "opening_text": "숫자는 드디어 조 단위",
+          "hook_type": "wry",
+          "topic_category": "trade-milestone",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "숫자는 드디어 조 단위",
+              "body": "수출 뉴스는 늘 크죠. 다만 이번엔 정말 숫자 자체가 컸습니다.",
+              "narration": "숫자는 드디어 조 단위.",
+              "source_indices": [],
+              "media": "graphic-2026-11-21-korea-exports-one-trillion-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "처음으로 일조 달러",
+              "body": "정책브리핑 자료는 십일월 십구일 오후 두 시 구 분 돌파라 했습니다.",
+              "narration": "정책브리핑 자료 기준으로 한국 누적 수출은 십일월 십구일 오후 두 시 구 분, 처음 일조 달러를 넘었습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-21-korea-exports-one-trillion-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "누적 일조 영십오억 달러",
+              "body": "같은 자료는 전년 동기 대비 육십이 점 구 퍼센트 증가라 설명했습니다.",
+              "narration": "누적액은 일조 영십오억 달러, 마지막 돌파 품목은 반도체였다고 했고요.",
+              "source_indices": [
+                0,
+                2
+              ],
+              "media": "graphic-2026-11-21-korea-exports-one-trillion-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "세계 네 번째라는 의미",
+              "body": "연합뉴스는 미국 독일 중국에 이어 네 번째라고 전했습니다.",
+              "narration": "연합뉴스는 미국, 독일, 중국에 이어 세계 네 번째라고 전했어요. 큰 기록은 맞는데, 체감 경기까지 자동 번역되진 않더라고요.",
+              "source_indices": [
+                3,
+                4
+              ],
+              "media": "graphic-2026-11-21-korea-exports-one-trillion-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "컨테이너는 웅장, 월급은 소박",
+              "body": "화면은 관련 파일사진일 수 있습니다. 실제 당일 현장과 다를 수 있어요.",
+              "narration": "머니투데이도 같은 돌파 사실을 전했고요. 조 단위 수출의 위엄, 이제 장바구니에도 수입되면 좋겠습니다.",
+              "source_indices": [
+                5,
+                0
+              ],
+              "media": "graphic-2026-11-21-korea-exports-one-trillion-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+            "category": "business",
+            "summary": "한국의 연간 누적 수출액이 2026년 11월 19일 사상 처음 1조 달러를 넘어섰다. 관세청 보도자료와 정책브리핑은 이날 오후 2시 9분 기준 누적 수출이 1조15억 달러라고 밝혔고, 연합뉴스와 머니투데이는 한국이 미국·독일·중국에 이어 세계 네 번째로 연 수출 1조 달러를 달성한 나라가 됐다고 보도했다.",
+            "verified_facts": [
+              {
+                "text": "관세청 보도자료를 전재한 정책브리핑은 한국의 연간 누적 수출액이 2026년 11월 19일 오후 2시 9분 사상 처음 1조 달러를 돌파했다고 밝혔다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "정책브리핑에 따르면 11월 19일까지 누적 수출은 전년 동기 대비 62.9% 증가한 1조15억 달러였다.",
+                "source_indices": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "text": "연합뉴스는 한국이 미국·독일(2006년), 중국(2007년)에 이어 세계 네 번째로 연 수출 1조 달러를 달성했다고 보도했다.",
+                "source_indices": [
+                  3,
+                  4
+                ]
+              },
+              {
+                "text": "정책브리핑의 관련 자료는 1조 달러 달성 시점의 마지막 수출 품목이 반도체였다고 설명했다.",
+                "source_indices": [
+                  2,
+                  0
+                ]
+              },
+              {
+                "text": "머니투데이는 산업통상부 설명을 인용해 2026년 11월 19일 한국의 누적 수출액이 1조 달러를 넘어섰다고 전했다.",
+                "source_indices": [
+                  5,
+                  0
+                ]
+              }
+            ],
+            "uncertainties": [
+              "연말까지 최종 확정되는 연간 수출 총액과 품목별 비중은 이후 통계 정리 과정에서 달라질 수 있다.",
+              "1조 달러 달성의 경기·고용 파급효과 해석은 기관과 분석 방식에 따라 차이가 있을 수 있다."
+            ],
+            "sources": [
+              {
+                "title": "대한민국 수출 1조 달러 돌파, 기업이 뛰고 국민이 함께 이룬 성과 - 보도자료 | 브리핑룸 | 대한민국 정책브리핑",
+                "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156789969",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "보도자료 | 브리핑룸 | 대한민국 정책브리핑",
+                "url": "https://www.korea.kr/briefing/pressReleaseList.do?pageIndex=1",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "보도자료 | 브리핑룸 | 대한민국 정책브리핑",
+                "url": "https://www.korea.kr/briefing/pressReleaseList.do%3BJSESSIONID_KOREA%3Dd54xcTLW1WQRbXrwDvpyp2QTDCyyZdwnXhS75lr2BG9x2Jj5mWk0%21112436470%21739974995%26pageIndex%3D4258%26repCode%3D%26repCodeType%3D%26srchWord%3D%26startDate%3D2008-02-29",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "[수출 1조달러] ① 19년만에 깨진 벽…AI 날개 달고 꿈의 숫자 현실로 | 연합뉴스",
+                "url": "https://www.yna.co.kr/view/AKR20261119064800003?section=economy%2Fall",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "[수출 1조달러] ⑤ 주요 일지·수출품목 변화 | 연합뉴스",
+                "url": "https://www.yna.co.kr/amp/view/AKR20261119066500003",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "수출 60% 늘었다…반도체 3배·8개 품목 신기록 쓴 '1조달러' - 머니투데이",
+                "url": "https://www.mt.co.kr/index.php/economy/2026/11/19/2026111908161431201",
+                "role": "independent_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "5a21d797279d385b60e01f67b6fbdf3ff4f91f78d9b42ad7459e24e0a82449fe",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-21T12:11:11.916350+09:00"
+        }
+      ],
+      "media": {
+        "commons-96296199-5fdc6f67": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/9/96/CPT_Coward%2C_temporarily_attached_to_the129th_Medical_Detachment%2C_neuters_a_golden_retriever_at_a_mobile_veterinary_clinic_at_Yongsan_Army_Garrison%2C_Seoul%2C_Korea%2C_Oct._21%2C_1998._The_-_DPLA_-_359edbefde0608d7ac757ab4a9fc319e.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:CPT_Coward,_temporarily_attached_to_the129th_Medical_Detachment,_neuters_a_golden_retriever_at_a_mobile_veterinary_clinic_at_Yongsan_Army_Garrison,_Seoul,_Korea,_Oct._21,_1998._The_-_DPLA_-_359edbefde0608d7ac757ab4a9fc319e.jpeg",
+          "path": "assets/commons-96296199-5fdc6f67.jpg",
+          "media_type": "image",
+          "credit": "Department of Defense. American Forces Information Service. Defense Visual Information Center. 1994 / Wikimedia Commons",
+          "license": "Public domain",
+          "license_url": "",
+          "notice": "자료사진 · 1998",
+          "description": "The original finding aid described this photograph as: Subject Operation/Series: FOAL EAGLE '98KOREA CD Base: Seoul Country: Republic Of Korea (KOR) Scene Camera Operator: SRA Nicole Thurston Release Status: Released to Public",
+          "capture_date": "21 October 1998date QS:P571,+1998-10-21T00:00:00Z/11",
+          "title": "File:CPT Coward, temporarily attached to the129th Medical Detachment, neuters a golden retriever at a mobile veterinary clinic at Yongsan Army Garrison, Seoul, Korea, Oct. 21, 1998. The - DPLA - 359edbefde0608d7ac757ab4a9fc319e.jpeg",
+          "topic_key": "korea-un-egovernment-ranking-2026-11-20",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-21T12:10:45.396333+09:00"
+        },
+        "commons-96592303-5fdc6f67": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/b/bd/SPC_Eriberto_Leon_administers_a_shot_to_Prince_at_a_mobile_veterinary_clinic_at_Yongsan%2C_Army_Garrison%2C_Seoul%2C_Korea%2C_Oct._21%2C_1998._The_mobile_Vet._clinic_often_attends_to_service_-_DPLA_-_fa30738bfc9f8b9ffc00122a1d7bf2ef.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+          "source": "https://commons.wikimedia.org/wiki/File:SPC_Eriberto_Leon_administers_a_shot_to_Prince_at_a_mobile_veterinary_clinic_at_Yongsan,_Army_Garrison,_Seoul,_Korea,_Oct._21,_1998._The_mobile_Vet._clinic_often_attends_to_service_-_DPLA_-_fa30738bfc9f8b9ffc00122a1d7bf2ef.jpeg",
+          "path": "assets/commons-96592303-5fdc6f67.jpg",
+          "media_type": "image",
+          "credit": "Department of Defense. American Forces Information Service. Defense Visual Information Center. 1994 / Wikimedia Commons",
+          "license": "Public domain",
+          "license_url": "",
+          "notice": "자료사진 · 1998",
+          "description": "The original finding aid described this photograph as: Subject Operation/Series: KOREA CD Base: Seoul Country: Republic Of Korea (KOR) Scene Camera Operator: SRA Nicole Thurston Release Status: Released to Public",
+          "capture_date": "21 October 1998date QS:P571,+1998-10-21T00:00:00Z/11",
+          "title": "File:SPC Eriberto Leon administers a shot to Prince at a mobile veterinary clinic at Yongsan, Army Garrison, Seoul, Korea, Oct. 21, 1998. The mobile Vet. clinic often attends to service - DPLA - fa30738bfc9f8b9ffc00122a1d7bf2ef.jpeg",
+          "topic_key": "korea-un-egovernment-ranking-2026-11-20",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-21T12:10:45.396391+09:00"
+        },
+        "commons-112684413-67b1a2db": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/b/be/AREX-Incheon_International_Airport_Cargo_Terminal_Stn-Concourse-1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:AREX-Incheon_International_Airport_Cargo_Terminal_Stn-Concourse-1.jpg",
+          "path": "assets/commons-112684413-67b1a2db.jpg",
+          "media_type": "image",
+          "credit": "IRTC1015 / Wikimedia Commons",
+          "license": "Public domain",
+          "license_url": "",
+          "notice": "자료사진 · 2021",
+          "description": "공항화물청사역 대합실",
+          "capture_date": "2021-11-03 15:04:55",
+          "title": "File:AREX-Incheon International Airport Cargo Terminal Stn-Concourse-1.jpg",
+          "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-21T12:10:46.883631+09:00"
+        },
+        "commons-112684428-67b1a2db": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/d/d1/AREX-Incheon_International_Airport_Cargo_Terminal_Stn-Concourse-3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:AREX-Incheon_International_Airport_Cargo_Terminal_Stn-Concourse-3.jpg",
+          "path": "assets/commons-112684428-67b1a2db.jpg",
+          "media_type": "image",
+          "credit": "IRTC1015 / Wikimedia Commons",
+          "license": "Public domain",
+          "license_url": "",
+          "notice": "자료사진 · 2021",
+          "description": "공항화물청사역 대합실",
+          "capture_date": "2021-11-03 14:39:47",
+          "title": "File:AREX-Incheon International Airport Cargo Terminal Stn-Concourse-3.jpg",
+          "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-21T12:10:46.883683+09:00"
+        },
+        "commons-112684429-67b1a2db": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/AREX-Incheon_International_Airport_Cargo_Terminal_Stn-Concourse-4.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:AREX-Incheon_International_Airport_Cargo_Terminal_Stn-Concourse-4.jpg",
+          "path": "assets/commons-112684429-67b1a2db.jpg",
+          "media_type": "image",
+          "credit": "IRTC1015 / Wikimedia Commons",
+          "license": "Public domain",
+          "license_url": "",
+          "notice": "자료사진 · 2021",
+          "description": "공항화물청사역 대합실",
+          "capture_date": "2021-11-03 14:40:33",
+          "title": "File:AREX-Incheon International Airport Cargo Terminal Stn-Concourse-4.jpg",
+          "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-21T12:10:46.883711+09:00"
+        },
+        "commons-112684427-67b1a2db": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/AREX-Incheon_International_Airport_Cargo_Terminal_Stn-Concourse-5.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:AREX-Incheon_International_Airport_Cargo_Terminal_Stn-Concourse-5.jpg",
+          "path": "assets/commons-112684427-67b1a2db.jpg",
+          "media_type": "image",
+          "credit": "IRTC1015 / Wikimedia Commons",
+          "license": "Public domain",
+          "license_url": "",
+          "notice": "자료사진 · 2021",
+          "description": "공항화물청사역 대합실",
+          "capture_date": "2021-11-03 14:41:04",
+          "title": "File:AREX-Incheon International Airport Cargo Terminal Stn-Concourse-5.jpg",
+          "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-21T12:10:46.883739+09:00"
+        },
+        "graphic-2026-11-21-korea-un-egovernment-ranking-0": {
+          "path": "assets/graphics/2026-11-21/2026-11-21-korea-un-egovernment-ranking/scene-01.png",
+          "sha256": "3762af673a47c9f6651c7954b9c055b86b66aea5e03c112dcd6db48cf349fc6b",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-un-egovernment-ranking-2026-11-20",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "c073936457624ccf5778588cde4b6125209846ba5fcde74230a234720348a756",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-21-korea-un-egovernment-ranking-1": {
+          "path": "assets/graphics/2026-11-21/2026-11-21-korea-un-egovernment-ranking/scene-02.png",
+          "sha256": "68a97e57fd48627d135344a9b60789874090ed607509fe18636d901fb0dff518",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-un-egovernment-ranking-2026-11-20",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "744f560554731d272c97fcefde04eb10e1dbed21187bc1fbb2fd4359f779bae6",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-21-korea-un-egovernment-ranking-2": {
+          "path": "assets/graphics/2026-11-21/2026-11-21-korea-un-egovernment-ranking/scene-03.png",
+          "sha256": "9dce089e7d0374ea90179fc79ff62343fd72a5bd4d94e88c8e3cecdf9084a342",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-un-egovernment-ranking-2026-11-20",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "bb25b748dc90fefb485933f095246ca486d1515ea4d41b393f98d170a1484c03",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-21-korea-un-egovernment-ranking-3": {
+          "path": "assets/graphics/2026-11-21/2026-11-21-korea-un-egovernment-ranking/scene-04.png",
+          "sha256": "7ff1cc164eba6188890fa6e76e3af3b3ad09d5e893d8c65b20f8cf700c00099e",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-un-egovernment-ranking-2026-11-20",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "9fb191822991cb24b14b14f23061833c35805e391da6706919d560569e4ee999",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-21-korea-un-egovernment-ranking-4": {
+          "path": "assets/graphics/2026-11-21/2026-11-21-korea-un-egovernment-ranking/scene-05.png",
+          "sha256": "c93134b5cf85273e88066b59add14df8ff358f0215b8ae3c64b594569f937042",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-un-egovernment-ranking-2026-11-20",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "5387a0c1c3c877b8962aa33dd7498fdb181f5f079bcba375a94dc2f7841e13fc",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-21-korea-exports-one-trillion-0": {
+          "path": "assets/graphics/2026-11-21/2026-11-21-korea-exports-one-trillion/scene-01.png",
+          "sha256": "38f7e65daf5d85b2bdc12d6039f1621856f2d5c26eedf541832c20f61b176933",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "c041d633f4eb1e34cf7321e0af3d2696cbd18d3a9dd60fdac2c3ae146a184202",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-21-korea-exports-one-trillion-1": {
+          "path": "assets/graphics/2026-11-21/2026-11-21-korea-exports-one-trillion/scene-02.png",
+          "sha256": "f5c0ba22baf9d4718d55875fca1fb5f1ea802bc22fc2b55476f5ed4fb015cfab",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "f8a3af5228418972453ed8324480376262dad3090c913a79a0cea7101dc44aa7",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-21-korea-exports-one-trillion-2": {
+          "path": "assets/graphics/2026-11-21/2026-11-21-korea-exports-one-trillion/scene-03.png",
+          "sha256": "3515271531cea6bd5935a09d1fa0c93feb0eb820a6b2fdd1b741937778a1fb19",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "cb3b913d58ed9d29c0e6fbd6f35f6f7837b0b3fc2ac1a6fa127256bcc6592b25",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-21-korea-exports-one-trillion-3": {
+          "path": "assets/graphics/2026-11-21/2026-11-21-korea-exports-one-trillion/scene-04.png",
+          "sha256": "a9cad55e5e45ad98d7c88e59f9f5fa966813816eb2ffdef7d384daea2b5d7df0",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "5512c67857b01d47287707183a62417d871496c6f7a650a9810ef1ec542fe698",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-21-korea-exports-one-trillion-4": {
+          "path": "assets/graphics/2026-11-21/2026-11-21-korea-exports-one-trillion/scene-05.png",
+          "sha256": "2cfde39fc4963cb43d35c27a39c76ca83c042152d12ee6f8b4247b3024c86bae",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-exports-one-trillion-dollars-2026-11-19",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "f46b7de43921eac7f09705ae30e31535143a1c2da55cc5a08035237a67be0e27",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-21-korea-un-egovernment-ranking\": [\"graphic-2026-11-21-korea-un-egovernment-ranking-0\", \"graphic-2026-11-21-korea-un-egovernment-ranking-1\", \"graphic-2026-11-21-korea-un-egovernment-ranking-2\", \"graphic-2026-11-21-korea-un-egovernment-ranking-3\", \"graphic-2026-11-21-korea-un-egovernment-ranking-4\"], \"2026-11-21-korea-exports-one-trillion\": [\"graphic-2026-11-21-korea-exports-one-trillion-0\", \"graphic-2026-11-21-korea-exports-one-trillion-1\", \"graphic-2026-11-21-korea-exports-one-trillion-2\", \"graphic-2026-11-21-korea-exports-one-trillion-3\", \"graphic-2026-11-21-korea-exports-one-trillion-4\"]}}",
+      "review_source_urls": [
+        "https://www.yna.co.kr/amp/view/AKR20261120036900530",
+        "https://www.korea.kr/news/policyNewsView.do?newsId=148976159&pWise=sub&pWiseSub=R5",
+        "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156789969"
+      ],
+      "created_at": "2026-11-21T12:11:11.916453+09:00"
     }
   },
   "publications": [
