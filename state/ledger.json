@@ -6783,7 +6783,7 @@
           "completed_at": "2026-11-21T12:11:10.628816+09:00"
         }
       },
-      "status": "tts_submitted",
+      "status": "rendered",
       "active_stage": "editorial_review_1",
       "review_input_hash": "82a343e5bf4a7500e8e2abbaa1d81ea3b9582ba3df8a2465a88c8e44e1f60fc5",
       "editorial_exclusions": [],
