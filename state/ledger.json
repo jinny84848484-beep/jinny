@@ -7476,7 +7476,7 @@
           "completed_at": "2026-11-22T10:09:19.941781+09:00"
         }
       },
-      "status": "uploaded",
+      "status": "complete",
       "active_stage": "editorial_review_1",
       "nov22_photo_recovery": {
         "run": 44968565375,
@@ -7931,7 +7931,8 @@
           ]
         }
       ],
-      "active_job": "2026-11-22-suneung-ai-crackdown"
+      "active_job": "2026-11-22-suneung-ai-crackdown",
+      "completed_at": "2026-11-22T10:12:18.333859+09:00"
     }
   },
   "publications": [
