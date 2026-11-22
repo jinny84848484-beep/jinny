@@ -7476,7 +7476,7 @@
           "completed_at": "2026-11-22T10:09:19.941781+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1",
       "nov22_photo_recovery": {
         "run": 44968565375,
@@ -8575,6 +8575,18 @@
       "video_id": "kVbXpj694KM",
       "url": "https://www.youtube.com/shorts/kVbXpj694KM",
       "at": "2026-11-21T12:12:48.445621+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-22-suneung-ai-crackdown",
+      "topic_key": "suneung-ai-cheating-crackdown-2026-11",
+      "category": "society",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "수능 끝나자 AI 뒤쫓기 시작",
+      "video_id": "I_b-Jlyz0Oo",
+      "url": "https://www.youtube.com/shorts/I_b-Jlyz0Oo",
+      "at": "2026-11-22T10:12:16.782091+09:00",
       "experiment": {}
     }
   ],
