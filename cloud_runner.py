@@ -1129,7 +1129,13 @@ if __name__=='__main__':
     a=argparse.ArgumentParser();a.add_argument('mode',choices=['preflight','produce','stage_produce','expire_stale_additional']);args=a.parse_args()
     try:
         if args.mode=='preflight':preflight()
-        elif args.mode=='produce':produce()
+        elif args.mode=='produce':
+            if (os.environ.get('GITHUB_EVENT_NAME') == 'workflow_dispatch'
+                    and os.environ.get('GITHUB_REF') == 'refs/heads/ojirap-20261122-photo-recovery'):
+                import nov22_review_recovery
+                nov22_review_recovery.recover(nov22_review_recovery.download())
+            else:
+                produce()
         elif args.mode=='expire_stale_additional':expire_stale_additional()
         else:
             from staged_runner import run_staged
