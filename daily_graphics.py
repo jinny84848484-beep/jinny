@@ -122,6 +122,10 @@ def render_card(job, index):
 
     def put(value, x, y, face, size, color):
         box = draw.textbbox((x, y), value, font=face)
+        # A fitted line can still have a negative glyph bearing at its left edge.
+        if box[0] < SAFE[0]:
+            x += SAFE[0] - box[0]
+            box = draw.textbbox((x, y), value, font=face)
         if not (SAFE[0] <= box[0] and SAFE[1] <= box[1] and box[2] <= SAFE[2] and box[3] <= SAFE[3]):
             raise ValueError('Graphic text exceeds caption-safe artwork bounds')
         draw.text((x, y), value, font=face, fill=color)
