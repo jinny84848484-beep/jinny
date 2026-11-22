@@ -7458,13 +7458,16 @@
           "completed_at": "2026-11-22T09:53:21.694723+09:00"
         },
         "editorial_review_0": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "4fb220fa6531c58486d23df8863089081041866698ac7d6812d001de46589d85",
           "attempts": 1,
-          "at": "2026-11-22T10:08:54.267003+09:00"
+          "at": "2026-11-22T10:08:54.267003+09:00",
+          "usable": true,
+          "sha256": "68080bcf173d1867b4b51e90642cf34f9d584e1e8070443fd5662da6ef92484d",
+          "completed_at": "2026-11-22T10:09:08.742519+09:00"
         }
       },
-      "status": "editorial_review_0_submitted",
+      "status": "editorial_review_0_completed",
       "active_stage": "editorial_review_0",
       "nov22_photo_recovery": {
         "run": 44968565375,
