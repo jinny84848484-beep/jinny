@@ -7476,14 +7476,450 @@
           "completed_at": "2026-11-22T10:09:19.941781+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
+      "status": "reviewed",
       "active_stage": "editorial_review_1",
       "nov22_photo_recovery": {
         "run": 44968565375,
         "artifact": 14732861424,
         "zip_sha256": "84412ab3bf2e82eeb023ab8ef48737528a25f88afe489073ffaf9fd19f6ed35c"
       },
-      "review_input_hash": "7a9300b9a5f0b5b9908486761d252d74cb13a08085974bd0886c3ff10a137899"
+      "review_input_hash": "7a9300b9a5f0b5b9908486761d252d74cb13a08085974bd0886c3ff10a137899",
+      "editorial_exclusions": [
+        {
+          "job_id": "2026-11-22-lguplus-ai-reorg",
+          "channel": "ojirap",
+          "reason": "editorial_review_failed",
+          "codes": [
+            "insufficient_media",
+            "media_relevance"
+          ]
+        }
+      ],
+      "retry_hold": false,
+      "jobs": [
+        {
+          "id": "2026-11-22-lguplus-ai-reorg",
+          "channel": "ojirap",
+          "topic_key": "lguplus-2027-ai-reorganization-2026-11",
+          "category": "technology",
+          "title": "엘지유플러스, 결국 AI 쪽으로",
+          "description": "2026년 11월 19일 회사 발표와 11월 22일 전자신문 보도를 바탕으로, LG유플러스의 2027년 임원 인사와 AI 중심 조직 재편 방향을 짚는 오늘의 오지랖.",
+          "sources": [
+            {
+              "title": "LG유플러스, 2027년 임원 인사 실시 – LG유플러스 뉴스룸",
+              "url": "https://news.lguplus.com/23377",
+              "checked_at": "2026-11-22T10:09:21.352229+09:00"
+            },
+            {
+              "title": "LG유플러스, 부문장 전부 교체…AI 사업 실행력 높인다 - 전자신문",
+              "url": "https://www.etnews.com/20261122000001",
+              "checked_at": "2026-11-22T10:09:21.352229+09:00"
+            },
+            {
+              "title": "LG유플러스 쇄신 인사…4개 부문장 교체 유력 - 전자신문",
+              "url": "https://www.etnews.com/20261118000030?m=1",
+              "checked_at": "2026-11-22T10:09:21.352229+09:00"
+            }
+          ],
+          "visual_queries": [
+            "LG Uplus headquarters Seoul Wikimedia Commons",
+            "telecommunications office building South Korea Wikimedia Commons"
+          ],
+          "opening_text": "AI로 줄 세웠네요.",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "AI로 줄 세웠네요",
+              "body": "자료사진입니다. 실제 인사 현장 아님, 2026년 11월 19일 발표 기준",
+              "narration": "AI로 줄 세웠네요.",
+              "source_indices": [
+                0
+              ]
+            },
+            {
+              "kind": "fact",
+              "headline": "공식 발표는 인사부터",
+              "body": "LG유플러스는 11월 19일 이사회 뒤 2027년 임원 인사를 발표했다",
+              "narration": "엘지유플러스는 십일월 십구일 이사회 뒤 이공이칠년 임원 인사를 냈고, AI 성과 확대와 통신 경쟁력 강화를 기조로 들었습니다.",
+              "source_indices": [
+                0
+              ]
+            },
+            {
+              "kind": "fact",
+              "headline": "독립 보도는 재편 해설",
+              "body": "전자신문은 11월 22일 네 개 사업 부문장 전면 교체와 AI 실행력 강화를 보도",
+              "narration": "전자신문은 오늘 네 개 사업 부문장을 모두 바꾸는 재편이라고 해설했죠. 십팔일 사전 보도와도 흐름은 이어집니다.",
+              "source_indices": [
+                1,
+                2
+              ]
+            },
+            {
+              "kind": "opinion",
+              "headline": "확정과 해석은 구분",
+              "body": "세부 배경은 기사 해설 성격도 있어 발표문보다 해석 여지가 남는다",
+              "narration": "제 느낌엔 통신사도 결국 AI를 본업 옆 프로젝트가 아니라 본판으로 올려둔 모양새예요. 다만 세부 배경은 회사 발표보다 해석의 영역이 있습니다.",
+              "source_indices": [
+                0,
+                1
+              ]
+            },
+            {
+              "kind": "closing",
+              "headline": "이제 성적표만 남았죠",
+              "body": "파일사진 표기 필수. 실제 이사회 장면으로 오인되면 안 된다",
+              "narration": "인사는 늘 거창한데, 진짜 평가는 내년 숫자가 하겠죠. AI 강화, 말은 빠른데 실적은 늘 천천히 걷더라고요.",
+              "source_indices": [
+                1
+              ]
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "lguplus-2027-ai-reorganization-2026-11",
+            "category": "technology",
+            "summary": "2026년 11월 19일 LG유플러스가 2027년 임원 인사를 발표했고, 11월 22일 전자신문은 이를 4개 사업 부문장 전면 교체와 AI 사업 실행력 강화에 초점을 둔 조직 재편으로 해설했다. 회사 공식 발표와 독립 매체 보도가 모두 확인돼, 국내 통신사의 AI 중심 경영 전환 이슈로 바로 활용 가능한 상태다.",
+            "verified_facts": [
+              {
+                "text": "LG유플러스는 2026년 11월 19일 오전 이사회를 열고 2027년 임원 인사를 단행했다고 회사 뉴스룸에서 밝혔다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "회사 발표에는 전무 승진 2명과 상무 신규 선임 9명이 포함됐고, 인사 기조로 AI 사업 성과 확대와 통신 본업 경쟁력 강화를 제시했다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "LG유플러스 공식 발표에는 Enterprise AI사업그룹장 안형균과 NW인프라그룹장 노성주의 전무 승진이 포함됐다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "전자신문은 2026년 11월 22일 LG유플러스가 4개 부문장을 모두 교체하고 AI 사업 실행력을 높이는 방향으로 조직을 재편했다고 보도했다.",
+                "source_indices": [
+                  1
+                ]
+              },
+              {
+                "text": "전자신문은 2026년 11월 18일 사전 보도에서 컨슈머·엔터프라이즈·네트워크·CTO 등 4대 사업 부문장의 전면 교체가 유력하다고 전했다.",
+                "source_indices": [
+                  2
+                ]
+              }
+            ],
+            "uncertainties": [
+              "전자신문 보도는 조직개편의 해설과 업계 평가를 담고 있어, 세부 인선 배경 일부는 회사 발표보다 해석의 여지가 있다.",
+              "추가 독립 보도로 후속 인사 효과나 시장 반응까지 확인한 것은 아니므로, 현재 시점에서는 발표 내용과 조직개편 방향 자체를 중심으로 다루는 것이 안전하다."
+            ],
+            "sources": [
+              {
+                "title": "LG유플러스, 2027년 임원 인사 실시 – LG유플러스 뉴스룸",
+                "url": "https://news.lguplus.com/23377",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "LG유플러스, 부문장 전부 교체…AI 사업 실행력 높인다 - 전자신문",
+                "url": "https://www.etnews.com/20261122000001",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "LG유플러스 쇄신 인사…4개 부문장 교체 유력 - 전자신문",
+                "url": "https://www.etnews.com/20261118000030?m=1",
+                "role": "independent_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "e52d398b041602b56ef2499e76a9bff9e5eee8fd820a1392b6ebcc7d77da9a6a",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-22T10:09:21.352229+09:00"
+        },
+        {
+          "id": "2026-11-22-suneung-ai-crackdown",
+          "channel": "ojirap",
+          "topic_key": "suneung-ai-cheating-crackdown-2026-11",
+          "category": "society",
+          "title": "수능 끝나자 AI 뒤쫓기 시작",
+          "description": "2026년 11월 19~20일 교육부와 정부 발표, 연합뉴스 보도를 바탕으로 수능 부정행위 대응 강화와 AI·스마트기기 추적 방침을 짚는 오늘의 오지랖.",
+          "sources": [
+            {
+              "title": "교육부 보도자료 목록 - 수능 부정행위 결코 용납하지 않겠습니다",
+              "url": "https://www.moe.go.kr/boardCnts/list.do?boardID=294&m=020402&page=1&s=moe&type=default",
+              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+            },
+            {
+              "title": "교육부 메인/보도자료 페이지 - 대학별고사 관련 부정행위 대응방안 점검 및 긴급 대응체계 구축, 스마트기기 등 전자기기 관련 부정행위 적발 현황",
+              "url": "https://www.moe.go.kr/main.do?menuCd=MCD00000000000049405&s=moe",
+              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+            },
+            {
+              "title": "교육부 메인/보도자료 페이지(동일 사안 재확인)",
+              "url": "https://moe.go.kr/main.do?m=050302&opendsn=50&s=moe",
+              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+            },
+            {
+              "title": "이 대통령 \"수능 부정행위 철저 추적…국가시험 A부터 Z까지 개편\" - 대한민국 정책브리핑",
+              "url": "https://m.korea.kr/news/policyNewsView.do?cateId=&newsId=148976210&pageIndex=1&repCode_P=&smenu=EDS02",
+              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+            },
+            {
+              "title": "[연합뉴스 이 시각 헤드라인] - 18:00 | 연합뉴스",
+              "url": "https://www.yna.co.kr/view/AKR20261120153100011",
+              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+            },
+            {
+              "title": "휴대전화에서 스마트안경까지…수능 부정행위 막을 해법은? | 연합뉴스",
+              "url": "https://www.yna.co.kr/view/AKR20261120098900061",
+              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+            }
+          ],
+          "visual_queries": [
+            "South Korea college scholastic ability test exam site Wikimedia Commons",
+            "classroom exam desks South Korea Wikimedia Commons"
+          ],
+          "opening_text": "수능 끝나고 수사가 바빠졌죠.",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "수능 끝나고 더 분주",
+              "body": "파일사진입니다. 실제 적발 장면이 아니라 공정성 이슈 설명용입니다",
+              "narration": "수능 끝나고 수사가 바빠졌죠.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "commons-64322355-06543af3"
+            },
+            {
+              "kind": "fact",
+              "headline": "교육부는 엄정 대응",
+              "body": "11월 19일과 20일 교육부는 부정행위 대응 자료를 잇달아 게시했다",
+              "narration": "교육부는 십일월 십구일 엄정 대응 방침을 올렸고, 이십일엔 전자기기 적발 현황과 대학별고사 긴급 대응 자료도 게시했습니다.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "commons-64302850-06543af3"
+            },
+            {
+              "kind": "fact",
+              "headline": "정부는 AI 기업 협조 언급",
+              "body": "정책브리핑과 연합뉴스는 추적·조사 및 기록 분석 방침을 전했다",
+              "narration": "정책브리핑은 이재명 대통령이 철저한 추적과 국가시험 전반 개편을 지시했다고 전했고, 연합뉴스는 AI 서비스 입력 여부와 업로드 기록 분석 방침을 보도했습니다.",
+              "source_indices": [
+                3,
+                4
+              ],
+              "media": "commons-64322355-06543af3"
+            },
+            {
+              "kind": "opinion",
+              "headline": "기술 막기, 기술 빌리기",
+              "body": "구체적 법적 범위와 실제 집행 수준은 추가 확인이 필요하다",
+              "narration": "솔직히 시험 감독이 이제 계산기만 보는 시대는 지난 듯해요. 부정행위를 막으려다 감시 기술도 같이 커지는 장면이라 좀 씁쓸합니다.",
+              "source_indices": [
+                3,
+                4,
+                5
+              ],
+              "media": "commons-64302850-06543af3"
+            },
+            {
+              "kind": "closing",
+              "headline": "문제는 시험 뒤에도 남죠",
+              "body": "연합뉴스는 점검 강화에도 스마트기기 반입 차단 한계를 짚었다",
+              "narration": "연결은 끊기라 했는데 세상은 더 연결됐죠. 수능 한 문제보다 어려운 건, 기술보다 한발 빨라지는 규정인 것 같습니다.",
+              "source_indices": [
+                5
+              ],
+              "media": "commons-64322355-06543af3"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "suneung-ai-cheating-crackdown-2026-11",
+            "category": "society",
+            "summary": "2026년 11월 19~20일 정부와 교육당국이 2027학년도 수능 직후 AI·스마트기기 활용 부정행위 대응을 강화했다. 교육부는 수능 부정행위에 엄정 대응하겠다는 공식 자료를 냈고, 11월 20일 대통령 회의 발언을 전한 정책브리핑과 연합뉴스 보도는 AI 기업 협조를 통한 추적·조사 방침과 제도 개편 지시를 확인했다. 최근성, 공공성, 사회적 관심이 모두 큰 한국 현안이다.",
+            "verified_facts": [
+              {
+                "text": "교육부는 2026년 11월 19일 보도자료 목록에 '수능 부정행위 결코 용납하지 않겠습니다'를 게시했다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "교육부는 2026년 11월 20일 보도자료 목록과 메인 페이지에서 '스마트기기 등 전자기기 관련 부정행위 적발 현황' 및 '대학별고사 관련 부정행위 대응방안 점검 및 긴급 대응체계 구축' 자료를 게시했다.",
+                "source_indices": [
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "대한민국 정책브리핑은 2026년 11월 20일 이재명 대통령이 수능 부정행위 의심 사례를 AI 기업들과 협조해 철저히 추적·조사하고, 국가시험 전반의 공정성 대책을 구축하라고 지시했다고 전했다.",
+                "source_indices": [
+                  3
+                ]
+              },
+              {
+                "text": "연합뉴스는 2026년 11월 20일 정부가 글로벌 AI 기업들과 협력해 시험 시간대 수능 문제가 AI 서비스에 입력됐는지와 이미지 업로드·문제풀이 요청 기록·통신 기록 등을 분석할 방침이라고 보도했다.",
+                "source_indices": [
+                  4
+                ]
+              },
+              {
+                "text": "연합뉴스는 올해 수능을 앞두고 AI 부정행위 우려에 따라 시험장 점검 규정이 강화됐지만 스마트기기 반입과 사용을 완전히 막지 못한 점을 짚었다.",
+                "source_indices": [
+                  5
+                ]
+              }
+            ],
+            "uncertainties": [
+              "교육부 사이트에서 직접 확인된 것은 보도자료 목록과 제목 중심이어서, 개별 원문 전문까지 모두 교차 열람한 것은 아니다.",
+              "정책브리핑의 대통령 발언 기사는 정부 발표 성격이 강하므로, 실제 후속 수사 범위와 기술적 집행 수준은 추가 보도로 계속 확인할 필요가 있다.",
+              "AI 기업 협조 방식과 자료 확보 절차의 구체적 법적 범위는 현재 공개 기사만으로는 제한적으로만 확인된다."
+            ],
+            "sources": [
+              {
+                "title": "교육부 보도자료 목록 - 수능 부정행위 결코 용납하지 않겠습니다",
+                "url": "https://www.moe.go.kr/boardCnts/list.do?boardID=294&m=020402&page=1&s=moe&type=default",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "교육부 메인/보도자료 페이지 - 대학별고사 관련 부정행위 대응방안 점검 및 긴급 대응체계 구축, 스마트기기 등 전자기기 관련 부정행위 적발 현황",
+                "url": "https://www.moe.go.kr/main.do?menuCd=MCD00000000000049405&s=moe",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "교육부 메인/보도자료 페이지(동일 사안 재확인)",
+                "url": "https://moe.go.kr/main.do?m=050302&opendsn=50&s=moe",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "이 대통령 \"수능 부정행위 철저 추적…국가시험 A부터 Z까지 개편\" - 대한민국 정책브리핑",
+                "url": "https://m.korea.kr/news/policyNewsView.do?cateId=&newsId=148976210&pageIndex=1&repCode_P=&smenu=EDS02",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "[연합뉴스 이 시각 헤드라인] - 18:00 | 연합뉴스",
+                "url": "https://www.yna.co.kr/view/AKR20261120153100011",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "휴대전화에서 스마트안경까지…수능 부정행위 막을 해법은? | 연합뉴스",
+                "url": "https://www.yna.co.kr/view/AKR20261120098900061",
+                "role": "independent_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "16944f419cd52018e6aa7d474e4a55639a61f7218c09f71eec2a6da37d824801",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-22T10:09:21.352346+09:00"
+        }
+      ],
+      "media": {
+        "commons-4152878-649c4337": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/LG_Telecom_Daerijeom.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:LG_Telecom_Daerijeom.jpg",
+          "path": "assets/commons-4152878-649c4337.jpg",
+          "media_type": "image",
+          "credit": "User:iTurtle(Korean Wikipedia) / Wikimedia Commons",
+          "license": "CC BY 3.0",
+          "license_url": "https://creativecommons.org/licenses/by/3.0",
+          "notice": "자료사진 · 2008년 LG텔레콤 판매점 · 현 LG유플러스 본사 아님",
+          "description": "An agency of LG Telecom in South Korea",
+          "capture_date": "2008-06-01",
+          "title": "File:LG Telecom Daerijeom.jpg",
+          "topic_key": "lguplus-2027-ai-reorganization-2026-11",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-22T10:08:52.583249+09:00"
+        },
+        "commons-134195919-649c4337": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/NOIRLab_HQ_Server_Racks_%286V6A0404-CC%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:NOIRLab_HQ_Server_Racks_(6V6A0404-CC).jpg",
+          "path": "assets/commons-134195919-649c4337.jpg",
+          "media_type": "image",
+          "credit": "NOIRLab/NSF/AURA/T. Slovinský / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2022년 미국 NOIRLab 서버실 · LG 시설 아님",
+          "description": "Server racks at the NOIRLab Headquarters Computer Server Room in Tucson, Arizona.",
+          "capture_date": "5 October 2022, 13:58 (upload date)",
+          "title": "File:NOIRLab HQ Server Racks (6V6A0404-CC).jpg",
+          "topic_key": "lguplus-2027-ai-reorganization-2026-11",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-22T10:08:52.583312+09:00"
+        },
+        "commons-64322355-06543af3": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Puhung_High_School_main_gate_during_the_South_Korea_College_Scholastic_Ability_Test%2C_2018_%282%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Puhung_High_School_main_gate_during_the_South_Korea_College_Scholastic_Ability_Test,_2018_(2).jpg",
+          "path": "assets/commons-64322355-06543af3.jpg",
+          "media_type": "image",
+          "credit": "고려 / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2017년 수능 시험장 정문 · 이번 사건과 무관",
+          "description": "2018학년도 대학수학능력시험 4교시 탐구 영역이 끝난 후 부흥고등학교 정문의 모습",
+          "capture_date": "2017-11-23 17:10:59",
+          "title": "File:Puhung High School main gate during the South Korea College Scholastic Ability Test, 2018 (2).jpg",
+          "topic_key": "suneung-ai-cheating-crackdown-2026-11",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-22T10:08:52.745316+09:00"
+        },
+        "commons-64302850-06543af3": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/The_exam_location_%28Puhung_High_School%29%2C_for_The_South_Korea_College_Scholastic_Ability_Test%2C_2018.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:The_exam_location_(Puhung_High_School),_for_The_South_Korea_College_Scholastic_Ability_Test,_2018.jpg",
+          "path": "assets/commons-64302850-06543af3.jpg",
+          "media_type": "image",
+          "credit": "고려 / Wikimedia Commons",
+          "license": "CC BY 4.0",
+          "license_url": "https://creativecommons.org/licenses/by/4.0",
+          "notice": "자료사진 · 2017년 수능 시험장 · 이번 사건과 무관",
+          "description": "2018학년도 대학수학능력시험 경기도교육청 35지구 제7시험장으로 선정된 부흥고등학교 안에 있는 시험실",
+          "capture_date": "2017-11-23 07:13:32",
+          "title": "File:The exam location (Puhung High School), for The South Korea College Scholastic Ability Test, 2018.jpg",
+          "topic_key": "suneung-ai-cheating-crackdown-2026-11",
+          "channel": "ojirap",
+          "relevance_verified": true,
+          "checked_at": "2026-11-22T10:08:52.745370+09:00"
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-22-suneung-ai-crackdown\": [\"commons-64322355-06543af3\", \"commons-64302850-06543af3\", \"commons-64322355-06543af3\", \"commons-64302850-06543af3\", \"commons-64322355-06543af3\"]}}",
+      "review_source_urls": [
+        "https://news.lguplus.com/23377",
+        "https://m.etnews.com/20261118000030",
+        "https://www.etnews.com/news/section.html?id1=03&page=10",
+        "https://www.etnews.com/news/section.html?id1=&page=65",
+        "https://www.etnews.com/index.html/20260814000102",
+        "https://www.etnews.com/20261119000382",
+        "https://www.etnews.com/news/reporter_list.html?id=1545&page=1",
+        "https://www.etnews.com/20261119000382?m=1",
+        "https://www.etnews.com/20261119000427",
+        "https://www.etnews.com/news/tag_list.html?id=21879",
+        "https://www.etnews.com/news/tag_list.html?id=102534",
+        "https://www.etnews.com/news/tag_list.html?id=57128",
+        "https://www.etnews.com/news/tag_list.html?id=98684",
+        "https://www.moe.go.kr/boardCnts/list.do?boardID=294&m=020402&page=1&s=moe&type=default"
+      ],
+      "created_at": "2026-11-22T10:09:21.352444+09:00"
     }
   },
   "publications": [
