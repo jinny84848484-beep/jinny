@@ -7440,13 +7440,16 @@
           "completed_at": "2026-11-22T09:52:23.057228+09:00"
         },
         "research_repair": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "51904bb3945b2d29786e7ad5b4f431c5517c20262226a9bd19e8ffbac1bf33ff",
           "attempts": 1,
-          "at": "2026-11-22T09:52:24.612509+09:00"
+          "at": "2026-11-22T09:52:24.612509+09:00",
+          "usable": true,
+          "sha256": "0c0a72ce66e181688c73df4d99e0ae8b872d19fd90e5f3dc76b3f70c35c4d075",
+          "completed_at": "2026-11-22T09:53:00.423437+09:00"
         }
       },
-      "status": "research_repair_submitted",
+      "status": "research_repair_completed",
       "active_stage": "research_repair"
     }
   },
