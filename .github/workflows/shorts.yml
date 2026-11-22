@@ -46,19 +46,35 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
+      - name: Check Ojirap voice review hold
+        id: voice_review_window
+        run: |
+          set -euo pipefail
+          korea_day="$(TZ=Asia/Seoul date +%F)"
+          if [[ "$korea_day" == '2026-11-23' ]]; then
+            echo 'allowed=false' >> "$GITHUB_OUTPUT"
+            echo '::notice::Ojirap production held for November 23 KST voice review. No media generated or uploaded.'
+          else
+            echo 'allowed=true' >> "$GITHUB_OUTPUT"
+          fi
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        if: steps.voice_review_window.outputs.allowed == 'true'
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        if: steps.voice_review_window.outputs.allowed == 'true'
         with:
           python-version: '3.12'
           cache: pip
       - name: Install renderer
+        if: steps.voice_review_window.outputs.allowed == 'true'
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y fonts-noto-cjk ffmpeg
           python -m pip install -r requirements.txt
       - name: Test production guards
+        if: steps.voice_review_window.outputs.allowed == 'true'
         run: python tests/run_offline.py
       - name: Run automation
+        if: steps.voice_review_window.outputs.allowed == 'true'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
@@ -104,7 +120,7 @@ jobs:
             python cloud_runner.py "$RUN_MODE"
           fi
       - name: Save produced media
-        if: always()
+        if: always() && steps.voice_review_window.outputs.allowed == 'true'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: shorts-${{ github.run_id }}
