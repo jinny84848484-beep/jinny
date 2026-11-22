@@ -12,6 +12,7 @@ def episode():
     for i,kind in enumerate(['hero','ingredients','heating','signature']):
         scenes.append(dict(kind=kind,duration=3,image=f'{i}.png',title='짧은 제목',body=f'내용 {i}',
                            footer='안내',narration='요리 설명',english='Recipe instructions.'))
+    scenes[0]['title']='재료 딱 2개!'
     scenes[2]['body']='700W 45초 · 1000W 30초'
     scenes[-1]['narration']=SIGNATURE
     return dict(channel_id=TEMPLATE['channel_id'],title='요리 제목',description='AI 이미지 예시',dish='퀘사디아',country='멕시코',servings=1,
@@ -47,6 +48,9 @@ class WorldKitchenTests(unittest.TestCase):
     def test_missing_time_basis(self):
         e=episode();e['heating']['basis']=''
         with self.assertRaises(ValueError):validate(e)
+    def test_swapped_wattage_time_pairs(self):
+        e=episode();e['scenes'][2]['body']='700W 30초 · 1000W 45초'
+        with self.assertRaises(ValueError):validate(e)
     def test_incorrect_visible_time(self):
         e=episode();e['heating']['seconds']['700']=50
         with self.assertRaises(ValueError):validate(e)
@@ -54,6 +58,14 @@ class WorldKitchenTests(unittest.TestCase):
         for index,kind in [(0,'logo'),(-1,'logo')]:
             e=episode();e['scenes'][index]['kind']=kind
             with self.assertRaises(ValueError):validate(e)
+    def test_missing_first_frame_ingredient_hook(self):
+        e=episode();e['scenes'][0]['title']='전자레인지로 간편하게'
+        with self.assertRaises(ValueError):validate(e)
+    def test_false_ingredient_count_blocked(self):
+        e=episode();e['ingredients'].append(dict(name='버터',unit='찻숟가락',amount=1))
+        with self.assertRaises(ValueError):validate(e)
+    def test_optional_ingredient_count_not_exaggerated(self):
+        e=episode();e['ingredients'].append(dict(name='모차렐라',unit='g',amount=10,optional=True));validate(e)
     def test_bad_signature(self):
         e=episode();e['scenes'][-1]['narration']='다음에 만나요'
         with self.assertRaises(ValueError):validate(e)

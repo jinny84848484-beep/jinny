@@ -1,15 +1,27 @@
 name: World Kitchen reviewed production
 on:
   schedule:
-    - cron: '0 8 * * *' # 17:00 KST production; 19:00 is target publication metadata only
+    - cron: '0 8 * * *' # 17:00 KST production; 19:00 scheduling requires independent publishing gate + verified credentials
   workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        options: [preflight, produce]
+        default: preflight
+        description: Read-only connections check or gated production
 permissions:
   contents: read
 concurrency:
   group: world-kitchen-single-producer
   cancel-in-progress: false
 jobs:
-  render-reviewed-queue:
+  cooking-production:
+    # CAS journal must persist submitted status BEFORE external calls.
+    # Job-scoped write is required for this durable no-retry receipt, not deployment.
+    # Generation/publication remain separately gated; do not grant workflow/admin scopes.
+    permissions:
+      contents: write
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -28,8 +40,29 @@ jobs:
           path: world_kitchen/state.json
           key: world-kitchen-state-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: world-kitchen-state-
-      - name: Render reviewed local input (no paid calls or upload credentials)
-        run: python -m world_kitchen.runner
+      - name: Cooking production (explicit generation and publishing gates)
+        env:
+          KITCHEN_GENERATION_ENABLED: ${{ vars.KITCHEN_GENERATION_ENABLED }}
+          KITCHEN_USAGE_APPROVED: ${{ vars.KITCHEN_USAGE_APPROVED }}
+          KITCHEN_PUBLISH_ENABLED: ${{ vars.KITCHEN_PUBLISH_ENABLED }}
+          KITCHEN_VOICE_ID: ${{ vars.KITCHEN_VOICE_ID }}
+          KITCHEN_LOGO_PATH: ${{ vars.KITCHEN_LOGO_PATH }}
+          KITCHEN_MUSIC_PATH: ${{ vars.KITCHEN_MUSIC_PATH }}
+          KITCHEN_MUSIC_RIGHTS_URL: ${{ vars.KITCHEN_MUSIC_RIGHTS_URL }}
+          KITCHEN_MUSIC_CREDIT: ${{ vars.KITCHEN_MUSIC_CREDIT }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          YOUTUBE_KITCHEN_OAUTH: ${{ secrets.YOUTUBE_KITCHEN_OAUTH }}
+          GITHUB_TOKEN: ${{ github.token }}
+          KITCHEN_RUN_MODE: ${{ inputs.mode }}
+        run: |
+          if [ "$KITCHEN_RUN_MODE" = "preflight" ]; then
+            python -m world_kitchen.automatic --preflight
+          elif [ "$KITCHEN_GENERATION_ENABLED" = "true" ]; then
+            python -m world_kitchen.automatic
+          else
+            python -m world_kitchen.runner
+          fi
       - name: Preserve attempt state even after failure
         if: always()
         uses: actions/cache/save@v4
@@ -43,6 +76,7 @@ jobs:
           name: world-kitchen-review-${{ github.run_id }}
           path: |
             runs/world_kitchen/
+            runs/world_kitchen_auto/
             world_kitchen/state.json
           if-no-files-found: ignore
           retention-days: 7
