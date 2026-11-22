@@ -7427,6 +7427,18 @@
       "publication_exclusions": [],
       "active_job": "2026-11-21-korea-exports-one-trillion",
       "completed_at": "2026-11-21T12:12:49.887126+09:00"
+    },
+    "2026-11-22": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "6412248eaea0a9dcc177a9e73ee4add234bb76ec27ac556c280f061a39108fab",
+          "attempts": 1,
+          "at": "2026-11-22T09:51:46.552520+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
