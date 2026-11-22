@@ -7476,7 +7476,7 @@
           "completed_at": "2026-11-22T10:09:19.941781+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_1",
       "nov22_photo_recovery": {
         "run": 44968565375,
@@ -7508,17 +7508,17 @@
             {
               "title": "LG유플러스, 2027년 임원 인사 실시 – LG유플러스 뉴스룸",
               "url": "https://news.lguplus.com/23377",
-              "checked_at": "2026-11-22T10:09:21.352229+09:00"
+              "checked_at": "2026-11-22T10:09:22.660694+09:00"
             },
             {
               "title": "LG유플러스, 부문장 전부 교체…AI 사업 실행력 높인다 - 전자신문",
               "url": "https://www.etnews.com/20261122000001",
-              "checked_at": "2026-11-22T10:09:21.352229+09:00"
+              "checked_at": "2026-11-22T10:09:22.660694+09:00"
             },
             {
               "title": "LG유플러스 쇄신 인사…4개 부문장 교체 유력 - 전자신문",
               "url": "https://www.etnews.com/20261118000030?m=1",
-              "checked_at": "2026-11-22T10:09:21.352229+09:00"
+              "checked_at": "2026-11-22T10:09:22.660694+09:00"
             }
           ],
           "visual_queries": [
@@ -7640,7 +7640,7 @@
           "fact_packet_hash": "e52d398b041602b56ef2499e76a9bff9e5eee8fd820a1392b6ebcc7d77da9a6a",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-22T10:09:21.352229+09:00"
+          "verified_at": "2026-11-22T10:09:22.660694+09:00"
         },
         {
           "id": "2026-11-22-suneung-ai-crackdown",
@@ -7653,32 +7653,32 @@
             {
               "title": "교육부 보도자료 목록 - 수능 부정행위 결코 용납하지 않겠습니다",
               "url": "https://www.moe.go.kr/boardCnts/list.do?boardID=294&m=020402&page=1&s=moe&type=default",
-              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+              "checked_at": "2026-11-22T10:09:22.660812+09:00"
             },
             {
               "title": "교육부 메인/보도자료 페이지 - 대학별고사 관련 부정행위 대응방안 점검 및 긴급 대응체계 구축, 스마트기기 등 전자기기 관련 부정행위 적발 현황",
               "url": "https://www.moe.go.kr/main.do?menuCd=MCD00000000000049405&s=moe",
-              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+              "checked_at": "2026-11-22T10:09:22.660812+09:00"
             },
             {
               "title": "교육부 메인/보도자료 페이지(동일 사안 재확인)",
               "url": "https://moe.go.kr/main.do?m=050302&opendsn=50&s=moe",
-              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+              "checked_at": "2026-11-22T10:09:22.660812+09:00"
             },
             {
               "title": "이 대통령 \"수능 부정행위 철저 추적…국가시험 A부터 Z까지 개편\" - 대한민국 정책브리핑",
               "url": "https://m.korea.kr/news/policyNewsView.do?cateId=&newsId=148976210&pageIndex=1&repCode_P=&smenu=EDS02",
-              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+              "checked_at": "2026-11-22T10:09:22.660812+09:00"
             },
             {
               "title": "[연합뉴스 이 시각 헤드라인] - 18:00 | 연합뉴스",
               "url": "https://www.yna.co.kr/view/AKR20261120153100011",
-              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+              "checked_at": "2026-11-22T10:09:22.660812+09:00"
             },
             {
               "title": "휴대전화에서 스마트안경까지…수능 부정행위 막을 해법은? | 연합뉴스",
               "url": "https://www.yna.co.kr/view/AKR20261120098900061",
-              "checked_at": "2026-11-22T10:09:21.352346+09:00"
+              "checked_at": "2026-11-22T10:09:22.660812+09:00"
             }
           ],
           "visual_queries": [
@@ -7829,7 +7829,7 @@
           "fact_packet_hash": "16944f419cd52018e6aa7d474e4a55639a61f7218c09f71eec2a6da37d824801",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-22T10:09:21.352346+09:00"
+          "verified_at": "2026-11-22T10:09:22.660812+09:00"
         }
       ],
       "media": {
@@ -7919,7 +7919,19 @@
         "https://www.etnews.com/news/tag_list.html?id=98684",
         "https://www.moe.go.kr/boardCnts/list.do?boardID=294&m=020402&page=1&s=moe&type=default"
       ],
-      "created_at": "2026-11-22T10:09:21.352444+09:00"
+      "created_at": "2026-11-22T10:09:21.352444+09:00",
+      "publication_exclusions": [
+        {
+          "job_id": "2026-11-22-lguplus-ai-reorg",
+          "channel": "ojirap",
+          "reason": "editorial_review_failed",
+          "codes": [
+            "insufficient_media",
+            "media_relevance"
+          ]
+        }
+      ],
+      "active_job": "2026-11-22-suneung-ai-crackdown"
     }
   },
   "publications": [
