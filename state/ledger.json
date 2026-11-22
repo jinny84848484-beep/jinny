@@ -7465,10 +7465,16 @@
           "usable": true,
           "sha256": "68080bcf173d1867b4b51e90642cf34f9d584e1e8070443fd5662da6ef92484d",
           "completed_at": "2026-11-22T10:09:08.742519+09:00"
+        },
+        "editorial_review_1": {
+          "status": "submitted",
+          "request_hash": "558e1ff07658e0c2c71607cfa36f5c6e42a501f6c4439a17f3879054aba00914",
+          "attempts": 1,
+          "at": "2026-11-22T10:09:10.150889+09:00"
         }
       },
-      "status": "editorial_review_0_completed",
-      "active_stage": "editorial_review_0",
+      "status": "editorial_review_1_submitted",
+      "active_stage": "editorial_review_1",
       "nov22_photo_recovery": {
         "run": 44968565375,
         "artifact": 14732861424,
