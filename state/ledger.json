@@ -7459,7 +7459,12 @@
         }
       },
       "status": "draft_completed",
-      "active_stage": "draft"
+      "active_stage": "draft",
+      "nov22_photo_recovery": {
+        "run": 44968565375,
+        "artifact": 14732861424,
+        "zip_sha256": "84412ab3bf2e82eeb023ab8ef48737528a25f88afe489073ffaf9fd19f6ed35c"
+      }
     }
   },
   "publications": [
