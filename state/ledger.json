@@ -7476,7 +7476,7 @@
           "completed_at": "2026-11-22T10:09:19.941781+09:00"
         }
       },
-      "status": "rendered",
+      "status": "upload_submitted",
       "active_stage": "editorial_review_1",
       "nov22_photo_recovery": {
         "run": 44968565375,
