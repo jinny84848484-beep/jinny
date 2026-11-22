@@ -7438,10 +7438,16 @@
           "usable": true,
           "sha256": "657f5224c38828316517597e6c9abb76d3a66121a7aa78dd571a04b9198498c0",
           "completed_at": "2026-11-22T09:52:23.057228+09:00"
+        },
+        "research_repair": {
+          "status": "submitted",
+          "request_hash": "51904bb3945b2d29786e7ad5b4f431c5517c20262226a9bd19e8ffbac1bf33ff",
+          "attempts": 1,
+          "at": "2026-11-22T09:52:24.612509+09:00"
         }
       },
-      "status": "research_completed",
-      "active_stage": "research"
+      "status": "research_repair_submitted",
+      "active_stage": "research_repair"
     }
   },
   "publications": [
