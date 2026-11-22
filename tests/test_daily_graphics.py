@@ -39,6 +39,15 @@ class Disabled(unittest.TestCase):
 
 
 class Cards(unittest.TestCase):
+    def test_negative_left_glyph_bearing_stays_caption_safe(self):
+        headline = 'AI로 줄 세웠네요'
+        job = {'scenes': [{'kind': 'hook', 'headline': headline}]}
+        with patch.object(g, '_language', return_value='ko'):
+            _, labels = g.render_card(job, 0)
+        label = next(label for label in labels if label['text'] == headline)
+        self.assertEqual(label['bbox'][0], g.SAFE[0])
+        self.assertLessEqual(label['bbox'][2], g.SAFE[2])
+
     def test_cards_show_only_reviewed_scene_text_with_notice(self):
         for job in batch():
             for i, scene in enumerate(job['scenes']):
