@@ -14,6 +14,7 @@ def episode():
                            footer='안내',narration='요리 설명',english='Recipe instructions.'))
     scenes[2]['body']='700W 45초 · 1000W 30초'
     scenes[-1]['narration']=SIGNATURE
+    scenes[-1]['body']=SIGNATURE
     return dict(channel_id=TEMPLATE['channel_id'],title='요리 제목',description='AI 이미지 예시',dish='퀘사디아',country='멕시코',servings=1,
                 ingredients=[dict(name='또띠아',amount=1,unit='장'),dict(name='치즈',amount=28,unit='g')],
                 steps=[dict(text='치즈 올리고 접기',appliance='none',seconds=0),dict(text='700W 45초부터 확인',appliance='microwave',seconds=45)],
@@ -57,6 +58,17 @@ class WorldKitchenTests(unittest.TestCase):
     def test_bad_signature(self):
         e=episode();e['scenes'][-1]['narration']='다음에 만나요'
         with self.assertRaises(ValueError):validate(e)
+    def test_exact_closing_visible_and_spoken(self):
+        self.assertEqual(SIGNATURE,'오늘도 방구석에서 세계요리 한입. 맛있게 드세요.')
+        for bad in ('내용 3','오늘도 방구석에서 세계 한 입, 맛있게 드세요!'):
+            e=episode();e['scenes'][-1]['body']=bad
+            with self.assertRaises(ValueError):validate(e)
+    def test_example_uses_verified_channel_and_exact_closing(self):
+        e=json.loads((Path(__file__).resolve().parents[1]/'world_kitchen'/'episode.example.json').read_text())
+        self.assertEqual(e['channel_id'],'UCkuz6ra5_hZ1MSAbFthqDcg')
+        self.assertEqual(e['scenes'][-1]['body'],SIGNATURE)
+        self.assertEqual(e['scenes'][-1]['narration'],SIGNATURE)
+        with self.assertRaisesRegex(ValueError,"asset rights review required"):validate(e)
     def test_nan_duration(self):
         e=episode();e['scenes'][0]['duration']=float('nan')
         with self.assertRaises(ValueError):validate(e)

@@ -1,0 +1,27 @@
+name: World Kitchen release dry-run only
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-release-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - name: Install media test utilities
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+      - name: Exercise approval handoff with isolated fixtures
+        run: python -m unittest discover -s tests -p 'test_world_kitchen_release_runner.py' -v
+      - name: Require empty public cooking queue
+        run: python -m world_kitchen.public_queue_guard
