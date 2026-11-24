@@ -7982,7 +7982,7 @@
           "completed_at": "2026-11-24T14:58:44.828493+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1",
       "review_input_hash": "1a644c0ee59317479b62c3bcf3a381713c215fab1c20d6207be09cb9520868a7",
       "editorial_exclusions": [
@@ -9143,6 +9143,18 @@
       "video_id": "I_b-Jlyz0Oo",
       "url": "https://www.youtube.com/shorts/I_b-Jlyz0Oo",
       "at": "2026-11-22T10:12:16.782091+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-24-ojirap-russia-ulleung-kadiz",
+      "topic_key": "russia-warplanes-near-ulleung-kadiz-2026-11-24",
+      "category": "politics",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "울릉도 가까이 온 러 군용기",
+      "video_id": "-thEPG6-hsE",
+      "url": "https://www.youtube.com/shorts/-thEPG6-hsE",
+      "at": "2026-11-24T15:00:15.446313+09:00",
       "experiment": {}
     }
   ],
