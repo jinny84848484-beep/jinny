@@ -7933,6 +7933,18 @@
       ],
       "active_job": "2026-11-22-suneung-ai-crackdown",
       "completed_at": "2026-11-22T10:12:18.333859+09:00"
+    },
+    "2026-11-24": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "a319e5b48cd12a7e44ec18e1a466da229bdeb35c3a8544c753ff8a7fff68b754",
+          "attempts": 1,
+          "at": "2026-11-24T14:56:48.376169+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
