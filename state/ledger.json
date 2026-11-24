@@ -7953,10 +7953,16 @@
           "usable": true,
           "sha256": "9521ac46fd5be6b3087bc2ce19ef8474b8eb1c4dc5ee9ec174a7192dfca796bb",
           "completed_at": "2026-11-24T14:58:00.838406+09:00"
+        },
+        "draft": {
+          "status": "submitted",
+          "request_hash": "7f213eab440f937565c5321de18afef753c43509494f75694e6994cc7526f64b",
+          "attempts": 1,
+          "at": "2026-11-24T14:58:02.090605+09:00"
         }
       },
-      "status": "research_repair_completed",
-      "active_stage": "research_repair"
+      "status": "draft_submitted",
+      "active_stage": "draft"
     }
   },
   "publications": [
