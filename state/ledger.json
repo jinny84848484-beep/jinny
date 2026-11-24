@@ -7982,9 +7982,500 @@
           "completed_at": "2026-11-24T14:58:44.828493+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
+      "status": "reviewed",
       "active_stage": "editorial_review_1",
-      "review_input_hash": "1a644c0ee59317479b62c3bcf3a381713c215fab1c20d6207be09cb9520868a7"
+      "review_input_hash": "1a644c0ee59317479b62c3bcf3a381713c215fab1c20d6207be09cb9520868a7",
+      "editorial_exclusions": [
+        {
+          "job_id": "2026-11-24-ojirap-korea-national-sovereignty-day",
+          "channel": "ojirap",
+          "reason": "editorial_review_failed",
+          "codes": [
+            "source_inaccessible",
+            "unsupported_claim"
+          ]
+        }
+      ],
+      "retry_hold": false,
+      "jobs": [
+        {
+          "id": "2026-11-24-ojirap-korea-national-sovereignty-day",
+          "channel": "ojirap",
+          "topic_key": "korea-national-sovereignty-day-designation-2026-11-24",
+          "category": "politics",
+          "title": "12·3이 기념일이 됐습니다",
+          "description": "정부가 12월 3일을 ‘12·3 국민주권의 날’로 지정하는 대통령령 개정안을 2026년 11월 24일 국무회의에서 통과시켰습니다. 정부 발표와 복수 보도를 바탕으로 확인된 사실만 짚고, 여론 평가는 이번 패킷 범위 밖이라고 선을 긋습니다.",
+          "sources": [
+            {
+              "title": "국민의 용기와 행동 기린다, ‘12·3국민주권의 날’ 정부기념일 지정 | 행정안전부",
+              "url": "https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do%3Bjsessionid%3DKL5zPiMKSKb-TQh6Q3UGtDA_cEvwayGxxlCPzMOr.node30?bbsId=BBSMSTR_000000000008&nttId=131202",
+              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+            },
+            {
+              "title": "이 대통령 \"12월 3일 '국민주권의 날'로 지정\" | MBC",
+              "url": "https://imnews.imbc.com/replay/2026/nw1200/article/6868120_36967.html",
+              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+            },
+            {
+              "title": "'12·3 그날' 정부기념일로‥\"헌법 수호 국민 기념\" | MBC",
+              "url": "https://imnews.imbc.com/news/2026/society/article/6868128_36918.html",
+              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+            },
+            {
+              "title": "Google 인기 검색어 - 대한민국 지난 24시간",
+              "url": "https://trends.google.com/trending?geo=KR&hl=ko",
+              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+            },
+            {
+              "title": "[다시보기] 이 대통령 \"12월3일 '국민주권의 날' 지정...민주주의 가치 계승-7월 17일 (금) 풀영상 [이슈현장] / JTBC News - YouTube",
+              "url": "https://www.youtube.com/watch?v=LKK299kZVL0",
+              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+            },
+            {
+              "title": "Instagram 접근 제한 확인 페이지",
+              "url": "https://privacycenter.instagram.com/policies/dpf/version/7047067902038207/",
+              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Wikimedia Commons National Assembly of South Korea exterior",
+            "Wikimedia Commons candlelight vigil South Korea"
+          ],
+          "opening_text": "달력에 새 이름이 붙었습니다.",
+          "hook_type": "surprise_update",
+          "topic_category": "government_commemoration",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "달력에 새 이름이 붙었습니다",
+              "body": "정부가 십이월 삼일을 새 기념일로 정했습니다.",
+              "narration": "달력에 새 이름이 붙었습니다.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ]
+            },
+            {
+              "kind": "fact",
+              "headline": "국무회의 통과, 날짜는 12월 3일",
+              "body": "행안부는 대통령령 개정안 통과를 오늘 알렸습니다.",
+              "narration": "행안부는 이천이십육년 십일월 이십사일, 매년 십이월 삼일을 ‘십이삼 국민주권의 날’로 정하는 대통령령 개정안이 국무회의를 통과했다고 밝혔어요. ",
+              "source_indices": [
+                0
+              ]
+            },
+            {
+              "kind": "fact",
+              "headline": "정부 설명은 헌정 수호 기념",
+              "body": "정부는 이 날을 국민 뜻을 기리는 취지라고 설명했습니다.",
+              "narration": "정부 설명상 이 기념일은 이천이십사년 십이월 삼일 비상계엄에 항거해 헌법과 민주주의를 지킨 국민의 뜻을 기리자는 취지입니다. ",
+              "source_indices": [
+                0,
+                2
+              ]
+            },
+            {
+              "kind": "opinion",
+              "headline": "관심은 이미 올라왔더군요",
+              "body": "검색어 급상승은 확인됐지만 여론 분포는 이번 범위 밖입니다.",
+              "narration": "구글 트렌드 한국 화면엔 ‘십이 월 삼 일’이 급상승으로 잡혔고, 저는 이런 날은 이름보다 어떻게 기억하느냐가 더 오래 간다고 봅니다. ",
+              "source_indices": [
+                3
+              ]
+            },
+            {
+              "kind": "closing",
+              "headline": "다만 못 본 것도 있습니다",
+              "body": "인스타 검증은 제한됐고 유튜브 당일 신호도 확인이 제한됐습니다.",
+              "narration": "다만 인스타 공개 게시물은 검증이 안 됐고 당일 유튜브 신호도 제한적이었어요. 기념일은 정해졌고, 이제 달력보다 기억력이 더 바빠지겠네요.",
+              "source_indices": [
+                4,
+                5
+              ]
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "korea-national-sovereignty-day-designation-2026-11-24",
+            "category": "politics",
+            "summary": "2026년 11월 24일 행정안전부와 복수 언론에 따르면, 정부는 2024년 12월 3일 비상계엄에 항거해 헌정 질서를 지킨 국민을 기리기 위해 매년 12월 3일을 ‘12·3 국민주권의 날’로 지정하는 대통령령 개정안을 국무회의에서 통과시켰다. 같은 날 Google Trends KR에서도 ‘12 월 3 일’이 급상승 검색어로 나타나 관심 신호가 확인됐다.",
+            "verified_facts": [
+              {
+                "text": "행정안전부는 2026년 11월 24일 보도자료에서 매년 12월 3일을 ‘12·3 국민주권의 날’로 지정하는 대통령령 ‘각종 기념일 등에 관한 규정’ 개정안이 국무회의를 통과했다고 밝혔다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "정부 설명에 따르면 이 기념일은 2024년 12월 3일 비상계엄에 항거해 대한민국의 헌법과 민주주의를 수호한 국민의 뜻을 기리기 위한 것이다.",
+                "source_indices": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "text": "행정안전부는 2026년 12월 3일 국회 일대에서 제1회 기념식을 열 예정이며, 시민추진위원회를 구성해 정부와 국회가 공동 주최한다고 밝혔다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "이재명 대통령은 2026년 11월 24일 국무회의에서 관련 안건을 처리할 예정이라고 언급했다는 보도가 나왔다.",
+                "source_indices": [
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "Google Trends 대한민국 지난 24시간 화면과 제공된 트렌드 신호에서 ‘12 월 3 일’이 2026년 11월 24일 급상승 검색어로 확인된다.",
+                "source_indices": [
+                  3
+                ]
+              },
+              {
+                "text": "YouTube에서는 2026년 7월 16일 JTBC News 영상이 ‘12월3일을 국민주권의 날로 지정’하겠다는 대통령 발언을 담고 있는 것이 확인되지만, 2026년 11월 24일 당일 새 업로드 신호는 이번 요청 범위에서 확인이 제한적이었다.",
+                "source_indices": [
+                  4
+                ]
+              },
+              {
+                "text": "Instagram 공개 게시물은 비로그인 접근 제한으로 이번 요청에서 특정 URL 내용을 검증하지 못했다.",
+                "source_indices": [
+                  5
+                ]
+              }
+            ],
+            "uncertainties": [
+              "정치적 해석이나 찬반 여론 분포는 이번 패킷에 포함하지 않았다. 확인 가능한 범위는 정부 결정과 보도 사실 중심이다.",
+              "YouTube 당일 업로드 인기 정도나 조회수 증감은 신뢰성 있게 비교 가능한 자료를 확보하지 못해 기재하지 않았다.",
+              "Instagram 공개 게시물은 접근 제한으로 검증 불가했다."
+            ],
+            "sources": [
+              {
+                "title": "국민의 용기와 행동 기린다, ‘12·3국민주권의 날’ 정부기념일 지정 | 행정안전부",
+                "url": "https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do%3Bjsessionid%3DKL5zPiMKSKb-TQh6Q3UGtDA_cEvwayGxxlCPzMOr.node30?bbsId=BBSMSTR_000000000008&nttId=131202",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "이 대통령 \"12월 3일 '국민주권의 날'로 지정\" | MBC",
+                "url": "https://imnews.imbc.com/replay/2026/nw1200/article/6868120_36967.html",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "'12·3 그날' 정부기념일로‥\"헌법 수호 국민 기념\" | MBC",
+                "url": "https://imnews.imbc.com/news/2026/society/article/6868128_36918.html",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "Google 인기 검색어 - 대한민국 지난 24시간",
+                "url": "https://trends.google.com/trending?geo=KR&hl=ko",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "[다시보기] 이 대통령 \"12월3일 '국민주권의 날' 지정...민주주의 가치 계승-7월 17일 (금) 풀영상 [이슈현장] / JTBC News - YouTube",
+                "url": "https://www.youtube.com/watch?v=LKK299kZVL0",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "Instagram 접근 제한 확인 페이지",
+                "url": "https://privacycenter.instagram.com/policies/dpf/version/7047067902038207/",
+                "role": "primary",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "ec414ab33f4811c4dcb89069cfb0a2cf5de4d3f1b79b8b892d45c725a775b67f",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-24T14:58:45.976545+09:00"
+        },
+        {
+          "id": "2026-11-24-ojirap-russia-ulleung-kadiz",
+          "channel": "ojirap",
+          "topic_key": "russia-warplanes-near-ulleung-kadiz-2026-11-24",
+          "category": "politics",
+          "title": "울릉도 가까이 온 러 군용기",
+          "description": "2026년 11월 24일 보도에 따르면 러시아 군용기 여러 대가 동해 KADIZ에 진입한 뒤 울릉도에 매우 가깝게 접근했고, 군은 경계경보와 대응 출격에 나섰습니다. 확인된 사실은 영공 침범은 없었다는 점까지입니다.",
+          "sources": [
+            {
+              "title": "러 군용기, 울릉도 영공 '초근접'…정부, 무관 초치해 항의 예정 | 연합뉴스",
+              "url": "https://www.yna.co.kr/view/AKR20261124094700504",
+              "checked_at": "2026-11-24T14:58:45.976770+09:00"
+            },
+            {
+              "title": "[그래픽] 러시아 군용기, 동해 KADIZ 진입 | 뉴시스",
+              "url": "https://nwww.newsis.com/view/NISI20261124_0002300458",
+              "checked_at": "2026-11-24T14:58:45.976770+09:00"
+            },
+            {
+              "title": "[연합뉴스 이 시각 헤드라인] - 10:30 | 연합뉴스",
+              "url": "https://www.yna.co.kr/view/AKR20261124062300011",
+              "checked_at": "2026-11-24T14:58:45.976770+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Wikimedia Commons Ulleungdo aerial view",
+            "Wikimedia Commons Republic of Korea Air Force fighter jet"
+          ],
+          "opening_text": "가깝지만 넘진 않았습니다.",
+          "hook_type": "tension_release",
+          "topic_category": "air_defense_incident",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "가깝지만 넘진 않았습니다",
+              "body": "러시아 군용기가 울릉도 가까이 접근했다는 보도입니다.",
+              "narration": "가깝지만 넘진 않았습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-24-ojirap-russia-ulleung-kadiz-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "KADIZ 진입 뒤 경계경보",
+              "body": "군은 경계경보를 발령하고 대응 출격했습니다.",
+              "narration": "연합뉴스와 뉴시스 보도에 따르면 합참은 이천이십육년 십일월 이십사일 러시아 군용기 여러 대가 동해 카디즈에 들어온 뒤 울릉도에 근접해 경계경보를 발령했다고 밝혔습니다. ",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-24-ojirap-russia-ulleung-kadiz-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "영공 침범은 없었다고 설명",
+              "body": "당국 설명상 실제 영공 침범은 없었습니다.",
+              "narration": "확인된 사실은 여기까지예요. 당국 설명상 실제 영공 침범은 없었지만, 연합뉴스는 울릉도 영공 침범 직전 수준 접근이라고 전했습니다. ",
+              "source_indices": [
+                0
+              ],
+              "media": "graphic-2026-11-24-ojirap-russia-ulleung-kadiz-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "숫자보다 거리감이 먼저",
+              "body": "기종·정확한 대수·좌표는 이번 범위에서 확정이 부족합니다.",
+              "narration": "다만 기종이나 정확한 대수, 좌표는 기사 범위에서 다 확정되진 않았고요. 제 느낌엔 이런 소식은 숫자보다 ‘얼마나 가까웠나’가 더 서늘합니다. ",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-24-ojirap-russia-ulleung-kadiz-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "파일사진은 파일사진이어야죠",
+              "body": "오늘 안보 현안으로 실시간 보도됐습니다.",
+              "narration": "오늘 오전 실시간 안보 현안으로 다뤄졌고 외교 대응도 이어질 걸로 보도됐습니다. 하늘은 안 넘었다는데, 심장은 잠깐 선을 넘었네요.",
+              "source_indices": [
+                0,
+                2
+              ],
+              "media": "graphic-2026-11-24-ojirap-russia-ulleung-kadiz-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "russia-warplanes-near-ulleung-kadiz-2026-11-24",
+            "category": "politics",
+            "summary": "2026년 11월 24일 한국 군과 언론 보도에 따르면 러시아 군용기 여러 대가 동해 한국방공식별구역(KADIZ)에 진입한 뒤 울릉도에 매우 가깝게 접근했고, 군은 영공 침범 가능성에 대비해 경계경보를 발령하고 대응 출격했다. 당국 설명상 실제 영공 침범은 없었지만, 울릉도 영공 침범 직전 수준의 접근이어서 외교 대응이 이어질 사안으로 보도됐다.",
+            "verified_facts": [
+              {
+                "text": "합동참모본부는 2026년 11월 24일 러시아 군용기 수 대가 동해 KADIZ에 진입한 뒤 울릉도에 근접해 경계경보를 발령했으며 영공침범은 없었다고 밝혔다고 연합뉴스와 뉴시스가 보도했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "연합뉴스는 합참 공보실장 브리핑을 인용해 러시아 군용기가 울릉도 영공 침범 직전까지 접근했다고 보도했다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "뉴시스 그래픽 기사도 합동참모본부 발표를 바탕으로 러시아 군용기의 KADIZ 진입과 울릉도 근접 사실을 전했다.",
+                "source_indices": [
+                  1
+                ]
+              },
+              {
+                "text": "이 사안은 2026년 11월 24일 오전 기준 한국 안보 현안으로 실시간 보도됐다.",
+                "source_indices": [
+                  0,
+                  2
+                ]
+              }
+            ],
+            "uncertainties": [
+              "이번 요청에서 합동참모본부의 별도 독립 웹페이지 원문 공지 URL은 직접 확보하지 못했고, 군 발표 내용은 연합뉴스와 뉴시스 보도로 확인했다.",
+              "러시아 군용기의 기종, 정확한 대수, 비행 경로 좌표는 열람한 기사 범위에서 확정적으로 모두 제시되지 않았다.",
+              "재사용 가능한 정확한 당일 현장 사진 확보 여부는 별도 이미지 확인이 필요하므로, 시각 자료는 울릉도 전경이나 한국 공군 전투기 자료사진처럼 직접 관련된 파일사진이 더 안전하다."
+            ],
+            "sources": [
+              {
+                "title": "러 군용기, 울릉도 영공 '초근접'…정부, 무관 초치해 항의 예정 | 연합뉴스",
+                "url": "https://www.yna.co.kr/view/AKR20261124094700504",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "[그래픽] 러시아 군용기, 동해 KADIZ 진입 | 뉴시스",
+                "url": "https://nwww.newsis.com/view/NISI20261124_0002300458",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "[연합뉴스 이 시각 헤드라인] - 10:30 | 연합뉴스",
+                "url": "https://www.yna.co.kr/view/AKR20261124062300011",
+                "role": "original_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "b3d147c1604062c2e97f4c21680d4a2c3a4ac22dc5ae66ab91f46bbb4c67a553",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-24T14:58:45.976770+09:00"
+        }
+      ],
+      "media": {
+        "commons-134740185-f83aa30a": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_the_Korean_People%27s_Air_Force_2023.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Flag_of_the_Korean_People%27s_Air_Force_2023.png",
+          "path": "assets/commons-134740185-f83aa30a.png",
+          "media_type": "image",
+          "credit": "DPRKRIGHTNOW / Wikimedia Commons",
+          "license": "Public domain",
+          "license_url": "",
+          "notice": "자료사진 · 2023",
+          "description": "The Flag is similar to the Flag of the KPA Ground Forces but the star encircled has a star. While the air force wing is encircled with fighter jets in a sun-like pattern.",
+          "capture_date": "2023-07-21",
+          "title": "File:Flag of the Korean People's Air Force 2023.png",
+          "topic_key": "russia-warplanes-near-ulleung-kadiz-2026-11-24",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-24T14:58:26.359587+09:00"
+        },
+        "commons-96740323-f83aa30a": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/c/c7/US_Air_Force_%28USAF%29_STAFF_Sergeant_%28SSGT%29_Henry_Gonzalez%2C_Aerospace_Propulsion_Craftsman%2C_51st_Maintenance_Squadron_%28MXS%29%2C_51st_Fighter_Wing_%28FW%29%2C_Osan_Air_Base_%28AB%29%2C_Republic_of_Ko_-_DPLA_-_a10d94b47a2cc1964d6515efddda94f2.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:US_Air_Force_(USAF)_STAFF_Sergeant_(SSGT)_Henry_Gonzalez,_Aerospace_Propulsion_Craftsman,_51st_Maintenance_Squadron_(MXS),_51st_Fighter_Wing_(FW),_Osan_Air_Base_(AB),_Republic_of_Ko_-_DPLA_-_a10d94b47a2cc1964d6515efddda94f2.jpeg",
+          "path": "assets/commons-96740323-f83aa30a.jpg",
+          "media_type": "image",
+          "credit": "Department of Defense. American Forces Information Service. Defense Visual Information Center. 1994 / Wikimedia Commons",
+          "license": "Public domain",
+          "license_url": "",
+          "notice": "자료사진 · 2004",
+          "description": "The original finding aid described this photograph as: Base: Osan Air Base Country: Republic Of Korea (KOR) Scene Camera Operator: SSGT Corey Clements, USAF Release Status: Released to Public",
+          "capture_date": "31 March 2004",
+          "title": "File:US Air Force (USAF) STAFF Sergeant (SSGT) Henry Gonzalez, Aerospace Propulsion Craftsman, 51st Maintenance Squadron (MXS), 51st Fighter Wing (FW), Osan Air Base (AB), Republic of Ko - DPLA - a10d94b47a2cc1964d6515efddda94f2.jpeg",
+          "topic_key": "russia-warplanes-near-ulleung-kadiz-2026-11-24",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-24T14:58:26.359705+09:00"
+        },
+        "graphic-2026-11-24-ojirap-russia-ulleung-kadiz-0": {
+          "path": "assets/graphics/2026-11-24/2026-11-24-ojirap-russia-ulleung-kadiz/scene-01.png",
+          "sha256": "9f7ee8ba168515b6e6dae09f555e1f3270c4708f63344940daa1065440a9ccc7",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "russia-warplanes-near-ulleung-kadiz-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "789609a9d34b4e2e62d8036ed8801c4d649964a3eb22fb1c5e82630156bb7e88",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-24-ojirap-russia-ulleung-kadiz-1": {
+          "path": "assets/graphics/2026-11-24/2026-11-24-ojirap-russia-ulleung-kadiz/scene-02.png",
+          "sha256": "f61bf451821e0255f0a61a3deb7cc3676ce792ba8e24a5f3dbfc4405d2b83210",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "russia-warplanes-near-ulleung-kadiz-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "f89ce3ad1a6152c99394264e6d09225864576f0c5980fb836205664cbfbfb73a",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-24-ojirap-russia-ulleung-kadiz-2": {
+          "path": "assets/graphics/2026-11-24/2026-11-24-ojirap-russia-ulleung-kadiz/scene-03.png",
+          "sha256": "0b196e7f72829978430d93a9c98acbc29b067b0a77102516f9105bae882a9b9e",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "russia-warplanes-near-ulleung-kadiz-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "7da3e642f9d9237e9a77333eec42d56fb4ba11f0d4422954a36e429226ae1748",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-24-ojirap-russia-ulleung-kadiz-3": {
+          "path": "assets/graphics/2026-11-24/2026-11-24-ojirap-russia-ulleung-kadiz/scene-04.png",
+          "sha256": "c85b751e19b259d5ad129b764702dbc2202ab3ca75b582b0119dff57b7a11062",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "russia-warplanes-near-ulleung-kadiz-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "572d6591bd55c4a43756e6fc9578f7cc452d19daef1507c12b6a57f4706e840f",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-24-ojirap-russia-ulleung-kadiz-4": {
+          "path": "assets/graphics/2026-11-24/2026-11-24-ojirap-russia-ulleung-kadiz/scene-05.png",
+          "sha256": "15137fad5f3a2922cbc2321f1531cdc9f34e646ec6aa870a3a9882a86478b380",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "russia-warplanes-near-ulleung-kadiz-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "4f4deab0231502c73353f4835c1388a91938bce981649585fc3b2247c88fcd2c",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-24-ojirap-russia-ulleung-kadiz\": [\"graphic-2026-11-24-ojirap-russia-ulleung-kadiz-0\", \"graphic-2026-11-24-ojirap-russia-ulleung-kadiz-1\", \"graphic-2026-11-24-ojirap-russia-ulleung-kadiz-2\", \"graphic-2026-11-24-ojirap-russia-ulleung-kadiz-3\", \"graphic-2026-11-24-ojirap-russia-ulleung-kadiz-4\"]}}",
+      "review_source_urls": [
+        "https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do%3Bjsessionid%3DKL5zPiMKSKb-TQh6Q3UGtDA_cEvwayGxxlCPzMOr.node30?bbsId=BBSMSTR_000000000008&nttId=131202",
+        "https://www.yna.co.kr/view/AKR20261124094700504"
+      ],
+      "created_at": "2026-11-24T14:58:45.976969+09:00"
     }
   },
   "publications": [
