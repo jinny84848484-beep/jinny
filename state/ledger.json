@@ -7982,7 +7982,7 @@
           "completed_at": "2026-11-24T14:58:44.828493+09:00"
         }
       },
-      "status": "uploaded",
+      "status": "complete",
       "active_stage": "editorial_review_1",
       "review_input_hash": "1a644c0ee59317479b62c3bcf3a381713c215fab1c20d6207be09cb9520868a7",
       "editorial_exclusions": [
@@ -8487,7 +8487,8 @@
           ]
         }
       ],
-      "active_job": "2026-11-24-ojirap-russia-ulleung-kadiz"
+      "active_job": "2026-11-24-ojirap-russia-ulleung-kadiz",
+      "completed_at": "2026-11-24T15:00:16.898951+09:00"
     }
   },
   "publications": [
