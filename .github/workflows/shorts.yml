@@ -41,6 +41,21 @@ concurrency:
   group: shorts-production
   cancel-in-progress: false
 jobs:
+  schedule-receipt:
+    if: github.event_name == 'schedule'
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Record native schedule arrival
+        env:
+          CRON_SLOT: ${{ github.event.schedule }}
+          PUBLIC_GATE: ${{ vars.PUBLIC_UPLOADS_ENABLED == 'true' }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          printf 'Native cron received: %s; runner KST: %s; run: %s; public gate enabled: %s\n' \
+            "$CRON_SLOT" "$(TZ=Asia/Seoul date -Iseconds)" "$RUN_ID" "$PUBLIC_GATE"
   shorts:
     if: github.event_name == 'workflow_dispatch' || vars.PUBLIC_UPLOADS_ENABLED == 'true'
     runs-on: ubuntu-24.04
