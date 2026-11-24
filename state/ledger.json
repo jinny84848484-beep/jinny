@@ -7982,7 +7982,7 @@
           "completed_at": "2026-11-24T14:58:44.828493+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_1",
       "review_input_hash": "1a644c0ee59317479b62c3bcf3a381713c215fab1c20d6207be09cb9520868a7",
       "editorial_exclusions": [
@@ -8009,32 +8009,32 @@
             {
               "title": "국민의 용기와 행동 기린다, ‘12·3국민주권의 날’ 정부기념일 지정 | 행정안전부",
               "url": "https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do%3Bjsessionid%3DKL5zPiMKSKb-TQh6Q3UGtDA_cEvwayGxxlCPzMOr.node30?bbsId=BBSMSTR_000000000008&nttId=131202",
-              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+              "checked_at": "2026-11-24T14:58:47.216048+09:00"
             },
             {
               "title": "이 대통령 \"12월 3일 '국민주권의 날'로 지정\" | MBC",
               "url": "https://imnews.imbc.com/replay/2026/nw1200/article/6868120_36967.html",
-              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+              "checked_at": "2026-11-24T14:58:47.216048+09:00"
             },
             {
               "title": "'12·3 그날' 정부기념일로‥\"헌법 수호 국민 기념\" | MBC",
               "url": "https://imnews.imbc.com/news/2026/society/article/6868128_36918.html",
-              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+              "checked_at": "2026-11-24T14:58:47.216048+09:00"
             },
             {
               "title": "Google 인기 검색어 - 대한민국 지난 24시간",
               "url": "https://trends.google.com/trending?geo=KR&hl=ko",
-              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+              "checked_at": "2026-11-24T14:58:47.216048+09:00"
             },
             {
               "title": "[다시보기] 이 대통령 \"12월3일 '국민주권의 날' 지정...민주주의 가치 계승-7월 17일 (금) 풀영상 [이슈현장] / JTBC News - YouTube",
               "url": "https://www.youtube.com/watch?v=LKK299kZVL0",
-              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+              "checked_at": "2026-11-24T14:58:47.216048+09:00"
             },
             {
               "title": "Instagram 접근 제한 확인 페이지",
               "url": "https://privacycenter.instagram.com/policies/dpf/version/7047067902038207/",
-              "checked_at": "2026-11-24T14:58:45.976545+09:00"
+              "checked_at": "2026-11-24T14:58:47.216048+09:00"
             }
           ],
           "visual_queries": [
@@ -8195,7 +8195,7 @@
           "fact_packet_hash": "ec414ab33f4811c4dcb89069cfb0a2cf5de4d3f1b79b8b892d45c725a775b67f",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-24T14:58:45.976545+09:00"
+          "verified_at": "2026-11-24T14:58:47.216048+09:00"
         },
         {
           "id": "2026-11-24-ojirap-russia-ulleung-kadiz",
@@ -8208,17 +8208,17 @@
             {
               "title": "러 군용기, 울릉도 영공 '초근접'…정부, 무관 초치해 항의 예정 | 연합뉴스",
               "url": "https://www.yna.co.kr/view/AKR20261124094700504",
-              "checked_at": "2026-11-24T14:58:45.976770+09:00"
+              "checked_at": "2026-11-24T14:58:47.216283+09:00"
             },
             {
               "title": "[그래픽] 러시아 군용기, 동해 KADIZ 진입 | 뉴시스",
               "url": "https://nwww.newsis.com/view/NISI20261124_0002300458",
-              "checked_at": "2026-11-24T14:58:45.976770+09:00"
+              "checked_at": "2026-11-24T14:58:47.216283+09:00"
             },
             {
               "title": "[연합뉴스 이 시각 헤드라인] - 10:30 | 연합뉴스",
               "url": "https://www.yna.co.kr/view/AKR20261124062300011",
-              "checked_at": "2026-11-24T14:58:45.976770+09:00"
+              "checked_at": "2026-11-24T14:58:47.216283+09:00"
             }
           ],
           "visual_queries": [
@@ -8346,7 +8346,7 @@
           "fact_packet_hash": "b3d147c1604062c2e97f4c21680d4a2c3a4ac22dc5ae66ab91f46bbb4c67a553",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-24T14:58:45.976770+09:00"
+          "verified_at": "2026-11-24T14:58:47.216283+09:00"
         }
       ],
       "media": {
@@ -8475,7 +8475,19 @@
         "https://www.mois.go.kr/frt/bbs/type010/commonSelectBoardArticle.do%3Bjsessionid%3DKL5zPiMKSKb-TQh6Q3UGtDA_cEvwayGxxlCPzMOr.node30?bbsId=BBSMSTR_000000000008&nttId=131202",
         "https://www.yna.co.kr/view/AKR20261124094700504"
       ],
-      "created_at": "2026-11-24T14:58:45.976969+09:00"
+      "created_at": "2026-11-24T14:58:45.976969+09:00",
+      "publication_exclusions": [
+        {
+          "job_id": "2026-11-24-ojirap-korea-national-sovereignty-day",
+          "channel": "ojirap",
+          "reason": "editorial_review_failed",
+          "codes": [
+            "source_inaccessible",
+            "unsupported_claim"
+          ]
+        }
+      ],
+      "active_job": "2026-11-24-ojirap-russia-ulleung-kadiz"
     }
   },
   "publications": [
