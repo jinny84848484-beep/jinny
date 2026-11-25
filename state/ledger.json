@@ -8529,9 +8529,554 @@
           "completed_at": "2026-11-25T13:54:20.011813+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
+      "status": "reviewed",
       "active_stage": "editorial_review_1",
-      "review_input_hash": "60237de64a8890b31948501a12b412d6e4909e62ff47289bf6a967bf2dd6cd59"
+      "review_input_hash": "60237de64a8890b31948501a12b412d6e4909e62ff47289bf6a967bf2dd6cd59",
+      "editorial_exclusions": [],
+      "retry_hold": false,
+      "jobs": [
+        {
+          "id": "2026-11-25-korea-sovereignty-day",
+          "channel": "ojirap",
+          "topic_key": "korea-national-sovereignty-day-designation-2026-11-24",
+          "category": "politics",
+          "title": "국민주권의 날, 공휴일은 아닙니다",
+          "description": "정부가 12월 3일을 ‘12·3 국민주권의 날’ 정부기념일로 지정했습니다. 첫 기념식은 2026년 12월 3일 국회 일대 예정이지만, 공휴일 지정과는 다르다는 점은 분명합니다.",
+          "sources": [
+            {
+              "title": "'12·3 국민주권의 날' 정부기념일 지정…국민 용기와 행동 기린다 - 대한민국 정책브리핑",
+              "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148976397&pWise=sub&pWiseSub=R1",
+              "checked_at": "2026-11-25T13:54:21.196759+09:00"
+            },
+            {
+              "title": "국민의 용기와 행동 기린다, '12·3국민주권의 날' 정부기념일 지정 - 대통령실 브리핑/정책브리핑",
+              "url": "https://m.korea.kr/briefing/pressReleaseView.do?gubun=pressRelease&newsId=156790530&pageIndex=4&repCode=",
+              "checked_at": "2026-11-25T13:54:21.196759+09:00"
+            },
+            {
+              "title": "'12·3 국민주권의 날' 기념일 지정...이 대통령 \"위대한 국민 승리\" | YTN",
+              "url": "https://www.ytn.co.kr/_ln/0101_202611241605214681",
+              "checked_at": "2026-11-25T13:54:21.196759+09:00"
+            },
+            {
+              "title": "12월 3일 '국민주권의날' 기념일 지정...공휴일은 아냐 / YTN - YouTube",
+              "url": "https://www.youtube.com/watch?v=BoD1A0R9xqM",
+              "checked_at": "2026-11-25T13:54:21.196759+09:00"
+            },
+            {
+              "title": "Google 인기 검색어",
+              "url": "https://trends.google.com/trending?geo=KR&hl=ko",
+              "checked_at": "2026-11-25T13:54:21.196759+09:00"
+            }
+          ],
+          "visual_queries": [
+            "National Assembly of Korea building Wikimedia Commons",
+            "Yeouido National Assembly Seoul Wikimedia Commons"
+          ],
+          "opening_text": "공휴일인 줄 알았죠",
+          "hook_type": "misunderstanding-fix",
+          "topic_category": "government-commemoration",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "공휴일인 줄 알았죠",
+              "body": "이름은 묵직한데 이번 지정은 공휴일이 아니라 정부기념일입니다.",
+              "narration": "공휴일인 줄 알았죠. 이름은 꽤 묵직한데, 이번 건 공휴일 지정이 아니라 정부기념일 지정입니다.",
+              "source_indices": [
+                2,
+                3
+              ],
+              "media": "graphic-2026-11-25-korea-sovereignty-day-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "십이월 삼일 공식 지정",
+              "body": "국무회의가 2026년 11월 24일 관련 대통령령 개정안을 의결했습니다.",
+              "narration": "정부는 이천이십육년 십일월 이십사일 국무회의에서 관련 대통령령 개정안을 의결해, 매년 십이월 삼일을 ‘십이삼 국민주권의 날’로 정했습니다. 출처 확인일은 이천이십육년 십일월 이십오일입니다.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-25-korea-sovereignty-day-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "첫 기념식은 국회 일대",
+              "body": "정부 주관 첫 기념식은 2026년 12월 3일 국회 일대 예정입니다.",
+              "narration": "정책브리핑 자료엔 첫 정부 주관 기념식이 이천이십육년 십이월 삼일 국회 일대에서, 정부와 국회 공동 주최로 열린다고 적혔고 전후 일주일은 기념주간으로 운영된다고 합니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-25-korea-sovereignty-day-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "이름보다 운영이 중요",
+              "body": "기념일의 의미는 크지만, 결국 어떻게 기억하게 만들지가 더 중요해 보입니다.",
+              "narration": "여기서부터는 제 의견인데요. 기념일 하나 더 만드는 일보다, 사람들이 왜 기억해야 하는지 덜 거창하게 설명하는 운영이 더 중요해 보입니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-25-korea-sovereignty-day-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "달력은 그대로입니다",
+              "body": "검색 관심은 올랐지만 쉬는 날은 아닙니다. 달력은 침착하더라고요.",
+              "narration": "관심도는 검색어에서 확인되지만, 달력은 아주 침착합니다. 이름은 새로 생겼고 쉬는 날은 그대로예요. 늘 그렇듯 기대가 먼저 연차를 냅니다.",
+              "source_indices": [
+                4,
+                3
+              ],
+              "media": "graphic-2026-11-25-korea-sovereignty-day-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "korea-national-sovereignty-day-designation-2026-11-24",
+            "category": "politics",
+            "summary": "2026년 11월 24일 국무회의에서 대통령령 개정안이 의결되며 매년 12월 3일이 정부기념일 ‘12·3 국민주권의 날’로 지정됐다. 첫 정부 주관 기념식은 2026년 12월 3일 국회 일대에서 열릴 예정이며, 기념일 전후 1주일은 기념주간으로 운영된다. 다만 이번 조치는 정부기념일 지정으로, 공휴일 지정과는 다르다.",
+            "verified_facts": [
+              {
+                "text": "2026년 11월 24일 국무회의에서 대통령령 ‘각종 기념일 등에 관한 규정’ 개정안이 통과돼 매년 12월 3일이 ‘12·3 국민주권의 날’ 정부기념일로 지정됐다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "대통령 직속 빛의 위원회는 올해부터 매년 12월 3일 정부 주관 기념식을 열고, 기념일 전후 1주일을 문화·학술행사를 포함한 기념주간으로 운영한다고 밝혔다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "첫 정부 주관 기념식은 2026년 12월 3일 국회 일대에서 열릴 예정이며, 정부와 국회가 공동 주최한다고 정책브리핑 보도자료가 전했다.",
+                "source_indices": [
+                  1
+                ]
+              },
+              {
+                "text": "YTN 보도에 따르면 이번 조치는 정부기념일 지정이며, 12월 3일이 공휴일이 되는 것은 아니다.",
+                "source_indices": [
+                  2,
+                  3
+                ]
+              },
+              {
+                "text": "Google Trends 한국 실시간 인기 검색어 화면에서 ‘국민주권의 날’ 관련 검색이 2026년 11월 25일 기준 활성 추세로 표시됐다.",
+                "source_indices": [
+                  4
+                ]
+              }
+            ],
+            "uncertainties": [
+              "Instagram 공개 게시물 신호는 비로그인 환경에서 안정적으로 확인되지 않아, 관심도 비교용으로 검증 가능한 특정 공개 게시물 URL을 확보하지 못했다.",
+              "YouTube 관심 신호는 확인 가능했지만, 조회수·좋아요 수치는 시시각각 변할 수 있으므로 현재 시점의 스냅샷으로만 취급해야 한다.",
+              "정치적 해석이나 찬반 프레이밍은 사실 검증 범위를 벗어나므로 commentary 단계에서 의견과 사실을 분리해야 한다."
+            ],
+            "sources": [
+              {
+                "title": "'12·3 국민주권의 날' 정부기념일 지정…국민 용기와 행동 기린다 - 대한민국 정책브리핑",
+                "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148976397&pWise=sub&pWiseSub=R1",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "국민의 용기와 행동 기린다, '12·3국민주권의 날' 정부기념일 지정 - 대통령실 브리핑/정책브리핑",
+                "url": "https://m.korea.kr/briefing/pressReleaseView.do?gubun=pressRelease&newsId=156790530&pageIndex=4&repCode=",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "'12·3 국민주권의 날' 기념일 지정...이 대통령 \"위대한 국민 승리\" | YTN",
+                "url": "https://www.ytn.co.kr/_ln/0101_202611241605214681",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "12월 3일 '국민주권의날' 기념일 지정...공휴일은 아냐 / YTN - YouTube",
+                "url": "https://www.youtube.com/watch?v=BoD1A0R9xqM",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "Google 인기 검색어",
+                "url": "https://trends.google.com/trending?geo=KR&hl=ko",
+                "role": "primary",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "257c5187653ff54e5d1a9d2cfe80d9a0eb9be34edf85e93bb8b816d6207ba753",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-25T13:54:21.196759+09:00"
+        },
+        {
+          "id": "2026-11-25-honam-water-semiconductor",
+          "channel": "ojirap",
+          "topic_key": "honam-semiconductor-water-supply-deoknam-plant-2026-11-25",
+          "category": "business",
+          "title": "반도체엔 결국 물길부터 깝니다",
+          "description": "전남광주통합특별시가 호남 반도체 클러스터 용수 공급을 위해 덕남정수장 생산량을 두 배로 늘리고 송수관로를 신설하는 계획을 추진합니다. 다만 아직은 추진 계획 단계라 향후 일정과 집행은 달라질 수 있습니다.",
+          "sources": [
+            {
+              "title": "호남 반도체 용수 공급 덕남정수장 생산량 2배로 늘린다 | 연합뉴스",
+              "url": "https://www.yna.co.kr/view/AKR20261125072000054",
+              "checked_at": "2026-11-25T13:54:21.196876+09:00"
+            },
+            {
+              "title": "호남 반도체 클러스터 모든 것 '한눈에'…반도체 정보 플랫폼 '칩온' 본격 운영 | 전자신문",
+              "url": "https://www.etnews.com/20261124000528",
+              "checked_at": "2026-11-25T13:54:21.196876+09:00"
+            },
+            {
+              "title": "전남광주통합특별시 공식 채널 - YouTube",
+              "url": "https://www.youtube.com/channel/UCpCtv8fw6egexjhOJpN1IZw",
+              "checked_at": "2026-11-25T13:54:21.196876+09:00"
+            },
+            {
+              "title": "호남권 반도체 클러스터 이미 시작되었습니다! - YouTube",
+              "url": "https://www.youtube.com/watch?v=tEGqMmZX1ZE",
+              "checked_at": "2026-11-25T13:54:21.196876+09:00"
+            }
+          ],
+          "visual_queries": [
+            "water treatment plant South Korea Wikimedia Commons",
+            "industrial water pipeline Wikimedia Commons"
+          ],
+          "opening_text": "반도체는 물부터네요",
+          "hook_type": "infrastructure-reveal",
+          "topic_category": "industry-infrastructure",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "반도체는 물부터네요",
+              "body": "공장 이야기 같아도, 이번 핵심은 칩보다 정수장과 관로입니다.",
+              "narration": "반도체는 물부터네요. 공장 얘기인 줄 알았더니, 이번 핵심은 칩보다 정수장과 관로입니다.",
+              "source_indices": [
+                0
+              ],
+              "media": "graphic-2026-11-25-honam-water-semiconductor-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "이천이십팔년 공급 목표",
+              "body": "통합특별시는 2028년 12월부터 하루 15만 톤 우선 공급을 목표로 밝혔습니다.",
+              "narration": "전남광주통합특별시는 이천이십팔년 십이월부터 호남 반도체 클러스터에 하루 십오만 톤을 우선 공급하겠다며, 덕남정수장 개량과 송수관로 신설 추진을 이천이십육년 십일월 이십오일 밝혔습니다. 확인일도 같습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-25-honam-water-semiconductor-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "정수장 두 배, 관로 일 킬로미터",
+              "body": "연합뉴스에 따르면 정수량은 22만 톤에서 44만 톤으로 늘릴 계획입니다.",
+              "narration": "연합뉴스 보도에 따르면 정수 생산량은 하루 평균 이십이만 톤에서 사십사만 톤으로 늘리고, 직경 천삼백오십밀리미터 길이 일킬로미터 송수관로도 새로 놓을 계획입니다.",
+              "source_indices": [
+                0
+              ],
+              "media": "graphic-2026-11-25-honam-water-semiconductor-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "산업정책은 수도공사 같아요",
+              "body": "제 생각엔 클러스터 뉴스는 결국 전기·물·도로가 진짜 본편입니다.",
+              "narration": "제 생각엔 산업정책 뉴스가 제일 현실적일 때가 이런 순간입니다. 반도체 비전도 좋지만, 결국 물길 안 나면 발표문만 번쩍하거든요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-25-honam-water-semiconductor-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "칩온도 켰지만 변수는 남죠",
+              "body": "정보 플랫폼 운영은 시작됐지만, 사업은 아직 추진 단계라 변동 가능성은 있습니다.",
+              "narration": "전자신문은 ‘칩온’ 운영 시작도 전했지만, 이 사업은 아직 추진 계획 단계라 일정과 집행은 달라질 수 있습니다. 반도체의 로딩 화면이 생각보다 촉촉하네요.",
+              "source_indices": [
+                1,
+                2,
+                3
+              ],
+              "media": "graphic-2026-11-25-honam-water-semiconductor-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "honam-semiconductor-water-supply-deoknam-plant-2026-11-25",
+            "category": "business",
+            "summary": "2026년 11월 25일 전남광주통합특별시가 호남 반도체 클러스터에 물을 대기 위해 덕남정수장 정수량을 하루 평균 22만 톤에서 44만 톤으로 늘리고, 클러스터 연결 송수관로를 신설하는 계획을 본격 추진한다고 밝혔다. 2028년 12월부터 하루 15만 톤 우선 공급이 목표이며, 최근에는 관련 정보 플랫폼 ‘칩온’ 운영도 시작됐다.",
+            "verified_facts": [
+              {
+                "text": "전남광주통합특별시는 2028년 12월부터 호남 반도체 클러스터에 하루 15만 톤의 용수를 우선 공급하기 위해 덕남정수장 개량과 송수관로 신설을 추진한다고 2026년 11월 25일 밝혔다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "연합뉴스 보도에 따르면 덕남정수장의 정수 생산량은 하루 평균 22만 톤에서 44만 톤으로 늘리는 계획이며, 사업비 451억 원이 투입된다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "같은 보도에 따르면 반도체 클러스터 연결용 직경 1,350mm, 길이 1km 송수관로 신설에 92억 원을 투입할 계획이다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "전남광주통합특별시는 반도체 클러스터 조성 과정과 비전을 공유하기 위한 온라인 정보 플랫폼 ‘칩온(CHIP ON)’을 2026년 11월 24일 본격 운영한다고 전자신문이 보도했다.",
+                "source_indices": [
+                  1
+                ]
+              },
+              {
+                "text": "YouTube에서는 전남광주통합특별시 공식 채널에 호남권 반도체 클러스터 관련 영상과 시리즈가 올라와 있어, 기관이 이 사안을 지속적으로 대중 홍보하고 있음을 확인할 수 있다.",
+                "source_indices": [
+                  2,
+                  3
+                ]
+              }
+            ],
+            "uncertainties": [
+              "이번 이슈에 관한 Google Trends의 독립적인 개별 검색어 급상승 화면은 제공된 신호 중 ‘반도체’처럼 넓은 키워드 중심이어서, 덕남정수장 사업 자체의 대중 검색 관심을 정밀하게 분리해 입증하기는 어렵다.",
+              "Instagram 공개 게시물은 비로그인 환경 제약으로 특정 게시물 URL과 게시 시점을 안정적으로 검증하지 못했다.",
+              "사업은 추진 계획 단계이므로 실제 착공·완공 일정과 예산 집행은 이후 행정 절차에 따라 달라질 수 있다."
+            ],
+            "sources": [
+              {
+                "title": "호남 반도체 용수 공급 덕남정수장 생산량 2배로 늘린다 | 연합뉴스",
+                "url": "https://www.yna.co.kr/view/AKR20261125072000054",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "호남 반도체 클러스터 모든 것 '한눈에'…반도체 정보 플랫폼 '칩온' 본격 운영 | 전자신문",
+                "url": "https://www.etnews.com/20261124000528",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "전남광주통합특별시 공식 채널 - YouTube",
+                "url": "https://www.youtube.com/channel/UCpCtv8fw6egexjhOJpN1IZw",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "호남권 반도체 클러스터 이미 시작되었습니다! - YouTube",
+                "url": "https://www.youtube.com/watch?v=tEGqMmZX1ZE",
+                "role": "primary",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "d726a7d1aeac54f3ede05ea686fe4a6d3f39725b0b50f5ab2fadfda114cfa82d",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-25T13:54:21.196876+09:00"
+        }
+      ],
+      "media": {
+        "graphic-2026-11-25-korea-sovereignty-day-0": {
+          "path": "assets/graphics/2026-11-25/2026-11-25-korea-sovereignty-day/scene-01.png",
+          "sha256": "e3c491431b40cb482cc46c01c893ff2a3ba3a4ad42b9adc0f9d2d9bd880c2531",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-national-sovereignty-day-designation-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "aa1ebaef2b4c0c11db96e36dd52ce401121e3bfd48e93250a845a5377cec1cec",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-25-korea-sovereignty-day-1": {
+          "path": "assets/graphics/2026-11-25/2026-11-25-korea-sovereignty-day/scene-02.png",
+          "sha256": "daef4e59f7b6fab16565921eb530c918dfb5ea9386b16cc38fd0bd251d6a2f48",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-national-sovereignty-day-designation-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "670e45d6e2d6638998defcfc49affb35c5c5b9bc9d6d38eee0a5b02ff21eca58",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-25-korea-sovereignty-day-2": {
+          "path": "assets/graphics/2026-11-25/2026-11-25-korea-sovereignty-day/scene-03.png",
+          "sha256": "3c73163018a671cba0baf502e0ef743e94f82289db9792f0acff062e04adf1dd",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-national-sovereignty-day-designation-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "ad34e6615b5d1baccf798cf9dbb92a206ed7c16fefa4ae57737c82e65056633c",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-25-korea-sovereignty-day-3": {
+          "path": "assets/graphics/2026-11-25/2026-11-25-korea-sovereignty-day/scene-04.png",
+          "sha256": "627be4a3a15bc8ade51811483f53248d72616e721a42e52e1522c386f6250910",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-national-sovereignty-day-designation-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "3ffb930bdedd991140e3e4b33141186a4acd3b19964330534e7c3efd3694c80d",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-25-korea-sovereignty-day-4": {
+          "path": "assets/graphics/2026-11-25/2026-11-25-korea-sovereignty-day/scene-05.png",
+          "sha256": "cd974a9aeef363b113224b296d91655c1a5cb3dacdca682a07ef67f02793e273",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "korea-national-sovereignty-day-designation-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "8e05ce28462eeb28967b0171d73b4bd1525112bf0a9cad0659de7c473926ec44",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-25-honam-water-semiconductor-0": {
+          "path": "assets/graphics/2026-11-25/2026-11-25-honam-water-semiconductor/scene-01.png",
+          "sha256": "b79b895740fc5920638a496ce2203d3501ec4d4a1574e574a5f85edfdafefe1f",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "honam-semiconductor-water-supply-deoknam-plant-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "045940bf242a17d4811b55fda3972c9b25fe569d8341a291ddbd5e50aa84e4cc",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-25-honam-water-semiconductor-1": {
+          "path": "assets/graphics/2026-11-25/2026-11-25-honam-water-semiconductor/scene-02.png",
+          "sha256": "5aa480b3f781f0eec6b918fdd17e7ae43c86783e7cc84684d493e132bb6a4208",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "honam-semiconductor-water-supply-deoknam-plant-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "8c712ed113a6ccd77d846aec91c86cfb212783c6293a6dba97aa4922844c1d68",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-25-honam-water-semiconductor-2": {
+          "path": "assets/graphics/2026-11-25/2026-11-25-honam-water-semiconductor/scene-03.png",
+          "sha256": "686d45eb71eb8e48ae6650b9c2f40f9125d5f7accb7e190e8c595ac9c96cc846",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "honam-semiconductor-water-supply-deoknam-plant-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "31bde7bcad076c5baf89bf71d56c3be0d3b8c6d8812b5e45fc801ef8d4650fd5",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-25-honam-water-semiconductor-3": {
+          "path": "assets/graphics/2026-11-25/2026-11-25-honam-water-semiconductor/scene-04.png",
+          "sha256": "fb2b948fc8e061ddb406668a1fdb52fc11a50906326cd6b5ff7392a30d1eae54",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "honam-semiconductor-water-supply-deoknam-plant-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "fb8eec7f14c51904f0950841d7ad93b12780aba69ac0828946a20a3f15c1354f",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-25-honam-water-semiconductor-4": {
+          "path": "assets/graphics/2026-11-25/2026-11-25-honam-water-semiconductor/scene-05.png",
+          "sha256": "70fa15c6321c7e4aa7ff6ef845c53575ad98387a3c99d678348e350b17f6177f",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "honam-semiconductor-water-supply-deoknam-plant-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "3522255fa237eaf3a45ab6092d94fe9684a6dc75691dc2be1533bf8aa1106f5c",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-25-korea-sovereignty-day\": [\"graphic-2026-11-25-korea-sovereignty-day-0\", \"graphic-2026-11-25-korea-sovereignty-day-1\", \"graphic-2026-11-25-korea-sovereignty-day-2\", \"graphic-2026-11-25-korea-sovereignty-day-3\", \"graphic-2026-11-25-korea-sovereignty-day-4\"], \"2026-11-25-honam-water-semiconductor\": [\"graphic-2026-11-25-honam-water-semiconductor-0\", \"graphic-2026-11-25-honam-water-semiconductor-1\", \"graphic-2026-11-25-honam-water-semiconductor-2\", \"graphic-2026-11-25-honam-water-semiconductor-3\", \"graphic-2026-11-25-honam-water-semiconductor-4\"]}}",
+      "review_source_urls": [
+        "https://m.korea.kr/briefing/pressReleaseView.do?gubun=pressRelease&newsId=156790530&pageIndex=4&repCode=",
+        "https://www.korea.kr/news/policyNewsView.do?newsId=148976397&pWise=sub&pWiseSub=R1",
+        "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156790530&pWiseMinistry=ministryNews&repCode=A00031&repCodeType=%EC%A0%95%EB%B6%80%EB%B6%80%EC%B2%98",
+        "https://www.korea.kr/briefing/policyBriefingView.do?newsId=156761367",
+        "https://www.korea.kr/news/policyNewsView.do?newsId=148960604&pWise=main&pWiseMain=K4",
+        "https://m.korea.kr/briefing/policyBriefingView.do?endDate=2026-05-17&gubun=policyBriefing&newsId=156761367&pageIndex=1&srchType=&srchWord=&startDate=2025-11-17",
+        "https://www.korea.kr/news/policyNewsView.do?newsId=148955821",
+        "https://gonggam.korea.kr/newsContentView.es?mid=a12700000000&news_id=15a0da29-6b44-439f-9acb-b735b8de1d7f&section_id=",
+        "https://gonggam.korea.kr/newsContentView.es?code_cd=&content=&mid=a12505000000&news_id=15a0da29-6b44-439f-9acb-b735b8de1d7f&section_id=NCCD_COVER",
+        "https://www.korea.kr/briefing/presidentView.do?newsId=148968323&pWise=sub&pWiseSub=C5",
+        "https://www.korea.kr/news/policyNewsView.do?newsId=148955771&pWise=Letter",
+        "https://m.korea.kr/expertWeb/resources/files/data/document_file/2014/2014_%EC%A0%95%EB%B6%80%EC%9D%98%EC%A0%84%ED%8E%B8%EB%9E%8C143.pdf",
+        "https://gonggam.korea.kr/newsContentView.es?code_cd=0123000000&content=NC002&mid=a12504000000&news_id=15a0da29-6b44-439f-9acb-b735b8de1d7f&section_id=NCCD_POLICY",
+        "https://www.yna.co.kr/view/AKR20261125072000054"
+      ],
+      "created_at": "2026-11-25T13:54:21.197049+09:00"
     }
   },
   "publications": [
