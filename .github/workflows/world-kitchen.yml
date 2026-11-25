@@ -8,7 +8,7 @@ on:
     - cron: '7 1 * * *'  # 10:07 KST
     - cron: '37 3 * * *' # 12:37 KST backup (GitHub delays or drops scheduled runs)
     - cron: '7 6 * * *'  # 15:07 KST backup
-    - cron: '0 8 * * *'  # 17:00 KST last regular run; later runs publish 20 min after upload
+    - cron: '47 7 * * *' # 16:47 KST last regular run; later runs publish 20 min after upload
   workflow_dispatch:
 permissions:
   contents: write

@@ -88,6 +88,10 @@ def run(now=None):
     if record.get('status') == 'upload_submitted':
         raise RuntimeError('Interrupted upload for ' + day + ' and no video with ' + code + ' on the channel; '
                            'check Studio before retrying (ledger left unchanged)')
+    if now.hour < 9:
+        print('World Kitchen ' + day + ': ' + now.strftime('%H:%M')
+              + ' KST is before the 09:00 production window; no attempt used.')
+        return 'too_early'
     attempts = record.get('attempts', 0) + 1
     ledger[day] = record = {'status': 'planning', 'attempts': attempts, 'code': code, 'started_at': now.isoformat()}
     sha = write_ledger(ledger, sha, day)
