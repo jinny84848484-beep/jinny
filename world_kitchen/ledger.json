@@ -7,9 +7,10 @@
     "reason": "independent review: BRAND_NAME_IN_SOURCE, MEASUREMENT_MISMATCH, HEATING_TIME_NOT_MATCHED_TO_QUANTITY, KOREAN_UNNATURAL"
   },
   "2026-11-26": {
-    "status": "planning",
+    "status": "held",
     "attempts": 1,
     "code": "WK-20261126",
-    "started_at": "2026-11-26T03:20:03.281063+09:00"
+    "started_at": "2026-11-26T03:20:03.281063+09:00",
+    "reason": "independent review after one revision: COUNTRY_ATTRIBUTION, HEATING_SOURCE_MISMATCH"
   }
 }
