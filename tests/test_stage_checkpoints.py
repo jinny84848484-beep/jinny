@@ -155,7 +155,8 @@ class EditorialDecision(unittest.TestCase):
             job=json.loads(prompt.split('\nJOB:\n',1)[1].split('\nIMAGE METADATA:\n',1)[0]);requests.append((job,kwargs['instructions']))
             code='source_inaccessible' if len(requests)==1 else 'english_hook'
             return json.dumps({'status':'FAIL','issues':[{'code':code,'job_index':0,'scene_index':-1,'explanation':'PRIVATE exact missing evidence'}],'selection':{}}),[{'url':'https://example.org'}]
-        with tempfile.TemporaryDirectory() as directory,patch.object(c.p,'ROOT',Path(directory)),patch.object(c,'journal_put',return_value='sha'),patch.object(c.relevant_media,'candidates',return_value=self.media),patch.object(c,'openai',side_effect=provider) as api,redirect_stdout(io.StringIO()) as log:
+        with tempfile.TemporaryDirectory() as directory,patch.object(c.p,'ROOT',Path(directory)),patch.object(c,'journal_put',return_value='sha'),patch.object(c.relevant_media,'candidates',return_value=self.media),patch.object(c,'openai',side_effect=provider) as api,patch.object(c,'editorial_fix_enabled',return_value=False),redirect_stdout(io.StringIO()) as log:
+            # Language-scope/privacy check of the first review round only (the 11/25 fix round has its own tests).
             with self.assertRaisesRegex(RuntimeError,'Editorial review did not pass'):c.review_jobs(ledger,'sha','2026-11-05',self.jobs)
             self.assertEqual(api.call_count,2)
             details=(c.p.ROOT/'runs/2026-11-05/checkpoints/editorial-details.json').read_text()
