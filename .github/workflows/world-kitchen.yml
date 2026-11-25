@@ -1,49 +1,51 @@
-name: World Kitchen reviewed production
+name: World Kitchen daily
+# CEO order 2026-11-25: 방구석 세계요리 is produced and scheduled (private -> public 19:00 KST) automatically.
+# Code: world_kitchen/daily.py (order), episode.py (content), providers.py (OpenAI/ElevenLabs/YouTube), ledger.py.
+# Needs secrets OPENAI_API_KEY, ELEVENLABS_API_KEY, YOUTUBE_KITCHEN_OAUTH and variable KITCHEN_VOICE_ID.
+# A failed run = CEO alarm (account/credits). A held day = warning (content), retried once by a later run.
 on:
   schedule:
-    - cron: '7 1 * * *' # 10:07 KST early start: GitHub delays scheduled runs by hours; state.json stops a second upload
-    - cron: '0 8 * * *' # 17:00 KST production; 19:00 is target publication metadata only
+    - cron: '7 1 * * *'  # 10:07 KST
+    - cron: '37 3 * * *' # 12:37 KST backup (GitHub delays or drops scheduled runs)
+    - cron: '7 6 * * *'  # 15:07 KST backup
+    - cron: '0 8 * * *'  # 17:00 KST last regular run; later runs publish 20 min after upload
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: world-kitchen-single-producer
   cancel-in-progress: false
 jobs:
-  render-reviewed-queue:
+  daily:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
       - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
         with:
           python-version: '3.12'
-      - name: Install renderer dependencies
+      - name: Install renderer
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y ffmpeg fonts-noto-cjk
           python -m pip install -r requirements.txt
-      - name: Restore cooking attempt ledger
-        uses: actions/cache/restore@v4
-        with:
-          path: world_kitchen/state.json
-          key: world-kitchen-state-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: world-kitchen-state-
-      - name: Render reviewed local input (no paid calls or upload credentials)
-        run: python -m world_kitchen.runner
-      - name: Preserve attempt state even after failure
-        if: always()
-        uses: actions/cache/save@v4
-        with:
-          path: world_kitchen/state.json
-          key: world-kitchen-state-${{ github.run_id }}-${{ github.run_attempt }}
-      - name: Save cooking review package
+      - name: Test World Kitchen guards (offline)
+        run: python -m unittest tests.test_world_kitchen tests.test_world_kitchen_daily
+      - name: Produce and schedule today's episode
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          YOUTUBE_KITCHEN_OAUTH: ${{ secrets.YOUTUBE_KITCHEN_OAUTH }}
+          KITCHEN_VOICE_ID: ${{ vars.KITCHEN_VOICE_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          OPENAI_MODEL: gpt-5.4
+        run: python -m world_kitchen.daily
+      - name: Save episode files for review
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          name: world-kitchen-review-${{ github.run_id }}
-          path: |
-            runs/world_kitchen/
-            world_kitchen/state.json
+          name: world-kitchen-${{ github.run_id }}
+          path: runs/world_kitchen/
           if-no-files-found: ignore
           retention-days: 7
