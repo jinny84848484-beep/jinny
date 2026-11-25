@@ -8489,6 +8489,18 @@
       ],
       "active_job": "2026-11-24-ojirap-russia-ulleung-kadiz",
       "completed_at": "2026-11-24T15:00:16.898951+09:00"
+    },
+    "2026-11-25": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "fb487fab357172020446a2173ecfea8f2408c3dc89d2f399daee6c608af9407b",
+          "attempts": 1,
+          "at": "2026-11-25T13:52:50.756377+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
