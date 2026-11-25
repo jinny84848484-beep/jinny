@@ -9091,10 +9091,16 @@
           "usable": true,
           "sha256": "7c61984313c699ba50147c9e28e74f4693fca609409db042a582ee1279f8fa2a",
           "completed_at": "2026-11-26T03:40:57.905126+09:00"
+        },
+        "research_repair": {
+          "status": "submitted",
+          "request_hash": "c6358049d92e71f3111c5e35e3bfc3fce39253112ebf9cfc0a217f28fba79081",
+          "attempts": 1,
+          "at": "2026-11-26T03:40:59.956184+09:00"
         }
       },
-      "status": "research_completed",
-      "active_stage": "research"
+      "status": "research_repair_submitted",
+      "active_stage": "research_repair"
     }
   },
   "publications": [
