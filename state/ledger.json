@@ -9129,9 +9129,584 @@
           "completed_at": "2026-11-26T03:42:31.848691+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
+      "status": "reviewed",
       "active_stage": "editorial_review_1",
-      "review_input_hash": "84ffa0fd1cd611092fdba458f91c063effc6090bf878af36004b815e48989d7f"
+      "review_input_hash": "84ffa0fd1cd611092fdba458f91c063effc6090bf878af36004b815e48989d7f",
+      "editorial_exclusions": [],
+      "retry_hold": false,
+      "jobs": [
+        {
+          "id": "2026-11-26-pubg-ive-the-squad-project",
+          "channel": "ojirap",
+          "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+          "category": "music",
+          "title": "배그가 아이브랑 시즌제를 합니다",
+          "description": "크래프톤이 배틀그라운드 시즌형 음악 프로젝트 더 스쿼드를 공개했고 첫 시즌에 아이브가 참여합니다. 공식 협업 공지와 이벤트는 확인되지만, 11월 25일 새 티저의 개별 유튜브 URL은 이번 검증에서 따로 못 잡았습니다.",
+          "sources": [
+            {
+              "title": "배틀그라운드 첫 시즌형 음악 프로젝트에 아이브 참여",
+              "url": "https://www.yna.co.kr/view/AKR20261125051500017",
+              "checked_at": "2026-11-26T03:42:33.441210+09:00"
+            },
+            {
+              "title": "PUBG x IVE",
+              "url": "https://pubg.com/en/news/11307",
+              "checked_at": "2026-11-26T03:42:33.441210+09:00"
+            },
+            {
+              "title": "Special Drops - November 2026",
+              "url": "https://pubg.com/en/events/notice/11328?category=event&period=PROGRESS",
+              "checked_at": "2026-11-26T03:42:33.441210+09:00"
+            },
+            {
+              "title": "PUBG x IVE Collaboration Trailer (LOVE DIVE - PUBG Mashup) | PUBG - YouTube",
+              "url": "https://www.youtube.com/watch?v=4lA9n7ejDi4",
+              "checked_at": "2026-11-26T03:42:33.441210+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Wikimedia Commons battle royale video game screenshot CC BY",
+            "Wikimedia Commons concert stage lights audience CC BY"
+          ],
+          "opening_text": "배그가 아이브요?",
+          "hook_type": "surprised",
+          "topic_category": "collaboration",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "배그가 아이브요?",
+              "body": "게임이랑 아이돌, 이제는 시즌제로 묶였습니다.",
+              "narration": "배그가 아이브요? 이제 게임도 시즌형 음악 프로젝트를 합니다.",
+              "source_indices": [
+                0
+              ],
+              "media": "graphic-2026-11-26-pubg-ive-the-squad-project-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "공개된 건 더 스쿼드",
+              "body": "십일월 이십오일 공개, 첫 시즌 아티스트는 아이브입니다.",
+              "narration": "연합뉴스에 따르면 십일월 이십오일 크래프톤이 더 스쿼드를 공개했고 첫 시즌 참여 아티스트는 아이브입니다.",
+              "source_indices": [
+                0
+              ],
+              "media": "graphic-2026-11-26-pubg-ive-the-squad-project-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "공식 공지는 이미 진행 중",
+              "body": "공식 사이트엔 십일월 초 협업 공지와 이벤트가 올라와 있습니다.",
+              "narration": "배틀그라운드 공식 페이지에는 십일월 삼일 협업 공지와 십일월 이벤트 안내가 이미 올라와 있더라고요.",
+              "source_indices": [
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-26-pubg-ive-the-squad-project-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "이 조합, 의외로 계산적",
+              "body": "사실 낯설지만, 게임은 체류시간이 길어서 음악 실험판으로도 보입니다.",
+              "narration": "제 생각엔 좀 뜬금없다가도, 오래 머무는 게임판이라 음악 실험장으로는 꽤 영리해 보여요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-26-pubg-ive-the-squad-project-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "다만 링크 하나는 미확인",
+              "body": "새 티저 개별 주소는 이번 검증에서 따로 확인되지 않았습니다.",
+              "narration": "다만 새 티저의 정확한 개별 유튜브 주소는 이번 검증에선 못 잡았습니다. 그래도 이제 치킨보다 컴백이 먼저네요.",
+              "source_indices": [
+                0,
+                3
+              ],
+              "media": "graphic-2026-11-26-pubg-ive-the-squad-project-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+            "category": "music",
+            "summary": "2026년 11월 25일 크래프톤이 ‘배틀그라운드’와 ‘배틀그라운드 모바일’의 시즌형 음악 프로젝트 ‘더 스쿼드(THE SQUAD)’를 공개했고, 첫 시즌 참여 아티스트로 아이브(IVE)를 내세웠다. 연합뉴스는 25일 공식 유튜브 채널에서 키아트와 뮤직비디오 티저를 공개하고 12월 2일 뮤직비디오 전편과 게임 내 콘텐츠 업데이트를 예고했다고 전했다. 배틀그라운드 공식 사이트에서 11월 들어 이미 PUBG x IVE 협업 공지와 관련 이벤트 진행 사실도 확인된다.",
+            "verified_facts": [
+              {
+                "text": "연합뉴스는 2026년 11월 25일 크래프톤이 ‘배틀그라운드’와 ‘배틀그라운드 모바일’의 시즌형 음악 프로젝트 ‘더 스쿼드’를 공개했다고 보도했다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "연합뉴스 보도에 따르면 첫 시즌 아티스트는 아이브이며, 11월 25일 배틀그라운드 공식 유튜브 채널에서 키아트와 뮤직비디오 티저를 소개하고 12월 2일 뮤직비디오 전편과 게임 내 콘텐츠 업데이트를 선보일 예정이라고 했다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "배틀그라운드 공식 뉴스 페이지에는 2026년 11월 3일자 ‘PUBG x IVE’ 공지가 게시돼 있으며, 협업 테마 장식·아이템·이벤트가 안내돼 있다.",
+                "source_indices": [
+                  1
+                ]
+              },
+              {
+                "text": "배틀그라운드 공식 이벤트 공지에는 2026년 11월 진행 ‘PUBG X IVE’ 미션과 보상, 그리고 일정이 안내돼 있다.",
+                "source_indices": [
+                  2
+                ]
+              },
+              {
+                "text": "공식 유튜브의 ‘PUBG x IVE Collaboration Trailer’ 영상은 2026년 11월 1일 게시된 공개 신호로 확인되지만, 이 요청에서는 11월 25일 공개된 새 티저의 개별 URL까지는 검증하지 못했다.",
+                "source_indices": [
+                  3
+                ]
+              }
+            ],
+            "uncertainties": [
+              "연합뉴스 기사에서 언급한 2026년 11월 25일자 ‘첫 키아트와 뮤직비디오 티저’의 정확한 개별 YouTube URL은 이 요청 중 별도로 안정 확인하지 못했다.",
+              "공개 Instagram 쪽 반응 게시물 URL과 지표는 이 요청 중 검증 실패했다. 따라서 인스타그램 인기도 평가는 제외한다.",
+              "공식 사이트에서 확인한 것은 기존 PUBG x IVE 협업 공지와 이벤트 진행 사실이며, ‘더 스쿼드’ 전용 상세 공지의 별도 공식 문서 URL은 확보하지 못했다."
+            ],
+            "sources": [
+              {
+                "title": "배틀그라운드 첫 시즌형 음악 프로젝트에 아이브 참여",
+                "url": "https://www.yna.co.kr/view/AKR20261125051500017",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "PUBG x IVE",
+                "url": "https://pubg.com/en/news/11307",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "Special Drops - November 2026",
+                "url": "https://pubg.com/en/events/notice/11328?category=event&period=PROGRESS",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "PUBG x IVE Collaboration Trailer (LOVE DIVE - PUBG Mashup) | PUBG - YouTube",
+                "url": "https://www.youtube.com/watch?v=4lA9n7ejDi4",
+                "role": "primary",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "bec1a6f2c8616510ddccaa6211366bab48fe082bfc414f544893b83413b792a1",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-26T03:42:33.441210+09:00"
+        },
+        {
+          "id": "2026-11-26-kyobo-hottracks-music-retail-exit",
+          "channel": "ojirap",
+          "topic_key": "kyobo-hottracks-music-retail-exit-2026-11-25",
+          "category": "culture",
+          "title": "핫트랙스 음반 코너가 문을 닫습니다",
+          "description": "교보문고가 2027년 1월 1일부로 음반 사업을 종료한다고 보도됐습니다. 기사들에 따르면 올해 말 재고 판매를 마무리하고 온라인과 전국 핫트랙스 매장의 음반 판매를 중단할 예정입니다.",
+          "sources": [
+            {
+              "title": "교보문고 \"음반사업 내년 1월 1일부로 종료\"",
+              "url": "https://www.yna.co.kr/view/AKR20261125095400005",
+              "checked_at": "2026-11-26T03:42:33.441331+09:00"
+            },
+            {
+              "title": "Kyobo Book Centre to end music retail business after three decades",
+              "url": "https://m.koreaherald.com/article/10949086",
+              "checked_at": "2026-11-26T03:42:33.441331+09:00"
+            },
+            {
+              "title": "교보문고 음반 사업 철수…“내년 초, 온·오프 음반 매장 철수”",
+              "url": "https://www.joongang.co.kr/article/25481748",
+              "checked_at": "2026-11-26T03:42:33.441331+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Wikimedia Commons record store CD shelves CC BY",
+            "Wikimedia Commons bookstore music section CDs"
+          ],
+          "opening_text": "CD 코너가 끝난답니다",
+          "hook_type": "nostalgic",
+          "topic_category": "retail_change",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "CD 코너가 끝난답니다",
+              "body": "한쪽 벽면을 채우던 음반 매대가 역사 속으로 갑니다.",
+              "narration": "CD 코너가 끝난답니다. 서점 한쪽 벽면의 그 반짝임도 이제 정리 수순이래요.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-26-kyobo-hottracks-music-retail-exit-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "종료 시점은 내년 첫날",
+              "body": "보도에 따르면 이천이십칠년 일월 일일부터 음반 사업을 끝냅니다.",
+              "narration": "보도에 따르면 교보문고는 이천이십칠년 일월 일일부터 음반 사업을 종료한다고 공지했습니다.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-26-kyobo-hottracks-music-retail-exit-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "올해 말 재고 판매 마무리",
+              "body": "온라인과 전국 핫트랙스 매장 판매도 중단 예정입니다.",
+              "narration": "올해 말까지 재고를 정리하고, 내년부터 온오프라인 음반 판매를 멈출 계획이라고 전해졌고요.",
+              "source_indices": [
+                0,
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-26-kyobo-hottracks-music-retail-exit-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "편해서 더 아쉬운 변화",
+              "body": "스트리밍이 익숙해도, 고르던 시간까지 사라지는 건 좀 허전합니다.",
+              "narration": "제 취향으론 스트리밍이 편한 건 맞는데, 괜히 한 장씩 뒤적이던 시간이 같이 없어지는 느낌은 있네요.",
+              "source_indices": [
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-26-kyobo-hottracks-music-retail-exit-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "삼십여 년의 한 페이지",
+              "body": "시작은 구십이년 광화문점, 끝은 조용하지만 또 선명합니다.",
+              "narration": "연합뉴스는 시작이 구십이년 광화문점이라고 전했죠. 시대는 가볍게 흘렀는데, 추억은 끝까지 플라스틱이네요.",
+              "source_indices": [
+                0
+              ],
+              "media": "graphic-2026-11-26-kyobo-hottracks-music-retail-exit-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "kyobo-hottracks-music-retail-exit-2026-11-25",
+            "category": "culture",
+            "summary": "2026년 11월 25일 교보문고가 2027년 1월 1일부로 음반 사업을 종료한다고 공지했다는 보도가 나왔다. 보도에 따르면 올해 말까지 재고 판매를 마무리한 뒤 온라인과 전국 핫트랙스 매장의 음반 판매를 중단하며, 1992년 광화문점 핫트랙스 1호점에서 시작된 실물 음반 유통 사업이 약 33년 만에 마무리된다.",
+            "verified_facts": [
+              {
+                "text": "교보문고는 홈페이지의 '핫트랙스 음반사업 종료 안내'를 통해 2027년 1월 1일부로 음반 사업을 종료한다고 공지했다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "교보문고는 올해 말까지 기존 재고 판매를 마무리하고 내년부터 온라인과 전국 핫트랙스 매장 내 음반 판매를 중단할 계획으로 보도됐다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "연합뉴스는 교보핫트랙스가 1992년 광화문점에 첫 매장을 열었고, 2023년 교보문고에 흡수 통합된 데 이어 이번에 음반 판매를 중단하게 됐다고 전했다.",
+                "source_indices": [
+                  0
+                ]
+              },
+              {
+                "text": "중앙일보는 교보문고 관계자 발언을 인용해 올해 말 신규 음반 매입을 중단하고 내년 초 온·오프라인 음반 매장을 모두 닫을 예정이라고 보도했다.",
+                "source_indices": [
+                  2
+                ]
+              },
+              {
+                "text": "코리아헤럴드는 이번 조치가 핫트랙스를 통한 30여 년간의 음반 판매를 끝내는 것이라고 보도했다.",
+                "source_indices": [
+                  1
+                ]
+              }
+            ],
+            "uncertainties": [
+              "교보문고 홈페이지 원공지 자체를 이 요청에서 직접 열람한 것은 아니고, 이를 인용한 기사들로 확인했다.",
+              "실제 현장 매대 철수 일정은 점포별로 차이가 있을 수 있다.",
+              "재사용 가능한 핫트랙스 실제 매장 사진 확보 여부는 별도 검증하지 못했다. 관련 음반 매대·CD 자료사진 사용 시 실제 해당 지점 철수 현장으로 오인되지 않게 설명해야 한다."
+            ],
+            "sources": [
+              {
+                "title": "교보문고 \"음반사업 내년 1월 1일부로 종료\"",
+                "url": "https://www.yna.co.kr/view/AKR20261125095400005",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "Kyobo Book Centre to end music retail business after three decades",
+                "url": "https://m.koreaherald.com/article/10949086",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "교보문고 음반 사업 철수…“내년 초, 온·오프 음반 매장 철수”",
+                "url": "https://www.joongang.co.kr/article/25481748",
+                "role": "independent_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "5d57474e547d85e4da822df68170bd551e189b223eb6f081df648bb7274d1002",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-26T03:42:33.441331+09:00"
+        }
+      ],
+      "media": {
+        "commons-190017827-9fae395e": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Drummer_performing_on_stage_during_a_live_music_concert_at_night_with_dynamic_lighting_effects.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Drummer_performing_on_stage_during_a_live_music_concert_at_night_with_dynamic_lighting_effects.jpg",
+          "path": "assets/commons-190017827-9fae395e.jpg",
+          "media_type": "image",
+          "credit": "Shixart1985 / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2025",
+          "description": "A skilled drummer showcases musical talent in a vibrant concert setting. Bright lights illuminate the stage while the audience enjoys the rhythmic performance in a lively atmosphere.",
+          "capture_date": "2025-07-12 23:36:09",
+          "title": "File:Drummer performing on stage during a live music concert at night with dynamic lighting effects.jpg",
+          "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-26T03:42:09.047006+09:00"
+        },
+        "commons-190017831-9fae395e": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/0/03/Drummer_performs_energetically_on_stage_with_vibrant_lights_in_a_lively_concert_setting_during_the_night.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Drummer_performs_energetically_on_stage_with_vibrant_lights_in_a_lively_concert_setting_during_the_night.jpg",
+          "path": "assets/commons-190017831-9fae395e.jpg",
+          "media_type": "image",
+          "credit": "Shixart1985 / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2025",
+          "description": "In a dynamic concert atmosphere, a drummer plays passionately under colorful lights, captivating the audience with powerful rhythm and energy.",
+          "capture_date": "2025-07-12 23:35:55",
+          "title": "File:Drummer performs energetically on stage with vibrant lights in a lively concert setting during the night.jpg",
+          "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-26T03:42:09.047064+09:00"
+        },
+        "commons-190017833-9fae395e": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Energetic_guitarist_performs_on_stage_during_a_lively_music_festival_at_night%2C_surrounded_by_vibrant_lights_and_excited_fans.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Energetic_guitarist_performs_on_stage_during_a_lively_music_festival_at_night,_surrounded_by_vibrant_lights_and_excited_fans.jpg",
+          "path": "assets/commons-190017833-9fae395e.jpg",
+          "media_type": "image",
+          "credit": "Shixart1985 / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2025",
+          "description": "A passionate guitarist plays an electric guitar on stage at a music festival. Bright red lights illuminate the scene as the audience enjoys the energetic atmosphere at night.",
+          "capture_date": "2025-07-12 23:31:12",
+          "title": "File:Energetic guitarist performs on stage during a lively music festival at night, surrounded by vibrant lights and excited fans.jpg",
+          "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-26T03:42:09.047095+09:00"
+        },
+        "commons-190017869-9fae395e": {
+          "url": "https://upload.wikimedia.org/wikipedia/commons/c/c6/Live_band_performance_at_an_outdoor_concert_with_lights_and_energetic_crowd_during_nighttime.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+          "source": "https://commons.wikimedia.org/wiki/File:Live_band_performance_at_an_outdoor_concert_with_lights_and_energetic_crowd_during_nighttime.jpg",
+          "path": "assets/commons-190017869-9fae395e.jpg",
+          "media_type": "image",
+          "credit": "Shixart1985 / Wikimedia Commons",
+          "license": "CC BY 2.0",
+          "license_url": "https://creativecommons.org/licenses/by/2.0",
+          "notice": "자료사진 · 2025",
+          "description": "Musicians energize the crowd during an outdoor concert. The stage is illuminated with bright lights, and audience members engage enthusiastically, enjoying the music.",
+          "capture_date": "2025-07-12 23:23:12",
+          "title": "File:Live band performance at an outdoor concert with lights and energetic crowd during nighttime.jpg",
+          "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+          "channel": "ojirap",
+          "relevance_verified": false,
+          "checked_at": "2026-11-26T03:42:09.047122+09:00"
+        },
+        "graphic-2026-11-26-pubg-ive-the-squad-project-0": {
+          "path": "assets/graphics/2026-11-26/2026-11-26-pubg-ive-the-squad-project/scene-01.png",
+          "sha256": "1752d86e0224cc984eeb4fe14f3882e3a6b505ced03ca2ca06f4fb9dbd7afbbb",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "2f94212b844dbd424194f8f96ddc3e5a538d94d70516cbc6dadedb90bec46894",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-26-pubg-ive-the-squad-project-1": {
+          "path": "assets/graphics/2026-11-26/2026-11-26-pubg-ive-the-squad-project/scene-02.png",
+          "sha256": "515ea52174913977960e67c0a7032b221ab9e88b7b9e4587080c9d97121f4aff",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "aba17c060d88908ae697a43ee213f8d2268e6fb23d78fa612f42945dd6ce47b6",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-26-pubg-ive-the-squad-project-2": {
+          "path": "assets/graphics/2026-11-26/2026-11-26-pubg-ive-the-squad-project/scene-03.png",
+          "sha256": "540d649de16510707fc722d40517712d5d588db4ab1fc771a0f724e3724504af",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "2cf06dee25bae19bed73de64da637d9425c69e2ff30b5a8c73d24579e5e113ce",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-26-pubg-ive-the-squad-project-3": {
+          "path": "assets/graphics/2026-11-26/2026-11-26-pubg-ive-the-squad-project/scene-04.png",
+          "sha256": "5e57dba37f23c18db6fa7208fc7db082691efa1d2f9e2be8a028e4710e41f21e",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "bb2b5f0952cf1363b3d05ab7789e7e99e47ef7e8a4c6c602a35ea0e7a099b361",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-26-pubg-ive-the-squad-project-4": {
+          "path": "assets/graphics/2026-11-26/2026-11-26-pubg-ive-the-squad-project/scene-05.png",
+          "sha256": "24712dd1d5043912cf4259a3127b00db04fbf31924c9f5ff8a432de482ac3a69",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "2ff59dbdc2e91ce3f7641c17358a9be9c678797d2b263f96ae177193abcce3ba",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-26-kyobo-hottracks-music-retail-exit-0": {
+          "path": "assets/graphics/2026-11-26/2026-11-26-kyobo-hottracks-music-retail-exit/scene-01.png",
+          "sha256": "b3737a1c94e37ba52fd50337cb2f33428f4b5cb560574ee6f4367495e11aa59a",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "kyobo-hottracks-music-retail-exit-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "1a18358959f93c6c78ed0ac73ca7b096f8bf0104da8d07f9b773c22f45457d0a",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-26-kyobo-hottracks-music-retail-exit-1": {
+          "path": "assets/graphics/2026-11-26/2026-11-26-kyobo-hottracks-music-retail-exit/scene-02.png",
+          "sha256": "6f9df5745cef1949a3fc5fcfc9652d3471b3110dc4d4633ff85c15e444a1cea9",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "kyobo-hottracks-music-retail-exit-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "ff8be1810f688e735086c8e2a27bb7f0c41edac126e37a194b1f944b7438c94f",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-26-kyobo-hottracks-music-retail-exit-2": {
+          "path": "assets/graphics/2026-11-26/2026-11-26-kyobo-hottracks-music-retail-exit/scene-03.png",
+          "sha256": "770cf2513e2b871fddd4fb18b69a4d6e6d187b3ca59517ce6d7dd7b7c62a973b",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "kyobo-hottracks-music-retail-exit-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "cfdaaf42dc799ab927ea146999de6c16b00e807292335921c32c3b5b3bab23f8",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-26-kyobo-hottracks-music-retail-exit-3": {
+          "path": "assets/graphics/2026-11-26/2026-11-26-kyobo-hottracks-music-retail-exit/scene-04.png",
+          "sha256": "60047ba1225d30d60b38e6a992117f1276b73c8d8daf2691ac476355d8597a7b",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "kyobo-hottracks-music-retail-exit-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "cd259c9c451793bf1da4a1234c01d471a4bde43bb2c81577ff03cff6b0e59212",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-26-kyobo-hottracks-music-retail-exit-4": {
+          "path": "assets/graphics/2026-11-26/2026-11-26-kyobo-hottracks-music-retail-exit/scene-05.png",
+          "sha256": "50c17df575c07dd031d24085c70602d1e99215538d92316409fc371868c94884",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "kyobo-hottracks-music-retail-exit-2026-11-25",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "5d44fad751f7fb05520c1e7683d573d1bb8011bc7716492184d31d75f5a76b74",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-26-pubg-ive-the-squad-project\": [\"graphic-2026-11-26-pubg-ive-the-squad-project-0\", \"graphic-2026-11-26-pubg-ive-the-squad-project-1\", \"graphic-2026-11-26-pubg-ive-the-squad-project-2\", \"graphic-2026-11-26-pubg-ive-the-squad-project-3\", \"graphic-2026-11-26-pubg-ive-the-squad-project-4\"], \"2026-11-26-kyobo-hottracks-music-retail-exit\": [\"graphic-2026-11-26-kyobo-hottracks-music-retail-exit-0\", \"graphic-2026-11-26-kyobo-hottracks-music-retail-exit-1\", \"graphic-2026-11-26-kyobo-hottracks-music-retail-exit-2\", \"graphic-2026-11-26-kyobo-hottracks-music-retail-exit-3\", \"graphic-2026-11-26-kyobo-hottracks-music-retail-exit-4\"]}}",
+      "review_source_urls": [
+        "https://www.yna.co.kr/view/AKR20261125051500017",
+        "https://www.yna.co.kr/view/AKR20261125095400005"
+      ],
+      "created_at": "2026-11-26T03:42:33.441423+09:00"
     }
   },
   "publications": [
