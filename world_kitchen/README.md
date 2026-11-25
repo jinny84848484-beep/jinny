@@ -1,40 +1,37 @@
-# 방구석 세계요리 자동 제작 경로 v1
+# 방구석 세계요리 — 매일 자동 제작·예약 게시
 
-## 구현 범위
-`python -m world_kitchen.runner`는 검토된 요리 큐를 읽어 **고정 양식 영상 + 선택형 영어 SRT + 설명 + 검수 결과 파일**을 자동 제작한다. 뉴스/코기 제작 코드와 OAuth·원장을 공유하지 않는다. `.github/workflows/world-kitchen.yml`은 매일 17:00 KST 또는 수동 실행으로 준비된 입력을 렌더하며, 목표 게시 시간은 19:00 KST 메타데이터다.
+CEO 지시 2026-11-16(채널 규칙)·2026-11-25(자동화 구축). 사람 확인 단계 없이 하루 1편을 만들어 비공개로 올리고 19:00 KST에 공개되도록 예약합니다.
 
-**아직 종단간 자동 채널 운영이 아니다.** 현재 큐는 비어 있다. 자동 트렌드 선정, 사실·안전·권리 심사, 이미지 생성, ElevenLabs API 생성, 미디어 저장소 동기화, YouTube 업로드/영어 자막 트랙 게시/19시 예약 어댑터는 연결되지 않았다. 해당 작업을 했다고 표시하거나 자동 결제를 요청하지 않는다. 새 큐가 없으면 `no_ready_episode`로 종료한다. 기존 브라우저에서 예약한 첫 영상을 큐에 다시 넣지 않는다.
+## 파일 지도
+| 파일 | 하는 일 |
+|---|---|
+| `daily.py` | **하루 실행 순서**(시작점). `python -m world_kitchen.daily` |
+| `episode.py` | 영상 내용: 기획·검수 프롬프트, 기획 → 렌더 입력 변환, 음성 길이 맞추기, 로고, 19시 예약 시각 |
+| `providers.py` | 외부 연결 전부: OpenAI(글·이미지), ElevenLabs(음성), YouTube(채널 확인·중복 확인·예약 업로드) |
+| `ledger.py` | 기록: `world_kitchen/ledger.json`(날짜별 상태·완료 코드 `WK-YYYYMMDD`) |
+| `pipeline.py` | 렌더러 + 규칙 검사(장면 순서, 700W·1000W 시간 표시, 끝 인사) |
+| `template.json` | 화면 배치·색·글꼴·끝 인사 |
+| `../kitchen_guard.py` | 조리 안전 검사(전자레인지·밥솥만, 계량 단위, 금지 조리법, AI 표시) |
+| `runner.py`, `queue.json` | 옛 수동 경로(검수된 입력만 렌더). 자동 실행에는 쓰지 않음 |
 
-## 공동 검수 통합
+## 하루 흐름 (`.github/workflows/world-kitchen.yml`, 10:07 · 12:37 · 15:07 · 17:00 KST)
+1. 기획: 웹에서 레시피 출처 2곳 이상 확인, 최근 30일 요리와 겹치지 않게
+2. 독립 검수: 출처·가열 시간·안전 재확인 (FAIL이면 그날 보류)
+3. 규칙 검사: `pipeline.validate` + `kitchen_guard`
+4. 이미지: 장면별 AI 음식 사진(글자·상표·얼굴 없음), 끝 장면은 완성 사진 재사용
+5. 음성: 장면별 ElevenLabs → 장면 길이를 음성에 맞춤
+6. 렌더 → 비공개 업로드 + 19:00 공개 예약(17:00 이후 늦게 돌면 업로드 20분 뒤 공개)
+7. `ledger.json`에 완료 기록
 
-수석비서실장이 추가한 `kitchen_guard.validate_recipe`를 동일 manifest의 재료·단계·화면·음성에 호출한다. 별도 복사본을 검증하지 않는다. 최신 사용자 지시의 치즈 28그램을 지원하도록 기존 가드에 g/그램 단위와 별도 질량 범위를 추가했다. 기존 9개 가드 테스트는 그대로 유지한다. 정규식 가드는 실제 조리 안전 심사를 대체하지 않는다.
+## 알람 기준
+- **실행 실패(빨간 X) = CEO 알람**: 키·OAuth 없음/만료/다른 채널, ElevenLabs 잔량 1,200자 미만, OpenAI 크레딧 부족.
+- **경고(held) = 내용 문제**: 검수 FAIL·규칙 위반 → 다음 실행이 1번 더 시도(하루 최대 2번).
+- 업로드 도중 끊기면 채널에서 `WK-YYYYMMDD`를 찾아 기록만 하고, 못 찾으면 멈춥니다(중복 업로드 방지).
 
-## 고정 구조
-- 첫 장면 완성 요리, 짧은 후킹 문구. 브랜드 인트로로 지연시키지 않는다.
-- 흰/크림 상단에 작은 기존 로고, 중앙에 **원본 비율을 유지한 음식 전체**, 하단에 짧은 설명.
-- 재료 → 조리 단계 → 700W·1000W별 **근거 있는 시간** → 식힘/완성 → 고정 시그니처.
-- 화면당 한 행동. 글귀가 바뀌면 대응 이미지도 변경한다. 같은 이미지를 꼭 재사용해야 하면 검토 이유를 남긴다.
-- 한국어는 영상에, 영어는 선택형 SRT로 생성. 영어 SRT 파일 생성은 YouTube 트랙 업로드 성공과 다르다.
-- 기존 ElevenLabs 목소리로 밝고 섬세하며 명확하게. `28, 그램`처럼 숫자와 단위가 끊긴 문장은 차단한다. 청취 검수는 별도 필수다.
-- 끝 인사: `오늘도 방구석에서 세계 한 입, 맛있게 드세요!`
-- 모차렐라가 늘어나는 컷은 선택 추가 결과임을 표시한다. AI 정지 이미지를 실제 조리영상이라고 주장하지 않는다.
+## 처음 1회 설정 (CEO)
+- GitHub Secret `YOUTUBE_KITCHEN_OAUTH`: 방구석 세계요리 채널 OAuth(JSON: channel_id, client_id, client_secret, refresh_token). 오지랖 채널(`YOUTUBE_OJIRAP_OAUTH`)과 같은 형식·같은 Google OAuth 클라이언트로 발급(권한: youtube.upload, youtube.readonly). 계정 로그인은 CEO가 직접.
+- GitHub Variable `KITCHEN_VOICE_ID`: 채널에 쓰는 ElevenLabs 목소리 ID.
+- 비용: 하루 이미지 5~6장(OpenAI) + 음성 약 300자 + 글 생성 2회. [금액 미검증]
 
-## 실행
-1. 이 폴더 `episode.example.json`을 복사하고 요리별 재료·양·단계·출처·시간·영어 자막을 작성한다. 출력별 시간은 요리/분량/상태와 맞는 근거를 사용하며 다른 요리에 45/30초를 복사하지 않는다.
-2. 권리 확인된 이미지, 로고/워드마크 PNG, 시간 정렬된 ElevenLabs 음성 파일을 실행 환경에 준비한다. 저장소에는 비밀키, 비공개 사용량 내역, 계정 파일을 넣지 않는다. 파일 경로는 manifest에서 지정한다.
-3. `python -m world_kitchen.pipeline episode.json`으로 검증한다.
-4. `python -m world_kitchen.pipeline episode.json --output runs/world_kitchen/review-name`으로 로컬 렌더한다. 기존 출력 디렉터리는 덮어쓰지 않는다.
-5. 준비된 파일이 GitHub runner에서도 접근 가능한 경우에만 queue.json에 `{"date":"YYYY-MM-DD","reviewed":true,"manifest":"world_kitchen/episodes/episode.json"}`을 추가한다. 로컬 경로만으로 CI에서 자산이 있다고 가정하지 않는다.
-6. `python -m world_kitchen.runner --date YYYY-MM-DD`가 큐에서 1편을 렌더한다. 실패나 시도 이력이 있으면 자동 반복하지 않는다.
-7. 실제 화면·음성 청취·영문 동기화·안전·권리·채널·중복을 검수한 뒤 별도의 승인된 게시 경로를 사용한다.
-
-큐 및 결과는 제목·설명·자막·음성의 숫자 일치와 사람의 의미 검수까지 보장하지 않는다. API 자격증명/사용량 확인·게시 어댑터 없이 `automatic_upload_enabled`를 켜지 않는다. 기본 상태의 두 자동화 플래그 false는 완전 자동 생성/업로드 미연결을 뜻하며 검토 입력 렌더 workflow의 실행 여부와 다르다.
-
-## 실패·중복 처리
-GitHub concurrency 그룹은 요리 전용 단일 실행이다. 로컬 상태에는 렌더 시작을 먼저 기록하고 애매한 실패는 자동 재시도하지 않는다. workflow는 상태를 캐시에 보존하지만 캐시는 영구 DB가 아니므로 유실될 수 있다. **게시 기능이 없기에 이 원장은 업로드 중복 방지 보장이 아니다.** 게시 연결 전 채널/영상 해시 기반 영구 원장과 외부 상태 재조회가 필요하다.
-
-## 검수·재현
-- `python -m unittest discover -s tests -p test_world_kitchen.py -v`
-- `python tests/run_offline.py` (네트워크와 프로덕션 비밀키 없는 전체 테스트)
-- 코드·테스트 통과, 렌더 산출물, 실제 게시 성공을 각각 구분해서 보고한다.
-- 수석비서실장 코드 검토: 채널 격리, 레시피별 시간 근거, 레이아웃/자막 안전영역, 재시도·중복, 자격증명 미포함, 위 미연결 항목을 확인한다.
+## 검사
+`python -m unittest tests.test_world_kitchen tests.test_world_kitchen_daily` (네트워크 없음)
