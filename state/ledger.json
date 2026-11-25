@@ -9129,7 +9129,7 @@
           "completed_at": "2026-11-26T03:42:31.848691+09:00"
         }
       },
-      "status": "uploaded",
+      "status": "complete",
       "active_stage": "editorial_review_1",
       "review_input_hash": "84ffa0fd1cd611092fdba458f91c063effc6090bf878af36004b815e48989d7f",
       "editorial_exclusions": [],
@@ -9708,7 +9708,8 @@
       ],
       "created_at": "2026-11-26T03:42:33.441423+09:00",
       "publication_exclusions": [],
-      "active_job": "2026-11-26-kyobo-hottracks-music-retail-exit"
+      "active_job": "2026-11-26-kyobo-hottracks-music-retail-exit",
+      "completed_at": "2026-11-26T03:44:29.600861+09:00"
     }
   },
   "publications": [
