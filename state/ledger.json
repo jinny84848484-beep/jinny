@@ -8529,7 +8529,7 @@
           "completed_at": "2026-11-25T13:54:20.011813+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1",
       "review_input_hash": "60237de64a8890b31948501a12b412d6e4909e62ff47289bf6a967bf2dd6cd59",
       "editorial_exclusions": [],
@@ -9746,6 +9746,18 @@
       "video_id": "-thEPG6-hsE",
       "url": "https://www.youtube.com/shorts/-thEPG6-hsE",
       "at": "2026-11-24T15:00:15.446313+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-25-korea-sovereignty-day",
+      "topic_key": "korea-national-sovereignty-day-designation-2026-11-24",
+      "category": "politics",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "국민주권의 날, 공휴일은 아닙니다",
+      "video_id": "-fSajetM0g8",
+      "url": "https://www.youtube.com/shorts/-fSajetM0g8",
+      "at": "2026-11-25T13:55:45.618319+09:00",
       "experiment": {}
     }
   ],
