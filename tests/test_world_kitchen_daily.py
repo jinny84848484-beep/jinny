@@ -134,13 +134,53 @@ class Run(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'CEO ALARM.*YOUTUBE_KITCHEN_OAUTH'):
                 a.preflight()
 
-    def test_review_fail_holds_with_warning(self):
-        answers = iter([json.dumps(plan(), ensure_ascii=False), json.dumps({'status': 'FAIL', 'issues': [{'code': 'heating_time', 'explanation': 'x'}]})])
+    FAIL = json.dumps({'status': 'FAIL', 'issues': [{'code': 'heating_time', 'explanation': 'x'}]})
+
+    def test_review_fail_twice_holds_with_warning(self):
+        prompts = []
+        answers = iter([json.dumps(plan(), ensure_ascii=False), self.FAIL, json.dumps(plan(), ensure_ascii=False), self.FAIL])
+
+        def text(prompt, instructions, **k):
+            prompts.append(instructions)
+            return next(answers)
         result, out = self.quiet(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None,
-                                 openai_text=lambda *x, **k: next(answers), openai_image=lambda *x: self.fail('no image before review'))
+                                 openai_text=text, openai_image=lambda *x: self.fail('no image before review'))
         self.assertEqual(result, 'held')
         self.assertIn('::warning', out)
         self.assertEqual(self.store[DAY]['attempts'], 1)
+        self.assertIn('heating_time', self.store[DAY]['reason'])
+        # exactly one revision, then one fresh review; never a second revision
+        self.assertEqual(prompts, [e.PLAN_PROMPT, e.REVIEW_PROMPT, e.REVISE_PROMPT, e.REVIEW_PROMPT])
+
+    def test_revision_that_passes_review_continues(self):
+        revised = plan()
+        revised['title'] = '전자레인지 1분, 치즈 퀘사디아'
+        answers = iter([json.dumps(plan(), ensure_ascii=False), self.FAIL, json.dumps(revised, ensure_ascii=False),
+                        json.dumps({'status': 'PASS', 'issues': []})])
+        def stop(prompt, path):
+            raise RuntimeError('images started')
+        # Reaching the image step proves the revised plan passed its fresh review.
+        with self.assertRaisesRegex(RuntimeError, 'images started'):
+            self.quiet(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None,
+                       openai_text=lambda *x, **k: next(answers), openai_image=stop)
+        self.assertEqual(self.store[DAY]['status'], 'planning')
+
+    def test_revision_cannot_repeat_a_recent_dish(self):
+        self.store['2026-11-20'] = {'status': 'scheduled', 'dish': '김치전'}
+        revised = plan()
+        revised['dish'] = '김치전'
+        answers = iter([json.dumps(plan(), ensure_ascii=False), self.FAIL, json.dumps(revised, ensure_ascii=False)])
+        result, out = self.quiet(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None,
+                                 openai_text=lambda *x, **k: next(answers), openai_image=lambda *x: self.fail('no image'))
+        self.assertEqual(result, 'held')
+        self.assertIn('recent', self.store[DAY]['reason'])
+
+    def test_planner_checklist_covers_review_failures(self):
+        for words in ('brand or manufacturer site', 'Attribution', 'No brand names', 'Measurements', 'heating.basis', 'natural spoken Korean'):
+            self.assertIn(words, e.PLAN_PROMPT)
+            self.assertIn(words, e.REVISE_PROMPT)
+        self.assertIn('untrusted evidence', e.REVISE_PROMPT)
+        self.assertIn('no real brand names', e.REVIEW_PROMPT)  # the safety review keeps the brand rule
 
     def test_full_day_is_scheduled_once(self):
         answers = iter([json.dumps(plan(), ensure_ascii=False), json.dumps({'status': 'PASS', 'issues': []})])
