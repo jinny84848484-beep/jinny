@@ -9084,13 +9084,16 @@
     "2026-11-26": {
       "checkpoints": {
         "research": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "c9b63600212fed7faa48a4deb3e1f816ae5bad02140a8221ffd315c932af4e0b",
           "attempts": 1,
-          "at": "2026-11-26T03:40:15.124837+09:00"
+          "at": "2026-11-26T03:40:15.124837+09:00",
+          "usable": true,
+          "sha256": "7c61984313c699ba50147c9e28e74f4693fca609409db042a582ee1279f8fa2a",
+          "completed_at": "2026-11-26T03:40:57.905126+09:00"
         }
       },
-      "status": "research_submitted",
+      "status": "research_completed",
       "active_stage": "research"
     }
   },
