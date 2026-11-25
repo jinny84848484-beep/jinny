@@ -9129,7 +9129,7 @@
           "completed_at": "2026-11-26T03:42:31.848691+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_1",
       "review_input_hash": "84ffa0fd1cd611092fdba458f91c063effc6090bf878af36004b815e48989d7f",
       "editorial_exclusions": [],
@@ -9146,22 +9146,22 @@
             {
               "title": "배틀그라운드 첫 시즌형 음악 프로젝트에 아이브 참여",
               "url": "https://www.yna.co.kr/view/AKR20261125051500017",
-              "checked_at": "2026-11-26T03:42:33.441210+09:00"
+              "checked_at": "2026-11-26T03:42:35.302769+09:00"
             },
             {
               "title": "PUBG x IVE",
               "url": "https://pubg.com/en/news/11307",
-              "checked_at": "2026-11-26T03:42:33.441210+09:00"
+              "checked_at": "2026-11-26T03:42:35.302769+09:00"
             },
             {
               "title": "Special Drops - November 2026",
               "url": "https://pubg.com/en/events/notice/11328?category=event&period=PROGRESS",
-              "checked_at": "2026-11-26T03:42:33.441210+09:00"
+              "checked_at": "2026-11-26T03:42:35.302769+09:00"
             },
             {
               "title": "PUBG x IVE Collaboration Trailer (LOVE DIVE - PUBG Mashup) | PUBG - YouTube",
               "url": "https://www.youtube.com/watch?v=4lA9n7ejDi4",
-              "checked_at": "2026-11-26T03:42:33.441210+09:00"
+              "checked_at": "2026-11-26T03:42:35.302769+09:00"
             }
           ],
           "visual_queries": [
@@ -9299,7 +9299,7 @@
           "fact_packet_hash": "bec1a6f2c8616510ddccaa6211366bab48fe082bfc414f544893b83413b792a1",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-26T03:42:33.441210+09:00"
+          "verified_at": "2026-11-26T03:42:35.302769+09:00"
         },
         {
           "id": "2026-11-26-kyobo-hottracks-music-retail-exit",
@@ -9312,17 +9312,17 @@
             {
               "title": "교보문고 \"음반사업 내년 1월 1일부로 종료\"",
               "url": "https://www.yna.co.kr/view/AKR20261125095400005",
-              "checked_at": "2026-11-26T03:42:33.441331+09:00"
+              "checked_at": "2026-11-26T03:42:35.302901+09:00"
             },
             {
               "title": "Kyobo Book Centre to end music retail business after three decades",
               "url": "https://m.koreaherald.com/article/10949086",
-              "checked_at": "2026-11-26T03:42:33.441331+09:00"
+              "checked_at": "2026-11-26T03:42:35.302901+09:00"
             },
             {
               "title": "교보문고 음반 사업 철수…“내년 초, 온·오프 음반 매장 철수”",
               "url": "https://www.joongang.co.kr/article/25481748",
-              "checked_at": "2026-11-26T03:42:33.441331+09:00"
+              "checked_at": "2026-11-26T03:42:35.302901+09:00"
             }
           ],
           "visual_queries": [
@@ -9458,7 +9458,7 @@
           "fact_packet_hash": "5d57474e547d85e4da822df68170bd551e189b223eb6f081df648bb7274d1002",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-26T03:42:33.441331+09:00"
+          "verified_at": "2026-11-26T03:42:35.302901+09:00"
         }
       ],
       "media": {
@@ -9706,7 +9706,9 @@
         "https://www.yna.co.kr/view/AKR20261125051500017",
         "https://www.yna.co.kr/view/AKR20261125095400005"
       ],
-      "created_at": "2026-11-26T03:42:33.441423+09:00"
+      "created_at": "2026-11-26T03:42:33.441423+09:00",
+      "publication_exclusions": [],
+      "active_job": "2026-11-26-pubg-ive-the-squad-project"
     }
   },
   "publications": [
