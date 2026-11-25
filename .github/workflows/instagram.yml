@@ -1,0 +1,35 @@
+name: Instagram weekly card news
+# CEO order 2026-11-25: @weekend.manual card news uploads automatically (Fridays from 12:30 KST).
+# Secrets: IG_ACCESS_TOKEN (long-lived Instagram Login token), IG_USER_ID.
+# Variable: IG_TOKEN_ISSUED_ON (YYYY-MM-DD). A failed run = CEO alarm (connection only);
+# content problems are warnings ("held") for the production lead, not failures.
+on:
+  schedule:
+    - cron: '37 3 * * 5' # Fri 12:37 KST, off the busy top of the hour
+    - cron: '7 5 * * 5'  # Fri 14:07 KST backup; GitHub delays scheduled runs
+    - cron: '7 9 * * 5'  # Fri 18:07 KST backup
+    - cron: '37 23 * * 5' # Sat 08:37 KST last chance (window ends Sat 12:30)
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: instagram-card-news
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.12'
+      - name: Test Instagram guards (offline)
+        run: python -m unittest tests.test_instagram_cards
+      - name: Publish this week's issue
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_TOKEN_ISSUED_ON: ${{ vars.IG_TOKEN_ISSUED_ON }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python instagram_cards.py
