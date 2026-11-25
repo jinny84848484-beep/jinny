@@ -8529,7 +8529,7 @@
           "completed_at": "2026-11-25T13:54:20.011813+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_1",
       "review_input_hash": "60237de64a8890b31948501a12b412d6e4909e62ff47289bf6a967bf2dd6cd59",
       "editorial_exclusions": [],
@@ -8546,27 +8546,27 @@
             {
               "title": "'12·3 국민주권의 날' 정부기념일 지정…국민 용기와 행동 기린다 - 대한민국 정책브리핑",
               "url": "https://www.korea.kr/news/policyNewsView.do?newsId=148976397&pWise=sub&pWiseSub=R1",
-              "checked_at": "2026-11-25T13:54:21.196759+09:00"
+              "checked_at": "2026-11-25T13:54:22.361603+09:00"
             },
             {
               "title": "국민의 용기와 행동 기린다, '12·3국민주권의 날' 정부기념일 지정 - 대통령실 브리핑/정책브리핑",
               "url": "https://m.korea.kr/briefing/pressReleaseView.do?gubun=pressRelease&newsId=156790530&pageIndex=4&repCode=",
-              "checked_at": "2026-11-25T13:54:21.196759+09:00"
+              "checked_at": "2026-11-25T13:54:22.361603+09:00"
             },
             {
               "title": "'12·3 국민주권의 날' 기념일 지정...이 대통령 \"위대한 국민 승리\" | YTN",
               "url": "https://www.ytn.co.kr/_ln/0101_202611241605214681",
-              "checked_at": "2026-11-25T13:54:21.196759+09:00"
+              "checked_at": "2026-11-25T13:54:22.361603+09:00"
             },
             {
               "title": "12월 3일 '국민주권의날' 기념일 지정...공휴일은 아냐 / YTN - YouTube",
               "url": "https://www.youtube.com/watch?v=BoD1A0R9xqM",
-              "checked_at": "2026-11-25T13:54:21.196759+09:00"
+              "checked_at": "2026-11-25T13:54:22.361603+09:00"
             },
             {
               "title": "Google 인기 검색어",
               "url": "https://trends.google.com/trending?geo=KR&hl=ko",
-              "checked_at": "2026-11-25T13:54:21.196759+09:00"
+              "checked_at": "2026-11-25T13:54:22.361603+09:00"
             }
           ],
           "visual_queries": [
@@ -8716,7 +8716,7 @@
           "fact_packet_hash": "257c5187653ff54e5d1a9d2cfe80d9a0eb9be34edf85e93bb8b816d6207ba753",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-25T13:54:21.196759+09:00"
+          "verified_at": "2026-11-25T13:54:22.361603+09:00"
         },
         {
           "id": "2026-11-25-honam-water-semiconductor",
@@ -8729,22 +8729,22 @@
             {
               "title": "호남 반도체 용수 공급 덕남정수장 생산량 2배로 늘린다 | 연합뉴스",
               "url": "https://www.yna.co.kr/view/AKR20261125072000054",
-              "checked_at": "2026-11-25T13:54:21.196876+09:00"
+              "checked_at": "2026-11-25T13:54:22.361724+09:00"
             },
             {
               "title": "호남 반도체 클러스터 모든 것 '한눈에'…반도체 정보 플랫폼 '칩온' 본격 운영 | 전자신문",
               "url": "https://www.etnews.com/20261124000528",
-              "checked_at": "2026-11-25T13:54:21.196876+09:00"
+              "checked_at": "2026-11-25T13:54:22.361724+09:00"
             },
             {
               "title": "전남광주통합특별시 공식 채널 - YouTube",
               "url": "https://www.youtube.com/channel/UCpCtv8fw6egexjhOJpN1IZw",
-              "checked_at": "2026-11-25T13:54:21.196876+09:00"
+              "checked_at": "2026-11-25T13:54:22.361724+09:00"
             },
             {
               "title": "호남권 반도체 클러스터 이미 시작되었습니다! - YouTube",
               "url": "https://www.youtube.com/watch?v=tEGqMmZX1ZE",
-              "checked_at": "2026-11-25T13:54:21.196876+09:00"
+              "checked_at": "2026-11-25T13:54:22.361724+09:00"
             }
           ],
           "visual_queries": [
@@ -8884,7 +8884,7 @@
           "fact_packet_hash": "d726a7d1aeac54f3ede05ea686fe4a6d3f39725b0b50f5ab2fadfda114cfa82d",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-25T13:54:21.196876+09:00"
+          "verified_at": "2026-11-25T13:54:22.361724+09:00"
         }
       ],
       "media": {
@@ -9076,7 +9076,9 @@
         "https://gonggam.korea.kr/newsContentView.es?code_cd=0123000000&content=NC002&mid=a12504000000&news_id=15a0da29-6b44-439f-9acb-b735b8de1d7f&section_id=NCCD_POLICY",
         "https://www.yna.co.kr/view/AKR20261125072000054"
       ],
-      "created_at": "2026-11-25T13:54:21.197049+09:00"
+      "created_at": "2026-11-25T13:54:21.197049+09:00",
+      "publication_exclusions": [],
+      "active_job": "2026-11-25-korea-sovereignty-day"
     }
   },
   "publications": [
