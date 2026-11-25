@@ -9109,10 +9109,17 @@
           "usable": true,
           "sha256": "e222c288b2163a0f3ae65b2a61e38f2daa2e577ef5574c5b288fb25e50bf303a",
           "completed_at": "2026-11-26T03:42:05.949089+09:00"
+        },
+        "editorial_review_0": {
+          "status": "submitted",
+          "request_hash": "03c329fefd9cf382bebf804dade03ed2b80d96cd052465f6286ed0849ce3ad3b",
+          "attempts": 1,
+          "at": "2026-11-26T03:42:11.131110+09:00"
         }
       },
-      "status": "draft_completed",
-      "active_stage": "draft"
+      "status": "editorial_review_0_submitted",
+      "active_stage": "editorial_review_0",
+      "review_input_hash": "84ffa0fd1cd611092fdba458f91c063effc6090bf878af36004b815e48989d7f"
     }
   },
   "publications": [
