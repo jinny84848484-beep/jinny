@@ -9080,6 +9080,18 @@
       "publication_exclusions": [],
       "active_job": "2026-11-25-honam-water-semiconductor",
       "completed_at": "2026-11-25T13:57:07.756791+09:00"
+    },
+    "2026-11-26": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "c9b63600212fed7faa48a4deb3e1f816ae5bad02140a8221ffd315c932af4e0b",
+          "attempts": 1,
+          "at": "2026-11-26T03:40:15.124837+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
