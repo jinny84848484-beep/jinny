@@ -168,6 +168,39 @@ class Run(unittest.TestCase):
         self.assertEqual(self.writes, ['planning', 'upload_submitted', 'scheduled'])
         self.assertEqual(self.store[DAY]['dish'], '퀘사디아')
 
+class OAuthShape(unittest.TestCase):
+    GOOD = {'channel_id': 'UCkuz6ra5_hZ1MSAbFthqDcg', 'client_id': '1067393655743-b4aos8sufhvn89ipe1juokprjvlv9sq3.apps.googleusercontent.com',
+            'client_secret': 'GOCSPX-abc', 'refresh_token': '1//abc'}
+
+    def token(self, value):
+        from world_kitchen import providers as pr
+        calls = []
+
+        def fake_http(url, data=None, headers=None, method=None, timeout=180):
+            calls.append(data)
+            if 'oauth2' in url:
+                return {'access_token': 't'}
+            return {'items': [{'id': 'UCkuz6ra5_hZ1MSAbFthqDcg', 'contentDetails': {'relatedPlaylists': {'uploads': 'UU1'}}}]}
+        with patch.dict(os.environ, {'YOUTUBE_KITCHEN_OAUTH': json.dumps(value)}), patch.object(pr, 'http', side_effect=fake_http):
+            return pr.youtube_token(), calls
+
+    def test_spaces_are_trimmed(self):
+        (token, uploads), calls = self.token({k: ' ' + v + ' ' for k, v in self.GOOD.items()})
+        self.assertEqual(uploads, 'UU1')
+        self.assertIn(b'client_id=1067393655743-b4aos8sufhvn89ipe1juokprjvlv9sq3.apps.googleusercontent.com&', calls[0])
+
+    def test_wrong_shapes_name_the_problem_without_secrets(self):
+        cases = {'<클라이언트 ID>': 'client_id looks wrong', 'abc.apps.googleusercontent.com': 'client_id looks wrong'}
+        for client_id, message in cases.items():
+            with self.subTest(client_id=client_id):
+                with self.assertRaisesRegex(RuntimeError, 'CEO ALARM.*' + message) as ctx:
+                    self.token({**self.GOOD, 'client_id': client_id})
+                self.assertNotIn('GOCSPX-abc', str(ctx.exception))
+        with self.assertRaisesRegex(RuntimeError, 'missing refresh_token'):
+            self.token({k: v for k, v in self.GOOD.items() if k != 'refresh_token'})
+        with self.assertRaisesRegex(RuntimeError, 'GOCSPX-'):
+            self.token({**self.GOOD, 'client_secret': '여기에_비밀번호'})
+
 
 if __name__ == '__main__':
     unittest.main()
