@@ -8529,7 +8529,7 @@
           "completed_at": "2026-11-25T13:54:20.011813+09:00"
         }
       },
-      "status": "uploaded",
+      "status": "complete",
       "active_stage": "editorial_review_1",
       "review_input_hash": "60237de64a8890b31948501a12b412d6e4909e62ff47289bf6a967bf2dd6cd59",
       "editorial_exclusions": [],
@@ -9078,7 +9078,8 @@
       ],
       "created_at": "2026-11-25T13:54:21.197049+09:00",
       "publication_exclusions": [],
-      "active_job": "2026-11-25-honam-water-semiconductor"
+      "active_job": "2026-11-25-honam-water-semiconductor",
+      "completed_at": "2026-11-25T13:57:07.756791+09:00"
     }
   },
   "publications": [
