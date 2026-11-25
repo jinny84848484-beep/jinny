@@ -8509,10 +8509,17 @@
           "usable": true,
           "sha256": "0a36465da97fa77c036a39b0f13c9c3ae5263f2fcad4ff2613624f81e7170966",
           "completed_at": "2026-11-25T13:53:58.346462+09:00"
+        },
+        "editorial_review_0": {
+          "status": "submitted",
+          "request_hash": "a1ca501736f63f7bb980a1da3ec40bd721aea085e8479305b1be04b8b05f3d32",
+          "attempts": 1,
+          "at": "2026-11-25T13:54:03.020091+09:00"
         }
       },
-      "status": "draft_completed",
-      "active_stage": "draft"
+      "status": "editorial_review_0_submitted",
+      "active_stage": "editorial_review_0",
+      "review_input_hash": "60237de64a8890b31948501a12b412d6e4909e62ff47289bf6a967bf2dd6cd59"
     }
   },
   "publications": [
