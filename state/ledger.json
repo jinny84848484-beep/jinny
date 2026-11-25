@@ -9102,13 +9102,16 @@
           "completed_at": "2026-11-26T03:41:38.122460+09:00"
         },
         "draft": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "05c9bb96aa98e6d927dadd113584e2dbfd3b3e9aa3ec731b5c7026557bcb2bde",
           "attempts": 1,
-          "at": "2026-11-26T03:41:40.092810+09:00"
+          "at": "2026-11-26T03:41:40.092810+09:00",
+          "usable": true,
+          "sha256": "e222c288b2163a0f3ae65b2a61e38f2daa2e577ef5574c5b288fb25e50bf303a",
+          "completed_at": "2026-11-26T03:42:05.949089+09:00"
         }
       },
-      "status": "draft_submitted",
+      "status": "draft_completed",
       "active_stage": "draft"
     }
   },
