@@ -7,6 +7,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import re
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -78,8 +79,21 @@ def youtube_token():
         c = json.loads(os.environ['YOUTUBE_KITCHEN_OAUTH'])
     except ValueError:
         raise RuntimeError(ALARM + 'YOUTUBE_KITCHEN_OAUTH is not valid JSON') from None
-    if c.get('channel_id') != TEMPLATE['channel_id']:
+    if not isinstance(c, dict):
+        raise RuntimeError(ALARM + 'YOUTUBE_KITCHEN_OAUTH must be a JSON object')
+    c = {k: v.strip() if isinstance(v, str) else v for k, v in c.items()}  # stray spaces from copy-paste
+    missing = [k for k in ('channel_id', 'client_id', 'client_secret', 'refresh_token') if not c.get(k)]
+    if missing:
+        raise RuntimeError(ALARM + 'YOUTUBE_KITCHEN_OAUTH is missing ' + ', '.join(missing))
+    if c['channel_id'] != TEMPLATE['channel_id']:
         raise RuntimeError(ALARM + 'stored OAuth is for a different channel')
+    client_id = c['client_id']
+    if not re.fullmatch(r'\d+-[0-9a-z]+\.apps\.googleusercontent\.com', client_id):
+        # The client ID is not secret; show only its outline to locate a paste mistake.
+        raise RuntimeError(ALARM + 'client_id looks wrong (length ' + str(len(client_id)) + ', starts '
+                           + repr(client_id[:14]) + ', ends ' + repr(client_id[-27:]) + ')')
+    if not c['client_secret'].startswith('GOCSPX-') or not c['refresh_token'].startswith('1//'):
+        raise RuntimeError(ALARM + 'client_secret must start with GOCSPX- and refresh_token with 1//')
     body = urllib.parse.urlencode({'client_id': c['client_id'], 'client_secret': c['client_secret'],
                                    'refresh_token': c['refresh_token'], 'grant_type': 'refresh_token'}).encode()
     result = http('https://oauth2.googleapis.com/token', body, {'Content-Type': 'application/x-www-form-urlencoded'})
