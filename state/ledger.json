@@ -9129,7 +9129,7 @@
           "completed_at": "2026-11-26T03:42:31.848691+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1",
       "review_input_hash": "84ffa0fd1cd611092fdba458f91c063effc6090bf878af36004b815e48989d7f",
       "editorial_exclusions": [],
@@ -10412,6 +10412,18 @@
       "video_id": "Kl5rxtPhrKI",
       "url": "https://www.youtube.com/shorts/Kl5rxtPhrKI",
       "at": "2026-11-26T03:43:29.742201+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-26-kyobo-hottracks-music-retail-exit",
+      "topic_key": "kyobo-hottracks-music-retail-exit-2026-11-25",
+      "category": "culture",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "핫트랙스 음반 코너가 문을 닫습니다",
+      "video_id": "YB3s3eXqxoY",
+      "url": "https://www.youtube.com/shorts/YB3s3eXqxoY",
+      "at": "2026-11-26T03:44:27.792420+09:00",
       "experiment": {}
     }
   ],
