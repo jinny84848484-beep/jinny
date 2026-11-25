@@ -1,8 +1,9 @@
 {
   "2026-11-25": {
-    "status": "planning",
+    "status": "held",
     "attempts": 2,
     "code": "WK-20261125",
-    "started_at": "2026-11-25T17:22:09.382756+09:00"
+    "started_at": "2026-11-25T17:22:09.382756+09:00",
+    "reason": "independent review: BRAND_NAME_IN_SOURCE, MEASUREMENT_MISMATCH, HEATING_TIME_NOT_MATCHED_TO_QUANTITY, KOREAN_UNNATURAL"
   }
 }
