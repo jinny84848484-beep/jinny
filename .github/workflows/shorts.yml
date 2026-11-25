@@ -32,6 +32,7 @@ on:
         type: string
         required: false
   schedule:
+    - cron: '7 20 * * *' # 05:07 KST early start: GitHub delays scheduled runs by hours; later runs exit once the day is complete
     - cron: '7 22 * * *' # 07:07 KST, off the busy top of the hour
     - cron: '37 1 * * *' # 10:37 KST backup; a completed day exits immediately
 permissions:

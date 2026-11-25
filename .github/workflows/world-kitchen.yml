@@ -1,6 +1,7 @@
 name: World Kitchen reviewed production
 on:
   schedule:
+    - cron: '7 1 * * *' # 10:07 KST early start: GitHub delays scheduled runs by hours; state.json stops a second upload
     - cron: '0 8 * * *' # 17:00 KST production; 19:00 is target publication metadata only
   workflow_dispatch:
 permissions:
