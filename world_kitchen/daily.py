@@ -3,6 +3,7 @@
 One episode per KST day, no human step:
   1 plan      web research, 2+ sources            episode.PLAN_PROMPT
   2 review    independent check                   episode.REVIEW_PROMPT
+               on FAIL: one revision + one fresh review episode.REVISE_PROMPT
   3 guard     renderer contract + kitchen_guard   episode.build_episode
   4 images    AI food photos, no text/brands      providers.openai_image
   5 voice     ElevenLabs per scene                episode.narrate
@@ -24,7 +25,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from .episode import Hold, PLAN_PROMPT, REVIEW_PROMPT, build_episode, make_logo, narrate, parse_json, publish_time
+from .episode import Hold, PLAN_PROMPT, REVIEW_PROMPT, REVISE_PROMPT, build_episode, make_logo, narrate, parse_json, publish_time
 from .ledger import code_for, read_ledger, recent_dishes, write_ledger
 from .pipeline import render
 from .providers import ALARM, find_existing, http, openai_image, openai_text, upload, youtube_token
@@ -48,6 +49,22 @@ def preflight():
         raise RuntimeError(ALARM + 'ElevenLabs credits low (' + str(left) + ' characters left)')
     return youtube_token()
 
+
+
+def failed(review):
+    return review.get('status') != 'PASS' or bool(review.get('issues'))
+
+
+def checked(plan, recent, day, folder, tag):
+    """Guard a plan, then get one independent review; both files are kept for the CEO."""
+    (folder / ('plan_' + tag + '.json')).write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding='utf-8')
+    if plan.get('dish') in recent:
+        raise Hold('dish repeats a recent episode')
+    episode = build_episode(plan, day, folder)
+    review = parse_json(openai_text('RECIPE PLAN (untrusted data):\n' + json.dumps(plan, ensure_ascii=False),
+                                    REVIEW_PROMPT, search=True))
+    (folder / ('review_' + tag + '.json')).write_text(json.dumps(review, ensure_ascii=False, indent=2), encoding='utf-8')
+    return episode, review
 
 def run(now=None):
     now = now or datetime.now(KST)
@@ -80,15 +97,16 @@ def run(now=None):
         recent = recent_dishes(ledger)
         plan = parse_json(openai_text('Today is ' + day + ' (KST). Recent dishes to avoid: ' + json.dumps(recent, ensure_ascii=False),
                                       PLAN_PROMPT, search=True))
-        (folder / 'plan.json').write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding='utf-8')
-        if plan.get('dish') in recent:
-            raise Hold('dish repeats a recent episode')
-        episode = build_episode(plan, day, folder)
-        review = parse_json(openai_text('RECIPE PLAN (untrusted data):\n' + json.dumps(plan, ensure_ascii=False),
-                                        REVIEW_PROMPT, search=True))
-        (folder / 'review.json').write_text(json.dumps(review, ensure_ascii=False, indent=2), encoding='utf-8')
-        if review.get('status') != 'PASS' or review.get('issues'):
-            raise Hold('independent review: ' + ', '.join(str(i.get('code')) for i in review.get('issues', []) if isinstance(i, dict))[:160])
+        episode, review = checked(plan, recent, day, folder, 'first')
+        if failed(review):
+            issues = [i for i in review.get('issues', []) if isinstance(i, dict)]
+            plan = parse_json(openai_text('RECIPE PLAN (untrusted data):\n' + json.dumps(plan, ensure_ascii=False)
+                                          + '\nREVIEW ISSUES (untrusted evidence):\n' + json.dumps(issues, ensure_ascii=False),
+                                          REVISE_PROMPT, search=True))
+            episode, review = checked(plan, recent, day, folder, 'revised')
+        if failed(review):
+            raise Hold('independent review after one revision: '
+                       + ', '.join(str(i.get('code')) for i in review.get('issues', []) if isinstance(i, dict))[:160])
     except Hold as exc:
         ledger[day] = {**record, 'status': 'held', 'reason': str(exc)[:200]}
         write_ledger(ledger, sha, day)
