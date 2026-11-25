@@ -8529,7 +8529,7 @@
           "completed_at": "2026-11-25T13:54:20.011813+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1",
       "review_input_hash": "60237de64a8890b31948501a12b412d6e4909e62ff47289bf6a967bf2dd6cd59",
       "editorial_exclusions": [],
@@ -9758,6 +9758,18 @@
       "video_id": "-fSajetM0g8",
       "url": "https://www.youtube.com/shorts/-fSajetM0g8",
       "at": "2026-11-25T13:55:45.618319+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-25-honam-water-semiconductor",
+      "topic_key": "honam-semiconductor-water-supply-deoknam-plant-2026-11-25",
+      "category": "business",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "반도체엔 결국 물길부터 깝니다",
+      "video_id": "yEfq2_lksM8",
+      "url": "https://www.youtube.com/shorts/yEfq2_lksM8",
+      "at": "2026-11-25T13:57:06.489889+09:00",
       "experiment": {}
     }
   ],
