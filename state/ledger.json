@@ -9129,7 +9129,7 @@
           "completed_at": "2026-11-26T03:42:31.848691+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1",
       "review_input_hash": "84ffa0fd1cd611092fdba458f91c063effc6090bf878af36004b815e48989d7f",
       "editorial_exclusions": [],
@@ -10400,6 +10400,18 @@
       "video_id": "yEfq2_lksM8",
       "url": "https://www.youtube.com/shorts/yEfq2_lksM8",
       "at": "2026-11-25T13:57:06.489889+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-26-pubg-ive-the-squad-project",
+      "topic_key": "pubg-ive-the-squad-project-2026-11-25",
+      "category": "music",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "배그가 아이브랑 시즌제를 합니다",
+      "video_id": "Kl5rxtPhrKI",
+      "url": "https://www.youtube.com/shorts/Kl5rxtPhrKI",
+      "at": "2026-11-26T03:43:29.742201+09:00",
       "experiment": {}
     }
   ],
