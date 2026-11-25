@@ -1,9 +1,8 @@
 {
   "2026-11-25": {
-    "status": "held",
-    "attempts": 1,
+    "status": "planning",
+    "attempts": 2,
     "code": "WK-20261125",
-    "started_at": "2026-11-25T17:18:59.564674+09:00",
-    "reason": "independent review: WRONG_SOURCE, ATTRIBUTION, REAL_BRAND_NAME"
+    "started_at": "2026-11-25T17:22:09.382756+09:00"
   }
 }
