@@ -54,6 +54,34 @@ class OjirapOnly(unittest.TestCase):
         self.assertEqual([x.args[0] for x in token.call_args_list],['ojirap','ojirap'])
         self.assertEqual([j['channel'] for j in ledger['publications']],['ojirap','ojirap'])
 
+    def test_graphics_only_is_logged_and_not_rendered_or_uploaded(self):
+        for blocked in (1, 2):
+            with self.subTest(blocked=blocked):
+                jobs=active()
+                media={}
+                for ix,job in enumerate(jobs):
+                    for i,scene in enumerate(job['scenes']):
+                        key=('graphic-' if ix<blocked else 'photo-')+job['id']+str(i)
+                        scene['media']=key
+                        media[key]={'topic_key':job['topic_key'],'channel':'ojirap','relevance_verified':True}
+                ledger={'days':{DAY:{'jobs':jobs,'media':media}},'publications':[]}
+                with tempfile.TemporaryDirectory() as tmp, patch.object(c.p,'ROOT',Path(tmp)), patch.object(c,'journal_put',return_value='sha'), patch.object(c,'download_media') as download, patch.object(c.daily_graphics,'ensure'), patch.object(c.media_renderer,'render') as render, patch.object(c,'youtube_token',return_value='test'), patch.object(c,'verify_channel'), patch.object(c,'upload',return_value='v') as upload:
+                    c.publish_reviewed(ledger,'sha',DAY)
+                self.assertEqual(render.call_count,2-blocked)
+                self.assertEqual(upload.call_count,2-blocked)
+                self.assertEqual(download.call_count,int(blocked==1))
+                self.assertEqual(ledger['days'][DAY]['status'],'complete')
+                self.assertEqual([x['reason'] for x in ledger['days'][DAY]['publication_exclusions']],['graphics_only_not_publishable']*blocked)
+
+    def test_direct_upload_stops_graphics_only_before_network(self):
+        job=active()[0]
+        for scene in job['scenes']:
+            scene['media']='graphic-fallback'
+        with patch.object(c.urllib.request,'urlopen') as network:
+            with self.assertRaisesRegex(RuntimeError,'graphics-only'):
+                c.upload(Path('/unused'),job,'test')
+        network.assert_not_called()
+
     def test_preflight_does_not_require_retired_secret_voice_or_identity(self):
         cfg=c.p.cfg();voice=cfg['channels']['ojirap']['voice_id']
         env={k:'test' for k in ('OPENAI_API_KEY','ELEVENLABS_API_KEY','YOUTUBE_OJIRAP_OAUTH','GITHUB_TOKEN','GITHUB_REPOSITORY')}

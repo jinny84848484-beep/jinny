@@ -741,9 +741,21 @@ RETIRED_NEWS_CHANNEL_ID='UCWFQVq3zxSnMi1sa0dUTVMQ'
 def news_publication_blocked(job):
     return job.get('channel')=='korean' or job.get('channel_id')==RETIRED_NEWS_CHANNEL_ID
 
+def graphics_only_ojirap(job, library):
+    if job.get('channel') != 'ojirap' or not job.get('scenes'):
+        return False
+    def is_graphic(scene):
+        key = scene.get('media')
+        return isinstance(key, str) and (key.startswith('graphic-') or
+            library.get(key, {}).get('policy') == daily_graphics.POLICY)
+    return all(is_graphic(scene) for scene in job['scenes'])
+
+
 def upload(folder,job,token):
     if news_publication_blocked(job):
         raise RuntimeError('Dongbang news publication retired by owner')
+    if graphics_only_ojirap(job, p.read(p.ROOT/'assets/media-library.json',{})):
+        raise RuntimeError('Ojirap graphics-only Shorts must not be uploaded')
     metadata=p.read(folder/'upload-metadata.json');path=folder/'short.mp4';size=path.stat().st_size
     body={'snippet':{'title':metadata['title'],'description':metadata['description'],'categoryId':CATEGORIES[job['category']],'defaultLanguage':metadata['language']},'status':{'privacyStatus':'public','selfDeclaredMadeForKids':False,'containsSyntheticMedia':True}}
     req=urllib.request.Request('https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status',data=json.dumps(body).encode(),headers={'Authorization':'Bearer '+token,'Content-Type':'application/json; charset=UTF-8','X-Upload-Content-Length':str(size),'X-Upload-Content-Type':'video/mp4'},method='POST')
@@ -1174,6 +1186,18 @@ def publish_reviewed(ledger,sha,day,*,slots=None,stage_callback=None):
     record['publication_exclusions']=[{'job_id':job['id'],'channel':job['channel'],'reason':'owner_retired_news_channel'} for job in excluded]+[editorial[job['id']] for job in jobs if job['id'] in editorial and not news_publication_blocked(job)]
     jobs=[job for job in jobs if not news_publication_blocked(job) and job['id'] not in editorial]
     if not jobs:raise RuntimeError('No reviewed story is publishable; batch held')
+    visual_exclusions = [job for job in jobs if graphics_only_ojirap(job, library)]
+    if visual_exclusions:
+        blocked_ids = {job['id'] for job in visual_exclusions}
+        for job in visual_exclusions:
+            record['publication_exclusions'].append({'job_id':job['id'],'channel':job['channel'],'reason':'graphics_only_not_publishable','codes':['insufficient_media']})
+            print('::warning title=Ojirap visual exclusion::'+job['id']+' insufficient_media: graphics-only; not uploaded',flush=True)
+        jobs = [job for job in jobs if job['id'] not in blocked_ids]
+        if not jobs:
+            stage('completion_marker')
+            record.update(status='complete',completed_at=p.now().isoformat())
+            journal_put(ledger,sha)
+            return
     for job in jobs:
         for scene in job['scenes']:
             media=library.get(scene.get('media'),{}) if isinstance(scene.get('media'),str) else {}
