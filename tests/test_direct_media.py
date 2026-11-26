@@ -9,6 +9,19 @@ import staged_runner as s
 from test_staged_runner import valid_jobs,DAY
 
 class DirectMedia(unittest.TestCase):
+    def test_fallback_retries_subject_without_provider_or_license_suffix(self):
+        job = {'topic_key':'event','channel':'ojirap','visual_queries':[
+            'Bank of Korea headquarters Wikimedia Commons', 'Seoul central bank CC BY Wikimedia Commons']}
+        names=['Bank of Korea headquarters Wikimedia Commons', 'Seoul central bank CC BY Wikimedia Commons',
+               'Bank of Korea headquarters', 'Seoul central bank']
+        with patch.object(m, 'search', side_effect=[{}, {}, {'a':{}}, {'b':{}}]) as search:
+            self.assertEqual(set(m.candidates([job])), {'a','b'})
+        self.assertEqual([c.args[0] for c in search.call_args_list], names)
+
+    def test_concise_queries_are_not_duplicated(self):
+        self.assertEqual(list(m.query_variants(['Bank of Korea', 'Bank of Korea Commons'])),
+                         ['Bank of Korea', 'Bank of Korea Commons'])
+
     def payload(self):
         pages={}
         for i,title in enumerate(['File:One.jpg','File:Two.png','File:Unrequested.jpg'],1):

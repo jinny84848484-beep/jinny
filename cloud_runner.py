@@ -885,7 +885,7 @@ def parse_editorial_review(text,jobs,media):
 
 MEDIA_ISSUES=frozenset({'media_identity','media_relevance','media_license','archive_context','insufficient_media'})
 GRAPHICS_RESEARCH_NOTE="""
-ORIGINAL GRAPHICS FALLBACK IS ENABLED. Photo availability alone must NOT make a story unready: when no exact reusable photograph is found, keep ready true if the event facts and sources meet every other requirement, list the photo gap in uncertainties, and still give visual_subject and two visual_queries. The pipeline will illustrate such a story with original text cards. Never relax factual, source independence or primary-source requirements."""
+ORIGINAL GRAPHICS FALLBACK IS ENABLED. Photo availability alone must NOT make a story unready: when no exact reusable photograph is found, keep ready true if the event facts and sources meet every other requirement, list the photo gap in uncertainties, and still give visual_subject and two concise subject-only visual_queries: use a named subject or institution in the first and a clearly relevant alternative in the second. Do not append Wikimedia Commons, license words, article dates or news wording. Prefer and plan topics with reusable relevant real photos when otherwise comparable; graphics are a last resort, not the default. No graphic may be passed off as a photo. Never relax factual, source independence or primary-source requirements."""
 
 
 NO_GRAPHICS_CLAUSE=', or replace photos with original text graphics'
