@@ -180,6 +180,9 @@ class Run(unittest.TestCase):
             self.assertIn(words, e.PLAN_PROMPT)
             self.assertIn(words, e.REVISE_PROMPT)
         self.assertIn('untrusted evidence', e.REVISE_PROMPT)
+        # CEO order 2026-11-26: source first, exact quantity, origin as the page states it
+        for words in ('SOURCE FIRST', 'never pick the dish first', 'no scaling', 'origin exactly as a cited page states'):
+            self.assertIn(words, e.PLAN_PROMPT)
         self.assertIn('no real brand names', e.REVIEW_PROMPT)  # the safety review keeps the brand rule
 
     def test_full_day_is_scheduled_once(self):
