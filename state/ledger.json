@@ -9759,7 +9759,7 @@
           "completed_at": "2026-11-27T00:51:07.440443+09:00"
         }
       },
-      "status": "upload_submitted",
+      "status": "uploaded",
       "active_stage": "editorial_review_1",
       "review_input_hash": "193c752cb3d3beeb8c6e84af2081fe1c2392be675b1c9cc9986a28f93751d878",
       "editorial_exclusions": [],
@@ -11029,6 +11029,18 @@
       "video_id": "PmusX3EmBXY",
       "url": "https://www.youtube.com/shorts/PmusX3EmBXY",
       "at": "2026-11-27T00:52:39.912017+09:00",
+      "experiment": {}
+    },
+    {
+      "job_id": "2026-11-27-bok-rate-hike-ojirap",
+      "topic_key": "bank-of-korea-base-rate-hike-2026-11-26",
+      "category": "business",
+      "channel": "ojirap",
+      "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+      "title": "금리, 다시 한 칸 올랐죠",
+      "video_id": "iEEjXeJfPNA",
+      "url": "https://www.youtube.com/shorts/iEEjXeJfPNA",
+      "at": "2026-11-27T00:54:05.551849+09:00",
       "experiment": {}
     }
   ],
