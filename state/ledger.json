@@ -9710,6 +9710,18 @@
       "publication_exclusions": [],
       "active_job": "2026-11-26-kyobo-hottracks-music-retail-exit",
       "completed_at": "2026-11-26T03:44:29.600861+09:00"
+    },
+    "2026-11-27": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "43b62bdd22efeec888e7a98cf5e9b298c3e56d726b84bd1978d410de090f388a",
+          "attempts": 1,
+          "at": "2026-11-27T00:48:45.700816+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
