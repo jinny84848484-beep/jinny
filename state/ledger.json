@@ -9759,7 +9759,7 @@
           "completed_at": "2026-11-27T00:51:07.440443+09:00"
         }
       },
-      "status": "uploaded",
+      "status": "complete",
       "active_stage": "editorial_review_1",
       "review_input_hash": "193c752cb3d3beeb8c6e84af2081fe1c2392be675b1c9cc9986a28f93751d878",
       "editorial_exclusions": [],
@@ -10301,7 +10301,8 @@
       ],
       "created_at": "2026-11-27T00:51:09.227374+09:00",
       "publication_exclusions": [],
-      "active_job": "2026-11-27-bok-rate-hike-ojirap"
+      "active_job": "2026-11-27-bok-rate-hike-ojirap",
+      "completed_at": "2026-11-27T00:54:06.849550+09:00"
     }
   },
   "publications": [
