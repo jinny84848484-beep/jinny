@@ -9759,9 +9759,547 @@
           "completed_at": "2026-11-27T00:51:07.440443+09:00"
         }
       },
-      "status": "editorial_review_1_completed",
+      "status": "reviewed",
       "active_stage": "editorial_review_1",
-      "review_input_hash": "193c752cb3d3beeb8c6e84af2081fe1c2392be675b1c9cc9986a28f93751d878"
+      "review_input_hash": "193c752cb3d3beeb8c6e84af2081fe1c2392be675b1c9cc9986a28f93751d878",
+      "editorial_exclusions": [],
+      "retry_hold": false,
+      "jobs": [
+        {
+          "id": "2026-11-27-cpa-selection-ojirap",
+          "channel": "ojirap",
+          "topic_key": "cpa-selection-2027-1100-korea-2026-11-24",
+          "category": "society",
+          "title": "회계사 숫자, 또 줄었네",
+          "description": "금융위가 이천이십칠년도 공인회계사 최소선발예정인원을 천백 명으로 확정했고, 업계에선 중장기 수급계획 부재 비판이 이어졌습니다.",
+          "sources": [
+            {
+              "title": "보험정책 - 정책일반 - 정책마당 - 금융위원회",
+              "url": "https://www.fsc.go.kr/po010103/88212?curPage=1&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
+              "checked_at": "2026-11-27T00:51:09.226912+09:00"
+            },
+            {
+              "title": "보도자료 - 위원회 소식 - 알림마당 - 금융위원회",
+              "url": "https://www.fsc.go.kr/no010101/88212?curPage=1&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=%EB%B0%9C&srchText=%EC%8B%A0%EC%9A%A9%EC%B9%B4%EB%93%9C%ED%98%84%EA%B8%88%ED%99%94",
+              "checked_at": "2026-11-27T00:51:09.226912+09:00"
+            },
+            {
+              "title": "청년공인회계사회 “2027년 1,100명 선발, 미지정 현실 외면”",
+              "url": "https://lec.co.kr/news/articleView.html?idxno=753080",
+              "checked_at": "2026-11-27T00:51:09.226912+09:00"
+            },
+            {
+              "title": "회계사 선발 중장기 계획 세운다더니 제외…업계 후폭풍",
+              "url": "https://www.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=03739206645649656",
+              "checked_at": "2026-11-27T00:51:09.226912+09:00"
+            },
+            {
+              "title": "금융정책 - 정책일반 - 정책마당 - 금융위원회",
+              "url": "https://www.fsc.go.kr/po010101/85717?curPage=1&srchBeginDt=&srchCtgry=1&srchEndDt=%EC%97%90%EC%84%9C%ED%99%95%EC%9D%B8%EA%B0%80%EB%8A%A5%ED%95%A9%EB%8B%88%EB%8B%A4.&srchKey=&srchText=",
+              "checked_at": "2026-11-27T00:51:09.226912+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Certified public accountant exam Korea Wikimedia Commons",
+            "accounting ledger calculator CC BY Wikimedia Commons"
+          ],
+          "opening_text": "회계사 숫자, 또 줄었네.",
+          "hook_type": "dry_observation",
+          "topic_category": "public_interest",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "회계사 숫자, 또 줄었네",
+              "body": "자료사진입니다. 선발 인원 이슈 설명용입니다.",
+              "narration": "회계사 숫자, 또 줄었네.",
+              "source_indices": [],
+              "media": "graphic-2026-11-27-cpa-selection-ojirap-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "공식 발표는 천백 명",
+              "body": "금융위는 십일월 이십사일 최소선발예정인원 천백 명을 확정했어요.",
+              "narration": "금융위가 십일월 이십사일 이천이십칠년도 최소선발예정인원을 천백 명으로 정했고, 일차시험 합격자 수는 이천육백 명이라고 밝혔습니다. 출처는 금융위 공지, 이십사일 기준.",
+              "source_indices": [
+                0,
+                1
+              ],
+              "media": "graphic-2026-11-27-cpa-selection-ojirap-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "작년보다 오십 명 감소",
+              "body": "직전 발표의 천백오십 명보다 오십 명 적습니다.",
+              "narration": "직전 해 발표 기준 천백오십 명보다 오십 명 줄었습니다. 숫자는 담백한데 체감은 꽤 클 수 있겠죠.",
+              "source_indices": [
+                4
+              ],
+              "media": "graphic-2026-11-27-cpa-selection-ojirap-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "반발은 확인됐고 평가는 갈려요",
+              "body": "청년공인회계사회는 유감을 밝혔고, 계획 부재 비판도 나왔습니다.",
+              "narration": "청년공인회계사회 반발은 법률저널 보도로 확인됐고, 중장기 수급계획이 빠졌다는 비판도 이데일리에 실렸습니다. 제 의견으론 숫자보다 기준 설명이 더 아쉬워요.",
+              "source_indices": [
+                2,
+                3
+              ],
+              "media": "graphic-2026-11-27-cpa-selection-ojirap-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "숫자 하나가 던진 숙제",
+              "body": "관심 신호는 불확실했고, 지금 확실한 건 확정 숫자와 비판입니다.",
+              "narration": "다만 온라인 관심 신호는 검증이 불안정해 빼는 게 맞겠습니다. 오늘의 오지랖 결론은 이거예요. 천백 명보다 더 부족해 보인 건 납득의 자리였습니다.",
+              "source_indices": [
+                0,
+                1,
+                2,
+                3,
+                4
+              ],
+              "media": "graphic-2026-11-27-cpa-selection-ojirap-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "cpa-selection-2027-1100-korea-2026-11-24",
+            "category": "society",
+            "summary": "금융위원회가 2026년 11월 24일 공인회계사 자격·징계위원회를 열어 2027년도 공인회계사 최소선발예정인원을 1,100명으로 결정했다. 이후 11월 25~26일 청년공인회계사회 반발과 중장기 수급계획 부재 논란이 이어지며 ‘회계사’ 관련 관심이 붙었다. Google Trends 후보 신호와 별개로, 확인 가능한 현재 사실은 선발인원 확정과 그에 대한 업계 비판이다. YouTube·Instagram의 공개 관심 신호는 본 요청 시점에 확실히 검증되지 않았다.",
+            "verified_facts": [
+              {
+                "text": "금융위원회는 2026년 11월 24일 공인회계사 자격·징계위원회를 열어 2027년도 공인회계사 최소선발예정인원을 1,100명으로 결정했다고 밝혔다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "금융위원회 발표에는 2027년도 제1차시험 합격자 수 2,600명이 함께 제시됐다.",
+                "source_indices": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "text": "법률저널 보도에 따르면 청년공인회계사회는 2027년 1,100명 선발 결정에 대해 미지정 회계사 현실을 외면했다며 유감을 표명했다.",
+                "source_indices": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "text": "이데일리 보도에 따르면 금융위는 회계사 적정 선발 인원 산정과 관련한 중장기 수급 전망 제기 방안을 검토하겠다고 공식 답변한 바 있으나, 이번 확정 발표에는 그 계획이 반영되지 않았다는 비판이 제기됐다.",
+                "source_indices": [
+                  0,
+                  3
+                ]
+              },
+              {
+                "text": "직전 해 발표 기준으로 금융위는 2026년도 공인회계사 최소선발예정인원을 1,150명으로 정했었고, 올해 2027년도 예정인원은 그보다 50명 적다.",
+                "source_indices": [
+                  0,
+                  4
+                ]
+              }
+            ],
+            "uncertainties": [
+              "Google Trends 입력 후보에는 ‘회계사’가 있었지만, 웹 접근으로는 같은 시점의 공개 트렌드 화면을 직접 안정적으로 재현하지 못해 관심 신호를 핵심 근거로 삼지 않았다.",
+              "YouTube에서 이번 2027년 공인회계사 선발인원 논란을 보여주는 검증 가능한 공개 관심 URL을 확보하지 못했다.",
+              "공개 Instagram 역시 비로그인 접근 한계로 신호를 검증하지 못했다."
+            ],
+            "sources": [
+              {
+                "title": "보험정책 - 정책일반 - 정책마당 - 금융위원회",
+                "url": "https://www.fsc.go.kr/po010103/88212?curPage=1&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "보도자료 - 위원회 소식 - 알림마당 - 금융위원회",
+                "url": "https://www.fsc.go.kr/no010101/88212?curPage=1&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=%EB%B0%9C&srchText=%EC%8B%A0%EC%9A%A9%EC%B9%B4%EB%93%9C%ED%98%84%EA%B8%88%ED%99%94",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "청년공인회계사회 “2027년 1,100명 선발, 미지정 현실 외면”",
+                "url": "https://lec.co.kr/news/articleView.html?idxno=753080",
+                "role": "original_reporting",
+                "accessed": true
+              },
+              {
+                "title": "회계사 선발 중장기 계획 세운다더니 제외…업계 후폭풍",
+                "url": "https://www.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=03739206645649656",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "금융정책 - 정책일반 - 정책마당 - 금융위원회",
+                "url": "https://www.fsc.go.kr/po010101/85717?curPage=1&srchBeginDt=&srchCtgry=1&srchEndDt=%EC%97%90%EC%84%9C%ED%99%95%EC%9D%B8%EA%B0%80%EB%8A%A5%ED%95%A9%EB%8B%88%EB%8B%A4.&srchKey=&srchText=",
+                "role": "primary",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "2985903e4366ad0860529c50e94b8383ea7e2a7714519d17d1f19d737f00f33d",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-27T00:51:09.226912+09:00"
+        },
+        {
+          "id": "2026-11-27-bok-rate-hike-ojirap",
+          "channel": "ojirap",
+          "topic_key": "bank-of-korea-base-rate-hike-2026-11-26",
+          "category": "business",
+          "title": "금리, 다시 한 칸 올랐죠",
+          "description": "한국은행이 기준금리를 연 삼점영영 퍼센트에서 삼점이오 퍼센트로 올렸고, 성장세·물가·금융안정을 배경으로 들었습니다.",
+          "sources": [
+            {
+              "title": "통화정책방향(2026.11.26)",
+              "url": "https://www.bok.or.kr/portal/bbs/P0000559/view.do?depth=200690&menuNo=200690&nttId=11067084&programType=newsData&relate=Y",
+              "checked_at": "2026-11-27T00:51:09.227154+09:00"
+            },
+            {
+              "title": "한국은행 총재 기자간담회(2026.11.26)",
+              "url": "https://www.bok.or.kr/portal/bbs/P0000093/view.do?depth=200761&menuNo=200761&nttId=11067096&oldMenuNo=201150&programType=newsData&relate=Y",
+              "checked_at": "2026-11-27T00:51:09.227154+09:00"
+            },
+            {
+              "title": "Monetary Policy Decision(2026.11.26)",
+              "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?depth=400423&menuNo=400423&nttId=11067086&programType=newsDataEng&relate=Y",
+              "checked_at": "2026-11-27T00:51:09.227154+09:00"
+            },
+            {
+              "title": "한은, 기준금리 연 3.25%로 인상…반도체 호조·물가 부담 반영",
+              "url": "https://www.yna.co.kr/view/AKR20261126055800002?section=economy%2Fall",
+              "checked_at": "2026-11-27T00:51:09.227154+09:00"
+            },
+            {
+              "title": "한은, 금리 연 3.25%로 인상…동결 소수 의견 2명(종합)",
+              "url": "https://www.newsis.com/view/NISX20261126_0003884193",
+              "checked_at": "2026-11-27T00:51:09.227154+09:00"
+            }
+          ],
+          "visual_queries": [
+            "Bank of Korea headquarters Wikimedia Commons",
+            "central bank of Korea building Seoul Wikimedia Commons"
+          ],
+          "opening_text": "금리, 다시 한 칸 올랐죠.",
+          "hook_type": "plainspoken_hook",
+          "topic_category": "economy_watch",
+          "scenes": [
+            {
+              "kind": "hook",
+              "headline": "금리, 다시 한 칸 올랐죠",
+              "body": "자료사진입니다. 한국은행 금리 이슈 설명용입니다.",
+              "narration": "금리, 다시 한 칸 올랐죠.",
+              "source_indices": [],
+              "media": "graphic-2026-11-27-bok-rate-hike-ojirap-0"
+            },
+            {
+              "kind": "fact",
+              "headline": "기준금리 삼점이오 퍼센트",
+              "body": "한은 금통위가 십일월 이십육일 영점이오 퍼센트포인트 인상했습니다.",
+              "narration": "한국은행 금통위가 십일월 이십육일 기준금리를 연 삼점영영 퍼센트에서 삼점이오 퍼센트로 올렸습니다. 확인은 결정문과 영문 자료, 둘 다 같은 날짜입니다.",
+              "source_indices": [
+                0,
+                2
+              ],
+              "media": "graphic-2026-11-27-bok-rate-hike-ojirap-1"
+            },
+            {
+              "kind": "fact",
+              "headline": "배경은 성장·물가·안정",
+              "body": "한은은 성장세 강화, 목표 웃도는 물가, 금융안정 리스크를 언급했습니다.",
+              "narration": "한은은 성장세 강화와 목표를 웃도는 물가 흐름, 그리고 금융안정 리스크를 이유로 들었습니다.",
+              "source_indices": [
+                0,
+                2
+              ],
+              "media": "graphic-2026-11-27-bok-rate-hike-ojirap-2"
+            },
+            {
+              "kind": "opinion",
+              "headline": "다수는 인상, 소수는 동결",
+              "body": "기자간담회 자료엔 오 대 이 의견 분포가 적시됐습니다.",
+              "narration": "같은 날 기자간담회 자료엔 다섯 명 인상, 두 명 동결로 적시됐어요. 제 생각엔 숫자보다 분위기 전환 신호가 더 또렷합니다.",
+              "source_indices": [
+                1,
+                2
+              ],
+              "media": "graphic-2026-11-27-bok-rate-hike-ojirap-3"
+            },
+            {
+              "kind": "closing",
+              "headline": "다음 걸음은 아직 미정",
+              "body": "추가 인상 여부와 파급효과는 아직 전망 영역입니다.",
+              "narration": "연합뉴스와 뉴시스는 반도체 호조와 물가 부담 속 긴축 재개로 풀었지만, 다음 인상까지 단정하긴 이릅니다. 금리는 올랐고, 한숨도 기준금리처럼 정직하게 반응하겠네요.",
+              "source_indices": [
+                3,
+                4
+              ],
+              "media": "graphic-2026-11-27-bok-rate-hike-ojirap-4"
+            }
+          ],
+          "format_version": "paired-korean-issues-v1",
+          "fact_packet": {
+            "topic_key": "bank-of-korea-base-rate-hike-2026-11-26",
+            "category": "business",
+            "summary": "2026년 11월 26일 한국은행 금융통화위원회가 기준금리를 연 3.00%에서 3.25%로 0.25%포인트 인상했다. 한국은행은 같은 날 통화정책방향 결정문과 총재 기자간담회 자료를 공개했고, 국내 보도는 성장세·물가·금융안정 판단을 이번 결정의 핵심 배경으로 전했다.",
+            "verified_facts": [
+              {
+                "text": "한국은행 금융통화위원회는 2026년 11월 26일 통화정책방향 결정회의에서 기준금리를 연 3.00%에서 3.25%로 인상했다.",
+                "source_indices": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "한국은행은 결정문에서 국내경제 성장세가 강화되고 물가상승률이 목표 수준을 웃도는 흐름을 보일 것으로 전망되는 가운데 금융안정 리스크에도 유의할 필요가 있다고 설명했다.",
+                "source_indices": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "text": "한국은행이 같은 날 공개한 총재 기자간담회 자료에는 이번 결정에서 금통위원 5명이 인상에 찬성했고 2명은 3.00% 동결 의견을 냈다고 적시돼 있다.",
+                "source_indices": [
+                  1,
+                  2
+                ]
+              },
+              {
+                "text": "연합뉴스와 뉴시스는 이번 금리 인상을 최근 반도체 경기 호조와 물가 부담 속 긴축 재개로 해설했다.",
+                "source_indices": [
+                  3,
+                  4
+                ]
+              }
+            ],
+            "uncertainties": [
+              "향후 추가 인상 여부는 같은 날 제시된 공식 자료만으로 확정할 수 없고 이후 지표와 금통위 판단에 달려 있다.",
+              "시중금리·가계부채·환율 등에 미칠 파급효과는 현재 시점에서 전망 영역이다."
+            ],
+            "sources": [
+              {
+                "title": "통화정책방향(2026.11.26)",
+                "url": "https://www.bok.or.kr/portal/bbs/P0000559/view.do?depth=200690&menuNo=200690&nttId=11067084&programType=newsData&relate=Y",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "한국은행 총재 기자간담회(2026.11.26)",
+                "url": "https://www.bok.or.kr/portal/bbs/P0000093/view.do?depth=200761&menuNo=200761&nttId=11067096&oldMenuNo=201150&programType=newsData&relate=Y",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "Monetary Policy Decision(2026.11.26)",
+                "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?depth=400423&menuNo=400423&nttId=11067086&programType=newsDataEng&relate=Y",
+                "role": "primary",
+                "accessed": true
+              },
+              {
+                "title": "한은, 기준금리 연 3.25%로 인상…반도체 호조·물가 부담 반영",
+                "url": "https://www.yna.co.kr/view/AKR20261126055800002?section=economy%2Fall",
+                "role": "independent_reporting",
+                "accessed": true
+              },
+              {
+                "title": "한은, 금리 연 3.25%로 인상…동결 소수 의견 2명(종합)",
+                "url": "https://www.newsis.com/view/NISX20261126_0003884193",
+                "role": "original_reporting",
+                "accessed": true
+              }
+            ]
+          },
+          "fact_packet_hash": "15b599b12e333b64d1d609f6eb9294fa75b02b3a4041dbe2627d9859a8feb9ed",
+          "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
+          "editorial_status": "verified",
+          "verified_at": "2026-11-27T00:51:09.227154+09:00"
+        }
+      ],
+      "media": {
+        "graphic-2026-11-27-cpa-selection-ojirap-0": {
+          "path": "assets/graphics/2026-11-27/2026-11-27-cpa-selection-ojirap/scene-01.png",
+          "sha256": "a1d3d1911898243b0777f1d1e422001aaf8576ce32f1431181ee0b7764f121ed",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "cpa-selection-2027-1100-korea-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "48cff32d8c147b568627f917a6c45db7a1b9a57298bf24c81bbf27dde9cfd953",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-27-cpa-selection-ojirap-1": {
+          "path": "assets/graphics/2026-11-27/2026-11-27-cpa-selection-ojirap/scene-02.png",
+          "sha256": "c27d819d659af5ad8d3273fb0c005748d8920bdb16ba488537524709698c7065",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "cpa-selection-2027-1100-korea-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "24a57770b621e097cf364ad5f7bb9b0022317f7e09bd34d076ed37768c32d246",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-27-cpa-selection-ojirap-2": {
+          "path": "assets/graphics/2026-11-27/2026-11-27-cpa-selection-ojirap/scene-03.png",
+          "sha256": "e0696b6e447f83aab6da78191951ab072cea236dcfd7648e77efed1888c9b899",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "cpa-selection-2027-1100-korea-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "8aa05431e112a039431cb2845173974e6d3ab81028c84253017f6d6e1845fc8f",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-27-cpa-selection-ojirap-3": {
+          "path": "assets/graphics/2026-11-27/2026-11-27-cpa-selection-ojirap/scene-04.png",
+          "sha256": "6fa36f8e832abac22d7ad63f85b1d6b84abb4189d5f70a814255bddcf247da80",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "cpa-selection-2027-1100-korea-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "00016227c9f3acee5bf235d1bddf27f63ddee6645a4f0097821e995b882dfe13",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-27-cpa-selection-ojirap-4": {
+          "path": "assets/graphics/2026-11-27/2026-11-27-cpa-selection-ojirap/scene-05.png",
+          "sha256": "fdc5388bdd9c5f0c6fb35b559776a2d4913208cd473362c7437f5e9bdfcc3f18",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "cpa-selection-2027-1100-korea-2026-11-24",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "1be605d741094f2060ba9a565bcf8102aa06c754f7023985dad505b3ef7c6451",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-27-bok-rate-hike-ojirap-0": {
+          "path": "assets/graphics/2026-11-27/2026-11-27-bok-rate-hike-ojirap/scene-01.png",
+          "sha256": "2b20a4de4ee0ac6795257b7fe0dd512ec666839cdd770f169decca38f156be7f",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "bank-of-korea-base-rate-hike-2026-11-26",
+          "channel": "ojirap",
+          "scene_index": 0,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "81e4eb8c2c2b9e1e32fa0454815577bdb07a350e3e62e2a1ba04418f8e62c219",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-27-bok-rate-hike-ojirap-1": {
+          "path": "assets/graphics/2026-11-27/2026-11-27-bok-rate-hike-ojirap/scene-02.png",
+          "sha256": "c889a5f00c10d6e5f84a3ce616f86a92f08e49f3d2d932f18521b2faafa061cc",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "bank-of-korea-base-rate-hike-2026-11-26",
+          "channel": "ojirap",
+          "scene_index": 1,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "4a63ab3b42457759f02ad37fa8b08171ee0240cfd4b24c14f1093d6cafffbd62",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-27-bok-rate-hike-ojirap-2": {
+          "path": "assets/graphics/2026-11-27/2026-11-27-bok-rate-hike-ojirap/scene-03.png",
+          "sha256": "54e7c4205ea382a2b53b33b6d94738ed0fcd4936d95af1ebdd363f7a46a379d3",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "bank-of-korea-base-rate-hike-2026-11-26",
+          "channel": "ojirap",
+          "scene_index": 2,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "d2c507179dd219de673b58eb35ee5a3167e9f7fd701688b0184b353194d4b31e",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-27-bok-rate-hike-ojirap-3": {
+          "path": "assets/graphics/2026-11-27/2026-11-27-bok-rate-hike-ojirap/scene-04.png",
+          "sha256": "2f6f60594230ad0f9b62148a63ac32320ebcb75b047dd60a7b46808f48a0b0f1",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "bank-of-korea-base-rate-hike-2026-11-26",
+          "channel": "ojirap",
+          "scene_index": 3,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "c486045df44112941a53fa95dc4e3333d854b5a96abc85c67544ea0d32aa12a1",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        },
+        "graphic-2026-11-27-bok-rate-hike-ojirap-4": {
+          "path": "assets/graphics/2026-11-27/2026-11-27-bok-rate-hike-ojirap/scene-05.png",
+          "sha256": "5fc7d076a609dee124ba749891f4386e67334c3c5966685a27c963fc4d101761",
+          "media_type": "image",
+          "policy": "daily_original_graphics",
+          "topic_key": "bank-of-korea-base-rate-hike-2026-11-26",
+          "channel": "ojirap",
+          "scene_index": 4,
+          "notice": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님",
+          "text_hash": "9de485bf4d05a614911b9b8beb94b70472b9730a6f0e1a4a6ab6ad4ae00820a5",
+          "credit": "Original typography by this channel",
+          "source": "Original explanatory graphic based on the cited reporting",
+          "license": "Original channel artwork",
+          "license_url": "",
+          "disclaimer": "자료를 바탕으로 구성한 그래픽 · 실제 사진 아님 · No photograph, footage or reenactment.",
+          "relevance_verified": true
+        }
+      },
+      "review": "{\"status\": \"PASS\", \"issues\": [], \"selection\": {\"2026-11-27-cpa-selection-ojirap\": [\"graphic-2026-11-27-cpa-selection-ojirap-0\", \"graphic-2026-11-27-cpa-selection-ojirap-1\", \"graphic-2026-11-27-cpa-selection-ojirap-2\", \"graphic-2026-11-27-cpa-selection-ojirap-3\", \"graphic-2026-11-27-cpa-selection-ojirap-4\"], \"2026-11-27-bok-rate-hike-ojirap\": [\"graphic-2026-11-27-bok-rate-hike-ojirap-0\", \"graphic-2026-11-27-bok-rate-hike-ojirap-1\", \"graphic-2026-11-27-bok-rate-hike-ojirap-2\", \"graphic-2026-11-27-bok-rate-hike-ojirap-3\", \"graphic-2026-11-27-bok-rate-hike-ojirap-4\"]}}",
+      "review_source_urls": [
+        "https://www.fsc.go.kr/no010101/88212?curPage=1&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=%EB%B0%9C&srchText=%EC%8B%A0%EC%9A%A9%EC%B9%B4%EB%93%9C%ED%98%84%EA%B8%88%ED%99%94",
+        "https://www.bok.or.kr/portal/bbs/P0000559/view.do?depth=200690&menuNo=200690&nttId=11067084&programType=newsData&relate=Y",
+        "https://www.bok.or.kr/portal/bbs/P0000093/view.do?depth=200761&menuNo=200761&nttId=11067096&oldMenuNo=201150&programType=newsData&relate=Y"
+      ],
+      "created_at": "2026-11-27T00:51:09.227374+09:00"
     }
   },
   "publications": [
