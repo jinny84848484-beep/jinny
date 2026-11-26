@@ -39,16 +39,21 @@ def parse_json(text):
 CHECKLIST = """
 Before answering, check every item and fix the plan until all are true:
 1 Sources: each URL is a real recipe page you opened for THIS dish (not a search page, a shop page, a brand or manufacturer site, or a different dish). Prefer independent recipe sites, public broadcasters or cooking magazines.
-2 Attribution: country is where the dish comes from per the sources; if it is a Korean adaptation say so in description, e.g. '멕시코 퀘사디아를 전자레인지로'.
+2 Attribution: country is exactly the origin a cited page states; if it is a Korean adaptation say so in description, e.g. '멕시코 퀘사디아를 전자레인지로'.
 3 No brand names anywhere in title, description, ingredients, substitutes, narration, scene text or image_prompt; use generic names (피자치즈, 또띠아).
 4 Measurements: every ingredient amount equals a source amount, converted to the allowed units (1 밥숟가락 = 15ml, 1 찻숟가락 = 5ml, 1 종이컵 = 180ml) for the same servings; ingredients, steps, scene text and narration use the same numbers.
-5 Heating: heating.basis states the exact quantity in this plan; seconds come from a source cooking that same quantity (scale only when the source states a different quantity, and say how in caveat); 1000W = round(700W x 0.7); step text, heating.seconds, heating scene body and narration all agree.
+5 Heating: heating.basis states the exact quantity in this plan, copied from heating.source; seconds are that page's own time for that quantity (never scaled to a different quantity); 1000W = round(700W x 0.7); step text, heating.seconds, heating scene body and narration all agree.
 6 Korean: short, natural spoken Korean a home cook would say; no translated-sounding phrases; numbers in narration written as they are spoken.
 7 Safety: microwave-safe bowl or plate, loose cover, stir or rest when the source says so, proteins cooked through.
 """
 
 PLAN_PROMPT = """You plan ONE YouTube Short for the Korean channel 방구석 세계요리 (World Kitchen at Home): "집에 있는 도구와 쉬운 재료로, 나도 따라 만드는 세계 요리".
-Pick one world dish or a currently trending food in Korea that a beginner can make at home with ONLY a microwave or ONLY a rice cooker, with ingredients from Korean supermarkets, measured with 밥숟가락, 찻숟가락, 종이컵 or simple counts (g only for cheese/meat packs). Avoid every dish in the recent list. Browse real recipe pages; use at least two different https recipe/source pages you actually opened. Microwave heating times must come from a cited source for the same quantity; give both 700W and 1000W seconds (convert proportionally when only one is stated and say so in caveat).
+Work SOURCE FIRST, in this order (CEO order 2026-11-26):
+(a) Search for recipe pages that state, on the page itself, a microwave time with its wattage, or a rice cooker mode, for an exact ingredient quantity. Skip any page that does not.
+(b) Choose today's dish only from those pages: a world dish or a currently trending food in Korea that a beginner can make with ONLY a microwave or ONLY a rice cooker and Korean-supermarket ingredients, not in the recent list. If no page fits, search again with another dish; never pick the dish first and look for a time afterwards.
+(c) Copy that page's quantity and time exactly (no scaling); heating.source is that page and heating.basis quotes its quantity. Give both 700W and 1000W seconds (when the page states only one wattage, convert with 1000W = round(700W x 0.7) and say so in caveat).
+(d) Country: use the origin exactly as a cited page states it. If the pages do not state it or disagree, choose another dish.
+Use at least two different https recipe/source pages you actually opened; the second may confirm the dish and ingredients. Measure with 밥숟가락, 찻숟가락, 종이컵 or simple counts (g only for cheese/meat packs).
 Safety: no egg in shell, no metal or foil, no sealed containers, cover loosely with wrap or a lid, proteins cooked through ('속까지 완전히 익혀요'), no health or diet claims. Real brand names are forbidden anywhere.
 Return ONLY JSON with exactly these keys:
 dish, country, title (Korean, max 40 chars, hook style), description (Korean, 2-4 lines, must contain the sentence 'AI로 만든 이미지와 음성을 사용했습니다.'), servings (1-2), appliance ('microwave' or 'rice_cooker'),
