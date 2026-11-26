@@ -54,6 +54,22 @@ def fetch_candidates(params,topic,channel,expected_titles=None):
         found[key]={'url':url,'source':info['descriptionurl'],'path':'assets/'+key+('.png' if info['mime']=='image/png' else '.jpg'),'media_type':'image','credit':get('Artist')[:350]+' / Wikimedia Commons','license':license,'license_url':license_url,'notice':notice,'description':get('ImageDescription')[:1200],'capture_date':capture_date,'title':page['title'],'topic_key':topic,'channel':channel,'relevance_verified':False,'checked_at':p.now().isoformat()}
     return found
 
+# Commons is already the search provider. These suffixes are redundant there.
+# Retry only concise variants of the same subject, never an unrelated query.
+COMMONS_TAIL = re.compile(r'\s+(?:(?:CC BY(?: [234]\.0)?|CC0|public domain)\s+)?(?:Wikimedia Commons|Commons)\s*$', re.I)
+
+
+def query_variants(queries):
+    originals = list(dict.fromkeys(queries))
+    yield from originals
+    seen = set(originals)
+    for query in originals:
+        simpler = COMMONS_TAIL.sub('', query).strip()
+        if len(simpler) >= 3 and simpler not in seen:
+            seen.add(simpler)
+            yield simpler
+
+
 def candidates(jobs):
     result={}
     for job in jobs:
@@ -63,7 +79,7 @@ def candidates(jobs):
             queries=job.get('visual_queries',[])[:2]
             if not queries or any(not isinstance(q,str) or not 3<=len(q)<=100 for q in queries):raise ValueError('Specific visual search queries required')
             current={}
-            for query in queries:
+            for query in query_variants(queries):
                 current.update(search(query,job['topic_key'],job['channel']))
                 if len(current)>=4:break
         if len(current)<2:raise RuntimeError('Not enough relevant licensed photo candidates; batch held')
