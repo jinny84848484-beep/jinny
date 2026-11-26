@@ -14,10 +14,9 @@
     "reason": "independent review after one revision: COUNTRY_ATTRIBUTION_UNSUPPORTED, HEATING_TIME_MISMATCH_SOURCE"
   },
   "2026-11-27": {
-    "status": "held",
-    "attempts": 1,
+    "status": "planning",
+    "attempts": 2,
     "code": "WK-20261127",
-    "started_at": "2026-11-27T01:47:46.757508+09:00",
-    "reason": "independent review after one revision: ATTRIBUTION_NOT_VERIFIED, BRAND_NAME_VISIBLE"
+    "started_at": "2026-11-27T02:59:47.132508+09:00"
   }
 }
