@@ -9714,13 +9714,16 @@
     "2026-11-27": {
       "checkpoints": {
         "research": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "43b62bdd22efeec888e7a98cf5e9b298c3e56d726b84bd1978d410de090f388a",
           "attempts": 1,
-          "at": "2026-11-27T00:48:45.700816+09:00"
+          "at": "2026-11-27T00:48:45.700816+09:00",
+          "usable": true,
+          "sha256": "0d003a1cc9c96518758db3bd773a8ab8ce8b9f12b884992ffeefeffb86847774",
+          "completed_at": "2026-11-27T00:49:36.990939+09:00"
         }
       },
-      "status": "research_submitted",
+      "status": "research_completed",
       "active_stage": "research"
     }
   },
