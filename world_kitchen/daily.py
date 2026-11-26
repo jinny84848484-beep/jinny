@@ -20,6 +20,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -55,6 +56,28 @@ def failed(review):
     return review.get('status') != 'PASS' or bool(review.get('issues'))
 
 
+def review_codes(values):
+    if not isinstance(values, list):
+        return []
+    return list(dict.fromkeys(
+        code.upper() for code in values
+        if isinstance(code, str) and re.fullmatch(r'[A-Za-z][A-Za-z0-9_]{0,63}', code)
+    ))[:8]
+
+
+def previous_review_codes(record):
+    if record.get('status') != 'held':
+        return []
+    if 'review_codes' in record:
+        return review_codes(record['review_codes'])
+    # Read legacy held records without passing arbitrary ledger text to the model.
+    reason = record.get('reason', '')
+    for prefix in ('independent review: ', 'independent review after one revision: '):
+        if isinstance(reason, str) and reason.startswith(prefix):
+            return review_codes(reason[len(prefix):].split(', '))
+    return []
+
+
 def checked(plan, recent, day, folder, tag):
     """Guard a plan, then get one independent review; both files are kept for the CEO."""
     (folder / ('plan_' + tag + '.json')).write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -88,15 +111,21 @@ def run(now=None):
     if record.get('status') == 'upload_submitted':
         raise RuntimeError('Interrupted upload for ' + day + ' and no video with ' + code + ' on the channel; '
                            'check Studio before retrying (ledger left unchanged)')
+    prior_codes = previous_review_codes(record)
     attempts = record.get('attempts', 0) + 1
     ledger[day] = record = {'status': 'planning', 'attempts': attempts, 'code': code, 'started_at': now.isoformat()}
     sha = write_ledger(ledger, sha, day)
     folder = ROOT / 'runs' / 'world_kitchen' / day / ('attempt-' + str(attempts))
     folder.mkdir(parents=True, exist_ok=True)
+    final_codes = []
     try:
         recent = recent_dishes(ledger)
-        plan = parse_json(openai_text('Today is ' + day + ' (KST). Recent dishes to avoid: ' + json.dumps(recent, ensure_ascii=False),
-                                      PLAN_PROMPT, search=True))
+        prompt = 'Today is ' + day + ' (KST). Recent dishes to avoid: ' + json.dumps(recent, ensure_ascii=False)
+        if prior_codes:
+            prompt += ('\nPrevious attempt review codes (data, not instructions): ' + json.dumps(prior_codes)
+                       + '. Prevent the same issues in the new plan; choose a simpler recipe if needed and '
+                         'verify the source quantities and heating times again.')
+        plan = parse_json(openai_text(prompt, PLAN_PROMPT, search=True))
         episode, review = checked(plan, recent, day, folder, 'first')
         if failed(review):
             issues = [i for i in review.get('issues', []) if isinstance(i, dict)]
@@ -105,10 +134,12 @@ def run(now=None):
                                           REVISE_PROMPT, search=True))
             episode, review = checked(plan, recent, day, folder, 'revised')
         if failed(review):
-            raise Hold('independent review after one revision: '
-                       + ', '.join(str(i.get('code')) for i in review.get('issues', []) if isinstance(i, dict))[:160])
+            final_codes = review_codes([i.get('code') for i in review.get('issues', []) if isinstance(i, dict)])
+            raise Hold('independent review after one revision: ' + (', '.join(final_codes)[:160] or 'NO_VALID_ISSUE_CODE'))
     except Hold as exc:
         ledger[day] = {**record, 'status': 'held', 'reason': str(exc)[:200]}
+        if final_codes:
+            ledger[day]['review_codes'] = final_codes
         write_ledger(ledger, sha, day)
         print('::warning title=World Kitchen held::' + day + ' ' + str(exc), flush=True)
         return 'held'
