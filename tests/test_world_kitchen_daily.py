@@ -200,14 +200,17 @@ class Run(unittest.TestCase):
             video.write_bytes(b'video')
             return video
 
-        result, out = self.quiet(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None,
-                                 openai_text=lambda *x, **k: next(answers), openai_image=lambda prompt, path: images.append(prompt),
-                                 narrate=narrate, render=render, make_logo=lambda path: path,
-                                 upload=lambda video, ep, token, at: uploads.append(at) or 'vid9')
+        # The runner schedules from render completion, not the run's injected start time.
+        with patch.object(a, 'datetime', wraps=datetime) as clock:
+            clock.now.return_value = NOW
+            result, out = self.quiet(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None,
+                                     openai_text=lambda *x, **k: next(answers), openai_image=lambda prompt, path: images.append(prompt),
+                                     narrate=narrate, render=render, make_logo=lambda path: path,
+                                     upload=lambda video, ep, token, at: uploads.append(at) or 'vid9')
         self.assertEqual(result, 'scheduled')
         self.assertEqual(len(images), 5)  # signature card reuses the hero photo
         self.assertTrue(all('no text' in p for p in images))
-        self.assertEqual(uploads[0].hour, 19)
+        self.assertEqual(uploads, [datetime(2026, 11, 26, 19, 0, tzinfo=a.KST)])
         self.assertEqual(self.writes, ['planning', 'upload_submitted', 'scheduled'])
         self.assertEqual(self.store[DAY]['dish'], '퀘사디아')
 
