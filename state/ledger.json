@@ -9759,7 +9759,7 @@
           "completed_at": "2026-11-27T00:51:07.440443+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "tts_submitted",
       "active_stage": "editorial_review_1",
       "review_input_hash": "193c752cb3d3beeb8c6e84af2081fe1c2392be675b1c9cc9986a28f93751d878",
       "editorial_exclusions": [],
@@ -9776,27 +9776,27 @@
             {
               "title": "보험정책 - 정책일반 - 정책마당 - 금융위원회",
               "url": "https://www.fsc.go.kr/po010103/88212?curPage=1&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=&srchText=",
-              "checked_at": "2026-11-27T00:51:09.226912+09:00"
+              "checked_at": "2026-11-27T00:51:10.798577+09:00"
             },
             {
               "title": "보도자료 - 위원회 소식 - 알림마당 - 금융위원회",
               "url": "https://www.fsc.go.kr/no010101/88212?curPage=1&srchBeginDt=&srchCtgry=&srchEndDt=&srchKey=%EB%B0%9C&srchText=%EC%8B%A0%EC%9A%A9%EC%B9%B4%EB%93%9C%ED%98%84%EA%B8%88%ED%99%94",
-              "checked_at": "2026-11-27T00:51:09.226912+09:00"
+              "checked_at": "2026-11-27T00:51:10.798577+09:00"
             },
             {
               "title": "청년공인회계사회 “2027년 1,100명 선발, 미지정 현실 외면”",
               "url": "https://lec.co.kr/news/articleView.html?idxno=753080",
-              "checked_at": "2026-11-27T00:51:09.226912+09:00"
+              "checked_at": "2026-11-27T00:51:10.798577+09:00"
             },
             {
               "title": "회계사 선발 중장기 계획 세운다더니 제외…업계 후폭풍",
               "url": "https://www.edaily.co.kr/News/Read?mediaCodeNo=257&newsId=03739206645649656",
-              "checked_at": "2026-11-27T00:51:09.226912+09:00"
+              "checked_at": "2026-11-27T00:51:10.798577+09:00"
             },
             {
               "title": "금융정책 - 정책일반 - 정책마당 - 금융위원회",
               "url": "https://www.fsc.go.kr/po010101/85717?curPage=1&srchBeginDt=&srchCtgry=1&srchEndDt=%EC%97%90%EC%84%9C%ED%99%95%EC%9D%B8%EA%B0%80%EB%8A%A5%ED%95%A9%EB%8B%88%EB%8B%A4.&srchKey=&srchText=",
-              "checked_at": "2026-11-27T00:51:09.226912+09:00"
+              "checked_at": "2026-11-27T00:51:10.798577+09:00"
             }
           ],
           "visual_queries": [
@@ -9945,7 +9945,7 @@
           "fact_packet_hash": "2985903e4366ad0860529c50e94b8383ea7e2a7714519d17d1f19d737f00f33d",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-27T00:51:09.226912+09:00"
+          "verified_at": "2026-11-27T00:51:10.798577+09:00"
         },
         {
           "id": "2026-11-27-bok-rate-hike-ojirap",
@@ -9958,27 +9958,27 @@
             {
               "title": "통화정책방향(2026.11.26)",
               "url": "https://www.bok.or.kr/portal/bbs/P0000559/view.do?depth=200690&menuNo=200690&nttId=11067084&programType=newsData&relate=Y",
-              "checked_at": "2026-11-27T00:51:09.227154+09:00"
+              "checked_at": "2026-11-27T00:51:10.798802+09:00"
             },
             {
               "title": "한국은행 총재 기자간담회(2026.11.26)",
               "url": "https://www.bok.or.kr/portal/bbs/P0000093/view.do?depth=200761&menuNo=200761&nttId=11067096&oldMenuNo=201150&programType=newsData&relate=Y",
-              "checked_at": "2026-11-27T00:51:09.227154+09:00"
+              "checked_at": "2026-11-27T00:51:10.798802+09:00"
             },
             {
               "title": "Monetary Policy Decision(2026.11.26)",
               "url": "https://www.bok.or.kr/eng/bbs/E0000634/view.do?depth=400423&menuNo=400423&nttId=11067086&programType=newsDataEng&relate=Y",
-              "checked_at": "2026-11-27T00:51:09.227154+09:00"
+              "checked_at": "2026-11-27T00:51:10.798802+09:00"
             },
             {
               "title": "한은, 기준금리 연 3.25%로 인상…반도체 호조·물가 부담 반영",
               "url": "https://www.yna.co.kr/view/AKR20261126055800002?section=economy%2Fall",
-              "checked_at": "2026-11-27T00:51:09.227154+09:00"
+              "checked_at": "2026-11-27T00:51:10.798802+09:00"
             },
             {
               "title": "한은, 금리 연 3.25%로 인상…동결 소수 의견 2명(종합)",
               "url": "https://www.newsis.com/view/NISX20261126_0003884193",
-              "checked_at": "2026-11-27T00:51:09.227154+09:00"
+              "checked_at": "2026-11-27T00:51:10.798802+09:00"
             }
           ],
           "visual_queries": [
@@ -10118,7 +10118,7 @@
           "fact_packet_hash": "15b599b12e333b64d1d609f6eb9294fa75b02b3a4041dbe2627d9859a8feb9ed",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-27T00:51:09.227154+09:00"
+          "verified_at": "2026-11-27T00:51:10.798802+09:00"
         }
       ],
       "media": {
@@ -10299,7 +10299,9 @@
         "https://www.bok.or.kr/portal/bbs/P0000559/view.do?depth=200690&menuNo=200690&nttId=11067084&programType=newsData&relate=Y",
         "https://www.bok.or.kr/portal/bbs/P0000093/view.do?depth=200761&menuNo=200761&nttId=11067096&oldMenuNo=201150&programType=newsData&relate=Y"
       ],
-      "created_at": "2026-11-27T00:51:09.227374+09:00"
+      "created_at": "2026-11-27T00:51:09.227374+09:00",
+      "publication_exclusions": [],
+      "active_job": "2026-11-27-cpa-selection-ojirap"
     }
   },
   "publications": [
