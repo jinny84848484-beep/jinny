@@ -129,6 +129,28 @@ class Run(unittest.TestCase):
             self.quiet(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None)
         self.assertEqual(self.writes, [])
 
+    def test_early_run_does_not_consume_a_production_attempt(self):
+        for store in ({}, {DAY: {'status': 'held', 'attempts': 1, 'reason': 'prior review'}}):
+            with self.subTest(store=store):
+                self.store = copy.deepcopy(store)
+                early = datetime(2026, 11, 26, 3, 20, tzinfo=a.KST)
+                with patch.object(a, 'preflight', return_value=('t', 'UU')), \
+                     patch.object(a, 'find_existing', return_value=None), \
+                     patch.object(a, 'openai_text') as planner, redirect_stdout(io.StringIO()):
+                    self.assertEqual(a.run(early), 'too_early')
+                planner.assert_not_called()
+                self.assertEqual(self.store, store)
+                self.assertEqual(self.writes, [])
+
+    def test_early_run_can_reconcile_an_existing_upload(self):
+        self.store = {DAY: {'status': 'upload_submitted', 'attempts': 1}}
+        early = datetime(2026, 11, 26, 3, 20, tzinfo=a.KST)
+        with patch.object(a, 'preflight', return_value=('t', 'UU')), \
+             patch.object(a, 'find_existing', return_value='vid1'), redirect_stdout(io.StringIO()):
+            self.assertEqual(a.run(early), 'done')
+        self.assertEqual(self.store[DAY]['status'], 'found_existing')
+        self.assertEqual(self.store[DAY]['attempts'], 1)
+
     def test_missing_oauth_is_a_ceo_alarm(self):
         with patch.dict(os.environ, {k: 'x' for k in a.REQUIRED_ENV if k != 'YOUTUBE_KITCHEN_OAUTH'}, clear=True):
             with self.assertRaisesRegex(RuntimeError, 'CEO ALARM.*YOUTUBE_KITCHEN_OAUTH'):
