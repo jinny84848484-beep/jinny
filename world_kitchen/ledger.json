@@ -12,5 +12,11 @@
     "code": "WK-20261126",
     "started_at": "2026-11-26T18:22:57.275644+09:00",
     "reason": "independent review after one revision: COUNTRY_ATTRIBUTION_UNSUPPORTED, HEATING_TIME_MISMATCH_SOURCE"
+  },
+  "2026-11-27": {
+    "status": "planning",
+    "attempts": 1,
+    "code": "WK-20261127",
+    "started_at": "2026-11-27T01:47:46.757508+09:00"
   }
 }
