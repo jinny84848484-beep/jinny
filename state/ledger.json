@@ -10352,7 +10352,7 @@
           "completed_at": "2026-11-28T00:40:09.133707+09:00"
         }
       },
-      "status": "reviewed",
+      "status": "complete",
       "active_stage": "editorial_review_1",
       "review_input_hash": "2d151f78885a6c9f9a992368cd717088ab274495ce826731e74443bfd2ff4424",
       "editorial_exclusions": [],
@@ -10369,17 +10369,17 @@
             {
               "title": "손원일급 잠수함 2척, 잇따른 사고로 파손·수리…\"전력 공백 없을 것\"",
               "url": "https://mobile.newsis.com/view/NISX20261127_0003885659",
-              "checked_at": "2026-11-28T00:40:10.406716+09:00"
+              "checked_at": "2026-11-28T00:40:11.752402+09:00"
             },
             {
               "title": "[영상] 손원일급 잠수함 2척 잇단 사고…해군 \"대비 태세 유지\"",
               "url": "https://www.yna.co.kr/amp/view/AKR20261127112800704",
-              "checked_at": "2026-11-28T00:40:10.406716+09:00"
+              "checked_at": "2026-11-28T00:40:11.752402+09:00"
             },
             {
               "title": "[단독] 北은 내년 원잠 띄운다는데… 한국은 재래식마저 2척 부서졌다",
               "url": "https://www.chosun.com/politics/diplomacy-defense/2026/11/27/QBKNOQB4JFHTJKVHW25PXHXVUE/",
-              "checked_at": "2026-11-28T00:40:10.406716+09:00"
+              "checked_at": "2026-11-28T00:40:11.752402+09:00"
             }
           ],
           "visual_queries": [
@@ -10515,7 +10515,7 @@
           "fact_packet_hash": "ea00278f072b86c0627f582ab22d35ef4451f7be43a66d1f4197efebf0c81270",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-28T00:40:10.406716+09:00"
+          "verified_at": "2026-11-28T00:40:11.752402+09:00"
         },
         {
           "id": "2026-11-28-mss-startup-regulation-committee",
@@ -10528,17 +10528,17 @@
             {
               "title": "중소벤처기업부 보도자료 목록",
               "url": "https://www.mss.go.kr/site/smba/ex/bbs/List.do?cbIdx=86",
-              "checked_at": "2026-11-28T00:40:10.406831+09:00"
+              "checked_at": "2026-11-28T00:40:11.752528+09:00"
             },
             {
               "title": "오늘 | 실시간 뉴스 | 뉴시스",
               "url": "https://nwww.newsis.com/live/today/34",
-              "checked_at": "2026-11-28T00:40:10.406831+09:00"
+              "checked_at": "2026-11-28T00:40:11.752528+09:00"
             },
             {
               "title": "뉴스 > 언론사별 뉴스 :: 씽크풀",
               "url": "https://bizstock.chosun.com/news/mediaNews/list/mediaNews.do?ct=4",
-              "checked_at": "2026-11-28T00:40:10.406831+09:00"
+              "checked_at": "2026-11-28T00:40:11.752528+09:00"
             }
           ],
           "visual_queries": [
@@ -10668,7 +10668,7 @@
           "fact_packet_hash": "0b6252d245a8a75ba1e6c0e1aef81297a0bfdeecc98f6bdf16fa6348e5c95957",
           "channel_id": "UCZj1FlWDcoiEQNLfpwc5qtw",
           "editorial_status": "verified",
-          "verified_at": "2026-11-28T00:40:10.406831+09:00"
+          "verified_at": "2026-11-28T00:40:11.752528+09:00"
         }
       ],
       "media": {
@@ -10927,7 +10927,26 @@
         "https://thestart.kr/news/newsview.php?ncode=1065584422355296",
         "https://www.news1.kr/industry/sb-founded/6368426"
       ],
-      "created_at": "2026-11-28T00:40:10.406928+09:00"
+      "created_at": "2026-11-28T00:40:10.406928+09:00",
+      "publication_exclusions": [
+        {
+          "job_id": "2026-11-28-son-won-il-submarine-accidents",
+          "channel": "ojirap",
+          "reason": "graphics_only_not_publishable",
+          "codes": [
+            "insufficient_media"
+          ]
+        },
+        {
+          "job_id": "2026-11-28-mss-startup-regulation-committee",
+          "channel": "ojirap",
+          "reason": "graphics_only_not_publishable",
+          "codes": [
+            "insufficient_media"
+          ]
+        }
+      ],
+      "completed_at": "2026-11-28T00:40:11.752644+09:00"
     }
   },
   "publications": [
