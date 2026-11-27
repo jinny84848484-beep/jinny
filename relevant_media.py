@@ -70,7 +70,11 @@ def query_variants(queries):
             yield simpler
 
 
-def candidates(jobs):
+class InsufficientCandidates(RuntimeError):
+    """Search completed but could not supply two licensed candidates."""
+
+
+def candidates(jobs, *, diversify=False):
     result={}
     for job in jobs:
         if 'visual_source_titles' in job:
@@ -79,10 +83,25 @@ def candidates(jobs):
             queries=job.get('visual_queries',[])[:2]
             if not queries or any(not isinstance(q,str) or not 3<=len(q)<=100 for q in queries):raise ValueError('Specific visual search queries required')
             current={}
-            for query in query_variants(queries):
-                current.update(search(query,job['topic_key'],job['channel']))
-                if len(current)>=4:break
-        if len(current)<2:raise RuntimeError('Not enough relevant licensed photo candidates; batch held')
+            if diversify:
+                # Keep the same four-image review budget while including the
+                # relevant alternative, not just the first query's near-duplicates.
+                groups=[list(search(q,job['topic_key'],job['channel']).items())
+                        for q in dict.fromkeys(queries)]
+                for row in range(max(map(len,groups),default=0)):
+                    for group in groups:
+                        if row<len(group):current.setdefault(*group[row])
+                    if len(current)>=4:break
+                if len(current)<4:
+                    for query in query_variants(queries):
+                        if query in queries:continue
+                        current.update(search(query,job['topic_key'],job['channel']))
+                        if len(current)>=4:break
+            else:
+                for query in query_variants(queries):
+                    current.update(search(query,job['topic_key'],job['channel']))
+                    if len(current)>=4:break
+        if len(current)<2:raise InsufficientCandidates('Not enough relevant licensed photo candidates; batch held')
         result.update(dict(list(current.items())[:4]))
     return result
 

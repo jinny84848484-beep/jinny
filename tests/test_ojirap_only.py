@@ -1,4 +1,5 @@
 import copy
+from datetime import datetime
 import json
 import tempfile
 import unittest
@@ -72,6 +73,48 @@ class OjirapOnly(unittest.TestCase):
                 self.assertEqual(download.call_count,int(blocked==1))
                 self.assertEqual(ledger['days'][DAY]['status'],'complete')
                 self.assertEqual([x['reason'] for x in ledger['days'][DAY]['publication_exclusions']],['graphics_only_not_publishable']*blocked)
+
+    def test_overnight_does_not_start_new_day_or_write_journal(self):
+        for hour, minute, should_start in [(0,38,False),(4,59,False),(5,0,True)]:
+            now=datetime(2026,11,28,hour,minute,tzinfo=c.p.KST)
+            ledger={'days':{},'publications':[]}
+            with self.subTest(now=now), patch.object(c.p,'now',return_value=now), patch.dict(c.os.environ,{'PUBLIC_UPLOADS_ENABLED':'true'}), patch.object(c,'journal_get',return_value=(ledger,'sha')), patch.object(c,'journal_put') as save, patch.object(c,'preflight',side_effect=ValueError('start reached')) as preflight, patch.object(c,'openai') as paid, patch.object(c,'publish_reviewed') as publish:
+                if should_start:
+                    with self.assertRaisesRegex(ValueError,'start reached'): c.produce()
+                else:
+                    c.produce()
+                self.assertEqual(preflight.call_count,int(should_start))
+                save.assert_not_called();paid.assert_not_called();publish.assert_not_called()
+
+    def test_overnight_interrupted_submission_still_requires_reconciliation(self):
+        now=datetime(2026,11,28,0,38,tzinfo=c.p.KST)
+        ledger={'days':{'2026-11-28':{'status':'upload_submitted'}},'publications':[]}
+        with patch.object(c.p,'now',return_value=now), patch.dict(c.os.environ,{'PUBLIC_UPLOADS_ENABLED':'true'}), patch.object(c,'journal_get',return_value=(ledger,'sha')), patch.object(c,'preflight') as preflight:
+            with self.assertRaisesRegex(RuntimeError,'reconcile'):c.produce()
+            preflight.assert_not_called()
+
+    def test_photo_only_is_not_reclassified_to_graphics_and_no_photo_skips_review(self):
+        jobs=c.bind_researched_sources(active(),manifest_for(active()))
+        photo_ids=['first','second']
+        media={k:{'topic_key':jobs[0]['topic_key'],'channel':'ojirap'} for k in photo_ids}
+        failed={'status':'FAIL','issues':[{'code':'media_relevance','job_index':0,'scene_index':-1}],'selection':{}}
+        ledger={'days':{DAY:{}},'publications':[]}
+        with tempfile.TemporaryDirectory() as tmp, patch.object(c.p,'ROOT',Path(tmp)), patch.object(c,'journal_put',return_value='sha'), patch.object(c,'review_candidates',return_value=media), patch.object(c.daily_graphics,'enabled',return_value=True), patch.object(c.daily_graphics,'build') as cards, patch.object(c,'openai',return_value=(json.dumps(failed),[])) as paid:
+            with self.assertRaisesRegex(RuntimeError,'Editorial review did not pass'):
+                c.review_jobs(ledger,'sha',DAY,jobs,photo_only=True)
+            paid.assert_called_once()
+            cards.assert_not_called()
+        rec=ledger['days'][DAY]
+        self.assertEqual(rec['status'],'editorial_review_failed')
+        self.assertEqual([x['code'] for x in rec['editorial_diagnostic']['issues']],['media_relevance','insufficient_media'])
+
+    def test_production_considers_both_photo_queries_with_same_review_cap(self):
+        job=active()[0]
+        job['visual_queries']=['subject','relevant alternative']
+        with patch.object(c.relevant_media,'search',side_effect=[dict.fromkeys(['a','b','c','d','e']),dict.fromkeys(['x','y','z'])]) as search:
+            result=c.relevant_media.candidates([job],diversify=True)
+        self.assertEqual(list(result),['a','x','b','y'])
+        self.assertEqual([x.args[0] for x in search.call_args_list],job['visual_queries'])
 
     def test_direct_upload_stops_graphics_only_before_network(self):
         job=active()[0]

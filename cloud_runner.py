@@ -791,10 +791,11 @@ def collect_metrics(ledger):
 
 def produce(*, expected_day=None):
     if os.environ.get('PUBLIC_UPLOADS_ENABLED')!='true':raise RuntimeError('Public production is not enabled')
-    day=p.now().date().isoformat()
+    now=p.now()
+    day=now.date().isoformat()
     if expected_day is not None and day != expected_day:
         raise RuntimeError('Recovery production date changed; reconcile before continuation')
-    ledger,sha=journal_get();record=ledger['days'].setdefault(day,{})
+    ledger,sha=journal_get();record=ledger['days'].get(day,{})
     if record.get('status')=='complete':print('Daily batch already complete.');return
     if record.get('draft_429_recovery',{}).get('method')=='new_independently_observed_packet_old_topics_rejected':
         raise RuntimeError('Pinned new-packet recovery cannot resume through generic produce; reconcile explicitly')
@@ -803,6 +804,10 @@ def produce(*, expected_day=None):
     if str(record.get('status','')).startswith('operator_'):raise RuntimeError('Operator preview/final QA hold requires explicit reconciliation')
     if record.get('status') in {'research_submitted','draft_submitted','narration_correction_submitted','editorial_review_submitted','tts_submitted','rendered','upload_submitted','staged_waiting','staged_review_submitted'} or any(v.get('status')=='submitted' for v in record.get('checkpoints',{}).values()):raise RuntimeError('Interrupted external request: reconcile journal before retrying')
     assert_no_unresolved_additional(ledger)
+    if not record and now.hour < 5:
+        print('Ojirap: before 05:00 KST; no new Daily Shorts batch opened for '+day,flush=True)
+        return
+    record=ledger['days'].setdefault(day,{})
     if record.get('jobs'):p.assert_active_news_jobs(record['jobs'])
     preflight()
     # Public view counts are informational. A metrics API hiccup must not stop publishing.
@@ -847,7 +852,7 @@ def produce(*, expected_day=None):
         if record.get('research_recovery'):
             from research_recovery_registry import write_source_packets
             write_source_packets(record,jobs)
-        sha=review_jobs(ledger,sha,day,jobs)
+        sha=review_jobs(ledger,sha,day,jobs,photo_only=True)
     publish_reviewed(ledger,sha,day)
 
 
@@ -914,13 +919,21 @@ def research_instructions():
     return text+GRAPHICS_RESEARCH_NOTE
 
 
-def review_candidates(jobs):
+def review_candidates(jobs, *, photo_only=False):
     """Photo candidates; with the graphics fallback a story without photos is not a batch hold."""
     if not daily_graphics.enabled():return relevant_media.candidates(jobs)
     media={}
     for job in jobs:
-        try:media.update(relevant_media.candidates([job]))
-        except RuntimeError:pass
+        try:
+            if photo_only:
+                media.update(relevant_media.candidates([job], diversify=True))
+            else:
+                media.update(relevant_media.candidates([job]))
+        except relevant_media.InsufficientCandidates:
+            pass
+        except RuntimeError:
+            if photo_only:
+                raise
     return media
 
 
@@ -976,7 +989,7 @@ def fix_story_once(ledger,sha,day,index,jobs,issues,*,provider=None):
     return corrected,sha
 
 
-def review_jobs(ledger,sha,day,jobs,*,slots=None,cached_only=False,policy_recheck=False,correction_namespace=None):
+def review_jobs(ledger,sha,day,jobs,*,slots=None,cached_only=False,policy_recheck=False,correction_namespace=None,photo_only=False):
     p.assert_active_news_jobs(jobs)
     record=ledger['days'][day]
     if correction_namespace is not None:
@@ -1003,14 +1016,18 @@ def review_jobs(ledger,sha,day,jobs,*,slots=None,cached_only=False,policy_rechec
         if fingerprint(saved_request)!=record[review_hash_key] or saved_request.get('jobs')!=review_jobs_input:raise RuntimeError('Stage checkpoint input changed; reconcile before retrying')
         media=saved_request['images']
     else:
-        media=review_candidates(jobs)
+        media=review_candidates(jobs,photo_only=True) if photo_only else review_candidates(jobs)
         saved_request={'jobs':review_jobs_input,'images':media}
         p.write(path,saved_request);record[review_hash_key]=fingerprint(saved_request)
     decisions=[];selection={};issues=[];review_sources=[];graphics_media={}
-    fallback_enabled=daily_graphics.enabled()
+    fallback_enabled=daily_graphics.enabled() and not photo_only
     state={'sha':sha}
     def audit(index,job,stage=None):
             own_media={key:value for key,value in media.items() if value.get('topic_key')==job['topic_key'] and media_matches_channel(value,job)}
+            if photo_only and len(own_media)<2:
+                # Nothing publishable to review. Preserve an explicit failure
+                # without spending a paid review on a photo-less story.
+                return {'status':'FAIL','issues':[{'code':'insufficient_media','job_index':0,'scene_index':-1}], 'selection':{}}, None, {}
             english=job['channel']=='korean'
             language='ENGLISH. This channel is A Not-So-Polite Korean; the internal channel key korean means English. Require English-only title/opening and context understandable without prior Korea knowledge.' if english else 'KOREAN. This channel is 오늘의 오지랖; the internal channel key ojirap means Korean. Korean titles and hooks are correct. The english_hook check does not apply; never issue english_hook for this story.'
             allowed=REVIEW_ISSUES-{'review_contract'}-({'english_hook'} if not english else set())
