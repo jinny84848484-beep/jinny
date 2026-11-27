@@ -123,6 +123,46 @@ class Run(unittest.TestCase):
         self.assertEqual(result, 'done')
         self.assertEqual(self.store[DAY]['status'], 'found_existing')
 
+    def test_overnight_run_does_not_open_an_attempt(self):
+        with patch.object(a, 'preflight', return_value=('t', 'UU')), \
+             patch.object(a, 'find_existing', return_value=None) as existing, \
+             patch.object(a, 'openai_text') as planner, redirect_stdout(io.StringIO()):
+            for hour, minute in ((0, 0), (1, 47), (8, 59)):
+                self.assertEqual(a.run(NOW.replace(hour=hour, minute=minute)), 'before_window')
+        self.assertEqual(existing.call_count, 3)
+        planner.assert_not_called()
+        self.assertEqual(self.writes, [])
+        self.assertEqual(self.store, {})
+
+    def test_overnight_existing_upload_is_reconciled(self):
+        with patch.object(a, 'preflight', return_value=('t', 'UU')), \
+             patch.object(a, 'find_existing', return_value='vid1'), \
+             patch.object(a, 'openai_text') as planner, redirect_stdout(io.StringIO()):
+            self.assertEqual(a.run(NOW.replace(hour=1, minute=47)), 'done')
+        planner.assert_not_called()
+        self.assertEqual(self.writes, ['found_existing'])
+        self.assertEqual(self.store[DAY]['video_id'], 'vid1')
+
+    def test_overnight_interrupted_submission_is_not_retried(self):
+        self.store = {DAY: {'status': 'upload_submitted', 'attempts': 1}}
+        with patch.object(a, 'preflight', return_value=('t', 'UU')), \
+             patch.object(a, 'find_existing', return_value=None), \
+             patch.object(a, 'openai_text') as planner:
+            with self.assertRaisesRegex(RuntimeError, 'Interrupted upload'):
+                a.run(NOW.replace(hour=1, minute=47))
+        planner.assert_not_called()
+        self.assertEqual(self.writes, [])
+
+    def test_production_window_opens_at_nine_kst(self):
+        with patch.object(a, 'preflight', return_value=('t', 'UU')), \
+             patch.object(a, 'find_existing', return_value=None), \
+             patch.object(a, 'openai_text', side_effect=a.Hold('test-only stop')) as planner, \
+             redirect_stdout(io.StringIO()):
+            self.assertEqual(a.run(NOW.replace(hour=9, minute=0)), 'held')
+        planner.assert_called_once()
+        self.assertEqual(self.writes, ['planning', 'held'])
+        self.assertEqual(self.store[DAY]['attempts'], 1)
+
     def test_interrupted_upload_never_retries_blindly(self):
         self.store = {DAY: {'status': 'upload_submitted', 'attempts': 1}}
         with self.assertRaisesRegex(RuntimeError, 'Interrupted upload'):
