@@ -10307,13 +10307,16 @@
     "2026-11-28": {
       "checkpoints": {
         "research": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "1d3993ca4fca950d646714cbc7129b763e71c0e0399a746c99564d6b4409bab2",
           "attempts": 1,
-          "at": "2026-11-28T00:38:12.900984+09:00"
+          "at": "2026-11-28T00:38:12.900984+09:00",
+          "usable": true,
+          "sha256": "d40ab123f35a262ce39a7654f3bba3da3e419a9e7837058084c65d9a27d90c82",
+          "completed_at": "2026-11-28T00:39:00.478611+09:00"
         }
       },
-      "status": "research_submitted",
+      "status": "research_completed",
       "active_stage": "research"
     }
   },
