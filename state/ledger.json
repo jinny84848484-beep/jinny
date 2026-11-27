@@ -10316,13 +10316,16 @@
           "completed_at": "2026-11-28T00:39:00.478611+09:00"
         },
         "research_repair": {
-          "status": "submitted",
+          "status": "completed",
           "request_hash": "f048dc81c3dab7926cefe7059f63e5f25f1908af06319ef993a10e44c94eae0e",
           "attempts": 1,
-          "at": "2026-11-28T00:39:01.665929+09:00"
+          "at": "2026-11-28T00:39:01.665929+09:00",
+          "usable": true,
+          "sha256": "d5ffca89675db4dee1a04e640766c42c801e473957c6e4b49ba7d25bdd0bf0a5",
+          "completed_at": "2026-11-28T00:39:25.928868+09:00"
         }
       },
-      "status": "research_repair_submitted",
+      "status": "research_repair_completed",
       "active_stage": "research_repair"
     }
   },
