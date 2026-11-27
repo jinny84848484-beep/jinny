@@ -10332,10 +10332,17 @@
           "usable": true,
           "sha256": "1fcfa41a2b44d733ec81cfbfb9c3beae7c0f1ab389ba136e156d6ce1f6b99ed3",
           "completed_at": "2026-11-28T00:39:45.455871+09:00"
+        },
+        "editorial_review_0": {
+          "status": "submitted",
+          "request_hash": "53c3b55808c0825c2aef46b24d7dfe148d14835e163570e033c10c9393abcc0a",
+          "attempts": 1,
+          "at": "2026-11-28T00:39:49.418093+09:00"
         }
       },
-      "status": "draft_completed",
-      "active_stage": "draft"
+      "status": "editorial_review_0_submitted",
+      "active_stage": "editorial_review_0",
+      "review_input_hash": "2d151f78885a6c9f9a992368cd717088ab274495ce826731e74443bfd2ff4424"
     }
   },
   "publications": [
