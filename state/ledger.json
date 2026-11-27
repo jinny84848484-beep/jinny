@@ -10303,6 +10303,18 @@
       "publication_exclusions": [],
       "active_job": "2026-11-27-bok-rate-hike-ojirap",
       "completed_at": "2026-11-27T00:54:06.849550+09:00"
+    },
+    "2026-11-28": {
+      "checkpoints": {
+        "research": {
+          "status": "submitted",
+          "request_hash": "1d3993ca4fca950d646714cbc7129b763e71c0e0399a746c99564d6b4409bab2",
+          "attempts": 1,
+          "at": "2026-11-28T00:38:12.900984+09:00"
+        }
+      },
+      "status": "research_submitted",
+      "active_stage": "research"
     }
   },
   "publications": [
