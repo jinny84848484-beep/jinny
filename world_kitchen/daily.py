@@ -33,6 +33,7 @@ from .providers import ALARM, find_existing, http, openai_image, openai_text, up
 KST = ZoneInfo('Asia/Seoul')
 ROOT = Path(__file__).resolve().parents[1]
 MAX_ATTEMPTS = 2
+EARLIEST_PRODUCTION_HOUR = 9  # First scheduled run: 10:07 KST.
 MIN_TTS_CREDITS = 1200
 DONE = {'scheduled', 'found_existing'}
 REQUIRED_ENV = ('OPENAI_API_KEY', 'ELEVENLABS_API_KEY', 'YOUTUBE_KITCHEN_OAUTH', 'KITCHEN_VOICE_ID',
@@ -88,6 +89,10 @@ def run(now=None):
     if record.get('status') == 'upload_submitted':
         raise RuntimeError('Interrupted upload for ' + day + ' and no video with ' + code + ' on the channel; '
                            'check Studio before retrying (ledger left unchanged)')
+    # Reconcile existing uploads first, but do not spend today's attempts on a late overnight run.
+    if now.hour < EARLIEST_PRODUCTION_HOUR:
+        print(f'World Kitchen: {now:%H:%M} KST is before 09:00; no new attempt for {day}.', flush=True)
+        return 'before_window'
     attempts = record.get('attempts', 0) + 1
     ledger[day] = record = {'status': 'planning', 'attempts': attempts, 'code': code, 'started_at': now.isoformat()}
     sha = write_ledger(ledger, sha, day)
