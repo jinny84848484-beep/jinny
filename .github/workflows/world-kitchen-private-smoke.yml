@@ -3,6 +3,10 @@ on:
   push:
     branches: [qa/world-kitchen-private-20261128]
     paths: ['.github/workflows/world-kitchen-private-smoke.yml']
+  pull_request:
+    types: [opened]
+    branches: [main]
+    paths: ['.github/workflows/world-kitchen-private-smoke.yml']
 permissions:
   contents: read
 concurrency:
@@ -10,7 +14,11 @@ concurrency:
   cancel-in-progress: false
 jobs:
   private-upload:
-    if: github.repository == 'jinny84848484-beep/jinny'
+    if: >-
+      github.repository == 'jinny84848484-beep/jinny' &&
+      (github.ref == 'refs/heads/qa/world-kitchen-private-20261128' ||
+       (github.event.pull_request.head.ref == 'qa/world-kitchen-private-20261128' &&
+        github.event.pull_request.head.repo.full_name == github.repository))
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
