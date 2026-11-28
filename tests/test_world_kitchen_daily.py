@@ -261,6 +261,29 @@ class Run(unittest.TestCase):
         self.assertIn(json.dumps([plan()['dish']], ensure_ascii=False), calls[0][0])
         self.assertEqual([call[1] for call in calls], [e.PLAN_PROMPT, e.REVISE_PROMPT])
 
+    def test_backup_excludes_both_dishes_rejected_in_the_first_run(self):
+        first = plan()
+        first['ingredients'].append({'name': '우유', 'unit': '밥숟가락', 'amount': 37})
+        second = copy.deepcopy(first)
+        second['dish'] = '다른 테스트 요리'
+        responses = iter(map(json.dumps, (first, second, first, second)))
+        calls = []
+        def text(prompt, instructions, **kwargs):
+            calls.append((prompt, instructions))
+            return next(responses)
+        fakes = dict(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None,
+                     openai_text=text, openai_image=lambda *x: self.fail('no media before review'),
+                     upload=lambda *x: self.fail('never upload a held recipe'))
+        self.assertEqual(self.quiet(**fakes)[0], 'held')
+        self.assertEqual(self.quiet(**fakes)[0], 'held')
+        self.assertEqual(self.quiet(**fakes)[0], 'held')
+        self.assertEqual(len(calls), 4)
+        expected = json.dumps([first['dish'], second['dish']], ensure_ascii=False)
+        self.assertIn(expected, calls[2][0])
+        self.assertIn(expected, calls[3][0])
+        self.assertEqual(self.store[DAY]['attempts'], 2)
+        self.assertEqual(self.writes, ['planning', 'held', 'planning', 'held'])
+
     def test_planner_checklist_covers_review_failures(self):
         for words in ('brand or manufacturer site', 'Attribution', 'No brand names', 'Measurements', 'heating.basis', 'natural spoken Korean'):
             self.assertIn(words, e.PLAN_PROMPT)
