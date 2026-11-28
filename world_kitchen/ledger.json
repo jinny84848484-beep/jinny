@@ -21,9 +21,10 @@
     "reason": "guard: kitchen_microwave_time"
   },
   "2026-11-28": {
-    "status": "planning",
+    "status": "held",
     "attempts": 1,
     "code": "WK-20261128",
-    "started_at": "2026-11-28T17:51:20.744289+09:00"
+    "started_at": "2026-11-28T17:51:20.744289+09:00",
+    "reason": "guard: kitchen_amount"
   }
 }
