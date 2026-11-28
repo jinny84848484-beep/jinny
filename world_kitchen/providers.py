@@ -118,25 +118,33 @@ def find_existing(token, uploads, code):
     return None
 
 
-def upload(video, episode, token, publish_at):
+def upload(video, episode, token, publish_at, *, private_test=False):
+    if private_test:
+        if publish_at is not None or not episode['title'].startswith('[비공개 테스트] '):
+            raise RuntimeError('Private test requires a labeled fixture with no publish time')
+    elif publish_at is None:
+        raise RuntimeError('Production upload requires a scheduled publish time')
     size = video.stat().st_size
     body = {'snippet': {'title': episode['title'], 'description': episode['description'], 'categoryId': '26',
                         'defaultLanguage': 'ko', 'defaultAudioLanguage': 'ko'},
-            'status': {'privacyStatus': 'private', 'publishAt': publish_at.astimezone(ZoneInfo('UTC')).strftime('%Y-%m-%dT%H:%M:%SZ'),
+            'status': {'privacyStatus': 'private',
                        'selfDeclaredMadeForKids': False, 'containsSyntheticMedia': True}}
+    if not private_test:
+        body['status']['publishAt'] = publish_at.astimezone(ZoneInfo('UTC')).strftime('%Y-%m-%dT%H:%M:%SZ')
     req = urllib.request.Request('https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status',
                                  data=json.dumps(body).encode(), method='POST',
                                  headers={'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json; charset=UTF-8',
                                           'X-Upload-Content-Length': str(size), 'X-Upload-Content-Type': 'video/mp4'})
     with urllib.request.urlopen(req, timeout=60) as r:
         session = r.headers['Location']
-    host = urllib.parse.urlparse(session).hostname
-    if host not in {'www.googleapis.com', 'youtube.googleapis.com'}:
+    target = urllib.parse.urlparse(session)
+    if target.scheme != 'https' or target.hostname not in {'www.googleapis.com', 'youtube.googleapis.com'}:
         raise RuntimeError('Unexpected upload host')
     result = http(session, video.read_bytes(), {'Authorization': 'Bearer ' + token, 'Content-Type': 'video/mp4',
                                                 'Content-Length': str(size)}, 'PUT', timeout=600)
     if result.get('snippet', {}).get('channelId') != TEMPLATE['channel_id']:
         raise RuntimeError('Upload response channel mismatch')
-    if result.get('status', {}).get('privacyStatus') != 'private' or not result.get('status', {}).get('publishAt'):
-        raise RuntimeError('Upload was not scheduled privately; check Studio')
+    status = result.get('status', {})
+    if status.get('privacyStatus') != 'private' or bool(status.get('publishAt')) == private_test:
+        raise RuntimeError('Unexpected private upload schedule; check Studio')
     return result['id']
