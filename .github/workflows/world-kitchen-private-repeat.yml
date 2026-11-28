@@ -2,7 +2,7 @@ name: World Kitchen private upload repeat check
 on:
   pull_request:
     branches: [main]
-    types: [opened]
+    types: [opened, synchronize]
     paths: ['.github/workflows/world-kitchen-private-repeat.yml']
 permissions:
   contents: read
@@ -28,9 +28,6 @@ jobs:
           video_id = '3SjvlnnvoSs'
           marker = 'world-kitchen-private-smoke-20261128-once'
           token, uploads = providers.youtube_token()
-          found = providers.find_existing(token, uploads, marker)
-          if found != video_id:
-              raise RuntimeError('Duplicate guard did not find the existing fixture; do not retry upload')
           response = providers.http(
               'https://www.googleapis.com/youtube/v3/videos?part=snippet,status&id=' + video_id,
               headers={'Authorization': 'Bearer ' + token},
@@ -42,5 +39,9 @@ jobs:
           state = item['status']
           if marker not in item['snippet']['description'] or state.get('privacyStatus') != 'private' or state.get('publishAt') or state.get('uploadStatus') not in {'uploaded', 'processed'}:
               raise RuntimeError('Fixture is not an uploaded, unscheduled private video')
-          print(f"video_id={video_id} privacy=private schedule=none upload_status={state['uploadStatus']} duplicate_guard=passed writes=0")
+          print(f"video_id={video_id} privacy=private schedule=none upload_status={state['uploadStatus']} writes=0", flush=True)
+          found = providers.find_existing(token, uploads, marker)
+          if found != video_id:
+              raise RuntimeError('Duplicate lookup did not resolve exact private fixture via uploads playlist; no writes attempted')
+          print('duplicate_guard=passed writes=0')
           PY
