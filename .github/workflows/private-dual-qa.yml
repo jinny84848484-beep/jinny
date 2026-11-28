@@ -1,0 +1,83 @@
+name: Private uploader verification (two channels)
+on:
+  pull_request:
+    branches: [main]
+    types: [opened]
+    paths: ['.github/workflows/private-dual-qa.yml']
+permissions:
+  contents: read
+jobs:
+  private-upload:
+    if: >-
+      github.repository == 'jinny84848484-beep/jinny' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'qa/dual-private-20261128' &&
+      github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    strategy:
+      fail-fast: false
+      matrix:
+        channel: [ojirap, kitchen]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Build and verify one unscheduled private fixture
+        env:
+          QA_CHANNEL: ${{ matrix.channel }}
+          YOUTUBE_OJIRAP_OAUTH: ${{ matrix.channel == 'ojirap' && secrets.YOUTUBE_OJIRAP_OAUTH || '' }}
+          YOUTUBE_KITCHEN_OAUTH: ${{ matrix.channel == 'kitchen' && secrets.YOUTUBE_KITCHEN_OAUTH || '' }}
+        run: |
+          command -v ffmpeg >/dev/null || { sudo apt-get update -qq && sudo apt-get install -y ffmpeg; }
+          python -m pip install -r requirements.txt
+          python - <<'PY'
+          import os, re, subprocess, time, urllib.parse
+          import tempfile
+          from pathlib import Path
+          import cloud_runner as oj
+          from world_kitchen import providers as wk
+
+          mode = os.environ['QA_CHANNEL']
+          marker = 'private-only-qa-20261128-' + mode + '-' + os.environ['GITHUB_RUN_ID']
+          name = '오늘의 오지랖' if mode == 'ojirap' else '방구석 세계요리'
+          title = '[비공개 테스트] ' + name + ' 업로더 재검증'
+          if mode == 'ojirap':
+              token = oj.youtube_token('ojirap')
+              channel = oj.verify_channel('ojirap', token)
+          elif mode == 'kitchen':
+              token, _ = wk.youtube_token()
+              channel = wk.TEMPLATE['channel_id']
+          else:
+              raise RuntimeError('Unknown test channel')
+          with tempfile.TemporaryDirectory() as folder:
+              path = Path(folder)
+              video = path/'short.mp4'
+              subprocess.run(['ffmpeg', '-v','error','-f','lavfi','-i','testsrc2=s=360x640:r=24',
+                              '-t','3','-c:v','libx264','-pix_fmt','yuv420p',str(video)], check=True)
+              if mode == 'ojirap':
+                  oj.p.write(path/'upload-metadata.json', {'title': title, 'description': marker, 'language': 'ko'})
+                  job = {'channel':'ojirap', 'channel_id':channel, 'category':'society'}
+                  video_id = oj.upload(path, job, token, private_test=True)
+              else:
+                  video_id = wk.upload(video, {'title':title,'description':marker},
+                                       token,None,private_test=True)
+          if not isinstance(video_id,str) or not re.fullmatch(r'[A-Za-z0-9_-]{11}',video_id):
+              raise RuntimeError('No valid upload receipt')
+          print(f'upload_receipt video_id={video_id} private=true schedule=none', flush=True)
+          url = 'https://www.googleapis.com/youtube/v3/videos?'+urllib.parse.urlencode({'part':'snippet,status','id':video_id})
+          for attempt in range(4):
+              rows = wk.http(url, headers={'Authorization':'Bearer '+token}).get('items', [])
+              if rows:
+                  break
+              time.sleep(3)
+          if len(rows) != 1:
+              raise RuntimeError('Upload returned an ID but exact-ID lookup was unavailable; do not rerun this job')
+          row = rows[0]
+          snippet,status = row['snippet'],row['status']
+          if (row['id'] != video_id or snippet['channelId'] != channel or snippet['description'].strip() != marker
+              or status['privacyStatus'] != 'private' or status.get('publishAt')
+              or status['uploadStatus'] not in {'uploaded','processed'}):
+              raise RuntimeError('Private test identity/privacy/processing mismatch; no retry')
+          print(f'exact_readback video_id={video_id} privacy=private schedule=none status={status["uploadStatus"]}', flush=True)
+          PY
