@@ -74,6 +74,14 @@ class OjirapOnly(unittest.TestCase):
                 self.assertEqual(ledger['days'][DAY]['status'],'complete')
                 self.assertEqual([x['reason'] for x in ledger['days'][DAY]['publication_exclusions']],['graphics_only_not_publishable']*blocked)
 
+    def test_regular_research_uses_photo_contract_despite_graphics_config(self):
+        with patch.object(c.daily_graphics, 'enabled', return_value=True):
+            instructions = c.research_instructions(photo_only=True)
+            self.assertIn('two distinct relevant real', instructions)
+            self.assertIn('replace the story during this same search', instructions)
+            self.assertNotIn(c.GRAPHICS_RESEARCH_NOTE, instructions)
+            self.assertIn(c.GRAPHICS_RESEARCH_NOTE, c.research_instructions())
+
     def test_overnight_does_not_start_new_day_or_write_journal(self):
         for hour, minute, should_start in [(0,38,False),(4,59,False),(5,0,True)]:
             now=datetime(2026,11,28,hour,minute,tzinfo=c.p.KST)

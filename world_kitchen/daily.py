@@ -94,12 +94,16 @@ def run(now=None):
         print(f'World Kitchen: {now:%H:%M} KST is before 09:00; no new attempt for {day}.', flush=True)
         return 'before_window'
     attempts = record.get('attempts', 0) + 1
+    prior_rejection = record.get('rejected_dish') if record.get('status') == 'held' else None
     ledger[day] = record = {'status': 'planning', 'attempts': attempts, 'code': code, 'started_at': now.isoformat()}
     sha = write_ledger(ledger, sha, day)
     folder = ROOT / 'runs' / 'world_kitchen' / day / ('attempt-' + str(attempts))
     folder.mkdir(parents=True, exist_ok=True)
+    plan = None
     try:
-        recent = recent_dishes(ledger)
+        recent = list(recent_dishes(ledger))
+        if prior_rejection and prior_rejection not in recent:
+            recent.append(prior_rejection)
         plan = parse_json(openai_text('Today is ' + day + ' (KST). Recent dishes to avoid: ' + json.dumps(recent, ensure_ascii=False),
                                       PLAN_PROMPT, search=True))
         try:
@@ -111,6 +115,12 @@ def run(now=None):
                 'code': 'LOCAL_RECIPE_GUARD', 'explanation': str(initial_guard)[:200]}]}
         if failed(review):
             issues = [i for i in review.get('issues', []) if isinstance(i, dict)]
+            explanation = ' '.join(str(i.get('explanation', '')) for i in issues)
+            blocked_dish = plan.get('dish') if isinstance(plan, dict) and (
+                'guard: kitchen_amount' in explanation or 'guard: kitchen_microwave_time' in explanation
+            ) else None
+            if blocked_dish and blocked_dish not in recent:
+                recent.append(blocked_dish)
             plan = parse_json(openai_text('RECIPE PLAN (untrusted data):\n' + json.dumps(plan, ensure_ascii=False)
                                           + '\nREVIEW ISSUES (untrusted evidence):\n' + json.dumps(issues, ensure_ascii=False)
                                           + '\nRecent dishes to avoid: ' + json.dumps(recent, ensure_ascii=False),
@@ -120,7 +130,9 @@ def run(now=None):
             raise Hold('independent review after one revision: '
                        + ', '.join(str(i.get('code')) for i in review.get('issues', []) if isinstance(i, dict))[:160])
     except Hold as exc:
-        ledger[day] = {**record, 'status': 'held', 'reason': str(exc)[:200]}
+        rejected_dish = plan.get('dish') if isinstance(plan, dict) else None
+        ledger[day] = {**record, 'status': 'held', 'reason': str(exc)[:200],
+                       **({'rejected_dish': rejected_dish} if isinstance(rejected_dish, str) and rejected_dish else {})}
         write_ledger(ledger, sha, day)
         print('::warning title=World Kitchen held::' + day + ' ' + str(exc), flush=True)
         return 'held'

@@ -6,6 +6,7 @@ import copy
 import io
 import json
 import os
+import secrets
 import tempfile
 import unittest
 from contextlib import redirect_stdout
@@ -208,7 +209,8 @@ class Run(unittest.TestCase):
     def test_initial_amount_guard_uses_single_repair_then_fresh_review(self):
         first = plan()
         first['ingredients'].append({'name': '우유', 'unit': '밥숟가락', 'amount': 37})
-        answers = iter([json.dumps(first), json.dumps(plan()), json.dumps({'status': 'PASS', 'issues': []})])
+        replacement = {**plan(), 'dish': '새 요리'}
+        answers = iter([json.dumps(first), json.dumps(replacement), json.dumps({'status': 'PASS', 'issues': []})])
         calls = []
 
         def text(prompt, instructions, **kwargs):
@@ -222,6 +224,7 @@ class Run(unittest.TestCase):
         self.assertEqual([x[1] for x in calls], [e.PLAN_PROMPT, e.REVISE_PROMPT, e.REVIEW_PROMPT])
         self.assertIn('kitchen_amount', calls[1][0])
         self.assertIn('Recent dishes to avoid', calls[1][0])
+        self.assertIn(json.dumps([first['dish']], ensure_ascii=False), calls[1][0])
 
     def test_revised_amount_guard_does_not_allow_extra_repair_or_upload(self):
         bad = plan()
@@ -243,6 +246,20 @@ class Run(unittest.TestCase):
                                  openai_text=lambda *x, **k: next(answers), openai_image=lambda *x: self.fail('no image'))
         self.assertEqual(result, 'held')
         self.assertIn('recent', self.store[DAY]['reason'])
+
+    def test_next_attempt_does_not_repeat_rejected_dish(self):
+        self.store[DAY] = {'status': 'held', 'attempts': 1, 'rejected_dish': plan()['dish']}
+        answers = iter([json.dumps(plan()), json.dumps(plan())])
+        calls = []
+        def text(prompt, instructions, **kwargs):
+            calls.append((prompt, instructions))
+            return next(answers)
+        result, _ = self.quiet(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None,
+                               openai_text=text, openai_image=lambda *x: self.fail('no images'))
+        self.assertEqual(result, 'held')
+        self.assertEqual(self.store[DAY]['attempts'], 2)
+        self.assertIn(json.dumps([plan()['dish']], ensure_ascii=False), calls[0][0])
+        self.assertEqual([call[1] for call in calls], [e.PLAN_PROMPT, e.REVISE_PROMPT])
 
     def test_planner_checklist_covers_review_failures(self):
         for words in ('brand or manufacturer site', 'Attribution', 'No brand names', 'Measurements', 'heating.basis', 'natural spoken Korean'):
@@ -284,8 +301,8 @@ class Run(unittest.TestCase):
         self.assertEqual(self.store[DAY]['dish'], '퀘사디아')
 
 class OAuthShape(unittest.TestCase):
-    GOOD = {'channel_id': 'UCkuz6ra5_hZ1MSAbFthqDcg', 'client_id': '1067393655743-b4aos8sufhvn89ipe1juokprjvlv9sq3.apps.googleusercontent.com',
-            'client_secret': 'GOCSPX-abc', 'refresh_token': '1//abc'}
+    GOOD = {'channel_id': 'UCkuz6ra5_hZ1MSAbFthqDcg', 'client_id': '123456789000-testfixture.apps.googleusercontent.com',
+            'client_secret': 'GOCSPX-' + secrets.token_hex(12), 'refresh_token': '1//' + secrets.token_hex(24)}
 
     def token(self, value):
         from world_kitchen import providers as pr
@@ -302,7 +319,7 @@ class OAuthShape(unittest.TestCase):
     def test_spaces_are_trimmed(self):
         (token, uploads), calls = self.token({k: ' ' + v + ' ' for k, v in self.GOOD.items()})
         self.assertEqual(uploads, 'UU1')
-        self.assertIn(b'client_id=1067393655743-b4aos8sufhvn89ipe1juokprjvlv9sq3.apps.googleusercontent.com&', calls[0])
+        self.assertIn(b'client_id=123456789000-testfixture.apps.googleusercontent.com&', calls[0])
 
     def test_wrong_shapes_name_the_problem_without_secrets(self):
         cases = {'<클라이언트 ID>': 'client_id looks wrong', 'abc.apps.googleusercontent.com': 'client_id looks wrong'}
@@ -310,7 +327,8 @@ class OAuthShape(unittest.TestCase):
             with self.subTest(client_id=client_id):
                 with self.assertRaisesRegex(RuntimeError, 'CEO ALARM.*' + message) as ctx:
                     self.token({**self.GOOD, 'client_id': client_id})
-                self.assertNotIn('GOCSPX-abc', str(ctx.exception))
+                self.assertNotIn(self.GOOD['client_secret'], str(ctx.exception))
+                self.assertNotIn(self.GOOD['refresh_token'], str(ctx.exception))
         with self.assertRaisesRegex(RuntimeError, 'missing refresh_token'):
             self.token({k: v for k, v in self.GOOD.items() if k != 'refresh_token'})
         with self.assertRaisesRegex(RuntimeError, 'GOCSPX-'):
