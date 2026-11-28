@@ -61,9 +61,11 @@ class MetricsNonBlocking(unittest.TestCase):
     def test_metrics_failure_does_not_stop_production(self):
         import io, cloud_runner as c
         from contextlib import redirect_stderr
+        from datetime import datetime
         from unittest.mock import patch
         ledger = {'days': {}, 'publications': [], 'additional_batches': {}}
         with patch.dict(c.os.environ, {'PUBLIC_UPLOADS_ENABLED': 'true'}), \
+             patch.object(c.p, 'now', return_value=datetime.fromisoformat('2026-11-29T05:07:00+09:00')), \
              patch.object(c, 'journal_get', return_value=(ledger, 'sha')), \
              patch.object(c, 'preflight'), \
              patch.object(c, 'collect_metrics', side_effect=RuntimeError('www.googleapis.com HTTP 500')), \
@@ -72,6 +74,27 @@ class MetricsNonBlocking(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'reached research'):
                 c.produce()
         self.assertIn('Metrics skipped', err.getvalue())
+
+
+    def test_overnight_empty_day_does_not_start_production(self):
+        import io, cloud_runner as c
+        from contextlib import redirect_stdout
+        from datetime import datetime
+        from unittest.mock import patch
+        ledger = {'days': {}, 'publications': [], 'additional_batches': {}}
+        with (
+            patch.dict(c.os.environ, {'PUBLIC_UPLOADS_ENABLED': 'true'}),
+            patch.object(c.p, 'now', return_value=datetime.fromisoformat('2026-11-29T04:59:00+09:00')),
+            patch.object(c, 'journal_get', return_value=(ledger, 'sha')),
+            patch.object(c, 'preflight') as preflight,
+            patch.object(c.p, 'collect') as collect,
+            redirect_stdout(io.StringIO()) as out,
+        ):
+            c.produce()
+        preflight.assert_not_called()
+        collect.assert_not_called()
+        self.assertEqual(ledger['days'], {})
+        self.assertIn('before 05:00 KST', out.getvalue())
 
 
 class ExternalUpload(unittest.TestCase):
