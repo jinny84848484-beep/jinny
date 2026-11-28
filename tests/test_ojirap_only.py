@@ -133,6 +133,24 @@ class OjirapOnly(unittest.TestCase):
         self.assertEqual(list(result),['a','x','b','y'])
         self.assertEqual([x.args[0] for x in search.call_args_list],job['visual_queries'])
 
+    def test_sparse_visual_search_uses_labeled_related_category(self):
+        job=active()[0]; job['visual_queries']=['ROKS Sohn Won-yil', 'Korean Type 214 submarines']
+        photo={'media_type':'image','notice':'자료사진 · 2008','license':'Public domain'}
+        with patch.object(c.relevant_media,'search',side_effect=[{'a':photo},{'a':photo}]), patch.object(c.relevant_media,'search_related_category',return_value={'a':photo,'b':photo,'c':photo}) as category:
+            result=c.relevant_media.candidates([job],diversify=True)
+        category.assert_called_once_with(job['visual_queries'][1],job['topic_key'],'ojirap')
+        self.assertEqual(list(result),['a','b','c'])
+        self.assertNotIn('illustrative_only',result['a'])
+        self.assertEqual(result['b']['notice'],'자료화면 · 실제 현장 아님')
+        self.assertTrue(result['b']['illustrative_only'])
+        self.assertEqual(result['b']['license'],photo['license'])
+
+    def test_related_category_cannot_fill_a_story_without_two_real_assets(self):
+        job=active()[0]; job['visual_queries']=['direct subject','related subject']
+        with patch.object(c.relevant_media,'search',return_value={}), patch.object(c.relevant_media,'search_related_category',return_value={'only':{'media_type':'image'}}):
+            with self.assertRaises(c.relevant_media.InsufficientCandidates):
+                c.relevant_media.candidates([job],diversify=True)
+
     def test_direct_upload_stops_graphics_only_before_network(self):
         job=active()[0]
         for scene in job['scenes']:
