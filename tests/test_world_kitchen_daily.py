@@ -31,7 +31,8 @@ def plan():
         'steps': [{'text': '또띠아 반쪽에 치즈를 올리고 접어요', 'appliance': 'none', 'seconds': 0},
                   {'text': '접시에 담아 랩을 느슨하게 씌우고 700W 60초 데워요', 'appliance': 'microwave', 'seconds': 60}],
         'heating': {'seconds': {'700': 60, '1000': 40}, 'source': 'https://example.org/recipe-a',
-                    'basis': '또띠아 1장, 치즈 30g', 'caveat': '1000W는 700W 시간을 비례 환산, 기기마다 차이'},
+                    'basis': '또띠아 1장, 치즈 30g', 'caveat': '1000W는 700W 시간을 비례 환산, 기기마다 차이',
+                    'source_watts': 700, 'source_intervals': [{'seconds': 60, 'after': 'stop'}]},
         'sources': ['https://example.org/recipe-a', 'https://example.net/recipe-b'],
         'scenes': [
             {'kind': 'hero', 'title': '치즈 퀘사디아', 'body': '전자레인지면 끝', 'footer': '1인분', 'narration': '전자레인지만 있으면 퀘사디아가 됩니다.', 'english': 'All you need is a microwave.', 'image_prompt': 'Finished cheese quesadilla cut in wedges, no text'},
@@ -225,6 +226,42 @@ class Run(unittest.TestCase):
         self.assertIn('kitchen_amount', calls[1][0])
         self.assertIn('Recent dishes to avoid', calls[1][0])
         self.assertIn(json.dumps([first['dish']], ensure_ascii=False), calls[1][0])
+
+    def test_source_three_intervals_cannot_collapse_to_one_continuous_heat(self):
+        bad = plan()
+        bad['heating']['source_intervals'] = [
+            {'seconds': 60, 'after': 'stir'}, {'seconds': 30, 'after': 'stir'},
+            {'seconds': 10, 'after': 'stop'},
+        ]
+        bad['heating']['seconds'] = {'700': 100, '1000': 70}
+        bad['steps'][1].update(text='700W 100초 연속으로 돌려요.', seconds=100)
+        bad['scenes'][3]['body'] = '700W 100초 · 1000W 70초'
+        answers = iter([json.dumps(bad), json.dumps(bad), self.FAIL, self.FAIL])
+        calls = []
+        def text(prompt, instructions, **kwargs):
+            calls.append(instructions)
+            return next(answers)
+        result, _ = self.quiet(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None,
+                               openai_text=text, openai_image=lambda *x: self.fail('no image'),
+                               upload=lambda *x: self.fail('no upload'))
+        self.assertEqual(result, 'held')
+        self.assertEqual(calls, [e.PLAN_PROMPT, e.REVISE_PROMPT])
+        self.assertEqual(self.store[DAY]['reason'], 'guard: kitchen_heating_sequence')
+
+    def test_same_interval_total_still_requires_stirring_at_each_boundary(self):
+        value = plan()
+        value['heating']['source_intervals'] = [
+            {'seconds': 30, 'after': 'stir'}, {'seconds': 30, 'after': 'stop'},
+        ]
+        step = {'text': '700W 30초 돌려요.', 'seconds': 30, 'appliance': 'microwave'}
+        value['steps'] = [step, copy.deepcopy(step)]
+        with self.assertRaisesRegex(e.Hold, 'kitchen_heating_sequence'):
+            e.verify_source_heat(value)
+        value['steps'][0] = {**step, 'text': '700W 30초 돌린 뒤 저어요.'}
+        e.verify_source_heat(value)
+        value['heating']['source_watts'] = None
+        with self.assertRaisesRegex(e.Hold, 'kitchen_heating_source'):
+            e.verify_source_heat(value)
 
     def test_revised_amount_guard_does_not_allow_extra_repair_or_upload(self):
         bad = plan()
