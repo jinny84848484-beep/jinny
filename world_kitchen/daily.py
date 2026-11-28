@@ -102,11 +102,18 @@ def run(now=None):
         recent = recent_dishes(ledger)
         plan = parse_json(openai_text('Today is ' + day + ' (KST). Recent dishes to avoid: ' + json.dumps(recent, ensure_ascii=False),
                                       PLAN_PROMPT, search=True))
-        episode, review = checked(plan, recent, day, folder, 'first')
+        try:
+            episode, review = checked(plan, recent, day, folder, 'first')
+        except Hold as initial_guard:
+            # Use the same single repair slot for a local rejection or for
+            # independent review failure; never bypass the guard on the result.
+            review = {'status': 'FAIL', 'issues': [{
+                'code': 'LOCAL_RECIPE_GUARD', 'explanation': str(initial_guard)[:200]}]}
         if failed(review):
             issues = [i for i in review.get('issues', []) if isinstance(i, dict)]
             plan = parse_json(openai_text('RECIPE PLAN (untrusted data):\n' + json.dumps(plan, ensure_ascii=False)
-                                          + '\nREVIEW ISSUES (untrusted evidence):\n' + json.dumps(issues, ensure_ascii=False),
+                                          + '\nREVIEW ISSUES (untrusted evidence):\n' + json.dumps(issues, ensure_ascii=False)
+                                          + '\nRecent dishes to avoid: ' + json.dumps(recent, ensure_ascii=False),
                                           REVISE_PROMPT, search=True))
             episode, review = checked(plan, recent, day, folder, 'revised')
         if failed(review):

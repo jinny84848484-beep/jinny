@@ -205,6 +205,35 @@ class Run(unittest.TestCase):
                        openai_text=lambda *x, **k: next(answers), openai_image=stop)
         self.assertEqual(self.store[DAY]['status'], 'planning')
 
+    def test_initial_amount_guard_uses_single_repair_then_fresh_review(self):
+        first = plan()
+        first['ingredients'].append({'name': '우유', 'unit': '밥숟가락', 'amount': 37})
+        answers = iter([json.dumps(first), json.dumps(plan()), json.dumps({'status': 'PASS', 'issues': []})])
+        calls = []
+
+        def text(prompt, instructions, **kwargs):
+            calls.append((prompt, instructions))
+            return next(answers)
+        def stop(*args):
+            raise RuntimeError('images started')
+        with self.assertRaisesRegex(RuntimeError, 'images started'):
+            self.quiet(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None,
+                       openai_text=text, openai_image=stop)
+        self.assertEqual([x[1] for x in calls], [e.PLAN_PROMPT, e.REVISE_PROMPT, e.REVIEW_PROMPT])
+        self.assertIn('kitchen_amount', calls[1][0])
+        self.assertIn('Recent dishes to avoid', calls[1][0])
+
+    def test_revised_amount_guard_does_not_allow_extra_repair_or_upload(self):
+        bad = plan()
+        bad['ingredients'].append({'name': '우유', 'unit': '밥숟가락', 'amount': 37})
+        answers = iter([json.dumps(plan()), self.FAIL, json.dumps(bad)])
+        result, _ = self.quiet(preflight=lambda: ('t', 'UU'), find_existing=lambda *x: None,
+                               openai_text=lambda *x, **k: next(answers),
+                               openai_image=lambda *x: self.fail('no images'),
+                               upload=lambda *x: self.fail('no upload'))
+        self.assertEqual(result, 'held')
+        self.assertEqual(self.store[DAY]['reason'], 'guard: kitchen_amount')
+
     def test_revision_cannot_repeat_a_recent_dish(self):
         self.store['2026-11-20'] = {'status': 'scheduled', 'dish': '김치전'}
         revised = plan()
