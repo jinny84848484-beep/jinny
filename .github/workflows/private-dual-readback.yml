@@ -1,0 +1,59 @@
+name: Private fixture fresh-run readback
+on:
+  pull_request:
+    branches: [main]
+    types: [opened]
+    paths: ['.github/workflows/private-dual-readback.yml']
+permissions:
+  contents: read
+jobs:
+  readback:
+    if: >-
+      github.repository == 'jinny84848484-beep/jinny' &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      github.event.pull_request.head.ref == 'qa/dual-readback-20261128'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        channel: [ojirap, kitchen]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Verify exact private fixture without any YouTube writes
+        env:
+          QA_CHANNEL: ${{ matrix.channel }}
+          YOUTUBE_OJIRAP_OAUTH: ${{ matrix.channel == 'ojirap' && secrets.YOUTUBE_OJIRAP_OAUTH || '' }}
+          YOUTUBE_KITCHEN_OAUTH: ${{ matrix.channel == 'kitchen' && secrets.YOUTUBE_KITCHEN_OAUTH || '' }}
+        run: |
+          python -m pip install -r requirements.txt
+          python - <<'PY'
+          import os, urllib.parse
+          import cloud_runner as oj
+          from world_kitchen import providers as wk
+          mode = os.environ['QA_CHANNEL']
+          marker = 'private-only-qa-20261128-' + mode + '-46136546692'
+          if mode == 'ojirap':
+              vid = 'gX8O58FX5nM'
+              token = oj.youtube_token('ojirap')
+              channel = oj.verify_channel('ojirap', token)
+          elif mode == 'kitchen':
+              vid = 'QwChYWqsbps'
+              token, _ = wk.youtube_token()
+              channel = wk.TEMPLATE['channel_id']
+          else:
+              raise RuntimeError('Unknown QA channel')
+          url = 'https://www.googleapis.com/youtube/v3/videos?' + urllib.parse.urlencode({'part':'snippet,status','id':vid})
+          rows = wk.http(url, headers={'Authorization':'Bearer '+token}).get('items', [])
+          if len(rows) != 1:
+              raise RuntimeError('Exact-ID query did not return one item; no upload, no publish')
+          row = rows[0]
+          snippet, status = row['snippet'],row['status']
+          if row.get('id') != vid or snippet.get('channelId') != channel or snippet.get('description','').strip() != marker:
+              raise RuntimeError('Fixture identity or channel mismatch')
+          if status.get('privacyStatus') != 'private' or status.get('publishAt') or status.get('uploadStatus') not in {'uploaded','processed'}:
+              raise RuntimeError('Not an unscheduled private fixture')
+          print(f"fresh_run_readback channel={mode} id={vid} privacy=private schedule=none status={status['uploadStatus']} writes=0")
+          PY
