@@ -33,6 +33,7 @@ CEO alarm only when the account/token is missing, expired or wrong
 """
 from __future__ import annotations
 
+import argparse
 import base64
 import json
 import os
@@ -140,7 +141,12 @@ def validate(issue, review, day, folder):
         raise Hold('caption is empty')
     if '출처' not in caption:
         raise Hold('caption must carry a 출처 line')
-    caption = caption.strip() + '\n\n' + code_for(day)
+    # The export may already contain the same terminal issue code. Never append it twice.
+    issue_code = code_for(day)
+    caption = caption.strip()
+    while caption.rpartition('\n')[2].strip() == issue_code:
+        caption = caption.rpartition('\n')[0].rstrip()
+    caption += '\n\n' + issue_code
     if len(caption) > MAX_CAPTION:
         raise Hold('caption is longer than 2200 characters')
     if len(re.findall(r'#\w', caption)) > MAX_TAGS:
@@ -188,7 +194,12 @@ def in_window(day, now):
 def token_age_check(issued_on, today):
     if not issued_on:
         raise RuntimeError(CONNECT_ERRORS + 'repository variable IG_TOKEN_ISSUED_ON (YYYY-MM-DD) is missing')
-    age = (today - date.fromisoformat(issued_on)).days
+    try:
+        age = (today - date.fromisoformat(issued_on)).days
+    except ValueError:
+        raise RuntimeError(CONNECT_ERRORS + 'IG_TOKEN_ISSUED_ON must be a date (YYYY-MM-DD)') from None
+    if age < 0:
+        raise RuntimeError(CONNECT_ERRORS + 'IG_TOKEN_ISSUED_ON is in the future')
     if age > TOKEN_MAX_AGE_DAYS:
         raise RuntimeError(CONNECT_ERRORS + 'access token is ' + str(age) + ' days old; issue a new one '
                            '(it expires at 60 days) and update IG_ACCESS_TOKEN and IG_TOKEN_ISSUED_ON')
@@ -225,10 +236,10 @@ class Instagram:
     def check_account(self):
         try:
             me = self.get('/me', fields='user_id,username')
-        except RuntimeError as exc:
-            raise RuntimeError(CONNECT_ERRORS + 'token rejected or expired — ' + str(exc)[:200]) from None
+        except (RuntimeError, OSError, ValueError):
+            raise RuntimeError(CONNECT_ERRORS + 'could not verify the token with Meta') from None
         if me.get('username') != HANDLE or str(me.get('user_id')) != str(self.user):
-            raise RuntimeError(CONNECT_ERRORS + 'token belongs to @' + str(me.get('username')) + ', not @' + HANDLE)
+            raise RuntimeError(CONNECT_ERRORS + 'token or account ID does not match @' + HANDLE)
 
     def already_posted(self, code):
         recent = self.get('/' + self.user + '/media', fields='id,caption,permalink,timestamp', limit='25')
@@ -237,9 +248,11 @@ class Instagram:
                 return item
         return None
 
-    def quota_left(self):
+    def quota_left(self, require_reported=False):
         info = self.get('/' + self.user + '/content_publishing_limit', fields='quota_usage,config')
         row = (info.get('data') or [{}])[0]
+        if require_reported and ('quota_usage' not in row or 'quota_total' not in (row.get('config') or {})):
+            raise RuntimeError(CONNECT_ERRORS + 'Meta did not return a verifiable publishing quota')
         return int(row.get('config', {}).get('quota_total', 50)) - int(row.get('quota_usage', 0))
 
     def wait(self, container):
@@ -302,11 +315,31 @@ def write_posted(day, entry):
 
 # ---------- run ----------
 
+def configured_instagram():
+    token, user_id = (os.environ.get(k, '').strip() for k in ('IG_ACCESS_TOKEN', 'IG_USER_ID'))
+    if not token or not user_id:
+        raise RuntimeError(CONNECT_ERRORS + 'IG_ACCESS_TOKEN or IG_USER_ID is not configured')
+    return Instagram(token, user_id)
+
+
+def check_connection(now=None, client=None):
+    """Verify identity and capacity independently of issue staging; never publish or write state."""
+    age = token_age_check(os.environ.get('IG_TOKEN_ISSUED_ON', ''), (now or datetime.now(KST)).date())
+    ig = client or configured_instagram()
+    ig.check_account()
+    try:
+        quota = max(0, ig.quota_left(require_reported=True))
+    except (ValueError, TypeError, AttributeError, KeyError, RuntimeError, OSError):
+        raise RuntimeError(CONNECT_ERRORS + 'could not verify the publishing quota with Meta') from None
+    print(f'Instagram connection verified for @{HANDLE}; token age {age} days; quota left {quota}. No post or state change.')
+
+
 def run(now=None, client=None):
     now = now or datetime.now(KST)
     day = now.date().isoformat()
     # An issue may still be posted the morning after its day (until 12:30 KST).
     candidates = [day, (now.date() - timedelta(days=1)).isoformat()]
+    missing_friday = None
     for candidate in candidates:
         if not in_window(candidate, now):
             continue
@@ -321,9 +354,11 @@ def run(now=None, client=None):
             print('::warning title=Instagram card news held::' + candidate + ' ' + str(exc), flush=True)
             return 'hold'
         if issue is None:
+            if date.fromisoformat(candidate).weekday() == 4:
+                missing_friday = candidate
             continue
         token_age_check(os.environ.get('IG_TOKEN_ISSUED_ON', ''), now.date())
-        ig = client or Instagram(os.environ['IG_ACCESS_TOKEN'], os.environ['IG_USER_ID'])
+        ig = client or configured_instagram()
         ig.check_account()
         existing = ig.already_posted(issue['code'])
         if existing:
@@ -341,13 +376,20 @@ def run(now=None, client=None):
                                  'excluded': issue['excluded'], 'posted_at': datetime.now(KST).isoformat()})
         print('Published ' + issue['code'] + ' with ' + str(len(issue['cards'])) + ' cards: ' + result['permalink'])
         return 'posted'
+    if missing_friday:
+        print('::warning title=Instagram issue not delivered::' + missing_friday
+              + ' issue.json missing; no attempt to publish or verify Meta connection.', flush=True)
+        return 'hold'
     print('No Instagram issue due now.')
     return 'idle'
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--check-connection', action='store_true')
+    args = parser.parse_args()
     try:
-        run()
+        check_connection() if args.check_connection else run()
     except RuntimeError as exc:
         print(str(exc), file=sys.stderr, flush=True)
         sys.exit(1)

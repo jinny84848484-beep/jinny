@@ -10,6 +10,12 @@ on:
     - cron: '7 9 * * 5'  # Fri 18:07 KST backup
     - cron: '37 23 * * 5' # Sat 08:37 KST last chance (window ends Sat 12:30)
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Verify the Meta connection without publishing, or run the current issue'
+        type: choice
+        options: [check-connection, publish]
+        default: check-connection
 permissions:
   contents: write
 concurrency:
@@ -26,7 +32,15 @@ jobs:
           python-version: '3.12'
       - name: Test Instagram guards (offline)
         run: python -m unittest tests.test_instagram_cards
+      - name: Verify Meta identity and publishing quota (read-only)
+        if: github.event_name == 'workflow_dispatch' && inputs.mode == 'check-connection'
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_TOKEN_ISSUED_ON: ${{ vars.IG_TOKEN_ISSUED_ON }}
+        run: python instagram_cards.py --check-connection
       - name: Publish this week's issue
+        if: github.event_name == 'schedule' || inputs.mode == 'publish'
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
