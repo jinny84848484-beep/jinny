@@ -11,6 +11,29 @@ def search(query,topic,channel):
     params={'action':'query','format':'json','generator':'search','gsrsearch':query,'gsrnamespace':6,'gsrlimit':12,'prop':'imageinfo','iiprop':'url|extmetadata|mime|size','iiurlwidth':1280}
     return fetch_candidates(params,topic,channel)
 
+def search_related_category(query, topic, channel):
+    """Bounded fallback: one Commons category and one licensed file page."""
+    params={'action':'query','format':'json','list':'search','srnamespace':14,
+            'srlimit':1,'srsearch':query}
+    req=urllib.request.Request('https://commons.wikimedia.org/w/api.php?'+urllib.parse.urlencode(params),
+                               headers={'User-Agent':'JinnyShorts/1.0 (https://github.com/jinny84848484-beep/jinny)'})
+    with urllib.request.urlopen(req,timeout=30) as r:
+        hits=json.load(r).get('query',{}).get('search',[])
+    if not hits:return {}
+    title=hits[0].get('title','')
+    if not isinstance(title,str) or not title.startswith('Category:') or len(title)>300:return {}
+    return fetch_candidates({'action':'query','format':'json','generator':'categorymembers',
+                             'gcmtitle':title,'gcmtype':'file','gcmlimit':12,'prop':'imageinfo',
+                             'iiprop':'url|extmetadata|mime|size','iiurlwidth':1280},topic,channel)
+
+
+def contextual(candidate):
+    # A related result is never presented as a scene of the reported event.
+    if not isinstance(candidate,dict) or candidate.get('media_type')!='image':return candidate
+    return {**candidate,'illustrative_only':True,'notice':'자료화면 · 실제 현장 아님',
+            'disclaimer':'관련 실사 자료화면입니다. 보도된 사건의 실제 현장이나 당사자를 보여주는 사진이 아닙니다.'}
+
+
 def validate_titles(titles):
     if (not isinstance(titles,list) or len(titles)!=2
             or any(not isinstance(t,str) or not t.startswith('File:') or not 6<=len(t)<=512
@@ -86,8 +109,21 @@ def candidates(jobs, *, diversify=False):
             if diversify:
                 # Keep the same four-image review budget while including the
                 # relevant alternative, not just the first query's near-duplicates.
-                groups=[list(search(q,job['topic_key'],job['channel']).items())
-                        for q in dict.fromkeys(queries)]
+                topic,channel=job['topic_key'],job['channel']
+                ordered=list(dict.fromkeys(queries))
+                groups=[list(search(q,topic,channel).items()) for q in ordered]
+                if len(ordered)==2 and channel=='ojirap':
+                    direct_keys={key for key,_ in groups[0]}
+                    alternate=[(key,contextual(value)) for key,value in groups[1]
+                               if key not in direct_keys]
+                    # When direct and related file searches are sparse, look
+                    # within a category for the alternate subject only.
+                    if len(direct_keys)+len(alternate)<4 and len(alternate)<2:
+                        seen=direct_keys|{key for key,_ in alternate}
+                        alternate.extend((key,contextual(value)) for key,value in
+                                         search_related_category(ordered[1],topic,channel).items()
+                                         if key not in seen)
+                    groups[1]=alternate
                 for row in range(max(map(len,groups),default=0)):
                     for group in groups:
                         if row<len(group):current.setdefault(*group[row])
@@ -95,7 +131,9 @@ def candidates(jobs, *, diversify=False):
                 if len(current)<4:
                     for query in query_variants(queries):
                         if query in queries:continue
-                        current.update(search(query,job['topic_key'],job['channel']))
+                        for key,value in search(query,job['topic_key'],job['channel']).items():
+                            current.setdefault(key,contextual(value) if job['channel']=='ojirap' and
+                                               len(queries)==2 and query==COMMONS_TAIL.sub('',queries[1]).strip() else value)
                         if len(current)>=4:break
             else:
                 for query in query_variants(queries):
