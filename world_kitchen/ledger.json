@@ -21,9 +21,13 @@
     "reason": "guard: kitchen_microwave_time"
   },
   "2026-11-28": {
-    "status": "planning",
+    "status": "held",
     "attempts": 2,
     "code": "WK-20261128",
-    "started_at": "2026-11-28T21:15:19.232527+09:00"
+    "started_at": "2026-11-28T21:15:19.232527+09:00",
+    "reason": "independent review after one revision: COUNTRY_ATTRIBUTION, HEATING_MISMATCH_SOURCE, BRAND_NAME_VISIBLE_OR_SPOKEN",
+    "rejected_dishes": [
+      "nacho cheese dip"
+    ]
   }
 }
