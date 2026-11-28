@@ -3,7 +3,7 @@
 Metadata establishes license provenance, not visual relevance. The editorial
 vision review must approve the pictured subject before the renderer can use it.
 """
-import hashlib,html,json,re,urllib.parse,urllib.request
+import hashlib,html,json,re,urllib.error,urllib.parse,urllib.request
 import pipeline as p
 
 def clean(value):return html.unescape(re.sub('<[^>]+>','',value or '')).strip()
@@ -106,6 +106,17 @@ def candidates(jobs, *, diversify=False):
             queries=job.get('visual_queries',[])[:2]
             if not queries or any(not isinstance(q,str) or not 3<=len(q)<=100 for q in queries):raise ValueError('Specific visual search queries required')
             current={}
+            if job['channel']=='ojirap' and 'research_visual_titles' in job:
+                try:
+                    direct=job.get('research_direct_titles', [])
+                    current.update((key,value if value.get('title') in direct else contextual(value))
+                                   for key,value in resolve_titles(job['research_visual_titles'],
+                                   job['topic_key'],job['channel']).items())
+                except (ValueError,urllib.error.URLError,TimeoutError):
+                    pass  # Advisory evidence; an unavailable exact match does not prevent normal discovery.
+                if len(current)>=2:
+                    result.update(current)
+                    continue
             if diversify:
                 # Keep the same four-image review budget while including the
                 # relevant alternative, not just the first query's near-duplicates.
@@ -137,7 +148,8 @@ def candidates(jobs, *, diversify=False):
                         if len(current)>=4:break
             else:
                 for query in query_variants(queries):
-                    current.update(search(query,job['topic_key'],job['channel']))
+                    for key,value in search(query,job['topic_key'],job['channel']).items():
+                        current.setdefault(key,value)
                     if len(current)>=4:break
         if len(current)<2:raise InsufficientCandidates('Not enough relevant licensed photo candidates; batch held')
         result.update(dict(list(current.items())[:4]))

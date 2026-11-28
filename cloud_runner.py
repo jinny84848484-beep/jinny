@@ -193,6 +193,7 @@ def parse_research_manifest(text,evidence,recent):
         if not isinstance(key,str) or key in keys:raise ValueError('research_manifest_topics')
         keys.add(key)
         validate_research_story(story,observed,recent)
+        bind_observed_visual_pages(story,observed)
     if fingerprint(stories[0]['verified_facts'])==fingerprint(stories[1]['verified_facts']) or stories[0]['summary'].strip().casefold()==stories[1]['summary'].strip().casefold():raise ValueError('research_manifest_duplicate_event')
     return manifest
 
@@ -203,6 +204,29 @@ def observed_sources(evidence):
         try:observed.add(source_identity(entry.get('url')))
         except (ValueError,AttributeError):pass
     return observed
+
+
+def bind_observed_visual_pages(story,observed):
+    """Carry two observed Commons file pages separately from factual citations."""
+    pages=story.pop('visual_file_pages',None)
+    story.pop('research_visual_titles',None)
+    story.pop('research_direct_titles',None)
+    if not isinstance(pages,list) or len(pages)!=2:return
+    titles=[];direct_indices=[]
+    try:
+        for index,entry in enumerate(pages):
+            page=entry.get('url') if isinstance(entry,dict) else entry
+            if isinstance(entry,dict) and entry.get('relationship')=='exact_subject':
+                direct_indices.append(index)
+            canonical=source_identity(page)
+            parsed=urllib.parse.urlparse(canonical)
+            if (canonical not in observed or parsed.netloc!='commons.wikimedia.org'
+                    or parsed.query or not parsed.path.startswith('/wiki/')):return
+            titles.append(urllib.parse.unquote(parsed.path[len('/wiki/'):],errors='strict'))
+        titles=relevant_media.validate_titles(titles)
+        story['research_visual_titles']=titles
+        if direct_indices:story['research_direct_titles']=[titles[i] for i in direct_indices]
+    except (ValueError,UnicodeError):pass
 
 
 def validate_research_story(story,observed,recent):
@@ -260,6 +284,7 @@ def salvage_ready_stories(texts,evidence,recent,*,excluded=frozenset()):
             try:validate_research_story(story,observed,recent)
             except (ValueError,TypeError,KeyError,AttributeError):continue
             if any(story['topic_key']==k['topic_key'] or fingerprint(story['verified_facts'])==fingerprint(k['verified_facts']) or story['summary'].strip().casefold()==k['summary'].strip().casefold() for k in kept):continue
+            bind_observed_visual_pages(story,observed)
             kept.append(story)
     return kept
 
@@ -338,6 +363,15 @@ def bind_researched_sources(jobs,manifest):
             scene['source_indices']=list(dict.fromkeys(indices[i] for i in supplied))
         job['sources']=[{'title':s['title'],'url':s['url']} for s in packet['sources']]
         job['visual_queries']=packet['visual_queries']
+        # A draft must not introduce its own photo identities or select the
+        # strict staged route. Those inputs are fixed by research or recovery.
+        job.pop('visual_source_titles',None)
+        job.pop('research_visual_titles',None)
+        job.pop('research_direct_titles',None)
+        if job['channel']=='ojirap' and 'research_visual_titles' in packet:
+            job['research_visual_titles']=packet['research_visual_titles']
+            if 'research_direct_titles' in packet:
+                job['research_direct_titles']=packet['research_direct_titles']
         job['format_version']=PAIRED_FORMAT
         job['fact_packet']={key:json.loads(json.dumps(packet[key])) for key in ('topic_key','category','summary','verified_facts','uncertainties','sources')}
         job['fact_packet_hash']=fingerprint(job['fact_packet'])
@@ -927,7 +961,10 @@ photos with public domain, CC0 or CC BY status; a search snippet, a news screens
 evidence. Use the same concrete, indexable English subject phrases in visual_queries. One phrase can target
 a related object or process if its footage can be visibly labeled as illustration without misleading viewers.
 If you cannot verify sufficient photo candidates, replace the story during this same search, rather than
-sending an unusable story to drafting. Never put media URLs in factual sources or change the JSON schema.
+sending an unusable story to drafting. In each story put the two opened Commons file pages in
+visual_file_pages, an array of two objects with url (HTTPS, no tracking or fragment) and relationship
+('exact_subject' only when the photo depicts the very subject of the story; otherwise 'illustrative').
+Never put media URLs in factual sources. Keep all other story fields unchanged. These files are only candidates.
 The later independent factual and visual checks remain mandatory.
 """
 
