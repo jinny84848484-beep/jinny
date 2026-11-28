@@ -25,7 +25,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from .episode import Hold, PLAN_PROMPT, REVIEW_PROMPT, REVISE_PROMPT, build_episode, make_logo, narrate, parse_json, publish_time
+from .episode import Hold, PLAN_PROMPT, REVIEW_PROMPT, REVISE_PROMPT, build_episode, make_logo, narrate, parse_json, publish_time, verify_source_heat
 from .ledger import code_for, read_ledger, recent_dishes, write_ledger
 from .pipeline import render
 from .providers import ALARM, find_existing, http, openai_image, openai_text, upload, youtube_token
@@ -62,6 +62,7 @@ def checked(plan, recent, day, folder, tag):
     if plan.get('dish') in recent:
         raise Hold('dish repeats a recent episode')
     episode = build_episode(plan, day, folder)
+    verify_source_heat(plan)
     review = parse_json(openai_text('RECIPE PLAN (untrusted data):\n' + json.dumps(plan, ensure_ascii=False),
                                     REVIEW_PROMPT, search=True))
     (folder / ('review_' + tag + '.json')).write_text(json.dumps(review, ensure_ascii=False, indent=2), encoding='utf-8')
@@ -117,7 +118,8 @@ def run(now=None):
         try:
             episode, review = checked(plan, recent, day, folder, 'first')
         except Hold as initial_guard:
-            if str(initial_guard) in {'guard: kitchen_amount', 'guard: kitchen_microwave_time'}:
+            if str(initial_guard) in {'guard: kitchen_amount', 'guard: kitchen_microwave_time',
+                                      'guard: kitchen_heating_source'}:
                 dish = plan.get('dish')
                 if isinstance(dish, str) and dish.strip() and dish not in rejected:
                     rejected.append(dish)
