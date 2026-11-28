@@ -142,7 +142,20 @@ class Validation(Base):
             ig.jpeg_size(b'\xff\xd8\xff\xe1\x00\x10MPF\x00' + b'\x00' * 20)
 
 
+    def test_exports_with_issue_code_keep_a_single_terminal_code(self):
+        self.write(issue(caption='주말 #여행\n\n출처: 공식 페이지\n\nWM-20261127\nWM-20261127'))
+        self.assertEqual(ig.load_issue(DAY)['caption'].count('WM-20261127'), 1)
+
+
 class Timing(Base):
+    def test_missing_due_issue_is_reported_without_contacting_meta(self):
+        with patch.object(ig, 'configured_instagram', side_effect=AssertionError('must not call Meta')):
+            result, log = self.quiet(now=NOW)
+        self.assertEqual(result, 'hold')
+        self.assertIn('issue.json missing', log)
+        self.assertIn('no attempt', log)
+
+
     def test_not_before_1230_kst(self):
         self.write()
         fake = Fake()
@@ -163,6 +176,30 @@ class Timing(Base):
 
 
 class Connection(unittest.TestCase):
+    def test_readonly_probe_never_loads_an_issue_or_mutates_state(self):
+        client = ig.Instagram('secret', '42')
+        with patch.dict(os.environ, {'IG_TOKEN_ISSUED_ON': '2026-11-20'}), \
+                patch.object(ig, 'load_issue', side_effect=AssertionError('no file read')), \
+                patch.object(ig, 'write_posted', side_effect=AssertionError('no state write')), \
+                patch.object(client, 'post', side_effect=AssertionError('no Meta write')), \
+                patch.object(client, 'get', side_effect=[
+                    {'user_id': '42', 'username': 'weekend.manual'},
+                    {'data': [{'config': {'quota_total': 50}, 'quota_usage': 2}]},
+                ]) as get, redirect_stdout(io.StringIO()) as out:
+            ig.check_connection(NOW, client)
+        self.assertEqual([c.args[0] for c in get.call_args_list], ['/me', '/42/content_publishing_limit'])
+        self.assertIn('quota left 48', out.getvalue())
+        self.assertNotIn('secret', out.getvalue())
+
+    def test_probe_rejects_missing_quota_without_echoing_response(self):
+        client = ig.Instagram('secret', '42')
+        with patch.dict(os.environ, {'IG_TOKEN_ISSUED_ON': '2026-11-20'}), \
+                patch.object(client, 'get', side_effect=[
+                    {'user_id': '42', 'username': 'weekend.manual'}, {'data': []},
+                ]), self.assertRaisesRegex(RuntimeError, 'could not verify the publishing quota'):
+            ig.check_connection(NOW, client)
+
+
     def test_token_age_alarm(self):
         self.assertEqual(ig.token_age_check('2026-11-01', date(2026, 11, 27)), 26)
         with self.assertRaisesRegex(RuntimeError, 'CEO ALARM'):
