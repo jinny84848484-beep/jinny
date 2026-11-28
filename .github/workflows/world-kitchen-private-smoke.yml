@@ -1,0 +1,51 @@
+name: World Kitchen private upload smoke test
+on:
+  push:
+    branches: [qa/world-kitchen-private-20261128]
+    paths: ['.github/workflows/world-kitchen-private-smoke.yml']
+permissions:
+  contents: read
+concurrency:
+  group: world-kitchen-private-smoke-20261128
+  cancel-in-progress: false
+jobs:
+  private-upload:
+    if: github.repository == 'jinny84848484-beep/jinny'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - name: Render a small private-only technical fixture
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y ffmpeg
+          ffmpeg -hide_banner -loglevel error -f lavfi -i color=c=0x25435e:s=360x640:r=24 -t 3 -c:v libx264 -pix_fmt yuv420p -movflags +faststart /tmp/world-kitchen-smoke.mp4
+      - name: Upload once and read back YouTube privacy
+        env:
+          YOUTUBE_KITCHEN_OAUTH: ${{ secrets.YOUTUBE_KITCHEN_OAUTH }}
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from world_kitchen import providers
+
+          marker = 'world-kitchen-private-smoke-20261128-once'
+          token, uploads = providers.youtube_token()
+          video_id = providers.find_existing(token, uploads, marker)
+          if not video_id:
+              video_id = providers.upload(
+                  Path('/tmp/world-kitchen-smoke.mp4'),
+                  {'title': '[비공개 테스트] 방구석 세계요리 업로드 점검',
+                   'description': marker + '\nInternal upload fixture. Do not publish.'}, token, None,
+              )
+          data = providers.http(
+              'https://www.googleapis.com/youtube/v3/videos?part=snippet,status&id=' + video_id,
+              headers={'Authorization': 'Bearer ' + token},
+          )
+          items = data.get('items', [])
+          if len(items) != 1 or items[0]['snippet']['channelId'] != providers.TEMPLATE['channel_id']:
+              raise RuntimeError('Video could not be verified on the expected YouTube channel')
+          status = items[0]['status']
+          if status.get('privacyStatus') != 'private' or status.get('publishAt') or status.get('uploadStatus') not in {'uploaded', 'processed'}:
+              raise RuntimeError('YouTube readback did not verify an unscheduled private upload')
+          print(f"video_id={video_id} privacy=private schedule=none upload_status={status['uploadStatus']}")
+          PY
