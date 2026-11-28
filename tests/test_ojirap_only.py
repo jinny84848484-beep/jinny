@@ -108,6 +108,23 @@ class OjirapOnly(unittest.TestCase):
         self.assertEqual(rec['status'],'editorial_review_failed')
         self.assertEqual([x['code'] for x in rec['editorial_diagnostic']['issues']],['media_relevance','insufficient_media'])
 
+    def test_all_photo_insufficiency_completes_without_paid_review_or_next_slot(self):
+        jobs=c.bind_researched_sources(active(),manifest_for(active()))
+        ledger={'days':{DAY:{}},'publications':[]}
+        now=datetime.fromisoformat(DAY+'T08:00:00+09:00')
+        with tempfile.TemporaryDirectory() as tmp, patch.object(c.p,'ROOT',Path(tmp)), patch.object(c.p,'now',return_value=now), patch.object(c,'journal_put',return_value='new') as put, patch.object(c,'review_candidates',return_value={}), patch.object(c,'auto_exclude_enabled',return_value=True), patch.object(c,'openai') as paid, patch.object(c,'publish_reviewed') as publish, patch.object(c,'journal_get',return_value=(ledger,'new')), patch.dict(c.os.environ,{'PUBLIC_UPLOADS_ENABLED':'true'}):
+            self.assertEqual(c.review_jobs(ledger,'sha',DAY,jobs,photo_only=True),'new')
+            put.assert_called_once()
+            c.produce()
+            paid.assert_not_called()
+            publish.assert_not_called()
+        rec=ledger['days'][DAY]
+        self.assertEqual(rec['status'],'complete')
+        self.assertEqual(rec['completion_reason'],'no_photo_topics')
+        self.assertFalse(rec['retry_hold'])
+        self.assertEqual([x['codes'] for x in rec['editorial_exclusions']],[['insufficient_media']]*2)
+        self.assertEqual(ledger['publications'],[])
+
     def test_production_considers_both_photo_queries_with_same_review_cap(self):
         job=active()[0]
         job['visual_queries']=['subject','relevant alternative']

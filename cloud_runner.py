@@ -853,6 +853,7 @@ def produce(*, expected_day=None):
             from research_recovery_registry import write_source_packets
             write_source_packets(record,jobs)
         sha=review_jobs(ledger,sha,day,jobs,photo_only=True)
+        if record.get('status')=='complete':return
     publish_reviewed(ledger,sha,day)
 
 
@@ -1122,6 +1123,23 @@ Return ONLY JSON with exactly status, issues, selection. status is PASS or FAIL.
     p.write(p.ROOT/'runs'/day/'checkpoints'/('editorial-diagnostics'+file_suffix+'.json'),diagnostic)
     print('Editorial review decision: '+json.dumps(diagnostic,sort_keys=True),flush=True)
     if decision['status']!='PASS':
+        # Insufficient real visuals alone is an expected exclusion, not an
+        # interrupted operation. Do not rerun paid research or lower the bar.
+        media_only=issues and all(x['code']=='insufficient_media' for x in issues)
+        if (photo_only and media_only and len(failed)==len(review_jobs_input)
+                and auto_exclude_enabled() and not cached_only and not policy_recheck
+                and correction_namespace is None):
+            exclusions=[{'job_id':job['id'],'channel':job['channel'],
+                         'reason':'insufficient_real_visuals','codes':['insufficient_media']}
+                        for job in review_jobs_input]
+            diagnostic['excluded']=[{'job_id':x['job_id'],'codes':x['codes']} for x in exclusions]
+            if fixes:record['editorial_fixes']=fixes
+            record.update(status='complete',completed_at=p.now().isoformat(),
+                          completion_reason='no_photo_topics',retry_hold=False,
+                          editorial_exclusions=exclusions,editorial_diagnostic=diagnostic)
+            p.write(p.ROOT/'runs'/day/'checkpoints'/('editorial-diagnostics'+file_suffix+'.json'),diagnostic)
+            print('::warning title=Ojirap visuals::No story has sufficient real visuals; no video uploaded',flush=True)
+            return journal_put(ledger,sha)
         record.update(status='editorial_review_failed',retry_hold=True,editorial_diagnostic=diagnostic)
         journal_put(ledger,sha)
         raise RuntimeError('Editorial review did not pass; batch held')
