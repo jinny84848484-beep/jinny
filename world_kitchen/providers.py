@@ -119,11 +119,15 @@ def find_existing(token, uploads, code):
 
 
 def upload(video, episode, token, publish_at):
+    expected_time = (publish_at.astimezone(ZoneInfo('UTC')).strftime('%Y-%m-%dT%H:%M:%SZ')
+                     if publish_at is not None else None)
     size = video.stat().st_size
     body = {'snippet': {'title': episode['title'], 'description': episode['description'], 'categoryId': '26',
                         'defaultLanguage': 'ko', 'defaultAudioLanguage': 'ko'},
-            'status': {'privacyStatus': 'private', 'publishAt': publish_at.astimezone(ZoneInfo('UTC')).strftime('%Y-%m-%dT%H:%M:%SZ'),
+            'status': {'privacyStatus': 'private',
                        'selfDeclaredMadeForKids': False, 'containsSyntheticMedia': True}}
+    if expected_time is not None:
+        body['status']['publishAt'] = expected_time
     req = urllib.request.Request('https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status',
                                  data=json.dumps(body).encode(), method='POST',
                                  headers={'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json; charset=UTF-8',
@@ -137,6 +141,7 @@ def upload(video, episode, token, publish_at):
                                                 'Content-Length': str(size)}, 'PUT', timeout=600)
     if result.get('snippet', {}).get('channelId') != TEMPLATE['channel_id']:
         raise RuntimeError('Upload response channel mismatch')
-    if result.get('status', {}).get('privacyStatus') != 'private' or not result.get('status', {}).get('publishAt'):
-        raise RuntimeError('Upload was not scheduled privately; check Studio')
+    status = result.get('status', {})
+    if status.get('privacyStatus') != 'private' or bool(status.get('publishAt')) != (expected_time is not None):
+        raise RuntimeError('Upload privacy or schedule does not match the requested settings; check Studio')
     return result['id']
